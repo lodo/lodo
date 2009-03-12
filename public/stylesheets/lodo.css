@@ -1,0 +1,10 @@
+td.odd
+{
+    background-color: #ddd;
+}
+
+
+.submit_error
+{
+    background-color: red;
+}

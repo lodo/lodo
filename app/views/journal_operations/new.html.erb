@@ -1,0 +1,23 @@
+<h1>New journal_operation</h1>
+
+<% form_for(@journal_operation) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :journal %><br />
+    <%= f.text_field :journal %>
+  </p>
+  <p>
+    <%= f.label :account %><br />
+    <%= f.text_field :account %>
+  </p>
+  <p>
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', journal_operations_path %>

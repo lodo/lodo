@@ -1,0 +1,18 @@
+<p>
+  <b>Journal:</b>
+  <%=h @journal_operation.journal %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%=h @journal_operation.account %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%=h @journal_operation.amount %>
+</p>
+
+
+<%= link_to 'Edit', edit_journal_operation_path(@journal_operation) %> |
+<%= link_to 'Back', journal_operations_path %>

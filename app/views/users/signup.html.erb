@@ -1,0 +1,17 @@
+<% form_for(@user) do |f| %>
+
+<%= f.error_messages %><br/>
+
+<%= f.label :login %><br/>
+<%= f.text_field :login %><br/>
+
+<%= f.label :password %><br/>
+<%= f.text_field :password %><br/>
+
+<%= f.label :email %><br/>
+<%= f.text_field :email %><br/>
+
+<%= f.submit "Signup" %>
+
+<% end %>
+

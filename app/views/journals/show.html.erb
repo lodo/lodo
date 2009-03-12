@@ -1,0 +1,18 @@
+<p>
+  <b>Type:</b>
+  <%=h @journal.type %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%=h @journal.number %>
+</p>
+
+<p>
+  <b>Journal date:</b>
+  <%=h @journal.journal_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_journal_path(@journal) %> |
+<%= link_to 'Back', journals_path %>

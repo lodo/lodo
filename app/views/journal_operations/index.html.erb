@@ -1,0 +1,24 @@
+<h1>Listing journal_operations</h1>
+
+<table>
+  <tr>
+    <th>Journal</th>
+    <th>Account</th>
+    <th>Amount</th>
+  </tr>
+
+<% for journal_operation in @journal_operations %>
+  <tr>
+    <td><%=h journal_operation.journal %></td>
+    <td><%=h journal_operation.account %></td>
+    <td><%=h journal_operation.amount %></td>
+    <td><%= link_to 'Show', journal_operation %></td>
+    <td><%= link_to 'Edit', edit_journal_operation_path(journal_operation) %></td>
+    <td><%= link_to 'Destroy', journal_operation, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New journal_operation', new_journal_operation_path %>
