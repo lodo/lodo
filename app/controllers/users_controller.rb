@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user] = @user
         flash[:notice] = 'You have been registered.'
         format.html { redirect_to(@user) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
@@ -78,7 +79,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = User.find(:all)
+    @users = User.find(:all, :order => :login)
 
     respond_to do |format|
       format.html # index.html.erb

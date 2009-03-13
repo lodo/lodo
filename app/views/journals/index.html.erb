@@ -1,10 +1,11 @@
 <h1>Listing journals</h1>
 
-<table>
+<table class='striped'>
   <tr>
     <th>Type</th>
     <th>Number</th>
     <th>Journal date</th>
+    <th></th>
   </tr>
 
 <% for journal in @journals %>
@@ -12,9 +13,11 @@
     <td><%=h journal.type %></td>
     <td><%=h journal.number %></td>
     <td><%=h journal.journal_date %></td>
-    <td><%= link_to 'Show', journal %></td>
-    <td><%= link_to 'Edit', edit_journal_path(journal) %></td>
-    <td><%= link_to 'Destroy', journal, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      <%= link_to 'Show', journal %>
+      <%= link_to 'Edit', edit_journal_path(journal) %>
+      <%= link_to 'Destroy', journal, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>

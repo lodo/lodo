@@ -1,11 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :companies
+
   map.resources :journal_operations
 
   map.resources :journals
 
   map.resources :accounts
-  map.resources :users
-
+  map.resources :users, :collection => { :login => :get, :new => :get, :forgot_password => :get, :logout => :get}
+  map.resources :companies
+  
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:
@@ -46,7 +49,7 @@ ActionController::Routing::Routes.draw do |map|
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
   
-  map.login '/login', :controller => 'users', :action => 'login'
+  map.login '/users/signup', :controller => 'users', :action => 'signup'
 
   map.connect ':controller/:action'
   map.connect ':controller/:action/:id'

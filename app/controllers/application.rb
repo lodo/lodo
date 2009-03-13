@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     end
     flash[:warning]='Please login to continue'
     session[:return_to]=request.request_uri
-    redirect_to :controller => "user", :action => "login"
+    redirect_to :controller => "users", :action => "login"
     return false 
   end
 
@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
       session[:return_to]=nil
       redirect_to_url(return_to)
     else
-      redirect_to :controller=>'user', :action=>'welcome'
+      redirect_to :controller=>'users', :action=>'welcome'
     end
   end
 
