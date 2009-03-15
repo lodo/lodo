@@ -7,6 +7,11 @@ class CreateCompanies < ActiveRecord::Migration
       
       t.timestamps
     end
+    
+    create table :companies_users, :id => false do |t|
+      t.references :company
+      t.references :user
+    end
   end
 
   def self.down

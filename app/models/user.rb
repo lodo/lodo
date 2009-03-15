@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"  
   attr_protected :id, :salt
+  has_and_belongs_to_many :companies
+
   
   def password=(pass)
     @password=pass
