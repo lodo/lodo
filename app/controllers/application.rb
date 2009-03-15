@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
 
   def login_required
     if session[:user]
+      return false unless real_user = User.find(session[:user].id) 
+      return false unless real_user.login == session[:user].login
+      return false unless real_user.hashed_password == session[:user].hashed_password
+
       return true
     end
     flash[:warning]='Please login to continue'
