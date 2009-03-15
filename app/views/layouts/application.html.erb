@@ -14,7 +14,7 @@
 <body>
 
   <% if session[:user] %>
-
+  
   <div class='main_menu'>
     <ul>
       <li>
@@ -32,7 +32,7 @@
       <li>
 	Logged in as <%= link_to session[:user].login, :controller => 'users', :action => 'show', :id => session[:user].id %>
       </li>
-
+      
 
     </ul>
   </div>
