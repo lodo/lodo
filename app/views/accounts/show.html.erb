@@ -9,5 +9,42 @@
 </p>
 
 
+<p>
+  <b>Active:</b>
+  <%=h ((@account.active && "Yes") || "No") %>
+</p>
+
+
+<p>
+  <b>Lodo name:</b>
+  <%=h @account.lodo_name %>
+</p>
+
+
+<p>
+  <b>Debit text:</b>
+  <%=h @account.debit_text %>
+</p>
+
+<p>
+  <b>Credit text:</b>
+  <%=h @account.credit_text %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%=h @account.comments %>
+</p>
+
+<p>
+  <b>Ledger:</b>
+  <% if @account.has_ledger %>
+  ...
+  <% else %>
+  No
+  <% end %>
+</p>
+
+
 <%= link_to 'Edit', edit_account_path(@account) %> |
 <%= link_to 'Back', accounts_path %>

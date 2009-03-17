@@ -4,15 +4,18 @@
   <tr>
     <th>Number</th>
     <th>Name</th>
+    <th>Companies</th>
     <th></th>
   </tr>
 
-  <%= session[:user].login %>
   
   <% for user in @users %>
   <tr>
     <td><%=h user.login %></td>
     <td><%=h user.email %></td>
+    <td>
+      <%= user.companies.collect{|c| link_to c.name, c}.join(", ") %>
+    </td>
     <td>
       <%= link_to 'Show', user %>
       <%= link_to 'Edit', edit_user_path(user) %>

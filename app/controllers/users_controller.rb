@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :only=>['welcome', 'change_password']
+  before_filter :login_required, :only=>['change_password','show','index','edit', 'login2']
 
   def new
     @user = User.new
@@ -27,22 +27,39 @@ class UsersController < ApplicationController
     end
 
   end
-
+  
   def login
-    $stdout.flush
     if request.post?
       if session[:user] = User.authenticate(params[:login], params[:password])
+        if session[:user].companies.length == 1
+          session[:company] = session[:user].companies[0]
+        end
+        
         flash[:message]  = "Login successful"
         redirect_to :action => :show, :id => session[:user].id
-      
+        
       else
         flash[:warning] = "Login unsuccessful"
       end
     end
   end
 
+  def login2
+    if request.post?
+
+      if session[:company] = Company.find(params[:company])
+        flash[:message]  = "Company chosen"
+        redirect_to :action => :show, :id => session[:user].id
+      else
+        flash[:warning] = "Company not found"
+      end
+
+    end
+  end
+
   def logout
     session[:user] = nil
+    session[:company] = nil
     flash[:message] = 'Logged out'
     redirect_to :action => 'login'
   end
@@ -87,6 +104,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    @user = User.find(params[:id])
+
+    respond_to do |format|
+      
+      if @user.update_attributes(params[:user])
+        flash[:notice] = 'User was successfully updated.'
+        format.html { redirect_to(@user) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy
@@ -97,5 +130,8 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
 
 end

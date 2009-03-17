@@ -1,20 +1,6 @@
 <h1>Editing account</h1>
 
-<% form_for(@account) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :number %><br />
-    <%= f.text_field :number %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
+<%= render :partial => "form" %>
 
 <%= link_to 'Show', @account %> |
 <%= link_to 'Back', accounts_path %>

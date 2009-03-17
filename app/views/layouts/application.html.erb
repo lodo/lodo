@@ -20,19 +20,27 @@
       <li>
 	<%= link_to 'User administration', users_path %>
       </li>
+
       <li>
 	<%= link_to 'Account plan', accounts_path %>
       </li>
       <li>
 	<%= link_to 'Journals', journals_path %>
       </li>
+
       <li>
-	<%= link_to 'Log out', :controller => 'users', :action => 'logout' %>
+	<%= link_to 'Companies', companies_path %>
       </li>
+
       <li>
-	Logged in as <%= link_to session[:user].login, :controller => 'users', :action => 'show', :id => session[:user].id %>
+	Logged in as <em><%= link_to session[:user].login, :controller => 'users', :action => 'show', :id => session[:user].id %></em> (<%= link_to 'Log out', :controller => 'users', :action => 'logout' %>)
       </li>
-      
+
+      <% if session[:company] %>
+      <li>
+	Company: <%=h session[:company].name %>
+      </li>
+      <% end %>
 
     </ul>
   </div>

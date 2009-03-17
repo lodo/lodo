@@ -1,43 +1,5 @@
 <h1>New account</h1>
 
-<% form_for(@account) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :number %><br />
-    <%= f.text_field :number %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.check_box :active %>
-    <%= f.label :active %>
-  </p>
-  <p>
-    <%= f.label :lodo_name %><br />
-    <%= f.text_field :lodo_name %>
-  </p>
-  <p>
-    <%= f.label :debit_text %><br />
-    <%= f.text_field :debit_text %>
-  </p>
-  <p>
-    <%= f.label :credit_text %><br />
-    <%= f.text_field :credit_text %>
-  </p>
-  <p>
-    <%= f.label :comments %><br />
-    <%= f.text_field :comments %>
-  </p>
-  <p>
-    <%= f.check_box :has_ledger %>
-    <%= f.label :has_ledger %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
+<%= render :partial => "form" %>
 
 <%= link_to 'Back', accounts_path %>

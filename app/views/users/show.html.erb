@@ -8,6 +8,10 @@
   <%=h @user.email %>
 </p>
 
+<p>
+  <b>Companies:</b>
+  <%= @user.companies.collect{|c| link_to c.name, c}.join(", ") %>
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

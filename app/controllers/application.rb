@@ -16,18 +16,43 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
   def login_required
-    if session[:user]
-      return false unless real_user = User.find(session[:user].id) 
-      return false unless real_user.login == session[:user].login
-      return false unless real_user.hashed_password == session[:user].hashed_password
+    ok = true
 
+    #print "LALALALA", session[:company],"\n"
+    
+    if session[:user]
+      ok &= real_user = User.find(session[:user].id) 
+      ok &= real_user.login == session[:user].login
+      ok &= real_user.hashed_password == session[:user].hashed_password
+    else
+      ok = false
+    end
+    
+    if ok
       return true
     end
+
     flash[:warning]='Please login to continue'
     session[:return_to]=request.request_uri
     redirect_to :controller => "users", :action => "login"
     return false 
   end
+
+  def company_required
+    ok = true
+    
+    ok &= session[:company] != nil
+        
+    if ok
+      return true
+    end
+
+    flash[:warning]='Please pick a company to work with'
+    session[:return_to]=request.request_uri
+    redirect_to :controller => "users", :action => "login2"
+    return false 
+  end
+
 
   def current_user
     session[:user]

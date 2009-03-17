@@ -5,7 +5,7 @@
   Use an object as a fake namespace. Spiffy.
   */
   var LODO = new Object();
-  LODO.accountList = <%= Account.find(:all).to_json %>;
+  LODO.accountList = <%= @accounts_all.to_json %>;
 </script>
 
 <% form_for(@journal) do |f| %>

@@ -1,14 +1,15 @@
 class AccountsController < ApplicationController
   before_filter :login_required
+  before_filter :company_required
 
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = Account.find(:all)
-
+    @accounts = Account.find(session[:company].accounts, :order => 'number')
+    
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @accounts }
+      format.xml  { render :xml => @accounts } 
     end
   end
 
@@ -38,12 +39,12 @@ class AccountsController < ApplicationController
   def edit
     @account = Account.find(params[:id])
   end
-
+  
   # POST /accounts
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
-
+    @account.company_id = session[:company].id
     respond_to do |format|
       if @account.save
         flash[:notice] = 'Account was successfully created.'

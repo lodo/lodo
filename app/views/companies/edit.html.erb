@@ -1,32 +1,6 @@
 <h1>Editing company</h1>
 
-<% form_for(@company) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :users %><br />
-    <%= f.text_field :users %>
-  </p>
-  <p>
-    <%= f.label :accounts %><br />
-    <%= f.text_field :accounts %>
-  </p>
-  <p>
-    <%= f.label :organization_number %><br />
-    <%= f.text_field :organization_number %>
-  </p>
-  <p>
-    <%= f.label :address %><br />
-    <%= f.text_field :address %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
+<%= render :partial => "form" %>
 
 <%= link_to 'Show', @company %> |
 <%= link_to 'Back', companies_path %>

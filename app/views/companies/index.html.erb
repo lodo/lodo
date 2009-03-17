@@ -1,24 +1,29 @@
 <h1>Listing companies</h1>
 
-<table>
+<table class='striped'>
   <tr>
     <th>Name</th>
     <th>Users</th>
     <th>Accounts</th>
     <th>Organization number</th>
     <th>Address</th>
+    <th></th>
   </tr>
 
 <% for company in @companies %>
   <tr>
     <td><%=h company.name %></td>
-    <td><%=h company.users %></td>
-    <td><%=h company.accounts %></td>
+    <td><%=h company.users.collect {|u| u.login}.join ", " %></td>
+    <td><%=h company.accounts.collect{|a| a.number.to_s + " " + a.name}.join(", ") %></td>
     <td><%=h company.organization_number %></td>
-    <td><%=h company.address %></td>
-    <td><%= link_to 'Show', company %></td>
-    <td><%= link_to 'Edit', edit_company_path(company) %></td>
-    <td><%= link_to 'Destroy', company, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>  
+      <%= render :partial => "addresses/show", :locals => { :address => company.address } %>
+    </td>
+    <td>
+      <%= link_to 'Show', company %>
+      <%= link_to 'Edit', edit_company_path(company) %>
+      <%= link_to 'Destroy', company, :confirm => 'Are you sure?', :method => :delete %>
+    </td>
   </tr>
 <% end %>
 </table>

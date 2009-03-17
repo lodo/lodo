@@ -1,4 +1,7 @@
 class JournalOperationsController < ApplicationController
+  before_filter :login_required
+  before_filter :company_required
+
   # GET /journal_operations
   # GET /journal_operations.xml
   def index

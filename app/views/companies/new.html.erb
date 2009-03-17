@@ -1,19 +1,5 @@
 <h1>New company</h1>
 
-<% form_for(@company) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :organization_number %><br />
-    <%= f.text_field :organization_number %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
+<%= render :partial => "form" %>
 
 <%= link_to 'Back', companies_path %>

@@ -1,8 +1,17 @@
 class CompaniesController < ApplicationController
+  before_filter :find_company, :only => [:show, :edit, :update, :destroy]
+
+  def find_company
+    @company = Company.find(params[:id])
+    if !@company.address
+      @company.address = Address.new
+    end
+  end
+
   # GET /companies
   # GET /companies.xml
   def index
-    @companies = Company.find(:all)
+    @companies = Company.find(:all, :order => :name)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +22,6 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.xml
   def show
-    @company = Company.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @company }
@@ -34,33 +41,44 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-    @company = Company.find(params[:id])
   end
 
   # POST /companies
   # POST /companies.xml
   def create
+    users = params[:company][:user_ids]
+    params[:company][:user_ids] = nil
     @company = Company.new(params[:company])
-
+    
     respond_to do |format|
       if @company.save
-        flash[:notice] = 'Company was successfully created.'
-        format.html { redirect_to(@company) }
-        format.xml  { render :xml => @company, :status => :created, :location => @company }
+        @company.user_ids = users
+        if @company.save
+          flash[:notice] = 'Company was successfully created.'
+          format.html { redirect_to(@company) }
+          format.xml  { render :xml => @company, :status => :created, :location => @company }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @company.errors, :status => :unprocessable_entity }
+        end
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @company.errors, :status => :unprocessable_entity }
       end
     end
   end
-
+  
   # PUT /companies/1
   # PUT /companies/1.xml
   def update
-    @company = Company.find(params[:id])
 
     respond_to do |format|
-      if @company.update_attributes(params[:company])
+#      @company.users = Users.find(params[:users])
+      params[:company][:accounts] = []
+      #print "TJOHO", params.to_json, "\n"
+      
+#      params[:company][:users] = User.find(params[:company][:users])
+      if @company.update_attributes(params[:company]) && @company.address.update_attributes(params[:address])
         flash[:notice] = 'Company was successfully updated.'
         format.html { redirect_to(@company) }
         format.xml  { head :ok }
@@ -74,7 +92,6 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   # DELETE /companies/1.xml
   def destroy
-    @company = Company.find(params[:id])
     @company.destroy
 
     respond_to do |format|

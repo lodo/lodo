@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
     self.save
     Notifications.deliver_forgot_password(self.email, self.login, new_pass)
   end
-
+  
   protected
 
   def self.encrypt(pass, salt)
