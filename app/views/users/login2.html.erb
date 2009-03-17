@@ -1,0 +1,10 @@
+
+
+<% form_tag :action=> "login2" do -%>
+
+<h3>Select company</h3> 
+<label for="company">Company:</label><br/>
+<%= select_tag "company", options_for_select(session[:user].companies.collect {|p| [ p.name, p.id ] }) %><br/>
+<%= submit_tag "Submit" %>
+
+<% end %>

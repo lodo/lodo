@@ -1,0 +1,23 @@
+
+<% form_for(@company) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :organization_number %><br />
+    <%= f.text_field :organization_number %>
+  </p>
+  <p>
+    <%= f.label :user_ids %><br />
+    <%= f.select :user_ids, User.find(:all).collect {|p| [ p.login, p.id ] }, {}, {:multiple => true, :size => 15} %>
+  </p>
+  <p>
+    <%= render :partial => "addresses/form", :locals => { :address => @company.address } %>
+  </p>
+  <p>
+    <%= f.submit "Save" %>
+  </p>
+<% end %>

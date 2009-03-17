@@ -1,0 +1,28 @@
+
+<% fields_for address do |f| %>
+<p>
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</p>
+<p>
+  <%= f.label :street1 %><br />
+  <%= f.text_field :street1 %>
+</p>
+<p>
+  <%= f.label :street2 %><br />
+  <%= f.text_field :street2 %>
+</p>
+<p>
+  <%= f.label :postal_code %><br />
+  <%= f.text_field :postal_code %>
+</p>
+<p>
+  <%= f.label :town %><br />
+  <%= f.text_field :town %>
+</p>
+<p>
+  <%= f.label :country %><br />
+  <%= f.text_field :country %>
+</p>
+
+<% end %>
