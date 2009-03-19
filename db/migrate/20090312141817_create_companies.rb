@@ -16,5 +16,6 @@ class CreateCompanies < ActiveRecord::Migration
 
   def self.down
     drop_table :companies
+    drop_table :companies_users
   end
 end

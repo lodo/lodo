@@ -1,14 +1,14 @@
 class JournalsController < ApplicationController
   before_filter :login_required
   before_filter :company_required
-  before_filter :find_journal, :only => [:new, :e, :show, :destroy]
-  before_filter :find_accounts, :only => [:new, :update]
-
+  before_filter :find_journal, :only => [:update, :show, :destroy, :edit]
+  before_filter :find_accounts_all, :only => [:new, :edit]
+  
   # GET /journals
   # GET /journals.xml
   def index
     @journals = Journal.find(:all)
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @journals }
@@ -28,7 +28,7 @@ class JournalsController < ApplicationController
   # GET /journals/new.xml
   def new
     @journal = Journal.new
-
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @journal }
@@ -42,10 +42,18 @@ class JournalsController < ApplicationController
   # POST /journals
   # POST /journals.xml
   def create
+ 
     @journal = Journal.new(params[:journal])
+    @journal.company_id = session[:company].id
 
     respond_to do |format|
       if @journal.save
+        params[:journal_operations].each {
+          |key, value|
+          value[:journal_id] = @journal.id
+          op = JournalOperation.new(value)
+          op.save
+       }
         flash[:notice] = 'Journal was successfully created.'
         format.html { redirect_to(@journal) }
         format.xml  { render :xml => @journal, :status => :created, :location => @journal }
@@ -86,10 +94,10 @@ class JournalsController < ApplicationController
   private 
   
   def find_journal
-    @journal = Journal.new
+    @journal = Journal.find(params[:id])
   end
   
-  def find_accounts
+  def find_accounts_all
     @accounts_all =
       Account.find(:all, 
                    :conditions => {:company_id => session[:company].id}, 

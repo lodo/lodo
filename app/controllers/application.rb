@@ -36,6 +36,12 @@ class ApplicationController < ActionController::Base
     session[:return_to]=request.request_uri
     redirect_to :controller => "users", :action => "login"
     return false 
+  rescue ActiveRecord::RecordNotFound 
+    flash[:warning]='You user has been deleted'
+    session[:user] = nil
+    session[:company] = nil
+    redirect_to :controller => "users", :action => "login"
+    return false 
   end
 
   def company_required

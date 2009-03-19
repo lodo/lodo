@@ -52,7 +52,7 @@ function sumColumn(column)
 
 function makeAccountSelect() {
     var sel = document.createElement("select");
-    sel.name = "account_" + LODO.journalLines;
+    sel.name = "journal_operations[" + LODO.journalLines+"][account_id]";
     sel.id = "dynfield_0_"+ LODO.journalLines;
     
     for (var i=0; i<LODO.accountList.length; i++) {
@@ -82,7 +82,7 @@ function doDisable(row_number)
 function makeDebet() {
     var res = document.createElement("input");
     res.type="text";
-    res.name = "debet_" + LODO.journalLines;
+    res.name = "journal_operations[" + LODO.journalLines+"][debet]";
     res.id='dynfield_1_' + LODO.journalLines;
     res.setAttribute("autocomplete","off");
 
@@ -98,11 +98,11 @@ function makeDebet() {
 
 }
 
-function makeKredit() {
+function makeCredit() {
     var res = document.createElement("input");
     res.type="text";
-    res.name = "dynfield_2_" + LODO.journalLines;
-    res.id=res.name;
+    res.name = "journal_operations[" + LODO.journalLines+"][credit]";
+    res.id='dynfield_2_' + LODO.journalLines;
     res.setAttribute("autocomplete","off");
 
     var fun;
@@ -122,7 +122,7 @@ function makeText(id) {
     return res;
 }
 
-function addAccountLine()
+function addAccountLine(line)
 {
     if(!LODO.journalLines) {
 	LODO.journalLines = 0;
@@ -135,22 +135,42 @@ function addAccountLine()
     row.id='tjo';
     
     row.addCell = function (content) {
-	var c = row.insertCell(this.cells.length);
-	c.appendChild(content);
+		var c = row.insertCell(this.cells.length);
+		c.appendChild(content);
     }
     
     row.addCell(makeAccountSelect());
     row.addCell(makeDebet());
-    row.addCell(makeKredit());
+    row.addCell(makeCredit());
     row.addCell(makeText('balance'));
     row.addCell(makeText('in'));
     row.addCell(makeText('out'));
     row.addCell(makeText('vat'));
     row.addCell(makeText('amount'));
     
+    amount = line.amount;
+    $("#dynfield_0_"+ LODO.journalLines)[0].value = line.account_id;
+    $("#dynfield_1_"+ LODO.journalLines)[0].value = amount<0?-amount:0;
+    $("#dynfield_2_"+ LODO.journalLines)[0].value = amount>0?amount:0;
+    
+    if (line) {
+	doDisable(LODO.journalLines);
+    }
     LODO.journalLines++;
     stripe('#operations_table');
 }
+
+function addPredefinedAccountLines(){
+    lines = LODO.journalOperationList;
+    for (var i=0; i<lines.length; i++) {
+	line = lines[i]['journal_operation'];
+	addAccountLine(line);
+    }
+    sumColumn(1);
+    sumColumn(2);
+    validate();
+}
+
 
 function handleArrowKeys(evt, col_number, row_number) {
     evt = (evt) ? evt : ((window.event) ? event : null);

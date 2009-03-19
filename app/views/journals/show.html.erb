@@ -1,6 +1,6 @@
 <p>
   <b>Type:</b>
-  <%=h @journal.type %>
+  <%=h @journal.journal_type %>
 </p>
 
 <p>
@@ -13,6 +13,39 @@
   <%=h @journal.journal_date %>
 </p>
 
+<p>
+  <table class='striped'>
+    <thead>
+      <tr>
+	<th>
+	  Account
+	</th>
+	<th>
+	  Debet
+	</th>
+	<th>
+	  Credit
+	</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for op in @journal.journal_operation %>
+      <tr>
+	<td>
+	  <%= op.account.name %>
+	</td>
+	<td>
+	  <%= op.debet %>
+	</td>
+	<td>
+	  <%= op.credit %>
+	</td>
+      </tr>
+      <% end %>
+    </tbody>
+    
+  </table>
+</p>
 
 <%= link_to 'Edit', edit_journal_path(@journal) %> |
 <%= link_to 'Back', journals_path %>

@@ -1,0 +1,101 @@
+<script>
+  /*
+  Use an object as a fake namespace. Spiffy.
+  */
+  var LODO = new Object();
+  LODO.accountList = <%= @accounts_all.to_json %>;
+  LODO.journalOperationList = <%= @journal.journal_operation.to_json %>;
+</script>
+
+<% form_for(@journal) do |f| %>
+<%= f.error_messages %>
+
+<p>
+  <%= f.label :journal_type %><br />
+  <%= f.text_field :journal_type %>
+</p>
+<p>
+  <%= f.label :number %><br />
+  <%= f.text_field :number %>
+</p>
+<p>
+  <%= f.label :journal_date %><br />
+  <%= f.date_select :journal_date %>
+</p>
+<p>
+  <button onClick='addAccountLine();' type='button'>Ny postering til bilag</button>
+  <input type='checkbox' id='vat'/><label for='vat'>VAT</label>
+  <input type='checkbox' id='details'/><label for='details'>Details</label>
+
+</p>
+<p>
+  <table class='striped' id='operations_table'>
+    <thead>
+      <tr>
+	<th>
+	  Kontoplan
+	</th>
+	<th>
+	  Debet
+	</th>
+	<th>
+	  Kredit
+	</th>
+	<th>
+	  Saldo
+	</th>
+	<th>
+	  Inn
+	</th>
+	<th>
+	  Ut
+	</th>
+	<th>
+	  MVA
+	</th>
+	<th>
+	  Avd.
+	</th>
+	<th>
+	  Prosjekt
+	</th>
+	<th>
+	  Forfallsdato
+	</th>
+	<th>
+	  KID.
+	</th>
+	<th>
+	  Faktura
+	</th>
+	<th>
+	  Tekst
+	</th>
+	<th>
+
+	</th>
+      </tr>
+    </thead>
+    <tbody id='operations'>
+    </tbody>
+    <tfoot>
+      <tr>
+	<td></td>
+	<td id='dynfield_1_sum'>0,00</td>
+	<td id='dynfield_2_sum'>0,00</td>
+      </tr>
+      <tr>
+	<td></td>
+	<td id='dynfield_diff'>0,00</td>
+      </tr>
+    </tfoot>
+  </table>
+
+</p>
+<p>
+  <%= f.submit "Create" %>
+</p>
+<script>
+addPredefinedAccountLines();
+</script>
+<% end %>

@@ -12,6 +12,12 @@ class CompaniesController < ApplicationController
   # GET /companies.xml
   def index
     @companies = Company.find(:all, :order => :name)
+    @companies.each do
+      |c| 
+      if !c.address 
+        c.address = Address.new
+      end
+    end
 
     respond_to do |format|
       format.html # index.html.erb

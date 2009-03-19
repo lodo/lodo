@@ -1,24 +1,6 @@
 <h1>Editing journal</h1>
 
-<% form_for(@journal) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
-  </p>
-  <p>
-    <%= f.label :number %><br />
-    <%= f.text_field :number %>
-  </p>
-  <p>
-    <%= f.label :journal_date %><br />
-    <%= f.date_select :journal_date %>
-  </p>
-  <p>
-    <%= f.submit "Update" %>
-  </p>
-<% end %>
+<%= render :partial => "form" %>
 
 <%= link_to 'Show', @journal %> |
 <%= link_to 'Back', journals_path %>
