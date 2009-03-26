@@ -10,7 +10,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.xml
   def index
-    @bills = Bill.find(:all)
+    @bills = Bill.find(session[:company].bills, :order => 'updated_at')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -49,7 +49,7 @@ class BillsController < ApplicationController
   # POST /bills.xml
   def create
     @bill = Bill.new(params[:bill])
-
+    @bill.company_id = session[:company].id
     respond_to do |format|
       if @bill.save
         flash[:notice] = 'Bill was successfully created.'

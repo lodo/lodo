@@ -32,7 +32,7 @@ var orders = {
 	    sum += parseFloatNazi($('#amount_' + i)[0].value) * parseFloatNazi($('#unitPrice_'+i)[0].innerHTML);
 	    
 	    orders.setPrice(i,parseFloatNazi($('#unitPrice_'+i)[0].innerHTML)*parseFloatNazi($('#amount_' + i)[0].value) * (100.0-parseFloatNazi($('#discount_'+i)[0].value))*0.01);
-
+	    
 	}
 	
 	$('#dynfield_sum')[0].innerHTML = toMoney(sum);
