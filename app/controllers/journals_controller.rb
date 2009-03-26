@@ -1,5 +1,4 @@
 class JournalsController < ApplicationController
-  before_filter :login_required
   before_filter :company_required
   before_filter :find_journal, :only => [:update, :show, :destroy, :edit]
   before_filter :find_accounts_all, :only => [:new, :edit]

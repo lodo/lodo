@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
-  before_filter :login_required
   before_filter :company_required
 
   # GET /products

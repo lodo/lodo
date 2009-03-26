@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :only=>['change_password','show','index','edit', 'change_current_company']
+  skip_before_filter :login_required, :only=>['login', 'new', 'forgot_password']
 
   def new
     @user = User.new
@@ -31,13 +31,18 @@ class UsersController < ApplicationController
   def login
     if request.post?
       if session[:user] = User.authenticate(params[:login], params[:password])
-        if not session[:user].current_company.nil? and not session[:user].current_company.in(session[:user].companies) and session[:user].companies.length == 1
+        if not session[:user].current_company or not session[:user].current_company.in(session[:user].companies) and session[:user].companies.length > 0
             session[:user].current_company = session[:user].companies[0]
+            session[:user].save
         end
         
         flash[:message]  = "Login successful"
-        redirect_to :action => :show, :id => session[:user].id
-        
+
+	if session[:return_to]
+          redirect_to session[:return_to]
+        else
+          redirect_to :action => :show, :id => session[:user].id
+        end      
       else
         flash[:warning] = "Login unsuccessful"
       end
@@ -122,7 +127,7 @@ class UsersController < ApplicationController
 
   def change_current_company
     session[:user].current_company = Company.find(params[:company])
-    session[:user].save()
+    session[:user].save
     respond_to do |format|
       format.html { redirect_to(:back) }
     end
