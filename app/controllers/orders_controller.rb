@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
     @order = Order.new
-    @products_all = Product.find(session[:company].products, :order => 'name')
+    @products_all = Product.find(session[:user].current_company.products, :order => 'name')
     
     respond_to do |format|
       format.html # new.html.erb
@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
-    @products_all = Product.find(session[:company].products, :order => 'name')
+    @products_all = Product.find(session[:user].current_company.products, :order => 'name')
   end
   
   # POST /orders

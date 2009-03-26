@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   def login_required
     ok = true
 
-    #print "LALALALA", session[:company],"\n"
+    #print "LALALALA", session[:user].current_company,"\n"
     
     if session[:user]
       ok &= real_user = User.find(session[:user].id) 
@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound 
     flash[:warning]='You user has been deleted'
     session[:user] = nil
-    session[:company] = nil
+    session[:user].current_company = nil
     redirect_to :controller => "users", :action => "login"
     return false 
   end
@@ -47,18 +47,16 @@ class ApplicationController < ActionController::Base
   def company_required
     ok = true
     
-    ok &= session[:company] != nil
+    ok &= session[:user].current_company != nil
         
     if ok
       return true
     end
 
-    flash[:warning]='Please pick a company to work with'
-    session[:return_to]=request.request_uri
-    redirect_to :controller => "users", :action => "login2"
+    flash[:notice]='You must have at least one company to work with'
+    redirect_to :controller => "companies", :action => "index"
     return false 
   end
-
 
   def current_user
     session[:user]

@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"  
   attr_protected :id, :salt
   has_and_belongs_to_many :companies
-  
+  belongs_to :current_company, :class_name => 'Company'
   
   def password=(pass)
     @password=pass

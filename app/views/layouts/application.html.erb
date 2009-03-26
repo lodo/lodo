@@ -13,7 +13,6 @@
   <%= javascript_include_tag 'jquery' %>
 </head>
 <body>
-
   <% if session[:user] %>
   
   <div class='main_menu'>
@@ -49,11 +48,14 @@
 	Logged in as <em><%= link_to session[:user].login, :controller => 'users', :action => 'show', :id => session[:user].id %></em> (<%= link_to 'Log out', :controller => 'users', :action => 'logout' %>)
       </li>
 
-      <% if session[:company] %>
-      <li>
-	Company: <%=h session[:company].name %>
+      <li class="change_company_form">
+        <% form_tag :controller => "users", :action=> "change_current_company" do -%>
+         <label for="company">Company:</label>
+         <%= select_tag "company", options_for_select(session[:user].companies.collect {|p| [ p.name, p.id ] },
+                                                      if session[:user].current_company.nil? then 0 else session[:user].current_company.id end ) %>
+         <%= submit_tag "Change" %>
+        <% end %>
       </li>
-      <% end %>
 
     </ul>
   </div>

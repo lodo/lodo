@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   # GET /products.xml
   def index
 
-    @products = Product.find(session[:company].products, :order => 'name')
+    @products = Product.find(session[:user].current_company.products, :order => 'name')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
   # POST /products.xml
   def create
     @product = Product.new(params[:product])
-    @product.company_id = session[:company].id
+    @product.company_id = session[:user].current_company.id
     respond_to do |format|
       if @product.save
         flash[:notice] = 'Product was successfully created.'

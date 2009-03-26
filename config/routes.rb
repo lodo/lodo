@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :journals
 
   map.resources :accounts
-  map.resources :users, :collection => { :login => :get, :login2 => :get, :new => :get, :forgot_password => :get, :logout => :get}
+  map.resources :users, :collection => { :change_current_company => :post, :login => :get, :login2 => :get, :new => :get, :forgot_password => :get, :logout => :get}
   map.resources :companies
   
   # The priority is based upon order of creation: first created -> highest priority.

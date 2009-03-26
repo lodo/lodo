@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :login_required, :only=>['change_password','show','index','edit', 'login2']
+  before_filter :login_required, :only=>['change_password','show','index','edit', 'change_current_company']
 
   def new
     @user = User.new
@@ -31,8 +31,8 @@ class UsersController < ApplicationController
   def login
     if request.post?
       if session[:user] = User.authenticate(params[:login], params[:password])
-        if session[:user].companies.length == 1
-          session[:company] = session[:user].companies[0]
+        if not session[:user].current_company.nil? and not session[:user].current_company.in(session[:user].companies) and session[:user].companies.length == 1
+            session[:user].current_company = session[:user].companies[0]
         end
         
         flash[:message]  = "Login successful"
@@ -44,22 +44,8 @@ class UsersController < ApplicationController
     end
   end
 
-  def login2
-    if request.post?
-
-      if session[:company] = Company.find(params[:company])
-        flash[:message]  = "Company chosen"
-        redirect_to :action => :show, :id => session[:user].id
-      else
-        flash[:warning] = "Company not found"
-      end
-
-    end
-  end
-
   def logout
     session[:user] = nil
-    session[:company] = nil
     flash[:message] = 'Logged out'
     redirect_to :action => 'login'
   end
@@ -132,6 +118,14 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+  end
+
+  def change_current_company
+    session[:user].current_company = Company.find(params[:company])
+    session[:user].save()
+    respond_to do |format|
+      format.html { redirect_to(:back) }
+    end
   end
 
 end

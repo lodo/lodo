@@ -69,11 +69,6 @@ td input
     height: 75px;
 }
 
-select
-{
-    width: 20em;
-}
-
 .button_list
 {
     margin: 0.5em;
@@ -477,4 +472,9 @@ iframe
 .submit_error
 {
     background-color: red;
+}
+
+.change_company_form form,
+.change_company_form form div {
+ display: inline;
 }
