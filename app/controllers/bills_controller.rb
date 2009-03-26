@@ -1,22 +1,22 @@
 class BillsController < ApplicationController
   before_filter :company_required
-
+  
   # GET /bills
   # GET /bills.xml
   def index
     @bills = Bill.find(session[:company].bills, :order => 'updated_at')
-
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @bills }
     end
   end
-
+  
   # GET /bills/1
   # GET /bills/1.xml
   def show
     @bill = Bill.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @bill }

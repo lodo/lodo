@@ -29,13 +29,12 @@ var orders = {
     {
 	var sum = 0.0;
 	for (var i=0; i < LODO.productLines; i++) {
-	    sum += parseFloatNazi($('#amount_' + i)[0].value) * parseFloatNazi($('#unitPrice_'+i)[0].innerHTML);
-	    
-	    orders.setPrice(i,parseFloatNazi($('#unitPrice_'+i)[0].innerHTML)*parseFloatNazi($('#amount_' + i)[0].value) * (100.0-parseFloatNazi($('#discount_'+i)[0].value))*0.01);
-	    
+	    var val = parseFloatNazi($('#unitPrice_'+i)[0].innerHTML)*parseFloatNazi($('#amount_' + i)[0].value) * (100.0-parseFloatNazi($('#discount_'+i)[0].value))*0.01;
+	    sum += val;
+	    orders.setPrice(i,val);
 	}
 	
-	$('#dynfield_sum')[0].innerHTML = toMoney(sum);
+	orders.setTotalPrice(sum);
     },
 
     makeProductSelect: function(value) {
@@ -91,6 +90,12 @@ var orders = {
 	return res;
     },
 
+    setTotalPrice: function(price) {
+	price = price*(100.0-parseFloatNazi($('#discount_total')[0].value))*0.01;
+	$('#dynfield_sum')[0].innerHTML = toMoney(price);
+	$('#price')[0].value = toMoney(price);
+    },
+
     setPrice: function(line, value) {
 	$('#price_'+line)[0].value = toMoney(value);
 	$('#priceLabel_'+line)[0].innerHTML = toMoney(value);
@@ -120,13 +125,13 @@ var orders = {
 	row.addCell(orders.makeProductSelect(line?line.product_id:null));
 	row.addCell(orders.makeText('unitPrice'));
 	row.addCell(orders.makeAmount(line?line.amount:0));
-	row.addCell(orders.makeDiscount(0));
+	row.addCell(orders.makeDiscount(toMoney(100.0 - 100*line.price/(orders.getProductPrice(line.product_id)*line.amount))));
 	row.addCell(orders.makePrice());
 	
 	var cell = document.createElement("span");
 	/*
 	  If we are reediting an old line, insert the id so we can match them together
-	 */
+	*/
 	if (line) {
 	    var line_id = document.createElement("input");
 	    line_id.type = "hidden";
@@ -136,9 +141,9 @@ var orders = {
 	}
 
 	row.addCell(cell);
-    
+	
 	LODO.productLines++;
-	stripe('#operations_table');
+	stripe();
 	orders.validate();
     },
 

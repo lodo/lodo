@@ -24,22 +24,21 @@
     <tbody id='products'></tbody>
     <tfoot>
       <tr>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td></td>
-		<td id='dynfield_sum'>0,00</td>
-		<td></td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>
+	  <input type='text' id='discount_total' value='<%= h @order.discount%>' onkeyup="orders.validate();"/>
+	  <input type='hidden' name='order[price]' id='price' value=''/>
+	</td>
+	<td id='dynfield_sum'>0,00</td>
+	<td></td>
       </tr>
     </tfoot>
   </table>
 
   <button onClick='orders.addProduct();' type='button'>Add product</button>
   
-  <p>
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
-  </p>
   <p>
     <%= f.label :mva %><br />
     <%= f.text_field :mva %>
