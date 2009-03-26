@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  start: 1
+  stop: 1
+
+two:
+  start: 1
+  stop: 1

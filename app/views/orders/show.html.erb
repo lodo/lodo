@@ -1,0 +1,81 @@
+<p>
+  <table class='striped'>
+    <thead>
+      <tr>
+		<th>
+		  Product
+		</th>
+		<th>
+		  Unit price
+		</th>
+		<th>
+		  Amount
+		</th>
+		<th>
+		  Total price
+		</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for it in @order.order_items %>
+      <tr>
+		<td>
+		  <%= it.product.name %>
+		</td>
+		<td>
+		  <%= it.product.price %>
+		</td>
+		<td>
+		  <%= it.amount %>
+		</td>
+      </tr>
+      <% end %>
+    </tbody>
+    
+  </table>
+
+</p>
+
+<p>
+  <b>Price:</b>
+  <%=h @order.price %>
+</p>
+
+<p>
+  <b>Mva:</b>
+  <%=h @order.mva %>
+</p>
+
+<p>
+  <b>Order date:</b>
+  <%=h @order.order_date %>
+</p>
+
+<p>
+  <b>Requested delivery date:</b>
+  <%=h @order.requested_delivery_date %>
+</p>
+
+<p>
+  <b>Seller:</b>
+  <%=h @order.seller_id %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%=h @order.customer_id %>
+</p>
+
+<p>
+  <b>Delivery address:</b>
+  <%=h @order.delivery_address_id %>
+</p>
+
+<p>
+  <b>Transport:</b>
+  <%=h @order.transport_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%= link_to 'Back', orders_path %>

@@ -8,6 +8,7 @@
   <%= stylesheet_link_tag 'journals' %>
   <%= stylesheet_link_tag 'lodo' %>
   <%= javascript_include_tag 'journals' %>
+  <%= javascript_include_tag 'orders' %>
   <%= javascript_include_tag 'lodo' %>
   <%= javascript_include_tag 'jquery' %>
 </head>
@@ -30,6 +31,18 @@
 
       <li>
 	<%= link_to 'Companies', companies_path %>
+      </li>
+
+      <li>
+	<%= link_to 'Products', products_path %>
+      </li>
+
+      <li>
+	<%= link_to 'Orders', orders_path %>
+      </li>
+
+      <li>
+	<%= link_to 'Bills', bills_path %>
       </li>
 
       <li>

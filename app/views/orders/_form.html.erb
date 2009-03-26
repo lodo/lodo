@@ -1,0 +1,78 @@
+<script>
+  /*
+  Use an object as a fake namespace. Spiffy.
+  */
+  var LODO = new Object();
+  LODO.productList = <%= @products_all.to_json %>;
+  LODO.orderItemList = <%= @order.order_items.to_json %>;
+</script>
+
+<% form_for(@order) do |f| %>
+  <%= f.error_messages %>
+
+  <table class='striped'>
+	<thead>
+	  <tr>
+		<th>Product</th>
+		<th>Unit Price</th>
+		<th>Amount</th>
+		<th>Discount</th>
+		<th>Total Price</th>
+		<th></th>
+	  </tr>
+	</thead>
+    <tbody id='products'></tbody>
+    <tfoot>
+      <tr>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td></td>
+		<td id='dynfield_sum'>0,00</td>
+		<td></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <button onClick='orders.addProduct();' type='button'>Add product</button>
+  
+  <p>
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :mva %><br />
+    <%= f.text_field :mva %>
+  </p>
+  <p>
+    <%= f.label :order_date %><br />
+    <%= f.date_select :order_date %>
+  </p>
+  <p>
+    <%= f.label :requested_delivery_date %><br />
+    <%= f.date_select :requested_delivery_date %>
+  </p>
+  <p>
+    <%= f.label :seller_id %><br />
+    <%= f.text_field :seller_id %>
+  </p>
+  <p>
+    <%= f.label :customer_id %><br />
+    <%= f.text_field :customer_id %>
+  </p>
+  <p>
+    <%= f.label :delivery_address_id %><br />
+    <%= f.text_field :delivery_address_id %>
+  </p>
+  <p>
+    <%= f.label :transport_id %><br />
+    <%= f.text_field :transport_id %>
+  </p>
+  <p>
+    <%= f.submit "Save" %>
+  </p>
+<% end %>
+
+<script>
+orders.addPredefined();
+</script>

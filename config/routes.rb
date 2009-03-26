@@ -1,4 +1,14 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :bills
+
+  map.resources :bill_items
+
+  map.resources :orders
+
+  map.resources :order_items
+
+  map.resources :products
+
   map.resources :companies
 
   map.resources :journal_operations

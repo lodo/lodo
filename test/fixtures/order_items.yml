@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  product: 
+  price: 9.99
+  amount: 1
+
+two:
+  product: 
+  price: 9.99
+  amount: 1

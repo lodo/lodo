@@ -38,7 +38,7 @@ h2
 /*
   Form styling
   */
-button 
+button
 {
     background-color: #eee;
     border: 1px solid #888;
@@ -54,6 +54,7 @@ input
 {
     background-color: white;
     border: 1px solid #888;
+	color: black;
 }
 
 td input

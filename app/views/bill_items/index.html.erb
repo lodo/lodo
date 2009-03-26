@@ -1,0 +1,22 @@
+<h1>Listing bill_items</h1>
+
+<table>
+  <tr>
+    <th>Order item</th>
+    <th>Count</th>
+  </tr>
+
+<% for bill_item in @bill_items %>
+  <tr>
+    <td><%=h bill_item.order_item %></td>
+    <td><%=h bill_item.count %></td>
+    <td><%= link_to 'Show', bill_item %></td>
+    <td><%= link_to 'Edit', edit_bill_item_path(bill_item) %></td>
+    <td><%= link_to 'Destroy', bill_item, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New bill_item', new_bill_item_path %>

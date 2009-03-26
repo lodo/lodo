@@ -10,10 +10,6 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.check_box :active %>
-    <%= f.label :active %>
-  </p>
-  <p>
     <%= f.label :lodo_name %><br />
     <%= f.text_field :lodo_name %>
   </p>
@@ -33,6 +29,9 @@
     <%= f.check_box :has_ledger %>
     <%= f.label :has_ledger %>
   </p>
+
+  <%= render :partial => "active_periods/form", :locals => { :active_periods => @account.activatable } %>
+
   <p>
     <%= f.submit "Save" %>
   </p>

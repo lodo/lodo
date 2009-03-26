@@ -1,4 +1,23 @@
 
+function parseFloatNazi(str) 
+{
+    if (str == null || str == "") {
+	return 0;
+    }
+
+    var str2 = str.replace(/,/g,'.');
+
+    if (str2.match(/^[0-9]*\.?[0-9]+$/))
+	return parseFloat(str2);
+    return NaN;
+}
+
+function toMoney (val) {
+    if (isNaN(val)) {
+	return '?';
+    }
+    return val.toFixed(2).replace(/\./g,',');
+}
 
 
 // this function is needed to work around 

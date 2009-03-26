@@ -1,0 +1,13 @@
+<p>
+  <b>Order item:</b>
+  <%=h @bill_item.order_item %>
+</p>
+
+<p>
+  <b>Count:</b>
+  <%=h @bill_item.count %>
+</p>
+
+
+<%= link_to 'Edit', edit_bill_item_path(@bill_item) %> |
+<%= link_to 'Back', bill_items_path %>

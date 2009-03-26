@@ -4,16 +4,15 @@ class CreateAccounts < ActiveRecord::Migration
       t.integer :number, :null => false
       t.string :name, :null => false
       
-      t.references :company
+      t.references :company 
       
-      t.boolean :active, :null => false
+      t.references :activatable
       t.string :lodo_name, :null => false
       t.string :debit_text, :null => false
       t.string :credit_text, :null => false
       t.string :comments, :null => false
       
       t.boolean :has_ledger, :null => false
-      
       t.timestamps
     end
   end
