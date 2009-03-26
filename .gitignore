@@ -1,0 +1,14 @@
+.*
+/config/database.yml
+/log/*
+*~
+\#*\#
+/doc/api
+/doc/app
+/db/schema.rb
+/db/test.rb
+/db/*.sqlite3
+/db/*.sql
+/nbproject
+/tmp/**/*
+
