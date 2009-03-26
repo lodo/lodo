@@ -126,7 +126,7 @@ class UsersController < ApplicationController
   end
 
   def change_current_company
-    session[:user].current_company = Company.find(params[:company])
+    session[:user].current_company = Company.find(params[:current_company])
     session[:user].save
     respond_to do |format|
       format.html { redirect_to(:back) }

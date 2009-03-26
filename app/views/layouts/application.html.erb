@@ -10,7 +10,7 @@
   <%= javascript_include_tag 'journals' %>
   <%= javascript_include_tag 'orders' %>
   <%= javascript_include_tag 'lodo' %>
-  <%= javascript_include_tag 'change_company' %>
+  <%= javascript_include_tag 'submitaction.js' %>
   <%= javascript_include_tag 'jquery' %>
 </head>
 <body>
@@ -51,11 +51,11 @@
 
       <li class="change_company_form">
         <% form_tag :controller => "users", :action=> "change_current_company" do -%>
-         <label for="company">Company:</label>
-         <%= select_tag "company", options_for_select(session[:user].companies.collect {|p| [ p.name, p.id ] },
-                                                      if session[:user].current_company.nil? then 0 else session[:user].current_company.id end ) %>
-         <%= submit_tag "Change" %>
+         <label for="current_company">Company:</label>
+         <%= select_tag "current_company", options_for_select(session[:user].companies.collect {|p| [ p.name, p.id ] },
+                                                              if session[:user].current_company.nil? then 0 else session[:user].current_company.id end ) %>
         <% end %>
+        <script>submitAction.registerSubmitAction('#current_company', 'change', '.change_company_form form');</script>
       </li>
 
     </ul>
