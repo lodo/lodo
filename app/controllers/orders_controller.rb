@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.xml
   def index
-    @orders = Order.find(session[:company].orders, :order => 'updated_at')
+    @orders = Order.find(session[:user].current_company.orders, :order => 'updated_at')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
   # POST /orders.xml
   def create
     @order = Order.new(params[:order])
-    @order.company_id = session[:company].id
+    @order.company_id = session[:user].current_company.id
     respond_to do |format|
       Order.transaction do
         begin
