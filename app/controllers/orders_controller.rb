@@ -78,6 +78,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       Order.transaction do
         begin
+          flash[:notice] = 'Save order.'
           @order.update_attributes(params[:order]) or raise ActiveRecord::Rollback
 
           params[:products].each {
@@ -86,18 +87,21 @@ class OrdersController < ApplicationController
             if value[:id] != nil
               op = OrderItem.find(value[:id])
               if op.amount > 0
-                op.update_attributes(value)  or raise ActiveRecord::Rollback
+                flash[:notice] = 'Update item.'
+                op.update_attributes(value) or raise ActiveRecord::Rollback
               else
+                flash[:notice] = 'DESTROY THE UNBELIVERS!!!'
                 op.destroy
               end
             else
               op = OrderItem.new(value)
               if op.amount > 0
+                flash[:notice] = 'Save new item.'
                 op.save or raise ActiveRecord::Rollback
               end
             end
           }
-
+          
           flash[:notice] = 'Order was successfully updated.'
           format.html { redirect_to(@order) }
           format.xml  { head :ok }

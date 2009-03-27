@@ -125,7 +125,7 @@ var orders = {
 	row.addCell(orders.makeProductSelect(line?line.product_id:null));
 	row.addCell(orders.makeText('unitPrice'));
 	row.addCell(orders.makeAmount(line?line.amount:0));
-	row.addCell(orders.makeDiscount(toMoney(100.0 - 100*line.price/(orders.getProductPrice(line.product_id)*line.amount))));
+	row.addCell(orders.makeDiscount(toMoney(line?(100.0 - 100*line.price/(orders.getProductPrice(line.product_id)*line.amount)):0.0)));
 	row.addCell(orders.makePrice());
 	
 	var cell = document.createElement("span");
