@@ -7,7 +7,11 @@ class Order < ActiveRecord::Base
   has_many :order_items
 
   def discount
-    100.0 * (1.0-self.price / self.order_items.inject(0.0){|sum,item| sum+item.price})
+    if self.price.nil?
+      0
+    else
+      100.0 * (1.0-self.price / self.order_items.inject(0.0){|sum,item| sum+item.price})
+    end
   end
 
 end
