@@ -49,21 +49,23 @@ class OrdersController < ApplicationController
     respond_to do |format|
       Order.transaction do
         begin
-          @order.save or raise ActiveRecord::Rollback
+          @order.save!
           params[:products].each {
             |key, value|
-            value[:order_id] = @order.id
-            item = OrderItem.new(value)
+	    item = OrderItem.new(value)
             if item.amount > 0
-              item.save or raise ActiveRecord::Rollback
+	      @order.order_items << item
+              item.save!
             end
           }
           flash[:notice] = 'Order was successfully created.'
           format.html { redirect_to(@order) }
           format.xml  { render :xml => @order, :status => :created, :location => @order }
-        rescue ActiveRecord::Rollback
+        rescue Exception => e
+	  puts e.inspect
           format.html { render :action => "new" }
           format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
+	  raise
         end
       end
     end
