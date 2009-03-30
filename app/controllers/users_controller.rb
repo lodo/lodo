@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :login_required, :only=>['login', 'new', 'forgot_password']
+  skip_before_filter :login_required, :only => ['login', 'new', 'forgot_password', 'create']
 
   def new
     @user = User.new
@@ -25,7 +25,6 @@ class UsersController < ApplicationController
         format.xml  { render :xml => @user.errors, :status => :unprocessable_entity }
       end
     end
-
   end
   
   def login
@@ -36,7 +35,7 @@ class UsersController < ApplicationController
             session[:user].save
         end
         
-        flash[:message]  = "Login successful"
+        flash[:notice]  = "Login successful"
 
 	if session[:return_to]
           redirect_to session[:return_to]
@@ -44,7 +43,7 @@ class UsersController < ApplicationController
           redirect_to :action => :show, :id => session[:user].id
         end      
       else
-        flash[:warning] = "Login unsuccessful"
+        flash[:notice] = "Login unsuccessful"
       end
     end
   end
