@@ -47,11 +47,11 @@ class ApplicationController < ActionController::Base
   end
 
   def company_required
-    ok = true
-    
-    ok &= session[:user].current_company != nil
-        
-    if ok
+    if session[:user].current_company.nil?
+      session[:user].current_company = session[:user].companies.first
+    end    
+
+    if not session[:user].current_company.nil?
       return true
     end
 
