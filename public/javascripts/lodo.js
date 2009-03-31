@@ -1,3 +1,33 @@
+function startswith (str, prefix) {
+  return str.substring(0,prefix.length) == prefix;
+}
+
+function endswith (str, suffix) {
+  return str.substring(this.length - suffix.length) == suffix;
+}
+
+
+function replaceIdsInDOM(id, templateId, dom) {
+    $.each(dom, function () {
+	if (this.nodeType == 1) {  // Node.ELEMENT_TYPE
+	    if (   this.hasAttribute('id')
+		&& startswith(this.getAttribute('id'), templateId))
+		this.setAttribute('id', id + this.getAttribute('id').substring(templateId.length))
+	    if (   this.hasAttribute('name')
+		&& startswith(this.getAttribute('name'), templateId))
+		this.setAttribute('name', id + this.getAttribute('name').substring(templateId.length))
+	}
+    })
+    if (dom.children().length > 0)
+        replaceIdsInDOM(id, templateId, dom.children());
+}
+
+function makeTemplateInstance(id, templateId) {
+    var res = $('#' + templateId).clone(true);
+    replaceIdsInDOM(id, templateId, res);
+    res[0].style.display = 'inherit';
+    return res[0];
+}
 
 function parseFloatNazi(str) 
 {

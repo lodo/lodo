@@ -4,7 +4,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.xml
   def index
-    @bills = Bill.find(session[:company].bills, :order => 'updated_at')
+    @bills = Bill.find(session[:user].current_company.bills, :order => 'updated_at')
     
     respond_to do |format|
       format.html # index.html.erb
@@ -23,9 +23,39 @@ class BillsController < ApplicationController
     end
   end
 
+  def get_all_orders
+    @orders_all = Order.find(
+      :all,
+      :joins => :company,
+      :conditions => ["orders.company_id = ?", session[:user].current_company.id ],
+      :include => {
+	:seller => {},
+	:customer => {},
+	:transport => {},
+	:company => {},
+        :order_items => :product
+      })
+
+=begin
+    @orders_all = Order.find_by_sql([
+"
+select
+  orders.*
+from
+ orders, companies
+where
+     orders.company_id = ?
+ and orders.customer_id = companies.id
+order by
+ companies.name, orders.created_at
+", session[:user].current_company.id])
+=end
+  end
+
   # GET /bills/new
   # GET /bills/new.xml
   def new
+    get_all_orders
     @bill = Bill.new
 
     respond_to do |format|
@@ -36,6 +66,7 @@ class BillsController < ApplicationController
 
   # GET /bills/1/edit
   def edit
+    get_all_orders
     @bill = Bill.find(params[:id])
   end
 
@@ -43,7 +74,7 @@ class BillsController < ApplicationController
   # POST /bills.xml
   def create
     @bill = Bill.new(params[:bill])
-    @bill.company_id = session[:company].id
+    @bill.company_id = session[:user].current_company.id
     respond_to do |format|
       if @bill.save
         flash[:notice] = 'Bill was successfully created.'
