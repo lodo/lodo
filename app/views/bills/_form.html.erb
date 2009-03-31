@@ -1,0 +1,106 @@
+<script>
+  /*
+  Use an object as a fake namespace. Spiffy.
+  */
+  var LODO = new Object();
+  LODO.orderList = <%= @orders_all.to_json(
+    :include => {:company => {},
+                 :customer => {},
+                 :seller => {},
+                 :transport => {},
+                 :order_items => {:include => :product}})
+  %>;
+  LODO.billItemList = <%= @bill.bill_orders.to_json %>;
+</script>
+
+
+<% form_for(@bill) do |f| %>
+  <%= f.error_messages %>
+
+
+  <table id="order_template" style="display: none" class='striped'>
+    <thead>
+      <tr>
+	<th>Product</th>
+	<th>Unit Price</th>
+	<th>Remaining</th>
+	<th>Amount</th>
+	<th>Discount</th>
+	<th>Total Price</th>
+      </tr>
+    </thead>
+    <tbody id='order_template_products'></tbody>
+    <tfoot>
+      <tr>
+	<td>Total for this order:</td>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>
+	  <input type='text' id='order_template_discount_total' onkeyup="bills.validate();"/>
+	  <input type='hidden' name='order_template_order[price]' id='order_template_price' value=''/>
+	</td>
+	<td id='order_template_dynfield_sum'>0,00</td>
+      </tr>
+    </tfoot>
+  </table>
+
+
+  <table class='striped'>
+    <thead>
+      <tr>
+	<th>Order</th>
+	<th>Products</th>
+	<th></th>
+      </tr>
+    </thead>
+    <tbody id='orders'></tbody>
+    <tfoot>
+      <tr>
+	<td>Total:</td>
+	<td>
+          <table>
+	    <tr>
+	      <th>Product</th>
+	      <th>Unit Price</th>
+	      <th>Remaining</th>
+	      <th>Amount</th>
+	      <th>Discount</th>
+	      <th>Total Price</th>
+	    </tr>
+            <tr>
+	      <td>Total for all orders:</td>
+	      <td></td>
+	      <td></td>
+	      <td></td>
+              <td>
+                <input type='text' id='discount_total' value='<%= h @bill.discount%>' onkeyup="bills.validate();"/>
+ 	        <input type='hidden' name='bill[price]' id='price' value=''/>
+              </td>
+              <td id='dynfield_sum'>0,00</td>
+            </tr>
+          </table>
+	</td>
+	<td></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <button onClick='bills.addOrder();' type='button'>Add order</button>
+
+  <p>
+    <%= f.label :delivery_date %><br />
+    <%= f.date_select :delivery_date %>
+  </p>
+  <p>
+    <%= f.label :billing_date %><br />
+    <%= f.date_select :billing_date %>
+  </p>
+  <p>
+    <%= f.submit "Create" %>
+  </p>
+<% end %>
+
+<script>
+  bills.addPredefined();
+</script>

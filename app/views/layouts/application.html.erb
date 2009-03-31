@@ -7,11 +7,7 @@
   <title>LODO</title>
   <%= stylesheet_link_tag 'journals' %>
   <%= stylesheet_link_tag 'lodo' %>
-  <%= javascript_include_tag 'journals' %>
-  <%= javascript_include_tag 'orders' %>
-  <%= javascript_include_tag 'lodo' %>
-  <%= javascript_include_tag 'submitaction.js' %>
-  <%= javascript_include_tag 'jquery' %>
+  <%= javascript_include_tag :all %>
 </head>
 <body>
   <% if session[:user] %>

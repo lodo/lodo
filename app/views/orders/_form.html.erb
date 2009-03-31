@@ -53,11 +53,11 @@
   </p>
   <p>
     <%= f.label :seller_id %><br />
-    <%= f.text_field :seller_id %>
+    <%= f.select :seller_id, Company.find(:all).collect {|p| [ p.name, p.id ] } %>
   </p>
   <p>
     <%= f.label :customer_id %><br />
-    <%= f.text_field :customer_id %>
+    <%= f.select :customer_id, Company.find(:all).collect {|p| [ p.name, p.id ] } %>
   </p>
   <p>
     <%= f.label :delivery_address_id %><br />
@@ -65,7 +65,7 @@
   </p>
   <p>
     <%= f.label :transport_id %><br />
-    <%= f.text_field :transport_id %>
+    <%= f.select :transport_id, Company.find(:all).collect {|p| [ p.name, p.id ] } %>
   </p>
   <p>
     <%= f.submit "Save" %>

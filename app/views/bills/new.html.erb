@@ -1,19 +1,5 @@
 <h1>New bill</h1>
 
-<% form_for(@bill) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :delivery_date %><br />
-    <%= f.date_select :delivery_date %>
-  </p>
-  <p>
-    <%= f.label :billing_date %><br />
-    <%= f.date_select :billing_date %>
-  </p>
-  <p>
-    <%= f.submit "Create" %>
-  </p>
-<% end %>
+<%= render :partial => "form" %>
 
 <%= link_to 'Back', bills_path %>
