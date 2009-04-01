@@ -1,3 +1,5 @@
+function $i (id) { return $("#" + id); }
+
 function startswith (str, prefix) {
   return str.substring(0,prefix.length) == prefix;
 }
@@ -9,7 +11,7 @@ function endswith (str, suffix) {
 function map(fn, seq) {
   var res = new Array();
 
-  seq.each(function (x) { res.push(fn(x)); })
+  $.each(seq, function (x) { res.push(fn(seq[x])); })
   return res;
 }
 
@@ -30,24 +32,34 @@ function div (x, y) { return x / y; }
 function sum (seq) { return reduce(add, seq); }
 function avg (seq) { return sum(seq) / seq.length; }
 
-function replaceIdsInDOM(id, templateId, dom) {
+function replaceIdsInDOM(id, name, templateId, dom) {
+    var item_id;
+    var item_name;
     $.each(dom, function () {
 	if (this.nodeType == 1) {  // Node.ELEMENT_TYPE
-	    if (   this.hasAttribute('id')
-		&& startswith(this.getAttribute('id'), templateId))
-		this.setAttribute('id', id + this.getAttribute('id').substring(templateId.length))
-	    if (   this.hasAttribute('name')
-		&& startswith(this.getAttribute('name'), templateId))
-		this.setAttribute('name', id + this.getAttribute('name').substring(templateId.length))
+	    if (   this.id !== undefined
+		&& startswith(this.id, templateId)) {
+		item_id = id + this.id.substring(templateId.length);
+		item_name = name + this.id.substring(templateId.length);
+            }
+	    if (   this.name !== undefined
+		&& startswith(this.name, templateId)) {
+		item_name = name + this.name.substring(templateId.length);
+            }
+            if (item_id !== undefined)
+                this.id = item_id;
+            if (item_name !== undefined)
+                this.name = item_name;
+            item_id = item_name = undefined;
 	}
     })
     if (dom.children().length > 0)
-        replaceIdsInDOM(id, templateId, dom.children());
+        replaceIdsInDOM(id, name, templateId, dom.children());
 }
 
-function makeTemplateInstance(id, templateId) {
+function makeTemplateInstance(id, name, templateId) {
     var res = $('#' + templateId).clone(true);
-    replaceIdsInDOM(id, templateId, res);
+    replaceIdsInDOM(id, name, templateId, res);
     res[0].style.display = 'inherit';
     return res[0];
 }
