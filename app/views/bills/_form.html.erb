@@ -29,7 +29,7 @@
 	<th>Total Price</th>
       </tr>
     </thead>
-    <tbody id='order_template_products'></tbody>
+    <tbody id='order_template_rows'></tbody>
     <tfoot>
       <tr>
 	<td>Total for this order:</td>
@@ -37,8 +37,8 @@
 	<td></td>
 	<td></td>
 	<td>
-	  <input type='text' id='order_template_discount_total' onkeyup="bills.validate();"/>
-	  <input type='hidden' name='order_template_order[price]' id='order_template_price' value=''/>
+	  <input type='text' id='order_template_discount_total' name='order_template[discount_total]' onkeyup="bills.validate();"/>
+	  <input type='hidden' name='order_template_order[price]' id='order_template_price' name='order_template[price]' value=''/>
 	</td>
 	<td id='order_template_dynfield_sum'>0,00</td>
       </tr>
@@ -53,7 +53,7 @@
 	<th>Products</th>
       </tr>
     </thead>
-    <tbody id='orders'></tbody>
+    <tbody id='bill_rows'></tbody>
     <tfoot>
       <tr>
 	<td>Total:</td>
