@@ -15,7 +15,7 @@ var bills = {
 
     validate: function()
     {
-	for (var i=0; i < LODO.orderLines; i++) {
+	for (var i=0; i < $('#bill')[0].table_lines; i++) {
 	    var price = $('#unitPrice_' + i)[0];
 	    var orderId = $('#order_id_' + i)[0].value;
 		
@@ -27,7 +27,7 @@ var bills = {
     sumColumn: function()
     {
 	var sum = 0.0;
-	for (var i=0; i < LODO.orderLines; i++) {
+	for (var i=0; i < $('#bill')[0].table_lines; i++) {
 	    var val = parseFloatNazi($('#unitPrice_'+i)[0].innerHTML)* (100.0-parseFloatNazi($('#discount_'+i)[0].value))*0.01;
 	    sum += val;
 	    bills.setPrice(i,val);
@@ -38,20 +38,20 @@ var bills = {
 
     makeOrderSelect: function(value) {
 	var sel = document.createElement("select");
-	sel.name = "orders[" + LODO.orderLines+"][order_id]";
-	sel.id = "order_id_"+ LODO.orderLines;
-        sel.line_id = LODO.orderLines;
+	sel.name = "orders[" + $('#bill')[0].table_lines+"][order_id]";
+	sel.id = "order_id_"+ $('#bill')[0].table_lines;
+        sel.line_id = $('#bill')[0].table_lines;
 
         for (var i=0; i<LODO.orderList.length; i++) {
 	    sel.add(new Option("" + LODO.orderList[i].order.customer.name + " - " + LODO.orderList[i].order.order_date + " - #" + LODO.orderList[i].order.id,
-                               LODO.orderList[i].order.id), null);
+                               i), null);
 	}
 
 	sel.onchange = function (event) {
             $.each(
                 LODO.orderList[this.value].order.order_items,
                 function (order_item) {
-                    bills.addProduct($("#orderDetails_" + this.line_id), {amount: 0, discount: 0.0, order_item: order_item});
+                    bills.addProduct($("#order_details_" + this.line_id), {price: 0, amount: 0, discount: 0.0, order_item: order_item});
                 }
             )
         }
@@ -63,7 +63,7 @@ var bills = {
     makeDiscount: function (value) {
 	var res = document.createElement("input");
 	res.type="text";
-	res.id='discount_' + LODO.orderLines;
+	res.id='discount_' + $('#bill')[0].table_lines;
 	res.setAttribute("autocomplete","off");
 	
 	res.onkeyup = function (event) {bills.validate();}
@@ -77,8 +77,8 @@ var bills = {
 
 	var inp = document.createElement("input");
 	inp.type="hidden";
-	inp.id='price_' + LODO.orderLines;
-	inp.name = "orders[" + LODO.orderLines+"][price]";
+	inp.id='price_' + $('#bill')[0].table_lines;
+	inp.name = "orders[" + $('#bill')[0].table_lines+"][price]";
 	inp.value = value;
 	res.appendChild(inp);
 	res.appendChild(bills.makeText('priceLabel'));
@@ -96,54 +96,86 @@ var bills = {
 	$('#priceLabel_'+line)[0].innerHTML = toMoney(value);
     },
 
-    makeText: function(id) {
+    makeText: function(id, text, context) {
 	var res = document.createElement("span");
-	res.id=id + "_" + LODO.orderLines;
+	res.id=id + "_" + $(context)[0].table_lines;
+        if (text) {
+          $(res).html(text);
+        }
 	return res;
     },
 
     makeOrderDetails: function(lines) {
-	var res = makeTemplateInstance("orderDetails_" + LODO.orderLines, "order_template")
-	if (lines != undefined)
-            lines.each(function (line) {
-                bills.addProduct(res, line)
-            })
+	var res = makeTemplateInstance("order_details_" + $('#bill')[0].table_lines, "order_template")
+	
+	res.updateProducts = function (order_nr) {
+            this.discount = LODO.orderList[order_nr].order.price / sum(map(function (x) { return x.price; }, LODO.orderList[order_nr].order.order_items));
+
+            $.each(
+                LODO.orderList[order_nr].order.order_items,
+                function (order_item) {
+                    bills.addProduct(this, {price: LODO.orderList[order_nr].order.price * discount, amount: 0, discount: 0.0, order_item: order_item});
+                }
+            )
+
+        }
+        res.productLines = 0;
         return res;
     },
 
+    addCell: function (row, content) {
+	var c = row.insertCell(row.cells.length);
+	c.appendChild(content);
+        return c;
+    },
+
+    addProduct: function (order_details, line) {
+        // bills.addProduct($("#order_details_" + this.line_id), {amount: 0, discount: 0.0, order_item: order_item});
+
+        var opTable = $("#" + order_details.getAttribute('id') + "_products", order_details)[0];
+	var row = opTable.insertRow(opTable.rows.length);
+    
+	bills.addCell(row, bills.makeText('product', line.order_item.product.name, opTable));
+	bills.addCell(row, bills.makeText('unit_price', line.price, opTable));
+	bills.addCell(row, bills.makeText('remaining', line.order_item.amount, opTable));
+
+/*
+	<th>Product</th>
+	<th>Unit Price</th>
+	<th>Remaining</th>
+	<th>Amount</th>
+	<th>Discount</th>
+	<th>Total Price</th>
+*/
+
+	order_details.productLines++;
+	stripe();
+	bills.validate();
+   },
+
     addOrder: function(line)
     {
-	if(!LODO.orderLines) {
-	    LODO.orderLines = 0;
+	if(!$('#bill')[0].table_lines) {
+	    $('#bill')[0].table_lines = 0;
 	}
 
 	var opTable = $('#orders')[0];
-	
 	var row = opTable.insertRow(opTable.rows.length);
     
-	row.addCell = function (content) {
-	    var c = row.insertCell(this.cells.length);
-	    c.appendChild(content);
-	}
-    
-	row.addCell(bills.makeOrderSelect(line?line.order_id:null));
-	row.addCell(bills.makeOrderDetails(line?line.order_details:null));
-	
-	var cell = document.createElement("span");
+	bills.addCell(row, bills.makeOrderSelect(line?line.order_id:null));
+	var cell = bills.addCell(row, bills.makeOrderDetails(line?line.order_details:null));
 	/*
 	  If we are reediting an old line, insert the id so we can match them together
 	*/
 	if (line) {
 	    var line_id = document.createElement("input");
 	    line_id.type = "hidden";
-	    line_id.name = "orders[" + LODO.orderLines+"][id]";
+	    line_id.name = "orders[" + $('#bill')[0].table_lines+"][id]";
 	    line_id.value = line.id;
 	    cell.appendChild(line_id);
 	}
-
-	row.addCell(cell);
 	
-	LODO.orderLines++;
+	$('#bill')[0].table_lines++;
 	stripe();
 	bills.validate();
     },

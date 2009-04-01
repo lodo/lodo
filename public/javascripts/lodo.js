@@ -6,6 +6,29 @@ function endswith (str, suffix) {
   return str.substring(this.length - suffix.length) == suffix;
 }
 
+function map(fn, seq) {
+  var res = new Array();
+
+  seq.each(function (x) { res.push(fn(x)); })
+  return res;
+}
+
+function reduce (fn, seq) {
+  var pos = 1;
+  var res = seq[0];
+
+  for (; pos < seq.length; pos++)
+    res = fn(res, seq[pos]);
+  return res;
+}
+
+function add (x, y) { return x + y; }
+function sub (x, y) { return x - y; }
+function mul (x, y) { return x * y; }
+function div (x, y) { return x / y; }
+
+function sum (seq) { return reduce(add, seq); }
+function avg (seq) { return sum(seq) / seq.length; }
 
 function replaceIdsInDOM(id, templateId, dom) {
     $.each(dom, function () {
@@ -27,6 +50,18 @@ function makeTemplateInstance(id, templateId) {
     replaceIdsInDOM(id, templateId, res);
     res[0].style.display = 'inherit';
     return res[0];
+}
+
+function decorateDOM(dom, decoration) {
+    var value;
+    for (member in decoration) {
+	value = decoration[member];
+        if (value.argumentNames === undefined) {
+            $.each(dom, function (domitem) { domitem[member] = value; });
+        } else {
+            decorateDOM($('#' + member, dom), value);
+        }
+    }
 }
 
 function parseFloatNazi(str) 
