@@ -190,7 +190,7 @@ box, to add the top/bottom margins, thus working around the problem.
 {
     display:block;
     position: absolute; 
-    top: 20px; left: 40; 
+    top: 20px; left: 40px;
     width: 250pt;
     background: #ffa;
     border: 1px solid black;
@@ -478,3 +478,8 @@ iframe
 .change_company_form form div {
  display: inline;
 }
+
+.ledger_item:hover {
+  background: yellow;
+}
+
