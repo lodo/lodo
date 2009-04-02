@@ -1,3 +1,4 @@
 class VatAccount < ActiveRecord::Base
-  belongs_to :account
+  has_many :accounts
+  belongs_to :target_account, :class_name => 'Account'
 end

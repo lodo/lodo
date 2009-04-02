@@ -1,7 +1,8 @@
 class JournalOperation < ActiveRecord::Base
   belongs_to :journal
   belongs_to :account
-
+  belongs_to :vat_account
+  
   def debet= (num)
     self.amount = - num.to_f
   end

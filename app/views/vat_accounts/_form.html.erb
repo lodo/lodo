@@ -6,8 +6,8 @@
     <%= f.text_field :code %>
   </p>
   <p>
-    <%= f.label :account_id %><br />
-    <%= f.select :account_id, session[:user].current_company.accounts.collect {|p| [ p.name, p.id ] }.sort %>
+    <%= f.label :target_account_id %><br />
+    <%= f.select :target_account_id, session[:user].current_company.accounts.collect {|p| [ p.name, p.id ] }.sort %>
   </p>
   <p>
     <%= f.label :percentage %><br />
