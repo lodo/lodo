@@ -144,6 +144,9 @@ var journals = {
 	
 	row.addCell(cell);
 	
+	var row2 = opTable.insertRow(opTable.rows.length);
+	row2.classNames="vat";
+
 	
 	if (line) {
 	    amount = line.amount;

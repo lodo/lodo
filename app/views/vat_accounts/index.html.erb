@@ -1,0 +1,30 @@
+<h1>Listing vat_accounts</h1>
+
+<table class='striped'>
+  <tr>
+    <th>Account</th>
+    <th>Percentage</th>
+    <th>Overridable</th>
+    <th>Code</th>
+    <th>Valid from</th>
+    <th>Valid to</th>
+  </tr>
+
+<% for vat_account in @vat_accounts %>
+  <tr>
+    <td><%=h vat_account.account.number %> -  <%=h vat_account.account.name %></td>
+    <td><%=h vat_account.percentage %></td>
+    <td><%=h vat_account.overridable %></td>
+    <td><%=h vat_account.code %></td>
+    <td><%=h vat_account.valid_from %></td>
+    <td><%=h vat_account.valid_to %></td>
+    <td><%= link_to 'Show', vat_account %></td>
+    <td><%= link_to 'Edit', edit_vat_account_path(vat_account) %></td>
+    <td><%= link_to 'Destroy', vat_account, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New vat_account', new_vat_account_path %>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  account: 
+  percentage: 1
+  overridable: false
+  code: 1
+  valid_from: 2009-03-31
+  valid_to: 2009-03-31
+
+two:
+  account: 
+  percentage: 1
+  overridable: false
+  code: 1
+  valid_from: 2009-03-31
+  valid_to: 2009-03-31

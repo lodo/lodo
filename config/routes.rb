@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :vat_accounts
+
   map.resources :bills
 
   map.resources :bill_items
@@ -15,7 +17,10 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :journals
 
-  map.resources :accounts
+  map.resources :accounts do |account|
+    account.resources :ledgers
+  end
+
   map.resources :users, :collection => { :change_current_company => :post, :login => :get, :login2 => :get, :new => :get, :forgot_password => :get, :logout => :get}
   map.resources :companies
   
