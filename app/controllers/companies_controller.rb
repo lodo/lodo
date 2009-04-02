@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.xml
   def index
-    @companies = Company.find(:all, :order => :name)
+    @companies = Company.find(:all, :include => :users, :order => :name)
     @companies.each do
       |c| 
       if !c.address 

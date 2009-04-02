@@ -25,10 +25,13 @@
     <%= f.label :comments %><br />
     <%= f.text_field :comments %>
   </p>
-  <p>
-    <%= f.check_box :has_ledger %>
+  <p id="has_ledger_toggle">
+    <%= f.check_box :has_ledger, :onchange => "accounts.toggleLedger( $('#account_has_ledger').attr('checked') );" %>
     <%= f.label :has_ledger %>
   </p>
+  <% if @account.ledgers.size > 0 %>
+    <%= javascript_tag "$(document).ready( function () { $('#has_ledger_toggle').hide(); } );" %>
+  <% end %>
 
   <%= render :partial => "active_periods/form", :locals => { :active_periods => @account.activatable } %>
 

@@ -11,4 +11,5 @@
 /db/*.sql
 /nbproject
 /tmp/**/*
+/*.patch
 
