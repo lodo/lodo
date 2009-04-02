@@ -97,14 +97,20 @@ var bills = {
 	return res;
     },
     
-    makePrice: function (value, context) {	
+    makePrice: function (value, order_item_id, context) {	
 	var res = document.createElement("span");
 
 	var inp = document.createElement("input");
 	inp.type = "hidden";
 	inp.id = bills.getCurrentLineId(context) + '_price';
-	inp.name = bills.getCurrentLineId(context) + '[price]';
+	inp.name = bills.getCurrentLineName(context) + '[price]';
 	inp.value = value;
+	res.appendChild(inp);
+	inp = document.createElement("input");
+	inp.type = "hidden";
+	inp.id = bills.getCurrentLineId(context) + '_order_item_id';
+	inp.name = bills.getCurrentLineName(context) + '[order_item_id]';
+	inp.value = order_item_id;
 	res.appendChild(inp);
 	res.appendChild(bills.makeText('price_label', value, context));
 	return res;
@@ -133,7 +139,7 @@ var bills = {
 	bills.addCell(row, bills.makeText('remaining', line.order_item.amount - line.order_item.billed, context));
 	bills.addCell(row, bills.makeAmount(line.order_item.amount, context));
 	bills.addCell(row, bills.makeDiscount(0, context));
-	bills.addCell(row, bills.makePrice(0, context));
+	bills.addCell(row, bills.makePrice(0, line.order_item.order_item_id, context));
 	stripe();
 	bills.validate();
    },
