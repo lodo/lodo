@@ -3,7 +3,7 @@ class ActiveRecord::Base
     if params.has_key? 'id' and params['id'] != 'undefined' 
       obj = self.find params['id']
       params.each do |key, value|
-        obj.send key + "=", value
+        obj.write_attribute key, value
       end
     else
       obj = self.new params

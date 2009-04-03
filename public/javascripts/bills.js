@@ -132,6 +132,7 @@ var bills = {
 
 
     addProduct: function (line, context) {
+console.log("addProduct", line);
 	var row = bills.addLine(context);
 
 	bills.addCell(row, bills.makeText('product', line.order_item.product.name, context));
@@ -144,32 +145,35 @@ var bills = {
 	bills.validate();
    },
 
-    makeOrderSelect: function(value) {
+    makeOrderSelect: function(line) {
+console.log("makeOrderSelect", line);
 	var sel = document.createElement("select");
 	sel.id = bills.getCurrentLineId('#bill') + "_order_id";
 	sel.name = bills.getCurrentLineName('#bill') + "[order_id]";
         sel.line_id = bills.getCurrentLineId('#bill')
 
         for (var i=0; i<LODO.orderList.length; i++) {
+            if (LODO.orderList[i].id == line.id)
+                sel.value = i;
 	    sel.add(new Option("" + LODO.orderList[i].order.customer.name + " - " + LODO.orderList[i].order.order_date + " - #" + LODO.orderList[i].order.id,
                                i), null);
 	}
 
-	sel.onchange = function (event) {
-            $i(sel.line_id + "_details")[0].updateProducts(this.value);
+	sel.onchange = function (event, line) {
+            $i(sel.line_id + "_details")[0].updateProducts(this.value, line);
         }
-	sel.value = value;
 
 	return sel;
     },
 
-    makeOrderDetails: function(lines) {
+    makeOrderDetails: function() {
 	var res = makeTemplateInstance(
             bills.getCurrentLineId('#bill') + "_details",
             bills.getCurrentLineName('#bill') + "[details]",
             "order_template");
 
-	res.updateProducts = function (order_nr) {
+	res.updateProducts = function (order_nr, line) {
+console.log("updateProducts", line);
             res.discount = LODO.orderList[order_nr].order.price / sum(map(function (x) { return x.price; }, LODO.orderList[order_nr].order.order_items));
             res.table_lines = 0;
 
@@ -179,25 +183,33 @@ var bills = {
 
             $.each(
                 LODO.orderList[order_nr].order.order_items,
-                function (order_item) {
-                    bills.addProduct(
-                        {price: LODO.orderList[order_nr].order.price * res.discount,
-                         amount: 0,
-                         discount: 0.0,
-                         order_item: LODO.orderList[order_nr].order.order_items[order_item]},
-                        res);
+                function () {
+                    var product_line = {price: LODO.orderList[order_nr].order.price * res.discount,
+				        amount: 0,
+					discount: 0.0,
+					order_item: this}
+
+                    if (line) {
+                        bill_item = find(function (bill_item) { return bill_item.order_item_id == this.id },
+                                         line);
+                        product_line.amount = bill_item.amount;
+                        product_line.discount = product_line.price / product_line.order_item.price;
+                    }
+
+                    bills.addProduct(product_line, res);
                 })
         }
         return res;
     },
 
     addOrder: function(line) {
+console.log("addOrder", line);
 	var row = bills.addLine('#bill');
     
-        var select = bills.makeOrderSelect(line?line.order_id:null);
+        var select = bills.makeOrderSelect(line);
 	bills.addCell(row, select);
-	var cell = bills.addCell(row, bills.makeOrderDetails(line?line.order_details:null));
-        select.onchange();
+        var details = bills.makeOrderDetails();
+	var cell = bills.addCell(row, details);
 
 	/* If we are reediting an old line, insert the id so we can match them together */
 	if (line) {
@@ -207,6 +219,7 @@ var bills = {
 	    line_id.value = line.id;
 	    cell.appendChild(line_id);
 	}
+        details.updateProducts(select.value, line.bill_items);
 
 	stripe();
 	bills.validate();
@@ -218,7 +231,7 @@ var bills = {
 
 	lines = LODO.billItemList;
 	for (var i=0; i<lines.length; i++) {
-	    line = lines[i]['bill_item'];
+	    line = lines[i]['bill_order'];
 	    bills.addOrder(line);
 	}
     }

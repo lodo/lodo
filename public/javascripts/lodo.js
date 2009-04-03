@@ -32,6 +32,13 @@ function div (x, y) { return x / y; }
 function sum (seq) { return reduce(add, seq); }
 function avg (seq) { return sum(seq) / seq.length; }
 
+function find (fn, seq) {
+  for (var pos = 0; pos < seq.length; pos++)
+    if (fn(seq[pos]))
+      return seq[pos];
+  return undefined;
+}
+
 function replaceIdsInDOM(id, name, templateId, dom) {
     var item_id;
     var item_name;

@@ -10,7 +10,8 @@
                  :transport => {},
                  :order_items => {:include => :product}})
   %>;
-  LODO.billItemList = <%= @bill.bill_orders.to_json %>;
+  LODO.billItemList = <%= @bill.bill_orders.to_json(
+    :include => :bill_items) %>;
 </script>
 
 
