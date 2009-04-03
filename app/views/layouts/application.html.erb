@@ -18,39 +18,39 @@
   <div class='main_menu'>
     <ul>
       <li>
-	<%= link_to 'User administration', users_path %>
+	<%= link_to I18n.t(:user_administration, :scope => :layout), users_path %>
       </li>
 
       <li>
-	<%= link_to 'Account plan', accounts_path %>
+	<%= link_to I18n.t(:chart_of_accounts, :scope => :layout), accounts_path %>
       </li>
       <li>
-	<%= link_to 'Journals', journals_path %>
-      </li>
-
-      <li>
-	<%= link_to 'Companies', companies_path %>
+	<%= link_to I18n.t(:journals, :scope => :layout), journals_path %>
       </li>
 
       <li>
-	<%= link_to 'Products', products_path %>
+	<%= link_to I18n.t(:companies, :scope => :layout), companies_path %>
       </li>
 
       <li>
-	<%= link_to 'Orders', orders_path %>
+	<%= link_to I18n.t(:products, :scope => :layout), products_path %>
       </li>
 
       <li>
-	<%= link_to 'Bills', bills_path %>
+	<%= link_to I18n.t(:orders, :scope => :layout), orders_path %>
       </li>
 
       <li>
-	Logged in as <em><%= link_to session[:user].login, :controller => 'users', :action => 'show', :id => session[:user].id %></em> (<%= link_to 'Log out', :controller => 'users', :action => 'logout' %>)
+	<%= link_to I18n.t(:bills, :scope => :layout), bills_path %>
+      </li>
+
+      <li>
+	<%= I18n.t(:logged_in_as, :scope => :layout) -%> <em><%= link_to session[:user].login, :controller => 'users', :action => 'show', :id => session[:user].id %></em> (<%= link_to I18n.t(:log_out, :scope => :layout), :controller => 'users', :action => 'logout' %>)
       </li>
 
       <li class="change_company_form">
         <% form_tag :controller => "users", :action=> "change_current_company" do -%>
-         <label for="current_company">Company:</label>
+         <label for="current_company"><%= I18n.t(:active_company, :scope => :layout) -%>:</label>
          <%= select_tag "current_company", options_for_select(session[:user].companies.collect {|p| [ p.name, p.id ] },
                                                               if session[:user].current_company.nil? then 0 else session[:user].current_company.id end ) %>
         <% end %>

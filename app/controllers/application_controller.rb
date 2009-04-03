@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  before_filter :login_required
+  before_filter :set_locale, :login_required
 
   helper :all # include all helpers, all the time
 
@@ -16,6 +16,11 @@ class ApplicationController < ActionController::Base
   # Uncomment this to filter the contents of submitted sensitive data parameters
   # from your application log (in this case, all fields with names like "password"). 
   # filter_parameter_logging :password
+
+
+  def set_locale
+    I18n.locale = session[:locale] = params[:locale] || session[:locale] || nil
+  end
 
   def login_required
     ok = true
