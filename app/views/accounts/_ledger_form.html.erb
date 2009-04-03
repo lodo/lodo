@@ -20,10 +20,6 @@
       <%= f.text_field :name %>
     </p>
   <p>
-    <%= f.label :address_id %><br />
-    <%= f.text_field :address_id %>
-  </p>
-  <p>
     <%= f.label :telephone_number, "Telephone" %><br />
     <%= f.text_field :telephone_number %>
   </p>
@@ -91,12 +87,24 @@
     <%= a.text_field :name %>
   </p>
   <p>
+    <%= a.label :street1 %><br />
+    <%= a.text_field :street1 %>
+  </p>
+  <p>
+    <%= a.label :street2 %><br />
+    <%= a.text_field :street2 %>
+  </p>
+  <p>
     <%= a.label :postal_code %><br />
     <%= a.text_field :postal_code %>
   </p>
   <p>
     <%= a.label :town %><br />
       <%= a.text_field :town %>
+  </p>
+  <p>
+    <%= a.label :country %><br />
+    <%= a.text_field :country %>
   </p>
   <% end %>
 </div>

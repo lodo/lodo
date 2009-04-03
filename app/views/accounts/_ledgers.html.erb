@@ -39,7 +39,7 @@
     <% end %>
 
   </table>
-    <%= javascript_tag "$(document).ready( function () { $('.ledger_item').click(accounts.loadLedger); } );" %>
+    <%= javascript_tag "$(document).ready( accounts.makeRowsClickable() );" %>
 
     <button type="button" onclick="accounts.prepareFormForNewLedger();">New ledger</button>
 

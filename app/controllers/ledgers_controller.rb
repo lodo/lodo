@@ -30,6 +30,22 @@ class LedgersController < ApplicationController
     end
   end
 
+  def new
+    @account = Account.find(params[:account_id])
+    @ledger = Ledger.new(:account => @account)
+    @ledger.address = Address.new
+    respond_to do |format|
+      format.json { render :json => @ledger.to_json(:include => [:account,
+                                                                 :address,
+                                                                 :unit,
+                                                                 :project]
+                                                    )
+      }
+      @account = @ledger.account
+      format.html { render :partial => "accounts/ledger_form", :locals => {:account => @account, :ledger => @ledger} }
+    end
+  end
+
   def show
     @ledger = nil
     if params[:account_id] && params[:account_id].to_i != 0

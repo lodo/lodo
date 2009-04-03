@@ -28,6 +28,7 @@ var accounts = {
       row.attr('id', 'ledger_id_' + ledger.id);
       $('#ledger_table').append(row);
       $('#new_ledger')[0].reset();
+      accounts.makeRowsClickable();
     }
   },
  
@@ -35,6 +36,11 @@ var accounts = {
  errorSavingLedger: function(XMLHttpRequest, textStatus, errorThrown) {
     //this; // the options for this ajax request
     alert('Unable to save ledger. ' + errorThrown);
+  },
+
+ // call loadLedger when a ledger is clicked
+ makeRowsClickable: function() {
+    $('.ledger_item').click(accounts.loadLedger);
   },
 
  // handle click on a ledger line by stuffing it into form
@@ -53,6 +59,8 @@ var accounts = {
  updateLedgerFormHtml: function(data, textStatus) {
     $('#ledger_form_wrapper').empty();
     $('#ledger_form_wrapper').append(data);
+    //$('#ledger_form_div h3').text('Editing ' + d );
+    accounts.scrollToLedger();
   },
 
  // callback for loadLedger failure
@@ -71,39 +79,13 @@ var accounts = {
 
  prepareFormForNewLedger: function() {
     accounts.scrollToLedger();
-    $('#ledger_form')[0].reset();
-    // update url & crap for form..
-    $('#ledger_form').attr('action', '/accounts/' + accounts.getAccountId() + '/ledgers');
-    $('#ledger_form_method').attr('value', 'post');
-    $('#ledger_form_div h3').text('New ledger');
-  },
-
- // callback for loadLedger success
- stuffFormWithLedger: function(data, textStatus) {
-    $('#ledger_form')[0].reset();
-    var ledger = data.ledger;
-    accounts.scrollToLedger();
-    $('#ledger_number').val(ledger.number);
-    $('#ledger_name').val(ledger.name);
-    $('#ledger_telephone_number').val(ledger.telephone_number);
-    $('#ledger_mobile_number').val(ledger.mobile_number);
-    $('#ledger_email').val(ledger.email);
-    $('#ledger_bank_account').val(ledger.bank_account);
-    $('#ledger_foreign_bank_number').val(ledger.foreign_bank_number);
-    $('#ledger_credit_days').val(ledger.credit_days);
-    $('#ledger_auto_payment').attr('checked', (ledger.auto_payment ? 'checked' : '') );
-    $('#ledger_placement_top').attr('checked', (ledger.placement_top ? 'checked' : '') );
-    $('#ledger_net_bank').attr('checked', (ledger.net_bank ? 'checked' : '') );
-    $('#ledger_unit_id').val(ledger.unit_id);
-    $('#ledger_project_id').val(ledger.project_id);
-    $('#ledger_debit_text').val(ledger.debit_text);
-    $('#ledger_credit_text').val(ledger.credit_text);
-    $('#ledger_comment').val(ledger.comment);
-    // update url & crap for form..
-    $('#ledger_form').attr('action', '/accounts/' + ledger.account.id + '/ledgers/' + ledger.id);
-    //$('#ledger_form').attr('method', 'post');
-    $('#ledger_form_method').attr('value', 'put');
-    $('#ledger_form_div h3').text('Editing ' + ledger.name);
+    $.ajax({
+	  type: 'GET',
+	  url: '/accounts/' + accounts.getAccountId() + '/ledgers/new',
+	  success: accounts.updateLedgerFormHtml,
+	  error: accounts.errorLoadingLedger,
+	  dataType: 'html'
+      });
   }
 
 }
