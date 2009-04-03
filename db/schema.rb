@@ -9,18 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090326103240) do
+ActiveRecord::Schema.define(:version => 20090402115322) do
 
   create_table "accounts", :force => true do |t|
-    t.integer  "number",      :null => false
-    t.string   "name",        :null => false
+    t.integer  "number",         :null => false
+    t.string   "name",           :null => false
     t.integer  "company_id"
-    t.boolean  "active",      :null => false
-    t.string   "lodo_name",   :null => false
-    t.string   "debit_text",  :null => false
-    t.string   "credit_text", :null => false
-    t.string   "comments",    :null => false
-    t.boolean  "has_ledger",  :null => false
+    t.integer  "activatable_id"
+    t.string   "lodo_name",      :null => false
+    t.string   "debit_text",     :null => false
+    t.string   "credit_text",    :null => false
+    t.string   "comments",       :null => false
+    t.boolean  "has_ledger",     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -51,11 +51,19 @@ ActiveRecord::Schema.define(:version => 20090326103240) do
 
   create_table "bill_items", :force => true do |t|
     t.integer  "order_item_id"
-    t.integer  "bill_id"
-    t.integer  "count"
+    t.integer  "amount"
     t.decimal  "price",         :precision => 20, :scale => 2
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "bill_order_id"
+  end
+
+  create_table "bill_orders", :force => true do |t|
+    t.integer  "bill_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.decimal  "price"
+    t.integer  "order_id"
   end
 
   create_table "bills", :force => true do |t|
@@ -89,17 +97,36 @@ ActiveRecord::Schema.define(:version => 20090326103240) do
   end
 
   create_table "journals", :force => true do |t|
-    t.integer  "type"
+    t.integer  "journal_type"
     t.integer  "number"
     t.date     "journal_date"
+    t.integer  "company_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "ledgers", :force => true do |t|
-    t.string   "name",       :null => false
-    t.integer  "account_id", :null => false
-    t.integer  "number",     :null => false
+    t.string   "name",                :null => false
+    t.integer  "account_id",          :null => false
+    t.integer  "number",              :null => false
+    t.integer  "account_type_id"
+    t.integer  "address_id"
+    t.string   "telephone_number"
+    t.string   "mobile_number"
+    t.string   "email"
+    t.string   "comment"
+    t.boolean  "placement_top"
+    t.string   "customer_number"
+    t.string   "ledger_bank_number"
+    t.string   "foreign_bank_number"
+    t.string   "debit_text",          :null => false
+    t.string   "credit_text",         :null => false
+    t.integer  "unit_id"
+    t.integer  "project_id"
+    t.integer  "credit_days"
+    t.boolean  "auto_payment"
+    t.boolean  "net_bank"
+    t.integer  "result_account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -111,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20090326103240) do
     t.integer  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "billed",                                    :default => 0
   end
 
   create_table "orders", :force => true do |t|

@@ -25,7 +25,8 @@ var accounts = {
       row.addCol(ledger.placement_top);
       row.addCol(ledger.unit_id);
       row.addCol(ledger.project_id);
-      row.insertAfter('.ledger_item:last');
+      row.attr('id', 'ledger_id_' + ledger.id);
+      $('#ledger_table').append(row);
       $('#new_ledger')[0].reset();
     }
   },
@@ -33,7 +34,7 @@ var accounts = {
  // callback for failed ajax call to ledger#save
  errorSavingLedger: function(XMLHttpRequest, textStatus, errorThrown) {
     //this; // the options for this ajax request
-    alert('Unable to save ledger.');
+    alert('Unable to save ledger. ' + errorThrown);
   },
 
  // handle click on a ledger line by stuffing it into form
@@ -42,11 +43,16 @@ var accounts = {
     var ledgerId = ( $(this).attr('id').substr(10) );
     $.ajax({
 	  type: 'GET',
-	  url: '/accounts/0/ledgers/' + ledgerId,
-	  success: accounts.stuffFormWithLedger,
+	  url: '/accounts/' + accounts.getAccountId() + '/ledgers/' + ledgerId,
+	  success: accounts.updateLedgerFormHtml,
 	  error: accounts.errorLoadingLedger,
-	  dataType: 'json'
+	  dataType: 'html'
       });
+  },
+
+ updateLedgerFormHtml: function(data, textStatus) {
+    $('#ledger_form_wrapper').empty();
+    $('#ledger_form_wrapper').append(data);
   },
 
  // callback for loadLedger failure
@@ -54,12 +60,29 @@ var accounts = {
     alert('Unable to load ledger.');
   },
 
+ scrollToLedger: function() {
+    $(window).scrollTop( $('#ledger_form_div').offset().top );
+  },
+
+ // fetch account id. only works for accounts#edit
+ getAccountId: function() {
+    return $('form.edit_account').attr('id').substr(13);
+  },
+
+ prepareFormForNewLedger: function() {
+    accounts.scrollToLedger();
+    $('#ledger_form')[0].reset();
+    // update url & crap for form..
+    $('#ledger_form').attr('action', '/accounts/' + accounts.getAccountId() + '/ledgers');
+    $('#ledger_form_method').attr('value', 'post');
+    $('#ledger_form_div h3').text('New ledger');
+  },
+
  // callback for loadLedger success
  stuffFormWithLedger: function(data, textStatus) {
-    $('#new_ledger')[0].reset();
+    $('#ledger_form')[0].reset();
     var ledger = data.ledger;
-    console.log(ledger);
-    $(window).scrollTop( $('#ledger_form_div').offset().top );
+    accounts.scrollToLedger();
     $('#ledger_number').val(ledger.number);
     $('#ledger_name').val(ledger.name);
     $('#ledger_telephone_number').val(ledger.telephone_number);
@@ -77,8 +100,10 @@ var accounts = {
     $('#ledger_credit_text').val(ledger.credit_text);
     $('#ledger_comment').val(ledger.comment);
     // update url & crap for form..
-    $('#new_ledger').attr('action', '/accounts/' + ledger.account.id + '/ledgers/' + ledger.id);
-    $('#new_ledger').attr('method', 'put');
+    $('#ledger_form').attr('action', '/accounts/' + ledger.account.id + '/ledgers/' + ledger.id);
+    //$('#ledger_form').attr('method', 'post');
+    $('#ledger_form_method').attr('value', 'put');
+    $('#ledger_form_div h3').text('Editing ' + ledger.name);
   }
- 
+
 }
