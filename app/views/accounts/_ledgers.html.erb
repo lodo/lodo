@@ -6,7 +6,7 @@
   <hr style="clear: both;" />
 
   <h2>Ledger accounts</h2>
-  <table>
+  <table id="ledger_table">
     <tr>
       <th>Number</th>
       <th>Name</th>
@@ -37,107 +37,14 @@
       <td><%=h ledger.project ? ledger.project.name : "" -%></td>
     </tr>
     <% end %>
-    <%= javascript_tag "$(document).ready( function () { $('.ledger_item').click(accounts.loadLedger); } );" %>
 
   </table>
+    <%= javascript_tag "$(document).ready( accounts.makeRowsClickable() );" %>
 
-  <div id="ledger_form_div" style="float: left;">
-    <h3>Ledger</h3>
+    <button type="button" onclick="accounts.prepareFormForNewLedger();">New ledger</button>
 
-    <% form_for([@account, Ledger.new], {:name => "new_ledger"} ) do |f| %>
+    <div id="ledger_form_wrapper">
+      <%= render :partial => "ledger_form" %>
+    </div>
     
-    <p>
-      <%= f.label :number %><br />
-      <%= f.text_field :number %>
-    </p>
-    <p>
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
-    </p>
-    <p>
-      <%= f.label :address_id %><br />
-      <%= f.text_field :address_id %>
-    </p>
-    <p>
-      <%= f.label :telephone_number, "Telephone" %><br />
-      <%= f.text_field :telephone_number %>
-    </p>
-    <p>
-      <%= f.label :mobile_number, "Mobile" %><br />
-      <%= f.text_field :mobile_number %>
-    </p>
-    <p>
-      <%= f.label :email %><br />
-      <%= f.text_field :email %>
-    </p>
-    <p>
-      <%= f.label :ledger_bank_number, "Bank account" %><br />
-      <%= f.text_field :ledger_bank_number %>
-    </p>
-    <p>
-      <%= f.label :foreign_bank_number %><br />
-      <%= f.text_field :foreign_bank_number %>
-    </p>
-    <p>
-      <%= f.label :credit_days %><br />
-      <%= f.text_field :credit_days %>
-    </p>
-    <p>
-      <%= f.label :auto_payment %><br />
-      <%= f.check_box :auto_payment %>
-    </p>
-    <p>
-      <%= f.label :placement_top %><br />
-      <%= f.check_box :placement_top %>
-    </p>
-    <p>
-      <%= f.label :net_bank %><br />
-      <%= f.check_box :net_bank %>
-    </p>
-
-    <p>
-      <%= f.label :unit_id, "Default unit" %><br />
-      <%= f.text_field :unit_id %>
-    </p>
-    <p>
-      <%= f.label :project_id, "Default project" %><br />
-      <%= f.text_field :project_id %>
-    </p>
-    <p>
-    <%= f.label :debit_text %><br />
-    <%= f.text_field :debit_text %>
-    </p>
-    <p>
-      <%= f.label :credit_text %><br />
-      <%= f.text_field :credit_text %>
-    </p>
-    <p>
-      <%= f.label :comment, "Notes" %><br />
-      <%= f.text_area :comment %>
-    </p>
-
-    <%= submit_tag "Save" %>
-    <%= javascript_tag "$('#new_ledger').submit( function () { jQuery.ajax({
-			type: 'POST',
-			url: '/accounts/#{@account.id}/ledgers',
-			data: $('#new_ledger').serialize(),
-			success: accounts.updateLedgerItemsTable,
-			error: accounts.errorSavingLedger,
-			dataType: 'json'
-}); return false; });" %>
-
-    <% end %>
-
-  </div>
-
-  <div id="addresses" style="float: left;">
-    <h4>Addresses</h4>
-
-  </div>
-
-  <hr style="clear: both;" />
-
-  <%= link_to 'Show', @account %> |
-  <%= link_to 'Back', accounts_path %>
-  
 </div>

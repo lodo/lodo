@@ -12,4 +12,8 @@
 /nbproject
 /tmp/**/*
 /*.patch
+<<<<<<< HEAD:.gitignore
 !.gitignore
+=======
+
+>>>>>>> 092ef8b6eb894acacfc99a599398ca42a54db086:.gitignore
