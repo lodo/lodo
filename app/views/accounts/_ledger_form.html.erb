@@ -58,11 +58,11 @@
   
   <p>
     <%= f.label :unit_id, "Default unit" %><br />
-    <%= f.text_field :unit_id %>
+    <%= f.select :unit_id, Unit.find(:all).map {|u| [u.name, u.id]}, {:include_blank => true} %>
   </p>
   <p>
     <%= f.label :project_id, "Default project" %><br />
-    <%= f.text_field :project_id %>
+    <%= f.select :project_id, Project.find(:all).map {|p| [p.name, p.id]}, {:include_blank => true} %>
     </p>
   <p>
     <%= f.label :debit_text %><br />
