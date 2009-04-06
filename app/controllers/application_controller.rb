@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  before_filter :set_locale, :login_required, :update_company
+  before_filter :set_locale, :login_required
   
   helper :all # include all helpers, all the time
 
@@ -26,15 +26,15 @@ class ApplicationController < ActionController::Base
     ok = true
     #print "LALALALA", session[:user].current_company,"\n"
     
-    if session[:user]
-      ok &= real_user = User.find(session[:user].id) 
-      ok &= real_user.login == session[:user].login
-      ok &= real_user.hashed_password == session[:user].hashed_password
+    if session[:user_id]
+      ok &= real_user = User.find(session[:user_id]) 
+      ok &= real_user.hashed_password == session[:user_hashed_password]
     else
       ok = false
     end
     
     if ok
+      @me = real_user
       return true
     end
 
@@ -44,18 +44,18 @@ class ApplicationController < ActionController::Base
     return false 
   rescue ActiveRecord::RecordNotFound 
     flash[:warning]='You user has been deleted'
-    session[:user] = nil
-    session[:user].current_company = nil
+    session[:user_id] = nil
+    session[:user_hashed_password] = nil
     redirect_to :controller => "users", :action => "login"
     return false 
   end
 
   def company_required
-    if session[:user].current_company.nil?
-      session[:user].current_company = session[:user].companies.first
+    if @me.current_company.nil?
+      @me.current_company = @me.companies.first
     end    
 
-    if not session[:user].current_company.nil?
+    if not @me.current_company.nil?
       return true
     end
 
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    session[:user]
+    @me
   end
 
   def redirect_to_stored
@@ -79,12 +79,6 @@ class ApplicationController < ActionController::Base
 
   def set_locale
     #I18n.locale = session[:locale] = params[:locale] || session[:locale] || nil
-  end
-
-  # FIXME!!!!!
-  # Don't store stuff in session, we can't trust it
-  def update_company
-    session[:user].current_company = Company.find( session[:user].current_company.id)
   end
 
 end

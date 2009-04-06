@@ -41,7 +41,7 @@ class VatAccountsController < ApplicationController
   # POST /vat_accounts.xml
   def create
     @vat_account = VatAccount.new(params[:vat_account])
-    @vat_account.company_id = session[:user].current_company.id
+    @vat_account.company_id = @me.current_company.id
 
     respond_to do |format|
       if @vat_account.save

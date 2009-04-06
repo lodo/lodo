@@ -4,7 +4,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = Account.find(session[:user].current_company.accounts, :order => 'number')
+    @accounts = Account.find(@me.current_company.accounts, :order => 'number')
     
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +44,7 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(params[:account])
     # Set the company manually
-    @account.company_id = session[:user].current_company.id
+    @account.company_id = @me.current_company.id
     respond_to do |format|
       if @account.save
         flash[:notice] = 'Account was successfully created.'
