@@ -73,6 +73,16 @@ var bills = {
     },
 
 
+    toDiscount: function (price, unit_price) {
+        var res;
+        for (precission = 0; precission < 10; precission++) {
+            res = (100 - (price / (unit_price * 0.01))).toFixed(precission)
+// FIXME: ((100 - res) * (unit_price * 0.01)).toFixed(2) or somesuch might be needed, and it might still not work.
+            if (price == (100 - res) * (unit_price * 0.01))
+                break;
+        }
+        return res.replace(/\./g,',')
+    },
 
     makeAmount: function (value, context) {
 	var res = document.createElement("input");
@@ -192,7 +202,7 @@ var bills = {
                                              bill_items);
                         product_line.amount = bill_item.amount;
                         product_line.price = bill_item.price;
-                        product_line.discount = 100 - (product_line.price / (product_line.order_item.price * product_line.amount * 0.01));
+                        product_line.discount = bills.toDiscount(product_line.price, product_line.order_item.price * product_line.amount);
                     }
                     bills.addProduct(product_line, res);
                 })
@@ -218,11 +228,7 @@ var bills = {
 	}
         details.updateProducts(select.value, bill_order && bill_order.bill_items);
         if (bill_order) {
-            $i(bills.getCurrentLineId('#bill') + "_details_discount")[0].value = (
-                   100
-                 - (   bill_order.price
-                    / (  sum(map(function (bill_item) { return bill_item.price; }, bill_order.bill_items))
-                       * 0.01)));
+            $i(bills.getCurrentLineId('#bill') + "_details_discount")[0].value = bills.toDiscount(bill_order.price, sum(map(function (bill_item) { return bill_item.price; }, bill_order.bill_items)));
         }
 
 	stripe();
@@ -233,7 +239,6 @@ var bills = {
 	$('#bill')[0].table_lines = 0;
 	$('#bill')[0].name = 'bill';
 
-
         LODO.orderDict = Array();
         for (var pos = 0; pos <  LODO.orderList.length; pos++)
             LODO.orderDict[LODO.orderList[pos].order.id] = pos;
@@ -241,6 +246,11 @@ var bills = {
 	for (var i=0; i<LODO.billItemList.length; i++) {
 	    bills.addOrder(LODO.billItemList[i].bill_order);
 	}
+
+        if (LODO.billPrice !== null) {
+	    $("#bill_discount")[0].value = bills.toDiscount(LODO.billPrice, parseFloatNazi($("#bill_price")[0].value));
+	    bills.validate();
+        }
     }
 
 }

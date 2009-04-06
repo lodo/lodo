@@ -12,6 +12,7 @@
   %>;
   LODO.billItemList = <%= @bill.bill_orders.to_json(
     :include => :bill_items) %>;
+  LODO.billPrice = <%= @bill.price.to_json %>;
 </script>
 
 
@@ -74,7 +75,7 @@
 	      <td></td>
 	      <td><input type='hidden' id='bill_amount' value='1' /></td>
               <td>
-                <input type='text' id='bill_discount' value='<%= h @bill.discount%>' onkeyup="bills.validate();"/>
+                <input type='text' id='bill_discount' onkeyup="bills.validate();"/>
  	        <input type='hidden' id='bill_price' name='bill[price]' value=''/>
               </td>
               <td id='bill_price_label'>0,00</td>
