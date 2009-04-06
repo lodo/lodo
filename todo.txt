@@ -1,7 +1,12 @@
 Återstående punkter
 
-Kontoplan:
-* Buggfix i uppdateringsskript (Ivar)
+Bilag:
+* Val av projekt/avdelning
+
+Order:
+* Kund skall vara reskontra
+* Adress skall vara adressfælt
+* Sæljare/transport skall vara avdelning? Reskontra? Eller vad?
 
 Faktura:
 * Lagring (Egil)
@@ -13,6 +18,7 @@ Generellt:
 * Øversættning (Ivar)
 * Kodkommentering (Egen kode)
 
+Disskutera:
 * Utseende, vilka fælt skall visas var (Anti-Kristian, Arnt, Rune, Ivar, Axel, Egil)
 * Rættigheter (Arnt, Anti-Kristian, Ivar)
 
@@ -21,6 +27,7 @@ Fixade punkter:
 
 Kontoplan:
 * Flytta bort anvændare från session før att fixa cookie store (Axel)
+* Buggfix i uppdateringsskript (Ivar)
 
 Bilag:
 * Visa/dølj mva (Axel)
