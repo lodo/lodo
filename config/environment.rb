@@ -48,7 +48,8 @@ Rails::Initializer.run do |config|
   # The internationalization framework can be changed to have another default locale (standard is :en) or more load paths.
   # All files from config/locales/*.rb,yml are added automatically.
   # config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
-  config.i18n.default_locale = :en
+  # config.i18n.default_locale = :de
+  config.i18n.default_locale = :nb
 
   # Your secret key for verifying cookie session data integrity.
   # If you change this key, all old sessions will become invalid!
@@ -63,8 +64,11 @@ Rails::Initializer.run do |config|
   # which shouldn't be used to store highly confidential information
   # (create the session table with "rake db:sessions:create")
   # config.action_controller.session_store = :active_record_store
+<<<<<<< HEAD:config/environment.rb
   #config.action_controller.session_store = :active_record_store
   config.action_controller.session_store = :cookie_store
+=======
+>>>>>>> a4bb32f607fefba470b97f54ac6a96a87b10260d:config/environment.rb
 
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,
