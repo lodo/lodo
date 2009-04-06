@@ -34,9 +34,9 @@
     <tfoot>
       <tr>
 	<td>Total for this order:</td>
+	<td id='order_template_unit_price'></td>
 	<td></td>
-	<td></td>
-	<td><input type='hidden' id='order_template_amount' value='1' /></td>
+	<td><input type='hidden' id='order_template_amount' name='order_template[amount]' value='1' /></td>
 	<td>
 	  <input type='text' id='order_template_discount' name='order_template[discount]' onkeyup="bills.validate();"/>
 	  <input type='hidden' id='order_template_price' name='order_template[price]' name='order_template[price]' value=''/>
@@ -70,7 +70,7 @@
 	    </tr>
             <tr>
 	      <td>Total for all orders:</td>
-	      <td></td>
+	      <td id='bill_unit_price'></td>
 	      <td></td>
 	      <td><input type='hidden' id='bill_amount' value='1' /></td>
               <td>

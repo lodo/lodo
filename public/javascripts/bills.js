@@ -6,20 +6,20 @@ var bills = {
     },
 
     sumDetailsColumn: function(context) {
-        bills.sumGenericColumn("_unit_price", "_discount", "", context);
+        bills.sumGenericColumn("", context);
     },
 
     sumColumn: function(context) {
-        bills.sumGenericColumn("_price_label", "_discount", "_details", context);
+        bills.sumGenericColumn("_details", context);
     },
 
-    sumGenericColumn: function(unit_price, discount, row_prefix, context) {
+    sumGenericColumn: function(row_prefix, context) {
 	var sum = 0.0;
         var id = $(context)[0].id;
 	for (var i=0; i < $(context)[0].table_lines; i++) {
-	    var val = (  parseFloatNazi($i(id + "_" + i + row_prefix + unit_price)[0].innerHTML)
+	    var val = (  parseFloatNazi($i(id + "_" + i + row_prefix + "_unit_price")[0].innerHTML)
                        * parseFloatNazi($i(id + "_" + i + row_prefix + "_amount")[0].value)
-                       * (100.0-parseFloatNazi($i(id + "_" + i + row_prefix + discount)[0].value))
+                       * (100.0-parseFloatNazi($i(id + "_" + i + row_prefix + "_discount")[0].value))
                        * 0.01);
 	    sum += val;
 	    bills.setPrice(i, val, row_prefix, context);
@@ -34,9 +34,10 @@ var bills = {
 	$i(id + "_" + line + row_prefix + '_price_label')[0].innerHTML = toMoney(value);
     },
 
-    setTotalPrice: function(price, context) {
+    setTotalPrice: function(unit_price, context) {
         var id = $(context)[0].id;
-	price = price*(100.0-parseFloatNazi($i(id + '_discount')[0].value))*0.01;
+	price = unit_price*(100.0-parseFloatNazi($i(id + '_discount')[0].value))*0.01;
+	$i(id + '_unit_price')[0].innerHTML = toMoney(unit_price);
 	$i(id + '_price_label')[0].innerHTML = toMoney(price);
 	$i(id + '_price')[0].value = toMoney(price);
     },
@@ -131,36 +132,33 @@ var bills = {
     },
 
 
-    addProduct: function (line, context) {
-console.log("addProduct", line);
+    addProduct: function (bill_item, context) {
 	var row = bills.addLine(context);
 
-	bills.addCell(row, bills.makeText('product', line.order_item.product.name, context));
-	bills.addCell(row, bills.makeText('unit_price', line.price, context));
-	bills.addCell(row, bills.makeText('remaining', line.order_item.amount - line.order_item.billed, context));
-	bills.addCell(row, bills.makeAmount(line.order_item.amount, context));
-	bills.addCell(row, bills.makeDiscount(0, context));
-	bills.addCell(row, bills.makePrice(0, line.order_item.order_item_id, context));
+	bills.addCell(row, bills.makeText('product', bill_item.order_item.product.name, context));
+	bills.addCell(row, bills.makeText('unit_price',  bill_item.order_item.price, context));
+	bills.addCell(row, bills.makeText('remaining', bill_item.order_item.amount - bill_item.order_item.billed, context));
+	bills.addCell(row, bills.makeAmount(bill_item.amount, context));
+	bills.addCell(row, bills.makeDiscount(bill_item.discount, context));
+	bills.addCell(row, bills.makePrice(bill_item.price, bill_item.order_item.id, context));
 	stripe();
 	bills.validate();
    },
 
-    makeOrderSelect: function(line) {
-console.log("makeOrderSelect", line);
+    makeOrderSelect: function(bill_order) {
 	var sel = document.createElement("select");
 	sel.id = bills.getCurrentLineId('#bill') + "_order_id";
 	sel.name = bills.getCurrentLineName('#bill') + "[order_id]";
         sel.line_id = bills.getCurrentLineId('#bill')
 
         for (var i=0; i<LODO.orderList.length; i++) {
-            if (LODO.orderList[i].id == line.id)
-                sel.value = i;
 	    sel.add(new Option("" + LODO.orderList[i].order.customer.name + " - " + LODO.orderList[i].order.order_date + " - #" + LODO.orderList[i].order.id,
-                               i), null);
+                               LODO.orderList[i].order.id), null);
 	}
+        sel.value = bill_order && bill_order.order_id;
 
-	sel.onchange = function (event, line) {
-            $i(sel.line_id + "_details")[0].updateProducts(this.value, line);
+	sel.onchange = function (event) {
+            $i(sel.line_id + "_details")[0].updateProducts(this.value);
         }
 
 	return sel;
@@ -172,8 +170,8 @@ console.log("makeOrderSelect", line);
             bills.getCurrentLineName('#bill') + "[details]",
             "order_template");
 
-	res.updateProducts = function (order_nr, line) {
-console.log("updateProducts", line);
+	res.updateProducts = function (order_id, bill_items) {
+            order_nr = LODO.orderDict[order_id];
             res.discount = LODO.orderList[order_nr].order.price / sum(map(function (x) { return x.price; }, LODO.orderList[order_nr].order.order_items));
             res.table_lines = 0;
 
@@ -185,41 +183,47 @@ console.log("updateProducts", line);
                 LODO.orderList[order_nr].order.order_items,
                 function () {
                     var product_line = {price: LODO.orderList[order_nr].order.price * res.discount,
-				        amount: 0,
+				        amount: this.amount,
 					discount: 0.0,
 					order_item: this}
 
-                    if (line) {
-                        bill_item = find(function (bill_item) { return bill_item.order_item_id == this.id },
-                                         line);
+                    if (bill_items) {
+                        var bill_item = find(function (bill_item) { return bill_item.order_item_id == product_line.order_item.id; },
+                                             bill_items);
                         product_line.amount = bill_item.amount;
-                        product_line.discount = product_line.price / product_line.order_item.price;
+                        product_line.price = bill_item.price;
+                        product_line.discount = 100 - (product_line.price / (product_line.order_item.price * product_line.amount * 0.01));
                     }
-
                     bills.addProduct(product_line, res);
                 })
         }
         return res;
     },
 
-    addOrder: function(line) {
-console.log("addOrder", line);
+    addOrder: function(bill_order) {
 	var row = bills.addLine('#bill');
     
-        var select = bills.makeOrderSelect(line);
+        var select = bills.makeOrderSelect(bill_order);
 	bills.addCell(row, select);
         var details = bills.makeOrderDetails();
 	var cell = bills.addCell(row, details);
 
 	/* If we are reediting an old line, insert the id so we can match them together */
-	if (line) {
-	    var line_id = document.createElement("input");
-	    line_id.type = "hidden";
-	    line_id.name = bills.getCurrentLineName('#bill') + "[id]";
-	    line_id.value = line.id;
-	    cell.appendChild(line_id);
+	if (bill_order) {
+	    var bill_order_id = document.createElement("input");
+	    bill_order_id.type = "hidden";
+	    bill_order_id.name = bills.getCurrentLineName('#bill') + "[id]";
+	    bill_order_id.value = bill_order.id;
+	    cell.appendChild(bill_order_id);
 	}
-        details.updateProducts(select.value, line.bill_items);
+        details.updateProducts(select.value, bill_order && bill_order.bill_items);
+        if (bill_order) {
+            $i(bills.getCurrentLineId('#bill') + "_details_discount")[0].value = (
+                   100
+                 - (   bill_order.price
+                    / (  sum(map(function (bill_item) { return bill_item.price; }, bill_order.bill_items))
+                       * 0.01)));
+        }
 
 	stripe();
 	bills.validate();
@@ -229,10 +233,13 @@ console.log("addOrder", line);
 	$('#bill')[0].table_lines = 0;
 	$('#bill')[0].name = 'bill';
 
-	lines = LODO.billItemList;
-	for (var i=0; i<lines.length; i++) {
-	    line = lines[i]['bill_order'];
-	    bills.addOrder(line);
+
+        LODO.orderDict = Array();
+        for (var pos = 0; pos <  LODO.orderList.length; pos++)
+            LODO.orderDict[LODO.orderList[pos].order.id] = pos;
+
+	for (var i=0; i<LODO.billItemList.length; i++) {
+	    bills.addOrder(LODO.billItemList[i].bill_order);
 	}
     }
 

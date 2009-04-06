@@ -71,8 +71,8 @@ order by
   end
 
   def post_to_model(post)
-    post = post.clone()
     bill_model = Hash.new
+    post = post.clone()
 
     ['price',
      'delivery_date(1i)', 
@@ -87,14 +87,13 @@ order by
     bill_model['bill_orders'] = []
 
     post.values.each do |bill_order_post|
-      bill_order_post = bill_order_post['details'].clone()
       bill_order_model = Hash.new
       bill_order_model['order_id'] = bill_order_post['order_id']
+      bill_order_post = bill_order_post['details'].clone()
 
-      ['price', 
-       'discount'].each do |name|
-       bill_order_model[name] = bill_order_post.delete name
-      end
+      bill_order_model['price'] = bill_order_post.delete 'price'
+      bill_order_post.delete 'amount'
+      bill_order_post.delete 'discount'
 
       bill_order_model['bill_items'] = bill_order_post.values.map do |item|
 	item = item.clone()
@@ -102,7 +101,6 @@ order by
 	BillItem.create_or_update(item)
       end
 
-      bill_order_model.delete 'discount'
       bill_model['bill_orders'].push(BillOrder.create_or_update(bill_order_model))
     end
 
@@ -115,6 +113,7 @@ order by
   def create
     @bill = post_to_model params[:bill]
     @bill.company_id = session[:user].current_company.id
+puts YAML.dump @bill
 
     respond_to do |format|
       if @bill.save
