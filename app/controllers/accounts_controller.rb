@@ -1,3 +1,7 @@
+=begin
+
+=end
+
 class AccountsController < ApplicationController
   before_filter :company_required
 

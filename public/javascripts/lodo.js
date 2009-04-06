@@ -76,10 +76,16 @@ function decorateDOM(dom, decoration) {
     }
 }
 
+/**
+   Parse a text string as a float, while treating ',' (a comma) the
+   same as a '.' (period). An empty string is interpreted as the
+   number zero. If the entire string can not be parsed into a float,
+   NaN is returned.
+ */
 function parseFloatNazi(str) 
 {
     if (str == null || str == "") {
-	return 0;
+	return 0.o;
     }
 
     var str2 = str.replace(/,/g,'.');
@@ -89,6 +95,10 @@ function parseFloatNazi(str)
     return NaN;
 }
 
+/**
+   Format a floating point number for output on screen, using comma as
+   the decimal separator and two digits of precision.
+ */
 function toMoney (val) {
     if (isNaN(val)) {
 	return '?';
@@ -107,6 +117,9 @@ function hasClass(obj) {
     return result;
 }   
 
+/**
+   Stripe the specified table
+ */
 function stripe(id) {
 		
     // the flag we'll use to keep track of 
