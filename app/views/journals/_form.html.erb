@@ -24,14 +24,17 @@
 </p>
 <p>
   <button onClick='journals.addAccountLine();' type='button'>Ny postering til bilag</button>
-  <input type='checkbox' id='vat'/><label for='vat'>VAT</label>
-  <input type='checkbox' id='details'/><label for='details'>Details</label>
+  <input type='checkbox' id='vat' onchange='journals.toggleVisibility();'/><label for='vat'>VAT</label>
+  <input type='checkbox' id='details' onchange='journals.toggleVisibility();'/><label for='details'>Details</label>
   
 </p>
 <p>
   <table class='striped' id='operations_table'>
     <thead>
       <tr>
+	<th class='details' style='display:none'>
+	  Details
+	</th>
 	<th>
 	  Kontoplan
 	</th>

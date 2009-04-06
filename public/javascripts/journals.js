@@ -2,8 +2,7 @@
    Separate hournals namespace for journals specific scripting
  */
 var journals = {
-
-
+    
     validate: function ()
     {
 	var sum1 = $('#dynfield_1_sum')[0].innerHTML;
@@ -66,24 +65,24 @@ var journals = {
 	    
 	    vatFactorInput.readOnly=!overridable;
 	    
-	    var vatFactor = 0.01*parseFloatNazi(vatFactorInput.value);
+	    var vatFactor = 1.0 - 1.0/(1.0+0.01*parseFloatNazi(vatFactorInput.value));
 	    var baseAmount = (credit > 0.0)?credit:debet;
 	    var vatAmount = toMoney(vatFactor * baseAmount);
-
 
 	    var vatAccountInput = $('#vat_account_'+i)[0];
 	    vatAccountInput.value = account.vat_account.id;
 	    
-	    if (credit > 0) {
+	    if (debet > 0) {
 		debet1.innerHTML = vatAmount;
 		credit2.innerHTML = vatAmount;
 	    } else {
-		debet2.innerHTML = vatAmount;
 		credit1.innerHTML = vatAmount;
+		debet2.innerHTML = vatAmount;
 	    }
 	}
 	
 	journals.validate();
+	journals.toggleVisibility();
     },
     
     makeAccountSelect: function () {
@@ -179,9 +178,12 @@ var journals = {
 	return res;
     },
     
-    makeText: function(id) {
+    makeText: function(id, content) {
 	var res = document.createElement("span");
 	res.id=id + "_" + LODO.journalLines;
+	if (content) {
+	    res.innerHTML = content;
+	}
 	return res;
     },
     
@@ -194,29 +196,35 @@ var journals = {
 	var opTable = $('#operations')[0];
 	
 	var row = opTable.insertRow(opTable.rows.length);
-	row.addCell = function (content) {
+
+	var ac = function (content, className) {
 	    var c = this.insertCell(this.cells.length);
+	    if (className) {
+		c.className = className;
+		c.otherClassName = className;
+	    }
 	    c.appendChild(content);
-	}
+	};
+
+	row.addCell = ac;
+
 
 	var row2 = opTable.insertRow(opTable.rows.length);
-	row2.addCell = function (content) {
-	    var c = this.insertCell(this.cells.length);
-	    c.appendChild(content);
-	}
+	row2.addCell = ac;
 	
 	var row3 = opTable.insertRow(opTable.rows.length);
-	row3.addCell = function (content) {
-	    var c = this.insertCell(this.cells.length);
-	    c.appendChild(content);
-	}
+	row3.addCell = ac;
+
+	row.addCell(journals.makeText('main_details_'+LODO.journalLines,'-1'),'details');
+	row2.addCell(journals.makeText('vat1_details_'+LODO.journalLines,'-2'),'details');
+	row3.addCell(journals.makeText('vat2_details_'+LODO.journalLines,'-3'),'details');
 	
-	row2.className="vat1";
+	row2.className="vat";
 	row2.addCell(journals.makeText('vat1_account'));
 	row2.addCell(journals.makeText('vat1_debet'));
 	row2.addCell(journals.makeText('vat1_credit'));
 	
-	row3.className="vat2";
+	row3.className="vat";
 	row3.addCell(journals.makeText('vat2_account'));
 	row3.addCell(journals.makeText('vat2_debet'));
 	row3.addCell(journals.makeText('vat2_credit'));
@@ -260,7 +268,6 @@ var journals = {
 	{
 	    journals.update();
 	}
-	
     },
 
     addPredefined: function(){
@@ -314,6 +321,13 @@ var journals = {
 		el.focus();
 	    }
 	}
+    },
+ 
+    toggleVisibility : function() {
+	var box = $('#vat')[0];
+	box.checked ? $('.vat').show():$('.vat').hide();
+	var box2 = $('#details')[0];
+	box2.checked ? $('.details').show():$('.details').hide();
     }
-    
+   
 }

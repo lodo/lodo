@@ -167,13 +167,19 @@ function stripe(id) {
 			
 			var mytd = tds[j];
 			
-			mytd.className = even?'even':'odd';
+			mytd.className = even?' even':' odd';
+			if (mytd.otherClassName) {
+			    mytd.className += ' ' +mytd.otherClassName;
+			}
 		    }
 		    for (var j = 0; j < ths.length; j++) {
 			
 			var myth = ths[j];
 			
-			myth.className = even?'even':'odd';
+			myth.className = even?' even':' odd';
+			if (myth.otherClassName) {
+			    myth.className += ' '+ myth.otherClassName;
+			}
 		    }
 		}
 		// flip from odd to even, or vice-versa
