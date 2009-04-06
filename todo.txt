@@ -2,10 +2,6 @@
 
 Kontoplan:
 * Buggfix i uppdateringsskript (Ivar)
-* Flytta bort anvændare från session før att fixa cookie store (Felles)
-
-Bilag:
-* Detaljer (Axel)
 
 Faktura:
 * Lagring (Egil)
@@ -18,12 +14,16 @@ Generellt:
 * Kodkommentering (Egen kode)
 
 * Utseende, vilka fælt skall visas var (Anti-Kristian, Arnt, Rune, Ivar, Axel, Egil)
+* Rættigheter (Arnt, Anti-Kristian, Ivar)
 
-* Rættigheter (Arnt, Anti-Kristian)
 
-Fixade punkkter:
+Fixade punkter:
+
+Kontoplan:
+* Flytta bort anvændare från session før att fixa cookie store (Axel)
 
 Bilag:
 * Visa/dølj mva (Axel)
+* Detaljer (Axel)
 
 Generellt:

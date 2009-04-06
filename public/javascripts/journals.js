@@ -2,7 +2,10 @@
    Separate hournals namespace for journals specific scripting
  */
 var journals = {
-    
+
+    /**
+       Validate text entries. If something looks bad, disable submit button.
+     */
     validate: function ()
     {
 	var sum1 = $('#dynfield_1_sum')[0].innerHTML;
@@ -20,7 +23,10 @@ var journals = {
 	}
 	return sum1==sum2;
     },
-
+    
+    /**
+       Return the account with the specified id
+     */
     getAccount: function (id) {
 	for( var i =0; i<LODO.accountList.length; i++) {
 	    if (LODO.accountList[i].account.id == id) {
@@ -30,6 +36,10 @@ var journals = {
 	return null;
     },
     
+    /**
+       Update the sum cell at the bottom of the specified column. The
+       column value must be either 1 or 2, for debit or credit column.
+     */
     sumColumn: function (column)
     {
 	var sum = 0.0;
@@ -41,6 +51,10 @@ var journals = {
 	
     },
     
+
+    /**
+       Update all automatic fields, such as the vat. This also calls the validate function.
+     */
     update: function ()
     {
 	journals.sumColumn(1);
@@ -84,7 +98,10 @@ var journals = {
 	journals.validate();
 	journals.toggleVisibility();
     },
-    
+
+    /**
+       Return a DOM select node, populated with a list of all accounts that can be used for a transaction
+     */
     makeAccountSelect: function () {
 	var sel = document.createElement("select");
 	sel.name = "journal_operations[" + LODO.journalLines+"][account_id]";
@@ -104,6 +121,9 @@ var journals = {
 	return sel;
     },
 
+    /**
+       Updates the vat amount to the default for the selected account
+     */
     setDefaultVat: function (line) 
     {
 	var account = journals.getAccount($('#dynfield_0_'+line)[0].value);
@@ -112,6 +132,11 @@ var journals = {
 
     },
 
+    /**
+       Check if either debet or credit column should be disabled to
+       make it impossible to enter both a credit and debet amount on
+       the same line.
+     */
     doDisable: function (row_number)
     {
 	var debet = $('#dynfield_1_' + row_number)[0];
@@ -129,6 +154,9 @@ var journals = {
 	
     },
 
+    /**
+       Returns a DOM node suitable for using as a debet input box.
+     */
     makeDebet: function () {
 	var res = document.createElement("input");
 	res.type="text";
@@ -148,6 +176,9 @@ var journals = {
 	
     },
     
+    /**
+       Returns a DOM node suitable for using as a credit input box.
+     */
     makeCredit: function () {
 	var res = document.createElement("input");
 	res.type="text";
@@ -166,6 +197,9 @@ var journals = {
 	return res;
     },
     
+    /**
+       Returns a DOM node suitable for using as a vat input box.
+     */
     makeVat: function (val) {
 	var res = document.createElement("input");
 	res.type="text";
@@ -178,6 +212,9 @@ var journals = {
 	return res;
     },
     
+    /**
+       Returns a DOM node suitable for using as a text status field.
+     */
     makeText: function(id, content) {
 	var res = document.createElement("span");
 	res.id=id + "_" + LODO.journalLines;
@@ -187,6 +224,18 @@ var journals = {
 	return res;
     },
     
+    makeDetails: function(line, type) {
+	var lineId = '?';
+	if (line && line.id) {
+	    lineId = line.id;
+	}
+
+	return 'Postering:&nbsp;' + lineId+"-" + type + "<br/>Kilde:&nbsp;" + (type==0?'Manuell':'Automatisk opprettet MVA poste');
+    },
+
+    /**
+       Add a new line to the journal_operation list. 
+     */
     addAccountLine: function(line)
     {
 	if(!LODO.journalLines) {
@@ -215,9 +264,9 @@ var journals = {
 	var row3 = opTable.insertRow(opTable.rows.length);
 	row3.addCell = ac;
 
-	row.addCell(journals.makeText('main_details_'+LODO.journalLines,'-1'),'details');
-	row2.addCell(journals.makeText('vat1_details_'+LODO.journalLines,'-2'),'details');
-	row3.addCell(journals.makeText('vat2_details_'+LODO.journalLines,'-3'),'details');
+	row.addCell(journals.makeText('main_details_'+LODO.journalLines,journals.makeDetails(line, 0)),'details');
+	row2.addCell(journals.makeText('vat1_details_'+LODO.journalLines,journals.makeDetails(line, 1)),'details');
+	row3.addCell(journals.makeText('vat2_details_'+LODO.journalLines,journals.makeDetails(line, 2)),'details');
 	
 	row2.className="vat";
 	row2.addCell(journals.makeText('vat1_account'));
@@ -270,6 +319,9 @@ var journals = {
 	}
     },
 
+    /**
+       Add all predefined journal_operation lines from the LODO.journalOperationList array.
+     */
     addPredefined: function(){
 	lines = LODO.journalOperationList;
 	for (var i=0; i<lines.length; i++) {
@@ -279,6 +331,9 @@ var journals = {
 	journals.update();
     },
     
+    /**
+       Scroll with arrow keys
+     */
     handleArrowKeys: function(evt, col_number, row_number) {
 	evt = (evt) ? evt : ((window.event) ? event : null);
 	if (evt) {
@@ -322,7 +377,10 @@ var journals = {
 	    }
 	}
     },
- 
+
+    /**
+       Update things in accordance with vat/detals tobble checkboxes.
+     */
     toggleVisibility : function() {
 	var box = $('#vat')[0];
 	box.checked ? $('.vat').show():$('.vat').hide();
