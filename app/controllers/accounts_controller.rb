@@ -43,6 +43,7 @@ class AccountsController < ApplicationController
   # POST /accounts.xml
   def create
     @account = Account.new(params[:account])
+    # Set the company manually
     @account.company_id = session[:user].current_company.id
     respond_to do |format|
       if @account.save
@@ -78,7 +79,7 @@ class AccountsController < ApplicationController
   def destroy
     @account = Account.find(params[:id])
     @account.destroy
-
+    
     respond_to do |format|
       format.html { redirect_to(accounts_url) }
       format.xml  { head :ok }

@@ -1,0 +1,29 @@
+Återstående punkter
+
+Kontoplan:
+* Buggfix i uppdateringsskript (Ivar)
+* Flytta bort anvændare från session før att fixa cookie store (Felles)
+
+Bilag:
+* Detaljer (Axel)
+
+Faktura:
+* Lagring (Egil)
+* Kostnadsberækning (Egil)
+
+Generellt:
+* Menylayout (Anti-Kristian, Rune, Ivar)
+* Startsida  (Anti-Kristian, Rune, Ivar)
+* Øversættning (Ivar)
+* Kodkommentering (Egen kode)
+
+* Utseende, vilka fælt skall visas var (Anti-Kristian, Arnt, Rune, Ivar, Axel, Egil)
+
+* Rættigheter (Arnt, Anti-Kristian)
+
+Fixade punkkter:
+
+Bilag:
+* Visa/dølj mva (Axel)
+
+Generellt:

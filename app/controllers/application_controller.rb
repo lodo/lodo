@@ -2,13 +2,14 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  before_filter :login_required
+  before_filter :set_locale, :login_required, :update_company
+  
 
   helper :all # include all helpers, all the time
 
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
-  protect_from_forgery # :secret => 'fd4b65ee1595df77234ee4ea6a277542'
+  # protect_from_forgery # :secret => 'fd4b65ee1595df77234ee4ea6a277542'
   
   filter_parameter_logging "password"
 
@@ -19,7 +20,6 @@ class ApplicationController < ActionController::Base
 
   def login_required
     ok = true
-
     #print "LALALALA", session[:user].current_company,"\n"
     
     if session[:user]
@@ -71,6 +71,16 @@ class ApplicationController < ActionController::Base
     else
       redirect_to :controller=>'users', :action=>'welcome'
     end
+  end
+
+  def set_locale
+    #I18n.locale = session[:locale] = params[:locale] || session[:locale] || nil
+  end
+
+  # FIXME!!!!!
+  # Don't store stuff in session, we can't trust it
+  def update_company
+    session[:user].current_company = Company.find( session[:user].current_company.id)
   end
 
 end
