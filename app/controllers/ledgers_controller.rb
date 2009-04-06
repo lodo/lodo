@@ -3,7 +3,7 @@ class LedgersController < ApplicationController
   def create
     @ledger = Ledger.new(params[:ledger])
     @ledger.account_id = params[:account_id]
-    raise "account belongs to a different company" if @ledger.account.company != @me.current_company
+    raise "account does not belong to active company" if @ledger.account.company != @me.current_company
     if @ledger.save
       respond_to do |format|
         format.json { render :json => @ledger.to_json(:include => {:unit => {}, :project => {} }) }
@@ -18,7 +18,7 @@ class LedgersController < ApplicationController
 
   def update
     @ledger = Ledger.find(params[:id])
-    raise "account belongs to a different company" if @ledger.account.company != @me.current_company
+    raise "account does not belong to active company" if @ledger.account.company != @me.current_company
     @ledger.update_attributes!(params[:ledger])
     respond_to do |format|
       format.html do
@@ -51,10 +51,10 @@ class LedgersController < ApplicationController
     if params[:account_id] && params[:account_id].to_i != 0
       @ledger = Ledger.find(params[:id])
       raise "account_id incorrect" if @ledger.account_id != params[:account_id].to_i
-      raise "account belongs to a different company" if @ledger.account.company != @me.current_company
+      raise "account does not belong to active company" if @ledger.account.company != @me.current_company
     else
       @ledger = Ledger.find(params[:id])
-      raise "account belongs to a different company" if @ledger.account.company != @me.current_company
+      raise "account does not belong to active company" if @ledger.account.company != @me.current_company
     end
     respond_to do |format|
       format.json { render :json => @ledger.to_json(:include => [:account,
