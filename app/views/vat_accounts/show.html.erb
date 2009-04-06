@@ -1,0 +1,33 @@
+<p>
+  <b>Code:</b>
+  <%=h @vat_account.code %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%=h @vat_account.target_account.number %> -  <%=h @vat_account.target_account.name %>
+</p>
+
+<p>
+  <b>Percentage:</b>
+  <%=h @vat_account.percentage %>
+</p>
+
+<p>
+  <b>Overridable:</b>
+  <%=h @vat_account.overridable %>
+</p>
+
+<p>
+  <b>Valid from:</b>
+  <%=h @vat_account.valid_from %>
+</p>
+
+<p>
+  <b>Valid to:</b>
+  <%=h @vat_account.valid_to %>
+</p>
+
+
+<%= link_to 'Edit', edit_vat_account_path(@vat_account) %> |
+<%= link_to 'Back', vat_accounts_path %>

@@ -1,0 +1,50 @@
+<div id="ledgers">
+  <% if @account.ledgers.size == 0 %>
+    <%= javascript_tag "$(document).ready( function () { $('#ledgers').hide(); } );" %>
+  <% end %>
+
+  <hr style="clear: both;" />
+
+  <h2>Ledger accounts</h2>
+  <table id="ledger_table">
+    <tr>
+      <th>Number</th>
+      <th>Name</th>
+      <th>Telephone</th>
+      <th>Mobile</th>
+      <th>Email</th>
+      <th>Credit days</th>
+      <th>Auto payment</th>
+      <th>Placement top</th>
+      <th>Default unit</th>
+      <th>Default project</th>
+    </tr>
+    
+    <% @account.ledgers.each do |ledger| %>
+    <tr class="ledger_item" id="ledger_id_<%= ledger.id %>">
+      <td><%=h ledger.number -%></td>
+<!--
+      <td><%= link_to ledger.name, edit_account_ledger_path(ledger.account, ledger) -%></td>
+-->
+      <td><%=h ledger.name -%></td>
+      <td><%=h ledger.telephone_number -%></td>
+      <td><%=h ledger.mobile_number -%></td>
+      <td><%=h ledger.email -%></td>
+      <td><%=h ledger.credit_days -%></td>
+      <td><%=h ledger.auto_payment -%></td>
+      <td><%=h ledger.placement_top -%></td>
+      <td><%=h ledger.unit ? ledger.unit.name : "" -%></td>
+      <td><%=h ledger.project ? ledger.project.name : "" -%></td>
+    </tr>
+    <% end %>
+
+  </table>
+    <%= javascript_tag "$(document).ready( accounts.makeRowsClickable() );" %>
+
+    <button type="button" onclick="accounts.prepareFormForNewLedger();">New ledger</button>
+
+    <div id="ledger_form_wrapper">
+      <%= render :partial => "ledger_form" %>
+    </div>
+    
+</div>

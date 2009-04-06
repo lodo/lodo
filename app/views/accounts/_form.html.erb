@@ -1,40 +1,48 @@
 <% form_for(@account) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :number %><br />
-    <%= f.text_field :number %>
-  </p>
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.label :lodo_name %><br />
-    <%= f.text_field :lodo_name %>
-  </p>
-  <p>
-    <%= f.label :debit_text %><br />
-    <%= f.text_field :debit_text %>
-  </p>
-  <p>
-    <%= f.label :credit_text %><br />
-    <%= f.text_field :credit_text %>
-  </p>
-  <p>
-    <%= f.label :comments %><br />
-    <%= f.text_field :comments %>
-  </p>
-  <p>
-    <%= f.check_box :has_ledger %>
-    <%= f.label :has_ledger %>
-  </p>
-
-  <%= render :partial => "active_periods/form", :locals => { :active_periods => @account.activatable } %>
-
-  <p>
-    <%= f.submit "Save" %>
-  </p>
+<p>
+  <%= f.label :number %><br />
+  <%= f.text_field :number %>
+</p>
+<p>
+  <%= f.label :name %><br />
+  <%= f.text_field :name %>
+</p>
+<p>
+  <%= f.label :lodo_name %><br />
+  <%= f.text_field :lodo_name %>
+</p>
+<p>
+  <%= f.label :debit_text %><br />
+  <%= f.text_field :debit_text %>
+</p>
+<p>
+  <%= f.label :credit_text %><br />
+  <%= f.text_field :credit_text %>
+</p>
+<p>
+  <%= f.label :vat_account_id %><br />
+  <%= f.select :vat_account_id, @me.current_company.vat_accounts.collect {|p| [ p.target_account.name, p.id ] }.sort %>
+</p>
+<p>
+  <%= f.label :comments %><br />
+  <%= f.text_field :comments %>
+</p>
+<p id="has_ledger_toggle">
+  <%= f.check_box :has_ledger, :onchange => "accounts.toggleLedger( $('#account_has_ledger').attr('checked') );" %>
+  <%= f.label :has_ledger %>
+</p>
+<% if @account.ledgers.size > 0 %>
+<%= javascript_tag "$(document).ready( function () { $('#has_ledger_toggle').hide(); } );" %>
 <% end %>
+
+<%= render :partial => "active_periods/form", :locals => { :active_periods => @account.activatable } %>
+
+<p>
+  <%= f.submit "Save" %>
+</p>
+<% end %>
+
 
 

@@ -47,13 +47,13 @@ class JournalsController < ApplicationController
       Journal.transaction do
         begin
           @journal = Journal.new(params[:journal])
-          @journal.company_id = session[:user].current_company.id
+          @journal.company_id = @me.current_company.id
           @journal.save or raise ActiveRecord::Rollback
           params[:journal_operations].each {
             |key, value|
             value[:journal_id] = @journal.id
             op = JournalOperation.new(value)
-            if op.amount > 0.0
+            if op.amount != 0.0
               op.save or raise ActiveRecord::Rollback
             end
           }
@@ -129,7 +129,7 @@ class JournalsController < ApplicationController
   def find_accounts_all
     @accounts_all =
       Account.find(:all, 
-                   :conditions => {:company_id => session[:user].current_company.id}, 
+                   :conditions => {:company_id => @me.current_company.id}, 
                    :order => :number)
   end
   

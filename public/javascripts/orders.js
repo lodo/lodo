@@ -1,6 +1,12 @@
+/**
+   Separate hournals namespace for orderss specific scripting
+ */
 
 var orders = {
 
+    /**
+       Look up price for specified product
+     */
     getProductPrice: function(id) 
     {
 	
@@ -14,6 +20,11 @@ var orders = {
 	return 0.0;
     },
 
+    /**
+       Validate stuff. Currently can't find any errors. :-(
+
+       FIXME: Detect broken numbers
+     */
     validate: function()
     {
 	for (var i=0; i < LODO.productLines; i++) {
@@ -25,6 +36,9 @@ var orders = {
 	orders.sumColumn();
     },
 
+    /**
+       Sum all the prices up.
+     */
     sumColumn: function()
     {
 	var sum = 0.0;
@@ -37,6 +51,9 @@ var orders = {
 	orders.setTotalPrice(sum);
     },
 
+    /**
+       Make a select DOM node for product selection.
+     */
     makeProductSelect: function(value) {
 	var sel = document.createElement("select");
 	sel.name = "products[" + LODO.productLines+"][product_id]";
@@ -52,6 +69,9 @@ var orders = {
 	return sel;
     },
 
+    /**
+       Returns a DOM node suitable for using as a amount input box.
+     */
     makeAmount: function(value) {
 	var res = document.createElement("input");
 	res.type="text";
@@ -65,6 +85,9 @@ var orders = {
 	return res;
     },
 
+    /**
+       Returns a DOM node suitable for using as a discount input box.
+     */
     makeDiscount: function (value) {
 	var res = document.createElement("input");
 	res.type="text";
@@ -76,6 +99,9 @@ var orders = {
 	return res;
     },
     
+    /**
+       Returns a DOM node suitable for using as a price hidden input.
+     */
     makePrice: function (value) {
 	
 	var res = document.createElement("span");
@@ -90,23 +116,35 @@ var orders = {
 	return res;
     },
 
+    /**
+       Set the total price, taking into account the discount_total, and converting the number to a string with suitable formating.
+     */
     setTotalPrice: function(price) {
 	price = price*(100.0-parseFloatNazi($('#discount_total')[0].value))*0.01;
 	$('#dynfield_sum')[0].innerHTML = toMoney(price);
 	$('#price')[0].value = toMoney(price);
     },
 
+    /**
+       Sets the price of a specific line, not taking discount into account.
+     */
     setPrice: function(line, value) {
 	$('#price_'+line)[0].value = toMoney(value);
 	$('#priceLabel_'+line)[0].innerHTML = toMoney(value);
     },
 
+    /**
+       Make a generic span DOM node, suitable for a read only message.
+     */
     makeText: function(id) {
 	var res = document.createElement("span");
 	res.id=id + "_" + LODO.productLines;
 	return res;
     },
 
+    /**
+       Add a new product to the product list
+     */
     addProduct: function(line)
     {
 	if(!LODO.productLines) {
@@ -146,6 +184,10 @@ var orders = {
 	stripe();
 	orders.validate();
     },
+
+    /**
+       Add all predefined product lines from the LODO.orderItemList array.
+    */
 
     addPredefined: function(){
 	lines = LODO.orderItemList;

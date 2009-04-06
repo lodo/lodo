@@ -1,10 +1,10 @@
-<h1>Listing users</h1>
+<h1><%= t(:listing_users, :scope => :users) -%></h1>
 
 <table class='striped'>
   <tr>
-    <th>Number</th>
-    <th>Name</th>
-    <th>Companies</th>
+    <th><%= t(:login, :scope => :users) -%></th>
+    <th><%= t(:email, :scope => :users) -%></th>
+    <th><%= t(:companies, :scope => :users) -%></th>
     <th></th>
   </tr>
 
@@ -17,9 +17,9 @@
       <%= user.companies.collect{|c| link_to c.name, c}.join(", ") %>
     </td>
     <td>
-      <%= link_to 'Show', user %>
-      <%= link_to 'Edit', edit_user_path(user) %>
-      <%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %>
+      <%= link_to t(:show, :scope => :users), user %>
+      <%= link_to t(:edit, :scope => :users), edit_user_path(user) %>
+      <%= link_to t(:destroy, :scope => :users), user, :confirm => t(:delete_confirmation, :scope => :users, :name => user.login), :method => :delete %>
     </td>
   </tr>
   <% end %>
@@ -27,4 +27,4 @@
 
 <br />
 
-<%= link_to 'New user', new_user_path %>
+<%= link_to t(:new_user, :scope => :users), new_user_path %>

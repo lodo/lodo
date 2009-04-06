@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.xml
   def index
-    @orders = Order.find(session[:user].current_company.orders, :order => 'updated_at')
+    @orders = Order.find(@me.current_company.orders, :order => 'updated_at')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
     @order = Order.new
-    @products_all = Product.find(session[:user].current_company.products, :order => 'name')
+    @products_all = Product.find(@me.current_company.products, :order => 'name')
     
     respond_to do |format|
       format.html # new.html.erb
@@ -38,14 +38,14 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
-    @products_all = Product.find(session[:user].current_company.products, :order => 'name')
+    @products_all = Product.find(@me.current_company.products, :order => 'name')
   end
   
   # POST /orders
   # POST /orders.xml
   def create
     @order = Order.new(params[:order])
-    @order.company_id = session[:user].current_company.id
+    @order.company_id = @me.current_company.id
     respond_to do |format|
       Order.transaction do
         begin

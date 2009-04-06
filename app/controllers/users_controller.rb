@@ -16,7 +16,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
-        session[:user] = @user
+        session[:user_id] = @user.id
+        session[:user_hashed_password] = @user.hashed_password
         flash[:notice] = 'You have been registered.'
         format.html { redirect_to(@user) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
@@ -27,12 +28,16 @@ class UsersController < ApplicationController
     end
   end
   
+
   def login
     if request.post?
-      if session[:user] = User.authenticate(params[:login], params[:password])
-        if not session[:user].current_company or not session[:user].current_company.in(session[:user].companies) and session[:user].companies.length > 0
-            session[:user].current_company = session[:user].companies[0]
-            session[:user].save
+      @me = User.authenticate(params[:login], params[:password])
+      if @me
+        session[:user_id] = @me.id
+        session[:user_hashed_password] = @me.hashed_password
+        if not @me.current_company or not @me.current_company.in(@me.companies) and @me.companies.length > 0
+          @me.current_company = @me.companies[0]
+          @me.save
         end
         
         flash[:notice]  = "Login successful"
@@ -40,7 +45,7 @@ class UsersController < ApplicationController
 	if session[:return_to]
           redirect_to session[:return_to]
         else
-          redirect_to :action => :show, :id => session[:user].id
+          redirect_to :action => :show, :id => @me.id
         end      
       else
         flash[:notice] = "Login unsuccessful"
@@ -49,7 +54,8 @@ class UsersController < ApplicationController
   end
 
   def logout
-    session[:user] = nil
+    session[:user_id] = nil
+    session[:user_hashed_password] = nil
     flash[:message] = 'Logged out'
     redirect_to :action => 'login'
   end
@@ -67,7 +73,7 @@ class UsersController < ApplicationController
   end
   
   def change_password
-    @user=session[:user]
+    @user = User.find(params[:id])
     if request.post?
       @user.update_attributes(:password=>params[:user][:password], :password_confirmation => params[:user][:password_confirmation])
       if @user.save
@@ -125,8 +131,8 @@ class UsersController < ApplicationController
   end
 
   def change_current_company
-    session[:user].current_company = Company.find(params[:current_company])
-    session[:user].save
+    @me.current_company = Company.find(params[:current_company])
+    @me.save
     respond_to do |format|
       format.html { redirect_to(:back) }
     end

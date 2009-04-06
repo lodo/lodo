@@ -4,7 +4,6 @@
   <tr>
     <th>Name</th>
     <th>Users</th>
-    <th>Accounts</th>
     <th>Organization number</th>
     <th>Address</th>
     <th></th>
@@ -14,7 +13,6 @@
   <tr>
     <td><%=h company.name %></td>
     <td><%=h company.users.collect {|u| u.login}.join ", " %></td>
-    <td><%=h company.accounts.collect{|a| a.number.to_s + " " + a.name}.join(", ") %></td>
     <td><%=h company.organization_number %></td>
     <td>  
       <%= render :partial => "addresses/show", :locals => { :address => company.address } %>

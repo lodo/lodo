@@ -4,7 +4,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.xml
   def index
-    @bills = Bill.find(session[:user].current_company.bills, :order => 'updated_at')
+    @bills = Bill.find(@me.current_company.bills, :order => 'updated_at')
     
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +27,7 @@ class BillsController < ApplicationController
     @orders_all = Order.find(
       :all,
       :joins => :company,
-      :conditions => ["orders.company_id = ?", session[:user].current_company.id ],
+      :conditions => ["orders.company_id = ?", @me.current_company.id ],
       :include => {
 	:seller => {},
 	:customer => {},
@@ -48,7 +48,7 @@ where
  and orders.customer_id = companies.id
 order by
  companies.name, orders.created_at
-", session[:user].current_company.id])
+", @me.current_company.id])
 =end
   end
 
@@ -112,8 +112,7 @@ order by
   # POST /bills.xml
   def create
     @bill = post_to_model params[:bill]
-    @bill.company_id = session[:user].current_company.id
-puts YAML.dump @bill
+    @bill.company_id = @me.current_company.id
 
     respond_to do |format|
       if @bill.save
