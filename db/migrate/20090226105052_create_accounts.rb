@@ -5,6 +5,8 @@ class CreateAccounts < ActiveRecord::Migration
       t.string :name, :null => false
       
       t.references :company 
+      t.references :vat_account 
+      t.boolean :vat_overridable
       
       t.references :activatable
       t.string :lodo_name, :null => false

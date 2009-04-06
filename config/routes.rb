@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :vat_accounts
+
   map.resources :bills
 
   map.resources :bill_items

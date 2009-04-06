@@ -1,0 +1,31 @@
+<% form_for(@vat_account) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </p>
+  <p>
+    <%= f.label :target_account_id %><br />
+    <%= f.select :target_account_id, session[:user].current_company.accounts.collect {|p| [ p.name, p.id ] }.sort %>
+  </p>
+  <p>
+    <%= f.label :percentage %><br />
+    <%= f.text_field :percentage %>
+  </p>
+  <p>
+    <%= f.label :overridable %><br />
+    <%= f.check_box :overridable %>
+  </p>
+  <p>
+    <%= f.label :valid_from %><br />
+    <%= f.date_select :valid_from %>
+  </p>
+  <p>
+    <%= f.label :valid_to %><br />
+    <%= f.date_select :valid_to %>
+  </p>
+  <p>
+    <%= f.submit "Save" %>
+  </p>
+<% end %>

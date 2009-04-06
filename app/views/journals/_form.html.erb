@@ -3,7 +3,7 @@
   Use an object as a fake namespace. Spiffy.
   */
   var LODO = new Object();
-  LODO.accountList = <%= @accounts_all.to_json %>;
+  LODO.accountList = <%= @accounts_all.to_json :include => { :vat_account => {:include => {:target_account=>{}}} } %>;
   LODO.journalOperationList = <%= @journal.journal_operation.to_json %>;
 </script>
 
@@ -23,10 +23,10 @@
   <%= f.date_select :journal_date %>
 </p>
 <p>
-  <button onClick='addAccountLine();' type='button'>Ny postering til bilag</button>
+  <button onClick='journals.addAccountLine();' type='button'>Ny postering til bilag</button>
   <input type='checkbox' id='vat'/><label for='vat'>VAT</label>
   <input type='checkbox' id='details'/><label for='details'>Details</label>
-
+  
 </p>
 <p>
   <table class='striped' id='operations_table'>

@@ -53,7 +53,7 @@ class JournalsController < ApplicationController
             |key, value|
             value[:journal_id] = @journal.id
             op = JournalOperation.new(value)
-            if op.amount > 0.0
+            if op.amount != 0.0
               op.save or raise ActiveRecord::Rollback
             end
           }
