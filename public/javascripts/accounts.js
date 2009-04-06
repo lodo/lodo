@@ -23,12 +23,13 @@ var accounts = {
       row.addCol(ledger.credit_days);
       row.addCol(ledger.auto_payment);
       row.addCol(ledger.placement_top);
-      row.addCol(ledger.unit_id);
-      row.addCol(ledger.project_id);
+      row.addCol( ledger.unit_id ? ledger.unit.name : '' );
+      row.addCol( ledger.project_id ? ledger.project.name : '');
       row.attr('id', 'ledger_id_' + ledger.id);
       $('#ledger_table').append(row);
       $('#new_ledger')[0].reset();
       accounts.makeRowsClickable();
+      stripe();
     }
   },
  
