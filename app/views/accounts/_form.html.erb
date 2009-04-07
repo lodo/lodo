@@ -23,7 +23,7 @@
 </p>
 <p>
   <%= f.label :vat_account_id, t(:vat_account, :scope => :accounts) %><br />
-  <%= f.select :vat_account_id, @me.current_company.vat_accounts.collect {|p| [ p.target_account.name, p.id ] }.sort %>
+  <%= f.select :vat_account_id, @me.current_company.vat_accounts.collect {|p| [ p.target_account.name, p.id ] }.sort, {:include_blank => true} %>
 </p>
 <p>
   <%= f.label :comments, t(:comments, :scope => :accounts) %><br />
