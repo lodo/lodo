@@ -1,17 +1,17 @@
 <p>
-  <b>Username:</b>
+<b><%= t(:login, :scope => :users) -%>:</b>
   <%=h @user.login %>
 </p>
 
 <p>
-  <b>Email:</b>
+<b><%= t(:email, :scope => :users) -%>:</b>
   <%=h @user.email %>
 </p>
 
 <p>
-  <b>Companies:</b>
+<b><%= t(:companies, :scope => :users) -%>:</b>
   <%= @user.companies.collect{|c| link_to c.name, c}.join(", ") %>
 </p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to t(:edit, :scope => :users), edit_user_path(@user) %> |
+<%= link_to t(:list, :scope => :users), users_path %>

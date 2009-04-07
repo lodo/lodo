@@ -2,16 +2,19 @@
 
 <% form_tag :action=> "login" do -%>
 
-<h3>Login</h3> 
-<label for="login">Login:</label><br/>
+  <h3><%= t(:log_in, :scope => :users) -%></h3> 
+<label for="login"><%= t(:login, :scope => :users) -%>:</label><br/>
 <%= text_field_tag "login", "", :size => 20 %><br/>
 
-<label for="password">Password:</label><br/>
+<label for="password"><%= t(:password, :scope => :users) -%>:</label><br/>
 <%= password_field_tag "password", "", :size => 20 %><br/>
 
-<%= submit_tag "Submit" %>
-
-<%= link_to 'Register', :action => 'new' %> |
-<%= link_to 'Forgot my password', :action => 'forgot_password' %>     
+<%= submit_tag t(:log_in, :scope => :users) %>
 
 <% end %>
+
+<p>
+<%= link_to t(:signup, :scope => :users), :action => 'new' %> |
+<%= link_to t(:forgotten_password, :scope => :users), :action => 'forgot_password' %>     
+</p>
+
