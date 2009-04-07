@@ -1,16 +1,16 @@
 <p>
-  <b>Type:</b>
+  <b><%= t(:type, :scope => :journals) -%>:</b>
   <%=h @journal.journal_type %>
 </p>
 
 <p>
-  <b>Number:</b>
+  <b><%= t(:number, :scope => :journals) -%>:</b>
   <%=h @journal.number %>
 </p>
 
 <p>
-  <b>Journal date:</b>
-  <%=h @journal.journal_date %>
+  <b><%= t(:journal_date, :scope => :journals) -%>:</b>
+  <%=h l(@journal.journal_date) %>
 </p>
 
 <p>
@@ -18,13 +18,13 @@
     <thead>
       <tr>
 	<th>
-	  Account
+	  <%= t(:account, :scope => :journals) -%>
 	</th>
 	<th>
-	  Debet
+	  <%= t(:debit, :scope => :journals) -%>
 	</th>
 	<th>
-	  Credit
+	  <%= t(:credit, :scope => :journals) -%>
 	</th>
       </tr>
     </thead>
@@ -47,5 +47,5 @@
   </table>
 </p>
 
-<%= link_to 'Edit', edit_journal_path(@journal) %> |
-<%= link_to 'Back', journals_path %>
+<%= link_to t(:edit, :scope => :journals), edit_journal_path(@journal) %> |
+<%= link_to t(:back, :scope => :journals), journals_path %>

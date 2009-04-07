@@ -1,4 +1,4 @@
-<h1>New journal</h1>
+<h1><%= t(:new_journal, :scope => :journals) -%></h1>
 
 <%= render :partial => "form" %>
 <script>
@@ -7,4 +7,4 @@ journals.addAccountLine();
 journals.update();
 </script>
 
-<%= link_to 'Back', journals_path %>
+<%= link_to t(:back, :scope => :journals), journals_path %>
