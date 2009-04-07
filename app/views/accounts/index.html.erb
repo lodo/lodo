@@ -1,9 +1,9 @@
-<h1>Listing accounts</h1>
+<h1><%= t(:listing_accounts, :scope => :accounts) %></h1>
 
 <table class='striped'>
   <tr>
-    <th>Number</th>
-    <th>Name</th>
+    <th><%= t(:number, :scope => :accounts) -%></th>
+    <th><%= t(:name, :scope => :accounts) -%></th>
     <th></th>
   </tr>
 <% for account in @accounts %>
@@ -11,9 +11,9 @@
     <td><%=h account.number %></td>
     <td><%=h account.name %></td>
     <td>
-      <%= link_to 'Show', account %>
-      <%= link_to 'Edit', edit_account_path(account) %>
-      <%= link_to 'Destroy', account, :confirm => 'Are you sure?', :method => :delete %>
+      <%= link_to t(:show, :scope => :accounts), account %>
+      <%= link_to t(:edit, :scope => :accounts), edit_account_path(account) %>
+      <%= link_to t(:destroy, :scope => :accounts), account, :confirm => t(:confirm_delete, :scope => :accounts, :name => account.name), :method => :delete %>
     </td>
   </tr>
 <% end %>
@@ -21,4 +21,5 @@
 
 <br />
 
-<%= link_to 'New account', new_account_path %>
+<%= link_to t(:new_account, :scope => :accounts), new_account_path %>
+
