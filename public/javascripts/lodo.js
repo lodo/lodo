@@ -92,7 +92,7 @@ function decorateDOM(dom, decoration) {
 function parseFloatNazi(str) 
 {
     if (str == null || str == "") {
-	return 0.o;
+	return 0.0;
     }
 
     var str2 = str.replace(/,/g,'.');
