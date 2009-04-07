@@ -1,25 +1,25 @@
-<h1>Editing user <%=h @user.login%></h1>
+<h1><%= t(:editing, :scope => :users, :name => @user.login) -%></h1>
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :login %><br />
+  <%= f.label :login, t(:login, :scope => :users) %><br />
     <%= f.text_field :login %>
   </p>
   <p>
-    <%= f.label :company_ids %><br />
+  <%= f.label :company_ids, t(:companies, :scope => :users) %><br />
     <%= f.select :company_ids, Company.find(:all).collect {|p| [ p.name, p.id ] }, {}, {:multiple => true, :size => 15} %>
   </p>
   <p>
-    <%= f.label :email %><br />
+  <%= f.label :email, t(:email, :scope => :users) %><br />
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.submit "Update" %>
+  <%= f.submit t(:update, :scope => :users) %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= link_to t(:show, :scope => :users), @user %> |
+<%= link_to t(:list, :scope => :users), users_path %>
 

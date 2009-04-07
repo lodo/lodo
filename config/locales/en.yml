@@ -36,6 +36,7 @@ en:
     logged_in_as: "Logged in as"
     log_out: "Log out"
     active_company: "Active company"
+    vat_plan: "VAT plan"
   users:
     listing_users: "Listing users"
     login: "Login"
@@ -46,5 +47,18 @@ en:
     destroy: "Destroy"
     delete_confirmation: "Delete the user {{name}}?"
     new_user: "New user"
+    password: "Password"
+    signup: "Sign up"
+    change_password: "Change password"
+    choose_password: "Choose password"
+    confirm_password: "Confirm password"
+    log_in: "Log in"
+    forgotten_password: "Forgotten password"
+    email_password: "Email password"
+    back: "Back"
+    register: "Register"
+    list: "Back"
+    editing: "Editing the user {{name}}"
+    update: "Update"
 
 
