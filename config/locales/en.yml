@@ -98,9 +98,21 @@ en:
     country: "Country"
     net_bank: "Net bank"
     comment: "Comment"
-
-
-
-
+  vat:
+    listing_vat_accounts: "Listing vat accounts"
+    account: "Account"
+    percentage: "Percentage"
+    overridable: "Overridable"
+    code: "Code"
+    valid_from: "Valid from"
+    valid_to: "Valid to"
+    show: "Show"
+    edit: "Edit"
+    destroy: "Delete"
+    confirm_destroy: "Confirm deletion of vat-account {{code}}"
+    new_vat_account: "Create new"
+    editing_vat_account: "Editing vat account"
+    back: "Back"
+    save: "Save"
 
 

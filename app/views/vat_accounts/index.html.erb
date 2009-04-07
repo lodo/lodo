@@ -1,13 +1,13 @@
-<h1>Listing vat_accounts</h1>
+<h1><%= t(:listing_vat_accounts, :scope => :vat) -%></h1>
 
 <table class='striped'>
   <tr>
-    <th>Account</th>
-    <th>Percentage</th>
-    <th>Overridable</th>
-    <th>Code</th>
-    <th>Valid from</th>
-    <th>Valid to</th>
+    <th><%= t(:account, :scope => :vat) -%></th>
+    <th><%= t(:percentage, :scope => :vat) -%></th>
+    <th><%= t(:overridable, :scope => :vat) -%></th>
+    <th><%= t(:code, :scope => :vat) -%></th>
+    <th><%= t(:valid_from, :scope => :vat) -%></th>
+    <th><%= t(:valid_to, :scope => :vat) -%></th>
   </tr>
 
 <% for vat_account in @vat_accounts %>
@@ -16,15 +16,15 @@
     <td><%=h vat_account.percentage %></td>
     <td><%=h vat_account.overridable %></td>
     <td><%=h vat_account.code %></td>
-    <td><%=h vat_account.valid_from %></td>
-    <td><%=h vat_account.valid_to %></td>
-    <td><%= link_to 'Show', vat_account %></td>
-    <td><%= link_to 'Edit', edit_vat_account_path(vat_account) %></td>
-    <td><%= link_to 'Destroy', vat_account, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= l(vat_account.valid_from) %></td>
+    <td><%= l(vat_account.valid_to) %></td>
+    <td><%= link_to t(:show, :scope => :vat), vat_account %></td>
+    <td><%= link_to t(:edit, :scope => :vat), edit_vat_account_path(vat_account) %></td>
+    <td><%= link_to t(:destroy, :scope => :vat), vat_account, :confirm => t(:confirm_destroy, :scope => :vat, :code => vat_account.code), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New vat_account', new_vat_account_path %>
+<%= link_to t(:new_vat_account, :scope => :vat), new_vat_account_path %>

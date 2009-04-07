@@ -1,5 +1,5 @@
-<h1>New vat_account</h1>
+<h1><%= t(:new_vat_account, :scope => :vat) -%></h1>
 
 <%= render :partial => "form" %>
 
-<%= link_to 'Back', vat_accounts_path %>
+<%= link_to t(:back, :scope => :vat), vat_accounts_path %>
