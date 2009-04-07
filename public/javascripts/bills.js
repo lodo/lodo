@@ -78,7 +78,7 @@ var bills = {
         for (precission = 0; precission < 10; precission++) {
             res = (100 - (price / (unit_price * 0.01))).toFixed(precission)
 // FIXME: ((100 - res) * (unit_price * 0.01)).toFixed(2) or somesuch might be needed, and it might still not work.
-            if (price == (100 - res) * (unit_price * 0.01))
+            if (price == ((100 - res) * (unit_price * 0.01)).toFixed(2))
                 break;
         }
         return res.replace(/\./g,',')
