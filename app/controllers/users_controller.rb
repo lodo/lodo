@@ -35,7 +35,7 @@ class UsersController < ApplicationController
       if @me
         session[:user_id] = @me.id
         session[:user_hashed_password] = @me.hashed_password
-        if not @me.current_company or not @me.current_company.in(@me.companies) and @me.companies.length > 0
+        if not @me.current_company or not @me.companies.include?(@me.current_company) and @me.companies.length > 0
           @me.current_company = @me.companies[0]
           @me.save
         end

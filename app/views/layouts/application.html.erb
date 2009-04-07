@@ -13,7 +13,7 @@
   <% end %>
 </head>
 <body>
-  <% if session[:user] %>
+  <% if @me %>
   
   <div class='main_menu'>
     <ul>
@@ -49,14 +49,14 @@
       </li>
 
       <li>
-	<%= I18n.t(:logged_in_as, :scope => :layout) -%> <em><%= link_to session[:user].login, :controller => 'users', :action => 'show', :id => session[:user].id %></em> (<%= link_to I18n.t(:log_out, :scope => :layout), :controller => 'users', :action => 'logout' %>)
+	<%= I18n.t(:logged_in_as, :scope => :layout) -%> <em><%= link_to @me.login, :controller => 'users', :action => 'show', :id => @me.id %></em> (<%= link_to I18n.t(:log_out, :scope => :layout), :controller => 'users', :action => 'logout' %>)
       </li>
 
       <li class="change_company_form">
         <% form_tag :controller => "users", :action=> "change_current_company" do -%>
          <label for="current_company"><%= I18n.t(:active_company, :scope => :layout) -%>:</label>
-         <%= select_tag "current_company", options_for_select(session[:user].companies.collect {|p| [ p.name, p.id ] },
-                                                              if session[:user].current_company.nil? then 0 else session[:user].current_company.id end ) %>
+         <%= select_tag "current_company", options_for_select(@me.companies.collect {|p| [ p.name, p.id ] },
+                                                              if @me.current_company.nil? then 0 else @me.current_company.id end ) %>
         <% end %>
         <script>submitAction.registerSubmitAction('#current_company', 'change', '.change_company_form form');</script>
       </li>
