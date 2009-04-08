@@ -45,7 +45,7 @@ class VatAccountsController < ApplicationController
 
     respond_to do |format|
       if @vat_account.save
-        flash[:notice] = 'VatAccount was successfully created.'
+        flash[:notice] = t(:create_success, :scope => :vat)
         format.html { redirect_to(@vat_account) }
         format.xml  { render :xml => @vat_account, :status => :created, :location => @vat_account }
       else
@@ -62,7 +62,7 @@ class VatAccountsController < ApplicationController
 
     respond_to do |format|
       if @vat_account.update_attributes(params[:vat_account])
-        flash[:notice] = 'VatAccount was successfully updated.'
+        flash[:notice] = t(:update_success, :scope => :vat)
         format.html { redirect_to(@vat_account) }
         format.xml  { head :ok }
       else

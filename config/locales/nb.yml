@@ -127,6 +127,14 @@
     list: "Tilbake til listen"
     editing: "Redigerer brukeren {{name}}"
     update: "Lagre"
+    signup_successful: Bruker opprettet
+    login_success: Du er nå logget inn
+    login_error: Innlogging feilet. Sjekk brukernavn/passord.
+    logged_out: Du er nå logget ut av systemet.
+    password_sent: Vi har sendt deg et nytt passord pr email.
+    password_not_sent: Kunne ikke sende deg et nytt passord. Prøv igjen senere, eller kontakt brukerstøtte.
+    password_changed: Passord oppdatert
+    update_success: Profil oppdatert
   accounts:
     listing_accounts: "Viser kontoplan"
     number: "Nummer"
@@ -159,6 +167,10 @@
     foreign_bank_number: "Utenlandsk bankkonto?"
     net_bank: "Net bank?"
     comment: "Beskrivelse"
+    account_created: Konto opprettet
+    account_updated: Konto oppdatert
+  ledgers:
+    ledger_saved: Reskontro {{name}} lagret
   vat:
     listing_vat_accounts: "Viser mva-kontoer"
     account: "Konto"
@@ -175,6 +187,8 @@
     editing_vat_account: "Redigerer mva-konto"
     back: "Tilbake til listen"
     save: "Lagre"
+    create_success: Mva-sats opprettet
+    update_success: Mva-sats oppdatert
   journals:
     listing_journals: "Viser bilag"
     type: "Type"
@@ -285,8 +299,6 @@
     total_for_this_order: Total for denne ordren
     total_for_all_orders: Total for alle ordre
     total: Total
-
-
 
 
 

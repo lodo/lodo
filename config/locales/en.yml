@@ -60,6 +60,14 @@ en:
     list: "Back"
     editing: "Editing the user {{name}}"
     update: "Update"
+    signup_successful: You have been registered
+    login_success: You are now logged in
+    login_error: Login failed
+    logged_out: You are now logged out
+    password_sent: A new password has been sent by email
+    password_not_sent: Couldn't send password. Please try again later, or contact support.
+    password_changed: Password changed
+    update_success: User was successfully updated
   accounts:
     listing_accounts: "Listing accounts"
     number: "Number"
@@ -92,6 +100,10 @@ en:
     foreign_bank_number: "Foreign bank number"
     net_bank: "Net bank"
     comment: "Comment"
+    account_created: Account created
+    account_updated: Account updated
+  ledgers:
+    ledger_saved: Ledger {{name}} saved
   vat:
     listing_vat_accounts: "Listing vat accounts"
     account: "Account"
@@ -108,6 +120,8 @@ en:
     editing_vat_account: "Editing vat account"
     back: "Back"
     save: "Save"
+    create_success: VAT entry created
+    update_success: VAT entry updated
   journals:
     listing_journals: "Listing journal entries?"
     type: "Type"

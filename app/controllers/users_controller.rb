@@ -18,7 +18,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
         session[:user_hashed_password] = @user.hashed_password
-        flash[:notice] = 'You have been registered.'
+        flash[:notice] = :successful_signup
         format.html { redirect_to(@user) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
@@ -40,7 +40,7 @@ class UsersController < ApplicationController
           @me.save
         end
         
-        flash[:notice]  = "Login successful"
+        flash[:notice]  = t(:login_success, :scope => :users)
 
 	if session[:return_to]
           redirect_to session[:return_to]
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
           redirect_to :action => :show, :id => @me.id
         end      
       else
-        flash[:notice] = "Login unsuccessful"
+        flash[:notice] = t(:login_error, :scope => :users)
       end
     end
   end
@@ -56,7 +56,7 @@ class UsersController < ApplicationController
   def logout
     session[:user_id] = nil
     session[:user_hashed_password] = nil
-    flash[:message] = 'Logged out'
+    flash[:notice] = t(:logged_out, :scope => :users)
     redirect_to :action => 'login'
   end
 
@@ -64,10 +64,10 @@ class UsersController < ApplicationController
     if request.post?
       u= User.find_by_email(params[:email])
       if u and u.send_new_password
-        flash[:message]  = "A new password has been sent by email."
+        flash[:message]  = t(:password_sent, :scope => :users)
         redirect_to :action=>'login'
       else
-        flash[:warning]  = "Couldn't send password"
+        flash[:warning]  = t(:password_not_sent, :scope => :users)
       end
     end
   end
@@ -77,7 +77,7 @@ class UsersController < ApplicationController
     if request.post?
       @user.update_attributes(:password=>params[:user][:password], :password_confirmation => params[:user][:password_confirmation])
       if @user.save
-        flash[:message]="Password Changed"
+        flash[:message] = t(:password_changed, :scope => :users)
       end
     end
   end
@@ -106,7 +106,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       
       if @user.update_attributes(params[:user])
-        flash[:notice] = 'User was successfully updated.'
+        flash[:notice] = t(:update_success, :scope => :users)
         format.html { redirect_to(@user) }
         format.xml  { head :ok }
       else
