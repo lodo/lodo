@@ -226,4 +226,22 @@
     postal_code: Postnummer
     town: Sted
     country: Land
+  products:
+    listing_products: Viser produkter
+    price: Pris
+    name: Navn
+    show: Vis
+    edit: Rediger
+    destroy: Slett
+    destroy_confirmation: Bekreft sletting av {{name}}
+    new_product: Nytt produkt
+    create: Opprett
+    back: Tilbake
+    editing_product: Rediger produkt
+    update: Lagre endringer
+
+
+
+
+
 

@@ -159,4 +159,22 @@ en:
     postal_code: Zip
     town: City
     country: Country
+  products:
+    listing_products: Listing products
+    price: Price
+    name: Name
+    show: Show
+    edit: Edit
+    destroy: Destroy
+    destroy_confirmation: Confirm deleting {{name}}
+    new_product: New product
+    create: Opprett
+    back: Back
+    editing_product: Editing product
+    update: Update
+
+
+
+
+
 
