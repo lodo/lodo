@@ -226,4 +226,67 @@
     postal_code: Postnummer
     town: Sted
     country: Land
+  products:
+    listing_products: Viser produkter
+    price: Pris
+    name: Navn
+    show: Vis
+    edit: Rediger
+    destroy: Slett
+    destroy_confirmation: Bekreft sletting av {{name}}
+    new_product: Nytt produkt
+    create: Opprett
+    back: Tilbake
+    editing_product: Rediger produkt
+    update: Lagre endringer
+  orders:
+    listing_orders: Viser ordre
+    price: Pris
+    vat: Mva
+    order_date: Ordredato
+    requested_delivery_date: Ønsket leveringsdato
+    customer: Kunde
+    delivery_address: Leveringsadresse
+    transport: Transport
+    new_order: Ny ordre
+    seller: Selger
+    product: Produkt
+    unit_price: Enhetspris
+    amount: Antall
+    discount: Rabatt
+    total_price: Sum
+    add_product: Legg til produkt
+    save: Lagre
+    back: Tilbake
+    show: Vis
+    edit: Rediger
+    editing_order: Redigerer ordre
+  bills:
+    listing_bills: Viser fakturaer
+    delivery_date: Leveringsdato
+    billing_date: Fakturadato
+    new_bill: Ny faktura
+    show: Vis
+    back: Tilbake
+    edit: Rediger
+    destroy: Slett
+    confirm_destroy: Bekreft sletting av faktura {{number}}
+    editing_bill: Redigerer faktura
+    order: Ordre
+    products: Produkter
+    product: Produkt
+    unit_price: Pr stk
+    remaining: Rest
+    amount: Antall
+    discount: Rabatt
+    total_price: Totalpris
+    add_order: Legg til ordre
+    create: Opprett
+    total_for_this_order: Total for denne ordren
+    total_for_all_orders: Total for alle ordre
+    total: Total
+
+
+
+
 

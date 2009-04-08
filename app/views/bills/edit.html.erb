@@ -1,6 +1,6 @@
-<h1>Editing bill</h1>
+<h1><%= t(:editing_bill, :scope => :bills) -%></h1>
 
 <%= render :partial => "form" %>
 
-<%= link_to 'Show', @bill %> |
-<%= link_to 'Back', bills_path %>
+<%= link_to t(:show, :scope => :bills), @bill %> |
+<%= link_to t(:back, :scope => :bills), bills_path %>

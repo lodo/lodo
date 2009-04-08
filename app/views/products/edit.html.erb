@@ -1,20 +1,20 @@
-<h1>Editing product</h1>
+<h1><%= t(:editing_product, :scope => :products) -%></h1>
 
 <% form_for(@product) do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :price %><br />
+    <%= f.label :price, t(:price, :scope => :products) %><br />
     <%= f.text_field :price %>
   </p>
   <p>
-    <%= f.label :name %><br />
+    <%= f.label :name, t(:name, :scope => :products) %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.submit "Update" %>
+    <%= f.submit t(:update, :scope => :products) %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @product %> |
-<%= link_to 'Back', products_path %>
+<%= link_to t(:show, :scope => :products), @product %> |
+<%= link_to t(:back, :scope => :products), products_path %>

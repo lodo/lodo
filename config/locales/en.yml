@@ -159,4 +159,73 @@ en:
     postal_code: Zip
     town: City
     country: Country
+  products:
+    listing_products: Listing products
+    price: Price
+    name: Name
+    show: Show
+    edit: Edit
+    destroy: Destroy
+    destroy_confirmation: Confirm deleting {{name}}
+    new_product: New product
+    create: Opprett
+    back: Back
+    editing_product: Editing product
+    update: Update
+  orders:
+    listing_orders: Listing orders
+    price: Prce
+    vat: VAT
+    order_date: Order date
+    requested_delivery_date: Requested delivery date
+    customer: Customer
+    delivery_address: Delivery address
+    transport: Transport
+    new_order: New order
+    seller: Seller
+    product: Product
+    unit_price: Unit price
+    amount: Amount
+    discount: Discount
+    total_price: Total price
+    add_product: Add product
+    save: Save
+    back: Back
+    show: Show
+    edit: Edit
+    editing_order: Edit order
+  bills:
+    listing_bills: Listing bills
+    delivery_date: Delivery date
+    billing_date: Billing date
+    new_bill: New bill
+    show: Show
+    back: Back
+    edit: Edit
+    destroy: Delete
+    confirm_destroy: Confirm deleting bill {{number}}
+    editing_bill: Editing bill
+    order: Order
+    products: Products
+    product: Product
+    unit_price: Unit price
+    remaining: Reminder
+    amount: Amount
+    discount: Discount
+    total_price: Total price
+    add_order: Add order
+    create: Create
+    total_for_this_order: Total for this order
+    total_for_all_orders: Total for all orders
+    total: Total
+
+
+
+
+
+
+
+
+
+
 

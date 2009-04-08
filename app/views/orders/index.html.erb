@@ -1,15 +1,15 @@
-<h1>Listing orders</h1>
+<h1><%= t(:listing_orders, :scope => :orders) -%></h1>
 
 <table>
   <tr>
-    <th>Price</th>
-    <th>Mva</th>
-    <th>Order date</th>
-    <th>Requested delivery date</th>
-    <th>Seller</th>
-    <th>Customer</th>
-    <th>Delivery address</th>
-    <th>Transport</th>
+    <th><%= t(:price, :scope => :orders) -%></th>
+    <th><%= t(:vat, :scope => :orders) -%></th>
+    <th><%= t(:order_date, :scope => :orders) -%></th>
+    <th><%= t(:requested_delivery_date, :scope => :orders) -%></th>
+    <th><%= t(:seller, :scope => :orders) -%></th>
+    <th><%= t(:customer, :scope => :orders) -%></th>
+    <th><%= t(:delivery_address, :scope => :orders) -%></th>
+    <th><%= t(:transport, :scope => :orders) -%></th>
     <th></th>
   </tr>
 
@@ -17,17 +17,17 @@
   <tr>
     <td><%=h order.price %></td>
     <td><%=h order.mva %></td>
-    <td><%=h order.order_date %></td>
-    <td><%=h order.requested_delivery_date %></td>
+    <td><%=h l(order.order_date) %></td>
+    <td><%=h l(order.requested_delivery_date) %></td>
     <td><%=h order.seller_id %></td>
     <td><%=h order.customer_id %></td>
     <td><%=h order.delivery_address_id %></td>
     <td><%=h order.transport_id %></td>
 
     <td>
-      <%= link_to 'Show', order %>
-      <%= link_to 'Edit', edit_order_path(order) %>
-      <%= link_to 'Destroy', order, :confirm => 'Are you sure?', :method => :delete %>
+      <%= link_to t(:show, :scope => :orders), order %>
+      <%= link_to t(:edit, :scope => :orders), edit_order_path(order) %>
+      <%= link_to t(:destroy, :scope => :orders), order, :confirm => t(:confirm_destroy, :scope => :orders, :ordrenummer => order.id), :method => :delete %>
     </td>
   </tr>
 <% end %>
@@ -35,4 +35,4 @@
 
 <br />
 
-<%= link_to 'New order', new_order_path %>
+<%= link_to t(:new_order, :scope => :orders), new_order_path %>

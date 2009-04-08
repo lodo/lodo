@@ -1,22 +1,22 @@
-<h1>Listing bills</h1>
+<h1><%= t(:listing_bills, :scope => :bills) -%></h1>
 
 <table>
   <tr>
-    <th>Delivery date</th>
-    <th>Billing date</th>
+    <th><%= t(:delivery_date, :scope => :bills) -%></th>
+    <th><%= t(:billing_date, :scope => :bills) -%></th>
   </tr>
 
 <% for bill in @bills %>
   <tr>
-    <td><%=h bill.delivery_date %></td>
-    <td><%=h bill.billing_date %></td>
-    <td><%= link_to 'Show', bill %></td>
-    <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-    <td><%= link_to 'Destroy', bill, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%=h l(bill.delivery_date) %></td>
+    <td><%=h l(bill.billing_date) %></td>
+    <td><%= link_to t(:show, :scope => :bills), bill %></td>
+    <td><%= link_to t(:edit, :scope => :bills), edit_bill_path(bill) %></td>
+    <td><%= link_to t(:destroy, :scope => :bills), bill, :confirm => t(:confirm_destroy, :scope => :bills, :number => bill.id), :method => :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New bill', new_bill_path %>
+<%= link_to t(:new_bill, :scope => :bills), new_bill_path %>
