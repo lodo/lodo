@@ -239,9 +239,27 @@
     back: Tilbake
     editing_product: Rediger produkt
     update: Lagre endringer
-
-
-
-
+  orders:
+    listing_orders: Viser ordre
+    price: Pris
+    vat: Mva
+    order_date: Ordredato
+    requested_delivery_date: Ønsket leveringsdato
+    customer: Kunde
+    delivery_address: Leveringsadresse
+    transport: Transport
+    new_order: Ny ordre
+    seller: Selger
+    product: Produkt
+    unit_price: Enhetspris
+    amount: Antall
+    discount: Rabatt
+    total_price: Sum
+    add_product: Legg til produkt
+    save: Lagre
+    back: Tilbake
+    show: Vis
+    edit: Rediger
+    editing_order: Redigerer ordre
 
 

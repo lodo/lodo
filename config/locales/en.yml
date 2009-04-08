@@ -172,6 +172,28 @@ en:
     back: Back
     editing_product: Editing product
     update: Update
+  orders:
+    listing_orders: Listing orders
+    price: Prce
+    vat: VAT
+    order_date: Order date
+    requested_delivery_date: Requested delivery date
+    customer: Customer
+    delivery_address: Delivery address
+    transport: Transport
+    new_order: New order
+    seller: Seller
+    product: Product
+    unit_price: Unit price
+    amount: Amount
+    discount: Discount
+    total_price: Total price
+    add_product: Add product
+    save: Save
+    back: Back
+    show: Show
+    edit: Edit
+    editing_order: Edit order
 
 
 
