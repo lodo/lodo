@@ -1,12 +1,17 @@
 Återstående punkter
 
+Company:
+* All accounts vanish on update
+
 Bilag:
 * Val av projekt/avdelning
+* Horribly broken (due to translation?)
 
 Order:
 * Kund skall vara reskontra
 * Adress skall vara adressfælt
 * Sæljare/transport skall vara avdelning? Reskontra? Eller vad?
+ - Selger er alltid @me.current_company
 
 Faktura:
 * Lagring (Egil)
