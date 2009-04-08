@@ -90,12 +90,6 @@ en:
     new_ledger: "New ledger"
     ledger_bank_number: "Bank number"
     foreign_bank_number: "Foreign bank number"
-    address: "Address"
-    street1: "Street 1"
-    street2: "Street 2"
-    postal_code: "Postal code"
-    town: "Town"
-    country: "Country"
     net_bank: "Net bank"
     comment: "Comment"
   vat:
@@ -142,7 +136,27 @@ en:
     text: "Tekst"
     save: "Lagre"
     editing_journals: "Editing journal entry"
-
-
-
+  companies:
+    listing_companies: "Listing companies"
+    name: "Name"
+    users: "Users"
+    organization_number: "Org. number"
+    address: "Address"
+    show: "Show"
+    edit: "Edit"
+    destroy: "Destroy"
+    new_company: "New company"
+    destroy_confirmation: "Confirm deleting the company {{name}}"
+    back: "Back"
+    editing_company: "Editing company"
+    save: "Save"
+    accounts: "Chart of accounts"
+  address:
+    address: "Address"
+    name: Name
+    street1: Street 1
+    street2: Street 2
+    postal_code: Zip
+    town: City
+    country: Country
 

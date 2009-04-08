@@ -80,30 +80,30 @@
 
 <div id="addresses" style="float: left;">
   
-  <h4><%= t(:address, :scope => :accounts) -%></h4>
+  <h4><%= t(:address, :scope => :address) -%></h4>
   <% f.fields_for :address do |a| %>
   <p>
-    <%= a.label :name, t(:name, :scope => :accounts)%><br />
+    <%= a.label :name, t(:name, :scope => :address)%><br />
     <%= a.text_field :name %>
   </p>
   <p>
-    <%= a.label :street1, t(:street1, :scope => :accounts)%><br />
+    <%= a.label :street1, t(:street1, :scope => :address)%><br />
     <%= a.text_field :street1 %>
   </p>
   <p>
-    <%= a.label :street2, t(:street2, :scope => :accounts)%><br />
+    <%= a.label :street2, t(:street2, :scope => :address)%><br />
     <%= a.text_field :street2 %>
   </p>
   <p>
-    <%= a.label :postal_code, t(:postal_code, :scope => :accounts)%><br />
+    <%= a.label :postal_code, t(:postal_code, :scope => :address)%><br />
     <%= a.text_field :postal_code %>
   </p>
   <p>
-    <%= a.label :town, t(:town, :scope => :accounts)%><br />
+    <%= a.label :town, t(:town, :scope => :address)%><br />
       <%= a.text_field :town %>
   </p>
   <p>
-    <%= a.label :country, t(:country, :scope => :accounts)%><br />
+    <%= a.label :country, t(:country, :scope => :address)%><br />
     <%= a.text_field :country %>
   </p>
   <% end %>

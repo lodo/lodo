@@ -90,8 +90,8 @@
         less_than_or_equal_to: "må være mindre enn eller lik {{count}}"
         odd: "må være oddetall"
         even: "må være partall"
-      # models:
-      # attributes:
+    models:
+    attributes:
   layout:
     user_administration: "Brukeradministrasjon"
     chart_of_accounts: "Kontoplan"
@@ -157,12 +157,6 @@
     new_ledger: "Ny reskontro"
     ledger_bank_number: "Bankkonto"
     foreign_bank_number: "Utenlandsk bankkonto?"
-    address: "Adresse"
-    street1: "Gate 1"
-    street2: "Gate 2"
-    postal_code: "Postnummer"
-    town: "Sted"
-    country: "Land"
     net_bank: "Net bank?"
     comment: "Beskrivelse"
   vat:
@@ -208,8 +202,28 @@
     invoice: "Faktura?"
     text: "Tekst"
     save: "Lagre"
-    editing_journal: "Redigerer bilag"
-
-
-
+    editing_journal: "Rediger bilag"
+  companies:
+    listing_companies: "Viser firmaer"
+    name: "Navn"
+    users: "Brukere"
+    organization_number: "Org. nummer"
+    address: "Adresse"
+    show: "Vis"
+    edit: "Rediger"
+    destroy: "Slett"
+    new_company: "Nytt firma"
+    destroy_confirmation: "Bekreft sletting av firmaet {{name}}"
+    back: "Tilbake"
+    editing_company: "Rediger firma"
+    save: "Lagre"
+    accounts: "Kontoplan"
+  address:
+    address: "Adresse"
+    name: Navn
+    street1: Adresse 1
+    street2: Adresse 2
+    postal_code: Postnummer
+    town: Sted
+    country: Land
 
