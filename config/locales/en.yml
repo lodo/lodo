@@ -194,6 +194,35 @@ en:
     show: Show
     edit: Edit
     editing_order: Edit order
+  bills:
+    listing_bills: Listing bills
+    delivery_date: Delivery date
+    billing_date: Billing date
+    new_bill: New bill
+    show: Show
+    back: Back
+    edit: Edit
+    destroy: Delete
+    confirm_destroy: Confirm deleting bill {{number}}
+    editing_bill: Editing bill
+    order: Order
+    products: Products
+    product: Product
+    unit_price: Unit price
+    remaining: Reminder
+    amount: Amount
+    discount: Discount
+    total_price: Total price
+    add_order: Add order
+    create: Create
+    total_for_this_order: Total for this order
+    total_for_all_orders: Total for all orders
+    total: Total
+
+
+
+
+
 
 
 

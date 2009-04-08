@@ -261,5 +261,32 @@
     show: Vis
     edit: Rediger
     editing_order: Redigerer ordre
+  bills:
+    listing_bills: Viser fakturaer
+    delivery_date: Leveringsdato
+    billing_date: Fakturadato
+    new_bill: Ny faktura
+    show: Vis
+    back: Tilbake
+    edit: Rediger
+    destroy: Slett
+    confirm_destroy: Bekreft sletting av faktura {{number}}
+    editing_bill: Redigerer faktura
+    order: Ordre
+    products: Produkter
+    product: Produkt
+    unit_price: Pr stk
+    remaining: Rest
+    amount: Antall
+    discount: Rabatt
+    total_price: Totalpris
+    add_order: Legg til ordre
+    create: Opprett
+    total_for_this_order: Total for denne ordren
+    total_for_all_orders: Total for alle ordre
+    total: Total
+
+
+
 
 
