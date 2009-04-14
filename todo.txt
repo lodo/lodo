@@ -5,16 +5,22 @@ Company:
 
 Bilag:
 * Val av projekt/avdelning
-* Horribly broken (due to translation?)
+* Broken when (only) VAT is checked
 
 Order:
 * Kund skall vara reskontra
 * Adress skall vara adressfælt
 * Sæljare/transport skall vara avdelning? Reskontra? Eller vad?
- - Selger er alltid @me.current_company
+ - Må alltid ha me en binding til @me.current_company
+   - men holder det, eller skal vi også ha opplysninger om
+     individet som gjør et salg, e.g. kobling til employees
+   - eller kanskje et tekstfelt?
 
 Faktura:
 * Lagring (Egil)
+  - Ved lagring opprettes et bilag for salget, og faktura får fakturanummer
+    - Hvordan beregnes mva for en fakturalinje? Mulig å velge på linjene,
+      eller (kun?) avhengig av produkt..?
 * Kostnadsberækning (Egil)
 
 Generellt:
