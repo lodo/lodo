@@ -23,8 +23,7 @@ Preliminary feature list for the next milestone:
 
 ## Community
   * Redmine: <https://projects.freecode.no/projects/show/lodo-ng>
-    * I don't think the above is public. We might move issue tracking to lighthouse, trac.lodo.no or somewhere else..?
-  * Source: github.com, <http://github.com/inymoen/lodo/tree/master> -- Move to github: lodo/lodo?
+  * Source: <https://projects.freecode.no/git/lodo.git>, <http://github.com/inymoen/lodo/tree/master>
 
 ## Contributors
   * Funding and requirements: [Arnt Telhaug](mailto:arnt@telhaug.no), <http://www.lodo.no/>
