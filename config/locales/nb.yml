@@ -275,6 +275,7 @@
     show: Vis
     edit: Rediger
     editing_order: Redigerer ordre
+    destroy: Slett
   bills:
     listing_bills: Viser fakturaer
     delivery_date: Leveringsdato
