@@ -1,30 +1,32 @@
-= Lodo
-Lodo is a web based double entry accounting application, built on the Ruby&nbsp;on&nbsp;Rails[http://rubyonrails.org/] framework.
+# Lodo
+Lodo is a web based double entry accounting application, built on the [Ruby on Rails](http://rubyonrails.org/) framework.
 It is open source, released under AGPLv3.
 
-== Project status
+## Project status
 We're currently finishing up the first milestone/deliverable. A second development cycle is required to add some essential features before we consider it ready for experimental use, a schedule for this phase is still TBD.
 
-== Features
+## Features
 The initial release aims to deliver these features:
+
   * Chart of accounts, with abstract ledger support which should cover AR, AP and salary ledgers
   * General ledger
   * Orders and billing
   * Support for multiple users and tenants. Seems like proper access control didn't make it into this version
 
-=== Upcoming features
+### Upcoming features
 Preliminary feature list for the next milestone:
+
   * Reporting
   * Finish up user administration and access control
   * Salaries
   * A test suite
 
-== Community
+## Community
   * Redmine: https://projects.freecode.no/projects/show/lodo-ng
     * I don't think the above is public. We might move issue tracking to lighthouse, trac.lodo.no or somewhere else..?
   * Source: github.com, http://github.com/inymoen/lodo/tree/master -- Move to github; lodo/lodo?
 
-== Contributors
+## Contributors
   * Funding and requirements: Arnt Telhaug, http://www.lodo.no/
   * Development by FreeCode, http://freecode.no/
   * Ivar Nymoen, employee at lodo.no.
