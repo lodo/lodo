@@ -22,12 +22,12 @@ Preliminary feature list for the next milestone:
   * A test suite
 
 ## Community
-  * Redmine: https://projects.freecode.no/projects/show/lodo-ng
+  * Redmine: <https://projects.freecode.no/projects/show/lodo-ng>
     * I don't think the above is public. We might move issue tracking to lighthouse, trac.lodo.no or somewhere else..?
-  * Source: github.com, http://github.com/inymoen/lodo/tree/master -- Move to github; lodo/lodo?
+  * Source: github.com, <http://github.com/inymoen/lodo/tree/master> -- Move to github: lodo/lodo?
 
 ## Contributors
-  * Funding and requirements: Arnt Telhaug, http://www.lodo.no/
-  * Development by FreeCode, http://freecode.no/
+  * Funding and requirements: [Arnt Telhaug](mailto:arnt@telhaug.no), <http://www.lodo.no/>
+  * Development and project management by FreeCode, <http://freecode.no/>
   * Ivar Nymoen, employee at lodo.no.
 
