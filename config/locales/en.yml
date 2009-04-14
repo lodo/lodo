@@ -208,6 +208,7 @@ en:
     show: Show
     edit: Edit
     editing_order: Edit order
+    destroy: Delete
   bills:
     listing_bills: Listing bills
     delivery_date: Delivery date
