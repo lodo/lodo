@@ -24,7 +24,6 @@ class ApplicationController < ActionController::Base
 
   def login_required
     ok = true
-    #print "LALALALA", session[:user].current_company,"\n"
     
     if session[:user_id]
       ok &= real_user = User.find(session[:user_id]) 

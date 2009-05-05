@@ -132,7 +132,12 @@ class UsersController < ApplicationController
 
   def change_current_company
     @me.current_company = Company.find(params[:current_company])
-    @me.save
+
+    if not @me.save
+print @me.to_json
+      print "Unable to save current company: " + @me.errors.to_json
+      flash[:warning] = "Unable to save current company: " + @me.errors.to_json
+    end
     respond_to do |format|
       format.html { redirect_to(:back) }
     end

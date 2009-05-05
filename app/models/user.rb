@@ -1,16 +1,22 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  validates_length_of :login, :within => 3..40
-  validates_length_of :password, :within => 5..40
-  validates_presence_of :login, :email, :password, :salt
-  validates_uniqueness_of :login
+  validate :password_length
   validates_confirmation_of :password
+  validates_length_of :login, :within => 3..40
+  validates_presence_of :login, :email, :hashed_password, :salt
+  validates_uniqueness_of :login
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, :message => "Invalid email"  
   attr_protected :id, :salt
   has_and_belongs_to_many :companies
   belongs_to :current_company, :class_name => 'Company'
   
+  def password_length
+    if not @password.nil? and @password.length < 6
+      errors.add(:password, "must be at least 5 characters long")
+    end
+  end
+
   def password=(pass)
     @password=pass
     if pass
