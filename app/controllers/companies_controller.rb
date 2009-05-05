@@ -79,11 +79,6 @@ class CompaniesController < ApplicationController
   def update
 
     respond_to do |format|
-#      @company.users = Users.find(params[:users])
-      params[:company][:accounts] = []
-      #print "TJOHO", params.to_json, "\n"
-      
-#      params[:company][:users] = User.find(params[:company][:users])
       if @company.update_attributes(params[:company]) && @company.address.update_attributes(params[:address])
         flash[:notice] = 'Company was successfully updated.'
         format.html { redirect_to(@company) }
