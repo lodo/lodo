@@ -27,8 +27,9 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
     @order = Order.new
-    @products_all = Product.find(@me.current_company.products, :order => 'name')
-    
+    @products_all = (Account.find(@me.current_company.accounts, :include => [ :products ]
+			          ).collect { |account| account.products}).flatten
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @order }
@@ -38,7 +39,8 @@ class OrdersController < ApplicationController
   # GET /orders/1/edit
   def edit
     @order = Order.find(params[:id])
-    @products_all = Product.find(@me.current_company.products, :order => 'name')
+    @products_all = (Account.find(@me.current_company.accounts, :include => [ :products ]
+			          ).collect { |account| account.products}).flatten
   end
   
   # POST /orders
