@@ -1,5 +1,6 @@
 class Account < ActiveRecord::Base
   has_many :ledgers, :dependent => :destroy, :order => "lower(name)"
+  has_many :products
   belongs_to :company
   belongs_to :activatable
   belongs_to :vat_account

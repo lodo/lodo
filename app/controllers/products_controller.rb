@@ -4,8 +4,11 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.xml
   def index
+    puts Account.find(@me.current_company.accounts).to_json
 
-    @products = Product.find(@me.current_company.products, :order => 'name')
+
+    @products = (Account.find(@me.current_company.accounts, :include => [ :products ]
+                             ).collect { |account| account.products}).flatten
 
     respond_to do |format|
       format.html # index.html.erb
@@ -44,7 +47,8 @@ class ProductsController < ApplicationController
   # POST /products.xml
   def create
     @product = Product.new(params[:product])
-    @product.company_id = @me.current_company.id
+puts "ZZZZZZZZZZZZZZZZZZZZZZZZ"
+puts params[:product].to_json
     respond_to do |format|
       if @product.save
         flash[:notice] = 'Product was successfully created.'

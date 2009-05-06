@@ -4,6 +4,7 @@
   <tr>
     <th>Price</th>
     <th>Name</th>
+    <th>Account</th>
     <th></th>
   </tr>
   
@@ -11,6 +12,7 @@
   <tr>
     <td><%=h product.price %></td>
     <td><%=h product.name %></td>
+    <td><%=h product.account.name %></td>
     <td>
       <%= link_to 'Show', product %>
       <%= link_to 'Edit', edit_product_path(product) %>

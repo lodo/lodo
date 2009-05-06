@@ -1,6 +1,5 @@
 class Company < ActiveRecord::Base
   has_many :accounts
-  has_many :products
   has_many :orders
   has_many :bills
   has_many :vat_accounts

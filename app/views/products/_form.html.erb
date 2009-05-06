@@ -1,0 +1,19 @@
+<% form_for(@product) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :account_id %><br />
+    <%= f.select :account_id, @me.current_company.accounts.collect {|a| [ a.name, a.id ] }, {}, {} %>
+  </p>
+  <p>
+    <%= f.submit "Save" %>
+  </p>
+<% end %>
