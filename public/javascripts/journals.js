@@ -61,8 +61,16 @@ var journals = {
 	journals.sumColumn(2);
 	for (var i=0; i < LODO.journalLines; i++) {
 	    var account = journals.getAccount($('#dynfield_0_'+i)[0].value);
-	    var vat_account = account.vat_account.target_account;
-	    
+	    var vat_account;
+            var vat_account_id;
+            if (account.vat_account != undefined) {
+                vat_account_id = account.vat_account.id;
+                vat_account = account.vat_account.target_account;
+            } else {
+                vat_account_id = '';
+                vat_account = {'name': '&lt;No VAT account&gt;', 'overridable': 0, 'id': ''};  
+             }
+
 	    $('#vat1_account_'+i)[0].innerHTML = journals.getAccount($('#dynfield_0_'+i)[0].value).name;
 	    $('#vat2_account_'+i)[0].innerHTML = vat_account.name;
 	    
@@ -84,7 +92,7 @@ var journals = {
 	    var vatAmount = toMoney(vatFactor * baseAmount);
 
 	    var vatAccountInput = $('#vat_account_'+i)[0];
-	    vatAccountInput.value = account.vat_account.id;
+	    vatAccountInput.value = vat_account_id;
 	    
 	    if (debet > 0) {
 		debet1.innerHTML = vatAmount;
@@ -127,8 +135,12 @@ var journals = {
     setDefaultVat: function (line) 
     {
 	var account = journals.getAccount($('#dynfield_0_'+line)[0].value);
-	
-	$('#vatFactor_'+line)[0].value = account.vat_account.percentage;
+        var percentage = 0;
+
+        if (account.vat_account != undefined)
+            percentage = account.vat_account.percentage;
+
+	$('#vatFactor_'+line)[0].value = percentage;
 
     },
 

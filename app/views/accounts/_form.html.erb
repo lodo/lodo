@@ -23,7 +23,7 @@
 </p>
 <p>
   <%= f.label :vat_account_id %><br />
-  <%= f.select :vat_account_id, @me.current_company.vat_accounts.collect {|p| [ p.target_account.name, p.id ] }.sort %>
+  <%= f.select :vat_account_id, [['<No VAT account>', nil]] + @me.current_company.vat_accounts.collect {|p| [ p.target_account.name, p.id ] }.sort %>
 </p>
 <p>
   <%= f.label :comments %><br />
