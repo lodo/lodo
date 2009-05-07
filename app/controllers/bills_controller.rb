@@ -1,6 +1,6 @@
 class BillsController < ApplicationController
   before_filter :company_required
-  
+
   # GET /bills
   # GET /bills.xml
   def index
