@@ -19,10 +19,10 @@
     <td><%=h order.mva %></td>
     <td><%=h order.order_date %></td>
     <td><%=h order.requested_delivery_date %></td>
-    <td><%=h order.seller_id %></td>
-    <td><%=h order.customer_id %></td>
-    <td><%=h order.delivery_address_id %></td>
-    <td><%=h order.transport_id %></td>
+    <td><%=h order.seller.name %></td>
+    <td><%=h order.customer.name %></td>
+    <td><%= render :partial => "addresses/show", :locals => { :address => order.delivery_address } %></td>
+    <td><%=h order.transport.name %></td>
 
     <td>
       <%= link_to 'Show', order %>

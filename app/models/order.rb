@@ -1,7 +1,7 @@
 class Order < ActiveRecord::Base
   belongs_to :seller, :class_name => 'Company'
   belongs_to :customer, :class_name => 'Ledger'
-  belongs_to :delivery_address
+  belongs_to :delivery_address, :class_name => 'Address'
   belongs_to :transport, :class_name => 'Company'
   belongs_to :company, :class_name => 'Company'
   has_many :order_items

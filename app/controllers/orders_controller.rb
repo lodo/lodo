@@ -27,6 +27,7 @@ class OrdersController < ApplicationController
   # GET /orders/new.xml
   def new
     @order = Order.new
+    @order.delivery_address = Address.new
     @products_all = (Account.find(@me.current_company.accounts, :include => [ :products ]
 			          ).collect { |account| account.products}).flatten
 
@@ -47,11 +48,13 @@ class OrdersController < ApplicationController
   # POST /orders.xml
   def create
     @order = Order.new(params[:order])
+    @order.delivery_address = Address.new(params[:address])
     @order.company_id = @me.current_company.id
     respond_to do |format|
       Order.transaction do
         begin
           @order.save!
+          @order.delivery_address.save!
           params[:products].each {
             |key, value|
 	    item = OrderItem.new(value)
@@ -83,6 +86,7 @@ class OrdersController < ApplicationController
         begin
           flash[:notice] = 'Save order.'
           @order.update_attributes(params[:order]) or raise ActiveRecord::Rollback
+          @order.delivery_address.update_attributes(params[:address]) or raise ActiveRecord::Rollback
 
           params[:products].each {
             |key, value|

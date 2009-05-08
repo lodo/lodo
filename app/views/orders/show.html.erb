@@ -58,22 +58,22 @@
 
 <p>
   <b>Seller:</b>
-  <%=h @order.seller_id %>
+  <%=h @order.seller.name %>
 </p>
 
 <p>
   <b>Customer:</b>
-  <%=h @order.customer_id %>
+  <%=h @order.customer.name %>
 </p>
 
 <p>
   <b>Delivery address:</b>
-  <%=h @order.delivery_address_id %>
+  <%= render :partial => "addresses/show", :locals => { :address => @order.delivery_address } %>
 </p>
 
 <p>
   <b>Transport:</b>
-  <%=h @order.transport_id %>
+  <%=h @order.transport.name %>
 </p>
 
 

@@ -60,8 +60,8 @@
     <%= f.select :customer_id, (Account.find(@me.current_company.accounts).collect { |a| a.ledgers }).flatten.collect {|p| [ p.name, p.id ] } %>
   </p>
   <p>
-    <%= f.label :delivery_address_id %><br />
-    <%= f.text_field :delivery_address_id %>
+    <b>Delivery address:</b>
+    <%= render :partial => "addresses/form", :locals => { :address => @order.delivery_address } %>
   </p>
   <p>
     <%= f.label :transport_id %><br />
