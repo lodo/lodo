@@ -1,11 +1,29 @@
 class OrdersController < ApplicationController
   before_filter :company_required
+  before_filter :load_order, :only => [:show, :edit, :update, :destroy]
+  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+
+  def load_order
+    @order = Order.find(params[:id])
+  end
+
+  def right_company
+    if @me.companies.include? @order.company
+      @me.current_company = @order.company
+      return true
+    end
+
+    flash[:notice]='You can only manage your own orders. Go away.'
+    redirect_to :action => "index"
+    return false 
+  end
+
+
 
   # GET /orders
   # GET /orders.xml
   def index
     @orders = Order.find(@me.current_company.orders, :order => 'updated_at')
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @orders }
@@ -15,8 +33,6 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.xml
   def show
-    @order = Order.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @order }
@@ -39,7 +55,6 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
-    @order = Order.find(params[:id])
     @products_all = (Account.find(@me.current_company.accounts, :include => [ :products ]
 			          ).collect { |account| account.products}).flatten
   end
@@ -79,8 +94,6 @@ class OrdersController < ApplicationController
   # PUT /orders/1
   # PUT /orders/1.xml
   def update
-    @order = Order.find(params[:id])
-
     respond_to do |format|
       Order.transaction do
         begin
@@ -123,7 +136,6 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.xml
   def destroy
-    @order = Order.find(params[:id])
     @order.destroy
 
     respond_to do |format|
