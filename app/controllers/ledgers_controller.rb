@@ -1,4 +1,5 @@
 class LedgersController < ApplicationController
+  before_filter :company_required
   
   def create
     @ledger = Ledger.new(params[:ledger])
