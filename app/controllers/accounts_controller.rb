@@ -48,7 +48,7 @@ class AccountsController < ApplicationController
   def create
     @account = Account.new(params[:account])
     # Set the company manually
-    @account.company_id = @me.current_company.id
+    @account.company = @me.current_company
     respond_to do |format|
       if @account.save
         flash[:notice] = 'Account was successfully created.'
