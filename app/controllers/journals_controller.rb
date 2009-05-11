@@ -1,8 +1,24 @@
 class JournalsController < ApplicationController
   before_filter :company_required
-  before_filter :find_journal, :only => [:update, :show, :destroy, :edit]
   before_filter :find_accounts_all, :only => [:new, :edit]
-  
+  before_filter :load_journal, :only => [:show, :edit, :update, :destroy]
+  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+
+  def load_journal
+    @journal = Journal.find(params[:id])
+  end
+
+  def right_company
+    if @me.companies.include? @journal.company
+      @me.current_company = @journal.company
+      return true
+    end
+
+    flash[:notice]='You can only manage your own journals. Go away.'
+    redirect_to :action => "index"
+    return false 
+  end
+
   # GET /journals
   # GET /journals.xml
   def index
@@ -41,13 +57,11 @@ class JournalsController < ApplicationController
   # POST /journals
   # POST /journals.xml
   def create
- 
-
     respond_to do |format|
       Journal.transaction do
         begin
           @journal = Journal.new(params[:journal])
-          @journal.company_id = @me.current_company.id
+          @journal.company = @me.current_company
           @journal.save or raise ActiveRecord::Rollback
           params[:journal_operations].each {
             |key, value|
@@ -121,10 +135,6 @@ class JournalsController < ApplicationController
   end
 
   private 
-  
-  def find_journal
-    @journal = Journal.find(params[:id])
-  end
   
   def find_accounts_all
     @accounts_all =

@@ -1,4 +1,24 @@
 class VatAccountsController < ApplicationController
+  before_filter :company_required
+  before_filter :load_vat_account, :only => [:show, :edit, :update, :destroy]
+  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+
+  def load_vat_account
+    @vat_account = VatAccount.find(params[:id])
+  end
+
+  def right_company
+    if @me.companies.include? @vat_account.company
+      @me.current_company = @vat_account.company
+      return true
+    end
+
+    flash[:notice]='You can only manage your own vat accounts. Go away.'
+    redirect_to :action => "index"
+    return false 
+  end
+
+
   # GET /vat_accounts
   # GET /vat_accounts.xml
   def index
@@ -13,8 +33,6 @@ class VatAccountsController < ApplicationController
   # GET /vat_accounts/1
   # GET /vat_accounts/1.xml
   def show
-    @vat_account = VatAccount.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @vat_account }
@@ -34,7 +52,6 @@ class VatAccountsController < ApplicationController
 
   # GET /vat_accounts/1/edit
   def edit
-    @vat_account = VatAccount.find(params[:id])
   end
 
   # POST /vat_accounts
@@ -58,8 +75,6 @@ class VatAccountsController < ApplicationController
   # PUT /vat_accounts/1
   # PUT /vat_accounts/1.xml
   def update
-    @vat_account = VatAccount.find(params[:id])
-
     respond_to do |format|
       if @vat_account.update_attributes(params[:vat_account])
         flash[:notice] = 'VatAccount was successfully updated.'
@@ -75,7 +90,6 @@ class VatAccountsController < ApplicationController
   # DELETE /vat_accounts/1
   # DELETE /vat_accounts/1.xml
   def destroy
-    @vat_account = VatAccount.find(params[:id])
     @vat_account.destroy
 
     respond_to do |format|

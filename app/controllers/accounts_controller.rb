@@ -4,6 +4,24 @@
 
 class AccountsController < ApplicationController
   before_filter :company_required
+  before_filter :load_account, :only => [:show, :edit, :update, :destroy]
+  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+
+  def load_account
+    @account = Account.find(params[:id], :include => :ledgers)
+  end
+
+  def right_company
+    if @me.companies.include? @account.company
+      @me.current_company = @account.company
+      return true
+    end
+
+    flash[:notice]='You can only manage your own accounts. Go away.'
+    redirect_to :action => "index"
+    return false 
+  end
+
 
   # GET /accounts
   # GET /accounts.xml
@@ -19,8 +37,6 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.xml
   def show
-    @account = Account.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @account }
@@ -40,7 +56,6 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1/edit
   def edit
-    @account = Account.find(params[:id], :include => :ledgers)
   end
   
   # POST /accounts
@@ -64,8 +79,6 @@ class AccountsController < ApplicationController
   # PUT /accounts/1
   # PUT /accounts/1.xml
   def update
-    @account = Account.find(params[:id])
-
     respond_to do |format|
       if @account.update_attributes(params[:account])
         flash[:notice] = 'Account was successfully updated.'
@@ -81,7 +94,6 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.xml
   def destroy
-    @account = Account.find(params[:id])
     @account.destroy
     
     respond_to do |format|

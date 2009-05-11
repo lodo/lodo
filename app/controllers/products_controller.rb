@@ -1,12 +1,27 @@
 class ProductsController < ApplicationController
   before_filter :company_required
+  before_filter :load_product, :only => [:show, :edit, :update, :destroy]
+  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+
+  def load_product
+    @product = Product.find(params[:id])
+  end
+
+  def right_company
+    if @me.companies.include? @product.account.company
+      @me.current_company = @product.account.company
+      return true
+    end
+
+    flash[:notice]='You can only manage your own products. Go away.'
+    redirect_to :action => "index"
+    return false 
+  end
+
 
   # GET /products
   # GET /products.xml
   def index
-    puts Account.find(@me.current_company.accounts).to_json
-
-
     @products = (Account.find(@me.current_company.accounts, :include => [ :products ]
                              ).collect { |account| account.products}).flatten
 
@@ -19,8 +34,6 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.xml
   def show
-    @product = Product.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @product }
@@ -40,15 +53,12 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @product = Product.find(params[:id])
   end
 
   # POST /products
   # POST /products.xml
   def create
     @product = Product.new(params[:product])
-puts "ZZZZZZZZZZZZZZZZZZZZZZZZ"
-puts params[:product].to_json
     respond_to do |format|
       if @product.save
         flash[:notice] = 'Product was successfully created.'
@@ -64,8 +74,6 @@ puts params[:product].to_json
   # PUT /products/1
   # PUT /products/1.xml
   def update
-    @product = Product.find(params[:id])
-
     respond_to do |format|
       if @product.update_attributes(params[:product])
         flash[:notice] = 'Product was successfully updated.'
@@ -81,7 +89,6 @@ puts params[:product].to_json
   # DELETE /products/1
   # DELETE /products/1.xml
   def destroy
-    @product = Product.find(params[:id])
     @product.destroy
 
     respond_to do |format|

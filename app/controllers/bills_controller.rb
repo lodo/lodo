@@ -1,5 +1,24 @@
 class BillsController < ApplicationController
   before_filter :company_required
+  before_filter :load_bill, :only => [:show, :edit, :update, :destroy]
+  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+
+  def load_bill
+    @bill = Bill.find(params[:id])
+  end
+
+  def right_company
+    if @me.companies.include? @bill.company
+      @me.current_company = @bill.company
+      return true
+    end
+
+    flash[:notice]='You can only manage your own bills. Go away.'
+    redirect_to :action => "index"
+    return false 
+  end
+
+
   
   # GET /bills
   # GET /bills.xml
@@ -15,8 +34,6 @@ class BillsController < ApplicationController
   # GET /bills/1
   # GET /bills/1.xml
   def show
-    @bill = Bill.find(params[:id])
-    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @bill }
@@ -67,7 +84,6 @@ order by
   # GET /bills/1/edit
   def edit
     get_all_orders
-    @bill = Bill.find(params[:id])
   end
 
   def post_to_model(post)
@@ -129,8 +145,6 @@ order by
   # PUT /bills/1
   # PUT /bills/1.xml
   def update
-    @bill = Bill.find(params[:id])
-
     respond_to do |format|
       if @bill.update_attributes(params[:bill])
         flash[:notice] = 'Bill was successfully updated.'
@@ -146,7 +160,6 @@ order by
   # DELETE /bills/1
   # DELETE /bills/1.xml
   def destroy
-    @bill = Bill.find(params[:id])
     @bill.destroy
 
     respond_to do |format|

@@ -1,5 +1,26 @@
 class LedgersController < ApplicationController
   before_filter :company_required
+  before_filter :load_ledger, :only => [:show, :edit, :update, :destroy]
+  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+
+  def load_ledger
+    @ledger = Ledger.find(params[:id])
+
+    if params[:account_id] && params[:account_id].to_i != 0
+      raise "account_id incorrect" if @ledger.account_id != params[:account_id].to_i
+    end
+  end
+
+  def right_company
+    if @me.companies.include? @ledger.company
+      @me.current_company = @ledger.company
+      return true
+    end
+
+    flash[:notice]='You can only manage your own ledgers. Go away.'
+    redirect_to :action => "index"
+    return false 
+  end
   
   def create
     @ledger = Ledger.new(params[:ledger])
@@ -18,8 +39,6 @@ class LedgersController < ApplicationController
   end
 
   def update
-    @ledger = Ledger.find(params[:id])
-    raise "account does not belong to active company" if @ledger.account.company != @me.current_company
     @ledger.update_attributes!(params[:ledger])
     respond_to do |format|
       format.html do
@@ -48,15 +67,6 @@ class LedgersController < ApplicationController
   end
 
   def show
-    @ledger = nil
-    if params[:account_id] && params[:account_id].to_i != 0
-      @ledger = Ledger.find(params[:id])
-      raise "account_id incorrect" if @ledger.account_id != params[:account_id].to_i
-      raise "account does not belong to active company" if @ledger.account.company != @me.current_company
-    else
-      @ledger = Ledger.find(params[:id])
-      raise "account does not belong to active company" if @ledger.account.company != @me.current_company
-    end
     respond_to do |format|
       format.json { render :json => @ledger.to_json(:include => [:account,
                                                                  :address,
