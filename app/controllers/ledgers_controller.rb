@@ -12,8 +12,8 @@ class LedgersController < ApplicationController
   end
 
   def right_company
-    if @me.companies.include? @ledger.company
-      @me.current_company = @ledger.company
+    if @me.companies.include? @ledger.account.company
+      @me.current_company = @ledger.account.company
       return true
     end
 
