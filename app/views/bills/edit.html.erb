@@ -3,4 +3,5 @@
 <%= render :partial => "form" %>
 
 <%= link_to t(:show, :scope => :bills), @bill %> |
+<%= link_to "View journal entry", @bill.journal %> |
 <%= link_to t(:back, :scope => :bills), bills_path %>

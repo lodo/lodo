@@ -1,5 +1,5 @@
 class Journal < ActiveRecord::Base
-  has_many :journal_operation
+  has_many :journal_operations, :autosave => true
   belongs_to :company
   belongs_to :bill
 

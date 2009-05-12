@@ -4,7 +4,7 @@
   */
   var LODO = new Object();
   LODO.accountList = <%= @accounts_all.to_json :include => { :vat_account => {:include => {:target_account=>{}}} } %>;
-  LODO.journalOperationList = <%= @journal.journal_operation.to_json %>;
+  LODO.journalOperationList = <%= @journal.journal_operations.to_json %>;
 </script>
 
 <% form_for(@journal) do |f| %>
@@ -23,7 +23,7 @@
   <%= f.date_select :journal_date %>
 </p>
 <p>
-  <button onClick='journals.addAccountLine();' type='button'><%= t(:new_journal_operation, :scope => :journals) -%></button>
+  <button onClick='journals.addAccountLine();' type='button'><%= t(:new_journal_operations, :scope => :journals) -%></button>
   <input type='checkbox' id='vat' onchange='journals.toggleVisibility();'/><label for='vat'><%= t(:vat, :scope => :journals) -%></label>
   <input type='checkbox' id='details' onchange='journals.toggleVisibility();'/><label for='details'><%= t(:details, :scope => :journals) -%></label>
   

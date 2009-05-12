@@ -10,4 +10,5 @@
 
 
 <%= link_to t(:edit, :scope => :bills), edit_bill_path(@bill) %> |
+<%= link_to "View journal entry", @bill.journal %> |
 <%= link_to t(:back, :scope => :bills), bills_path %>
