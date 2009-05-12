@@ -12,7 +12,6 @@
   %>;
   LODO.billItemList = <%= @bill.bill_orders.to_json(
     :include => :bill_items) %>;
-  LODO.billPrice = <%= @bill.price.to_json %>;
 </script>
 
 
@@ -37,11 +36,8 @@
 	<td><%= t(:total_for_this_order, :scope => :bills) -%>:</td>
 	<td id='order_template_unit_price'></td>
 	<td></td>
-	<td><input type='hidden' id='order_template_amount' name='order_template[amount]' value='1' /></td>
-	<td>
-	  <input type='text' id='order_template_discount' name='order_template[discount]' onkeyup="bills.validate();"/>
-	  <input type='hidden' id='order_template_price' name='order_template[price]' name='order_template[price]' value=''/>
-	</td>
+	<td></td>
+	<td></td>
 	<td id='order_template_price_label'>0,00</td>
       </tr>
     </tfoot>
@@ -73,11 +69,8 @@
 	      <td><%= t(:total_for_all_orders, :scope => :bills) -%>:</td>
 	      <td id='bill_unit_price'></td>
 	      <td></td>
-	      <td><input type='hidden' id='bill_amount' value='1' /></td>
-              <td>
-                <input type='text' id='bill_discount' onkeyup="bills.validate();"/>
- 	        <input type='hidden' id='bill_price' name='bill[price]' value=''/>
-              </td>
+	      <td></td>
+              <td></td>
               <td id='bill_price_label'>0,00</td>
             </tr>
           </table>

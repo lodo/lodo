@@ -88,37 +88,43 @@ order by
     bill_model = Hash.new
     post = post.clone()
 
-    ['price',
-     'delivery_date(1i)', 
+    ['delivery_date(1i)', 
      'delivery_date(2i)',
      'delivery_date(3i)',
      'billing_date(1i)',
      'billing_date(2i)',
      'billing_date(3i)'].each do |name|
-     bill_model[name] = post.delete name
+      bill_model[name] = post.delete name
     end
 
-    bill_model['bill_orders'] = []
+    if post.include? 'id'
+      bill_model['id'] = post.delete 'id'
+    end
+
+    bill_model = Bill.create_or_update(bill_model)
+    bill_model.bill_orders.clear
 
     post.values.each do |bill_order_post|
       bill_order_model = Hash.new
       bill_order_model['order_id'] = bill_order_post['order_id']
+      if bill_order_post.include? 'id'
+        bill_order_model['id'] = bill_order_post['id']
+      end
       bill_order_post = bill_order_post['details'].clone()
 
-      bill_order_model['price'] = bill_order_post.delete 'price'
-      bill_order_post.delete 'amount'
-      bill_order_post.delete 'discount'
+      bill_order_model = BillOrder.create_or_update(bill_order_model)
+      bill_model.bill_orders.push bill_order_model
+      bill_order_model.bill_items.clear
 
-      bill_order_model['bill_items'] = bill_order_post.values.map do |item|
+      bill_order_post.values.each do |item|
 	item = item.clone()
-	item.delete 'discount'
-	BillItem.create_or_update(item)
+        item.delete 'discount'
+	item = BillItem.create_or_update(item)
+        bill_order_model.bill_items.push item
       end
-
-      bill_model['bill_orders'].push(BillOrder.create_or_update(bill_order_model))
     end
 
-    Bill.create_or_update(bill_model)
+    bill_model
   end
 
 
@@ -143,8 +149,11 @@ order by
   # PUT /bills/1
   # PUT /bills/1.xml
   def update
+    params[:bill]['id'] = params[:id]
+    @bill = post_to_model params[:bill]
+
     respond_to do |format|
-      if @bill.update_attributes(params[:bill])
+      if @bill.save
         flash[:notice] = 'Bill was successfully updated.'
         format.html { redirect_to(@bill) }
         format.xml  { head :ok }

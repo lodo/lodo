@@ -17,10 +17,15 @@ var bills = {
 	var sum = 0.0;
         var id = $(context)[0].id;
 	for (var i=0; i < $(context)[0].table_lines; i++) {
+            var amount = 1;
+            var discount = 1;
+            if ($i(id + "_" + i + row_prefix + "_discount").length)
+                amount = parseFloatNazi($i(id + "_" + i + row_prefix + "_amount")[0].value);
+            if ($i(id + "_" + i + row_prefix + "_discount").length)
+                discount = (100.0-parseFloatNazi($i(id + "_" + i + row_prefix + "_discount")[0].value)) * 0.01;
 	    var val = (  parseFloatNazi($i(id + "_" + i + row_prefix + "_unit_price")[0].innerHTML)
-                       * parseFloatNazi($i(id + "_" + i + row_prefix + "_amount")[0].value)
-                       * (100.0-parseFloatNazi($i(id + "_" + i + row_prefix + "_discount")[0].value))
-                       * 0.01);
+                       * amount
+                       * discount);
 	    sum += val;
 	    bills.setPrice(i, val, row_prefix, context);
 	}
@@ -30,16 +35,19 @@ var bills = {
 
     setPrice: function(line, value, row_prefix, context) {
         var id = $(context)[0].id;
-	$i(id + "_" + line + row_prefix + '_price')[0].value = toMoney(value);
+        if ($i(id + "_" + line + row_prefix + '_price').length)
+    	    $i(id + "_" + line + row_prefix + '_price')[0].value = value;
 	$i(id + "_" + line + row_prefix + '_price_label')[0].innerHTML = toMoney(value);
     },
 
     setTotalPrice: function(unit_price, context) {
         var id = $(context)[0].id;
-	price = unit_price*(100.0-parseFloatNazi($i(id + '_discount')[0].value))*0.01;
+        var discount = 1;
+        if ($i(id + '_discount').length)
+            discount = (100.0-parseFloatNazi($i(id + '_discount')[0].value))*0.01;
+	price = unit_price*discount;
 	$i(id + '_unit_price')[0].innerHTML = toMoney(unit_price);
 	$i(id + '_price_label')[0].innerHTML = toMoney(price);
-	$i(id + '_price')[0].value = toMoney(price);
     },
 
     eachLine: function(context, suffix, fn) {
@@ -144,13 +152,24 @@ var bills = {
 
     addProduct: function (bill_item, context) {
 	var row = bills.addLine(context);
+        var product = bills.makeText('product', bill_item.order_item.product.name, context);
+        var product_id;
 
-	bills.addCell(row, bills.makeText('product', bill_item.order_item.product.name, context));
+        if (bill_item.id != undefined) {
+	    product_id = document.createElement("input");
+	    product_id.type = "hidden";
+	    product_id.name = bills.getCurrentLineName(context) + "[id]";
+	    product_id.value = bill_item.id;
+	    product.appendChild(product_id);
+        }
+
+	bills.addCell(row, product);
 	bills.addCell(row, bills.makeText('unit_price',  bill_item.order_item.price, context));
 	bills.addCell(row, bills.makeText('remaining', bill_item.order_item.amount - bill_item.order_item.billed, context));
 	bills.addCell(row, bills.makeAmount(bill_item.amount, context));
 	bills.addCell(row, bills.makeDiscount(bill_item.discount, context));
 	bills.addCell(row, bills.makePrice(bill_item.price, bill_item.order_item.id, context));
+
 	stripe();
 	bills.validate();
    },
@@ -200,6 +219,7 @@ var bills = {
                     if (bill_items) {
                         var bill_item = find(function (bill_item) { return bill_item.order_item_id == product_line.order_item.id; },
                                              bill_items);
+                        product_line.id = bill_item.id;
                         product_line.amount = bill_item.amount;
                         product_line.price = bill_item.price;
                         product_line.discount = bills.toDiscount(product_line.price, product_line.order_item.price * product_line.amount);
@@ -227,9 +247,6 @@ var bills = {
 	    cell.appendChild(bill_order_id);
 	}
         details.updateProducts(select.value, bill_order && bill_order.bill_items);
-        if (bill_order) {
-            $i(bills.getCurrentLineId('#bill') + "_details_discount")[0].value = bills.toDiscount(bill_order.price, sum(map(function (bill_item) { return bill_item.price; }, bill_order.bill_items)));
-        }
 
 	stripe();
 	bills.validate();
@@ -247,10 +264,7 @@ var bills = {
 	    bills.addOrder(LODO.billItemList[i].bill_order);
 	}
 
-        if (LODO.billPrice !== null) {
-	    $("#bill_discount")[0].value = bills.toDiscount(LODO.billPrice, parseFloatNazi($("#bill_price")[0].value));
-	    bills.validate();
-        }
+        bills.validate();
     }
 
 }

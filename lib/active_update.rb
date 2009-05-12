@@ -8,6 +8,7 @@ class ActiveRecord::Base
     else
       obj = self.new params
     end
+    return obj
     obj
   end
 end
