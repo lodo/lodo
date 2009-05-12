@@ -12,6 +12,7 @@ class Bill < ActiveRecord::Base
   end
 
   def save
+=begin
     if self.journal.nil?
 
     else
@@ -25,7 +26,7 @@ class Bill < ActiveRecord::Base
     end
     
 
-
+=end
     super
   end
 
