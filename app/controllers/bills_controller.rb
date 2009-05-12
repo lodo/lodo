@@ -18,8 +18,6 @@ class BillsController < ApplicationController
     return false 
   end
 
-
-  
   # GET /bills
   # GET /bills.xml
   def index

@@ -3,6 +3,7 @@ class JournalsController < ApplicationController
   before_filter :find_accounts_all, :only => [:new, :edit]
   before_filter :load_journal, :only => [:show, :edit, :update, :destroy]
   before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+  before_filter :open_required, :only => [:update, :destroy, :edit]  
 
   def load_journal
     @journal = Journal.find(params[:id])
@@ -141,6 +142,15 @@ class JournalsController < ApplicationController
       Account.find(:all, 
                    :conditions => {:company_id => @me.current_company.id}, 
                    :order => :number)
+  end
+
+  def open_required
+    if Journal.find(params[:id]).editable?
+      return true
+    end
+    flash[:notice] = 'Journal is closed'
+    redirect_to :action => "show"
+    return false
   end
   
 end

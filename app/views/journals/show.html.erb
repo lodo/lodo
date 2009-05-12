@@ -47,5 +47,12 @@
   </table>
 </p>
 
-<%= link_to t(:edit, :scope => :journals), edit_journal_path(@journal) %> |
+<% if @journal.editable? %>
+  <%= link_to t(:edit, :scope => :journals), edit_journal_path(@journal) %> |
+<% elsif not @journal.bill.nil? %>
+  <%= link_to 'Show bill', :controller => "bills", :action => "show", :id => @journal.bill.id %>
+  <% if @journal.bill.editable? %>
+    <%= link_to 'Edit bill', :controller => "bills", :action => "edit", :id => @journal.bill.id %>
+  <% end %>
+<% end %>
 <%= link_to t(:back, :scope => :journals), journals_path %>
