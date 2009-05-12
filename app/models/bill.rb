@@ -37,6 +37,6 @@ class Bill < ActiveRecord::Base
   end
 
   def editable?
-    return (not self.closed)
+    return (not self.journal.nil? or not self.journal.closed)
   end
 end
