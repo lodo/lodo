@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  before_filter :set_locale, :login_required
+  before_filter :set_locale_now, :login_required
   
   helper :all # include all helpers, all the time
 
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
 
-  def set_locale
+  def set_locale_now
     I18n.locale = session[:locale] = params[:locale] || session[:locale]
   end
 
