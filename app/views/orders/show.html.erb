@@ -3,16 +3,16 @@
     <thead>
       <tr>
 		<th>
-		  Product
+      <%= t(:product, :scope => :orders) -%>
 		</th>
 		<th>
-		  Unit price
+		  <%= t(:unit_price, :scope => :orders) -%>
 		</th>
 		<th>
-		  Amount
+		  <%= t(:amount, :scope => :orders) -%>
 		</th>
 		<th>
-		  Total price
+		  <%= t(:total_price, :scope => :orders) -%>
 		</th>
       </tr>
     </thead>
@@ -37,45 +37,45 @@
 </p>
 
 <p>
-  <b>Price:</b>
+  <b><%= t(:price, :scope => :orders) -%>:</b>
   <%=h @order.price %>
 </p>
 
 <p>
-  <b>Mva:</b>
+  <b><%= t(:vat, :scope => :orders) -%>:</b>
   <%=h @order.mva %>
 </p>
 
 <p>
-  <b>Order date:</b>
-  <%=h @order.order_date %>
+  <b><%= t(:order_date, :scope => :orders) -%>:</b>
+  <%=h l(@order.order_date) %>
 </p>
 
 <p>
-  <b>Requested delivery date:</b>
-  <%=h @order.requested_delivery_date %>
+  <b><%= t(:requested_delivery_date, :scope => :orders) -%>:</b>
+  <%=h l(@order.requested_delivery_date) %>
 </p>
 
 <p>
-  <b>Seller:</b>
+  <b><%= t(:seller, :scope => :orders) -%>:</b>
   <%=h @order.seller.name %>
 </p>
 
 <p>
-  <b>Customer:</b>
+  <b><%= t(:customer, :scope => :orders) -%>:</b>
   <%=h @order.customer.name %>
 </p>
 
 <p>
-  <b>Delivery address:</b>
+  <b><%= t(:delivery_address, :scope => :orders) -%>:</b>
   <%= render :partial => "addresses/show", :locals => { :address => @order.delivery_address } %>
 </p>
 
 <p>
-  <b>Transport:</b>
+  <b><%= t(:transport, :scope => :orders) -%>:</b>
   <%=h @order.transport.name %>
 </p>
 
 
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to t(:edit, :scope => :orders), edit_order_path(@order) %> |
+<%= link_to t(:back, :scope => :orders), orders_path %>

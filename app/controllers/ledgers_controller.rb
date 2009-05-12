@@ -42,7 +42,7 @@ class LedgersController < ApplicationController
     @ledger.update_attributes!(params[:ledger])
     respond_to do |format|
       format.html do
-        flash[:notice] = "Ledger %s saved." % @ledger.name
+        flash[:notice] = t(:ledger_saved, :scope => :ledgers, :name => @ledger.name)
         redirect_to edit_account_path(@ledger.account)
       end
       format.json { head :ok }

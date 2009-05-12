@@ -1,27 +1,27 @@
 
 <% fields_for address do |f| %>
 <p>
-  <%= f.label :name %><br />
+  <%= f.label :name, t(:name, :scope => :address) %><br />
   <%= f.text_field :name %>
 </p>
 <p>
-  <%= f.label :street1 %><br />
+  <%= f.label :street1, t(:street1, :scope => :address) %><br />
   <%= f.text_field :street1 %>
 </p>
 <p>
-  <%= f.label :street2 %><br />
+  <%= f.label :street2, t(:street2, :scope => :address) %><br />
   <%= f.text_field :street2 %>
 </p>
 <p>
-  <%= f.label :postal_code %><br />
+  <%= f.label :postal_code, t(:postal_code, :scope => :address) %><br />
   <%= f.text_field :postal_code %>
 </p>
 <p>
-  <%= f.label :town %><br />
+  <%= f.label :town, t(:town, :scope => :address) %><br />
   <%= f.text_field :town %>
 </p>
 <p>
-  <%= f.label :country %><br />
+  <%= f.label :country, t(:country, :scope => :address) %><br />
   <%= f.text_field :country %>
 </p>
 

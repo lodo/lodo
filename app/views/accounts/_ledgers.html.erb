@@ -5,19 +5,19 @@
 
   <hr style="clear: both;" />
 
-  <h2>Ledger accounts</h2>
+  <h2><%= t(:ledger_accounts, :scope => :accounts) -%></h2>
   <table id="ledger_table">
     <tr>
-      <th>Number</th>
-      <th>Name</th>
-      <th>Telephone</th>
-      <th>Mobile</th>
-      <th>Email</th>
-      <th>Credit days</th>
-      <th>Auto payment</th>
-      <th>Placement top</th>
-      <th>Default unit</th>
-      <th>Default project</th>
+      <th><%= t(:number, :scope => :accounts) -%></th>
+      <th><%= t(:name, :scope => :accounts) -%></th>
+      <th><%= t(:telephone_number, :scope => :accounts) -%></th>
+      <th><%= t(:mobile_number, :scope => :accounts) -%></th>
+      <th><%= t(:email, :scope => :accounts) -%></th>
+      <th><%= t(:credit_days, :scope => :accounts) -%></th>
+      <th><%= t(:auto_payment, :scope => :accounts) -%></th>
+      <th><%= t(:placement_top, :scope => :accounts) -%></th>
+      <th><%= t(:unit, :scope => :accounts) -%></th>
+      <th><%= t(:project, :scope => :accounts) -%></th>
     </tr>
     
     <% @account.ledgers.each do |ledger| %>
@@ -41,7 +41,7 @@
   </table>
     <%= javascript_tag "$(document).ready( accounts.makeRowsClickable() );" %>
 
-    <button type="button" onclick="accounts.prepareFormForNewLedger();">New ledger</button>
+    <button type="button" onclick="accounts.prepareFormForNewLedger();"><%= t(:new_ledger, :scope => :accounts) -%></button>
 
     <div id="ledger_form_wrapper">
       <%= render :partial => "ledger_form" %>

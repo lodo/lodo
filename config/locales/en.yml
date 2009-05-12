@@ -36,6 +36,7 @@ en:
     logged_in_as: "Logged in as"
     log_out: "Log out"
     active_company: "Active company"
+    vat_plan: "VAT plan"
   users:
     listing_users: "Listing users"
     login: "Login"
@@ -46,5 +47,200 @@ en:
     destroy: "Destroy"
     delete_confirmation: "Delete the user {{name}}?"
     new_user: "New user"
+    password: "Password"
+    signup: "Sign up"
+    change_password: "Change password"
+    choose_password: "Choose password"
+    confirm_password: "Confirm password"
+    log_in: "Log in"
+    forgotten_password: "Forgotten password"
+    email_password: "Email password"
+    back: "Back"
+    register: "Register"
+    list: "Back"
+    editing: "Editing the user {{name}}"
+    update: "Update"
+    signup_successful: You have been registered
+    login_success: You are now logged in
+    login_error: Login failed
+    logged_out: You are now logged out
+    password_sent: A new password has been sent by email
+    password_not_sent: Couldn't send password. Please try again later, or contact support.
+    password_changed: Password changed
+    update_success: User was successfully updated
+  accounts:
+    listing_accounts: "Listing accounts"
+    number: "Number"
+    name: "Name"
+    show: "Show"
+    edit: "Edit"
+    destroy: "Destroy"
+    confirm_delete: "Confirm you want to delete the account {{name}}"
+    new_account: "New account"
+    lodo_name: "Lodo name"
+    debit_text: "Debit text"
+    credit_text: "Credit text"
+    vat_account: "VAT account"
+    comments: "Comments"
+    ledger: "Ledger"
+    back: "Back"
+    editing_account: "Editing account"
+    save: "Save"
+    ledger_accounts: "Ledger accounts"
+    telephone_number: "Telephone"
+    mobile_number: "Mobile"
+    email: "Email"
+    credit_days: "Credit days"
+    auto_payment: "Auto payment"
+    placement_top: "Placement top"
+    unit: "Default unit"
+    project: "Default project"
+    new_ledger: "New ledger"
+    ledger_bank_number: "Bank number"
+    foreign_bank_number: "Foreign bank number"
+    net_bank: "Net bank"
+    comment: "Comment"
+    account_created: Account created
+    account_updated: Account updated
+  ledgers:
+    ledger_saved: Ledger {{name}} saved
+  vat:
+    listing_vat_accounts: "Listing vat accounts"
+    account: "Account"
+    percentage: "Percentage"
+    overridable: "Overridable"
+    code: "Code"
+    valid_from: "Valid from"
+    valid_to: "Valid to"
+    show: "Show"
+    edit: "Edit"
+    destroy: "Delete"
+    confirm_destroy: "Confirm deletion of vat-account {{code}}"
+    new_vat_account: "Create new"
+    editing_vat_account: "Editing vat account"
+    back: "Back"
+    save: "Save"
+    create_success: VAT entry created
+    update_success: VAT entry updated
+  journals:
+    listing_journals: "Listing journal entries?"
+    type: "Type"
+    number: "Number"
+    journal_date: "Journal date"
+    confirm_destroy: "Sure you want to destroy journal entry {{number}}?"
+    show: "Show"
+    edit: "Edit"
+    destroy: "Destroy"
+    new_journal: "New journal entry"
+    back: "Back"
+    new_journal_operation: "Ny postering"
+    vat: "Mva"
+    details: "Detaljer"
+    account: "Konto"
+    debit: "Debet"
+    credit: "Kredit"
+    balance: "Saldo"
+    in: "Inn"
+    out: "Ut"
+    unit: "Avdeling"
+    project: "Prosjekt"
+    due_date: "Forfallsdato"
+    kid: "KID"
+    invoice: "Faktura?"
+    text: "Tekst"
+    save: "Lagre"
+    editing_journals: "Editing journal entry"
+  companies:
+    listing_companies: "Listing companies"
+    name: "Name"
+    users: "Users"
+    organization_number: "Org. number"
+    address: "Address"
+    show: "Show"
+    edit: "Edit"
+    destroy: "Destroy"
+    new_company: "New company"
+    destroy_confirmation: "Confirm deleting the company {{name}}"
+    back: "Back"
+    editing_company: "Editing company"
+    save: "Save"
+    accounts: "Chart of accounts"
+  address:
+    address: "Address"
+    name: Name
+    street1: Street 1
+    street2: Street 2
+    postal_code: Zip
+    town: City
+    country: Country
+  products:
+    listing_products: Listing products
+    price: Price
+    name: Name
+    show: Show
+    edit: Edit
+    destroy: Destroy
+    destroy_confirmation: Confirm deleting {{name}}
+    new_product: New product
+    create: Opprett
+    back: Back
+    editing_product: Editing product
+    update: Update
+  orders:
+    listing_orders: Listing orders
+    price: Prce
+    vat: VAT
+    order_date: Order date
+    requested_delivery_date: Requested delivery date
+    customer: Customer
+    delivery_address: Delivery address
+    transport: Transport
+    new_order: New order
+    seller: Seller
+    product: Product
+    unit_price: Unit price
+    amount: Amount
+    discount: Discount
+    total_price: Total price
+    add_product: Add product
+    save: Save
+    back: Back
+    show: Show
+    edit: Edit
+    editing_order: Edit order
+    destroy: Delete
+  bills:
+    listing_bills: Listing bills
+    delivery_date: Delivery date
+    billing_date: Billing date
+    new_bill: New bill
+    show: Show
+    back: Back
+    edit: Edit
+    destroy: Delete
+    confirm_destroy: Confirm deleting bill {{number}}
+    editing_bill: Editing bill
+    order: Order
+    products: Products
+    product: Product
+    unit_price: Unit price
+    remaining: Reminder
+    amount: Amount
+    discount: Discount
+    total_price: Total price
+    add_order: Add order
+    create: Create
+    total_for_this_order: Total for this order
+    total_for_all_orders: Total for all orders
+    total: Total
+
+
+
+
+
+
+
+
+
 
 

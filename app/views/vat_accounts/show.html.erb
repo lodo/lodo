@@ -1,33 +1,33 @@
 <p>
-  <b>Code:</b>
+  <b><%= t(:code, :scope => :vat) -%>:</b>
   <%=h @vat_account.code %>
 </p>
 
 <p>
-  <b>Account:</b>
+  <b><%= t(:account, :scope => :vat) -%>:</b>
   <%=h @vat_account.target_account.number %> -  <%=h @vat_account.target_account.name %>
 </p>
 
 <p>
-  <b>Percentage:</b>
+  <b><%= t(:percentage, :scope => :vat) -%>:</b>
   <%=h @vat_account.percentage %>
 </p>
 
 <p>
-  <b>Overridable:</b>
+  <b><%= t(:overridable, :scope => :vat) -%>:</b>
   <%=h @vat_account.overridable %>
 </p>
 
 <p>
-  <b>Valid from:</b>
+  <b><%= t(:valid_from, :scope => :vat) -%>:</b>
   <%=h @vat_account.valid_from %>
 </p>
 
 <p>
-  <b>Valid to:</b>
+  <b><%= t(:valid_to, :scope => :vat) -%>:</b>
   <%=h @vat_account.valid_to %>
 </p>
 
 
-<%= link_to 'Edit', edit_vat_account_path(@vat_account) %> |
-<%= link_to 'Back', vat_accounts_path %>
+<%= link_to t(:edit, :scope => :vat), edit_vat_account_path(@vat_account) %> |
+<%= link_to t(:back, :scope => :vat), vat_accounts_path %>

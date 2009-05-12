@@ -1,10 +1,10 @@
 <p>
-  <b>Price:</b>
+  <b><%= t(:price, :scope => :products) -%>:</b>
   <%=h @product.price %>
 </p>
 
 <p>
-  <b>Name:</b>
+  <b><%= t(:name, :scope => :products) -%>:</b>
   <%=h @product.name %>
 </p>
 
@@ -14,5 +14,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+<%= link_to t(:edit, :scope => :products), edit_product_path(@product) %> |
+<%= link_to t(:back, :scope => :products), products_path %>

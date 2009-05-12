@@ -1,10 +1,10 @@
-<h1>Listing journals</h1>
+<h1><%= t(:listing_journals, :scope => :journals) -%></h1>
 
 <table class='striped'>
   <tr>
-    <th>Type</th>
-    <th>Number</th>
-    <th>Journal date</th>
+    <th><%= t(:type, :scope => :journals) -%></th>
+    <th><%= t(:number, :scope => :journals) -%></th>
+    <th><%= t(:journal_date, :scope => :journals) -%></th>
     <th></th>
   </tr>
 
@@ -12,11 +12,11 @@
   <tr>
     <td><%=h journal.journal_type %></td>
     <td><%=h journal.number %></td>
-    <td><%=h journal.journal_date %></td>
+    <td><%=h l(journal.journal_date) %></td>
     <td>
-      <%= link_to 'Show', journal %>
-      <%= link_to 'Edit', edit_journal_path(journal) %>
-      <%= link_to 'Destroy', journal, :confirm => 'Are you sure?', :method => :delete %>
+      <%= link_to t(:show, :scope => :journals), journal %>
+      <%= link_to t(:edit, :scope => :journals), edit_journal_path(journal) %>
+      <%= link_to t(:destroy, :scope => :journals), journal, :confirm => t(:confirm_destroy, :scope => :journals, :number => journal.number), :method => :delete %>
     </td>
   </tr>
 <% end %>
@@ -24,4 +24,4 @@
 
 <br />
 
-<%= link_to 'New journal', new_journal_path %>
+<%= link_to t(:new_journal, :scope => :journals), new_journal_path %>

@@ -1,6 +1,6 @@
-<h1>Editing company</h1>
+<h1><%= t(:editing_company, :scope => :companies) -%></h1>
 
 <%= render :partial => "form" %>
 
-<%= link_to 'Show', @company %> |
-<%= link_to 'Back', companies_path %>
+<%= link_to t(:show, :scope => :companies), @company %> |
+<%= link_to t(:back, :scope => :companies), companies_path %>

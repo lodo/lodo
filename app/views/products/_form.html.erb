@@ -2,11 +2,11 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :price %><br />
+    <%= f.label :price, t(:price, :scope => :products) %><br />
     <%= f.text_field :price %>
   </p>
   <p>
-    <%= f.label :name %><br />
+    <%= f.label :name, t(:name, :scope => :products) %><br />
     <%= f.text_field :name %>
   </p>
   <p>
@@ -14,6 +14,6 @@
     <%= f.select :account_id, @me.current_company.accounts.collect {|a| [ a.name, a.id ] }, {}, {} %>
   </p>
   <p>
-    <%= f.submit "Save" %>
+    <%= f.submit t(:create, :scope => :products) %>
   </p>
 <% end %>

@@ -1,6 +1,6 @@
-<h1>Editing journal</h1>
+<h1><%= t(:editing_journal, :scope => :journals) %></h1>
 
 <%= render :partial => "form" %>
 
-<%= link_to 'Show', @journal %> |
-<%= link_to 'Back', journals_path %>
+<%= link_to t(:show, :scope => :journals), @journal %> |
+<%= link_to t(:back, :scope => :journals), journals_path %>

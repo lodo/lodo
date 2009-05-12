@@ -90,8 +90,8 @@
         less_than_or_equal_to: "må være mindre enn eller lik {{count}}"
         odd: "må være oddetall"
         even: "må være partall"
-      # models:
-      # attributes:
+    models:
+    attributes:
   layout:
     user_administration: "Brukeradministrasjon"
     chart_of_accounts: "Kontoplan"
@@ -103,6 +103,7 @@
     logged_in_as: "Logget inn som"
     log_out: "Logg ut"
     active_company: "Valgt firma"
+    vat_plan: "MVA-oppsett"
   users:
     listing_users: "Viser brukere"
     login: "Brukernavn"
@@ -113,3 +114,192 @@
     destroy: "Slett"
     delete_confirmation: "Sikker på at du vil slette brukeren {{name}}?"
     new_user: "Ny bruker"
+    password: "Passord"
+    signup: "Registrer bruker"
+    change_password: "Bytt passord"
+    choose_password: "Velg passord"
+    confirm_password: "Bekreft passord"
+    log_in: "Logg inn"
+    forgotten_password: "Glemt passord"
+    email_password: "Send meg nytt passord"
+    back: "Gå til innlogging"
+    register: "Registrer ny bruker"
+    list: "Tilbake til listen"
+    editing: "Redigerer brukeren {{name}}"
+    update: "Lagre"
+    signup_successful: Bruker opprettet
+    login_success: Du er nå logget inn
+    login_error: Innlogging feilet. Sjekk brukernavn/passord.
+    logged_out: Du er nå logget ut av systemet.
+    password_sent: Vi har sendt deg et nytt passord pr email.
+    password_not_sent: Kunne ikke sende deg et nytt passord. Prøv igjen senere, eller kontakt brukerstøtte.
+    password_changed: Passord oppdatert
+    update_success: Profil oppdatert
+  accounts:
+    listing_accounts: "Viser kontoplan"
+    number: "Nummer"
+    name: "Navn"
+    show: "Vis"
+    edit: "Rediger"
+    destroy: "Slett"
+    confirm_delete: "Bekreft sletting av konto {{name}}"
+    new_account: "Ny konto"
+    lodo_name: "Lodo navn"
+    debit_text: "Debit tekst"
+    credit_text: "Credit tekst"
+    vat_account: "MVA-konto"
+    comments: "Beskrivelse"
+    ledger: "Reskontro"
+    back: "Tilbake til listen"
+    editing_account: "Redigerer konto"
+    save: "Lagre"
+    ledger_accounts: "Reskontroer"
+    telephone_number: "Telefon"
+    mobile_number: "Mobil"
+    email: "Epost"
+    credit_days: "Kreditt-dager"
+    auto_payment: "Auto payment?"
+    placement_top: "Placement top?"
+    unit: "Avdeling"
+    project: "Prosjekt"
+    new_ledger: "Ny reskontro"
+    ledger_bank_number: "Bankkonto"
+    foreign_bank_number: "Utenlandsk bankkonto?"
+    net_bank: "Net bank?"
+    comment: "Beskrivelse"
+    account_created: Konto opprettet
+    account_updated: Konto oppdatert
+  ledgers:
+    ledger_saved: Reskontro {{name}} lagret
+  vat:
+    listing_vat_accounts: "Viser mva-kontoer"
+    account: "Konto"
+    percentage: "Mva-sats"
+    overridable: "Overstyrbar"
+    code: "Kode"
+    valid_from: "Gyldig fra"
+    valid_to: "Gyldig til"
+    show: "Vis"
+    edit: "Rediger"
+    destroy: "Slett"
+    confirm_destroy: "Bekreft sletting av mva-sats {{code}}"
+    new_vat_account: "Ny oppføring"
+    editing_vat_account: "Redigerer mva-konto"
+    back: "Tilbake til listen"
+    save: "Lagre"
+    create_success: Mva-sats opprettet
+    update_success: Mva-sats oppdatert
+  journals:
+    listing_journals: "Viser bilag"
+    type: "Type"
+    number: "Nummer"
+    journal_date: "Bilagsdato"
+    confirm_destroy: "Bekreft sletting av bilag {{number}}"
+    show: "Vis"
+    edit: "Rediger"
+    destroy: "Slett"
+    new_journal: "Nytt bilag"
+    back: "Tilbake"
+    new_journal_operation: "Ny postering"
+    vat: "Mva"
+    details: "Detaljer"
+    account: "Konto"
+    debit: "Debet"
+    credit: "Kredit"
+    balance: "Saldo"
+    in: "Inn"
+    out: "Ut"
+    unit: "Avdeling"
+    project: "Prosjekt"
+    due_date: "Forfallsdato"
+    kid: "KID"
+    invoice: "Faktura?"
+    text: "Tekst"
+    save: "Lagre"
+    editing_journal: "Rediger bilag"
+  companies:
+    listing_companies: "Viser firmaer"
+    name: "Navn"
+    users: "Brukere"
+    organization_number: "Org. nummer"
+    address: "Adresse"
+    show: "Vis"
+    edit: "Rediger"
+    destroy: "Slett"
+    new_company: "Nytt firma"
+    destroy_confirmation: "Bekreft sletting av firmaet {{name}}"
+    back: "Tilbake"
+    editing_company: "Rediger firma"
+    save: "Lagre"
+    accounts: "Kontoplan"
+  address:
+    address: "Adresse"
+    name: Navn
+    street1: Adresse 1
+    street2: Adresse 2
+    postal_code: Postnummer
+    town: Sted
+    country: Land
+  products:
+    listing_products: Viser produkter
+    price: Pris
+    name: Navn
+    show: Vis
+    edit: Rediger
+    destroy: Slett
+    destroy_confirmation: Bekreft sletting av {{name}}
+    new_product: Nytt produkt
+    create: Opprett
+    back: Tilbake
+    editing_product: Rediger produkt
+    update: Lagre endringer
+  orders:
+    listing_orders: Viser ordre
+    price: Pris
+    vat: Mva
+    order_date: Ordredato
+    requested_delivery_date: Ønsket leveringsdato
+    customer: Kunde
+    delivery_address: Leveringsadresse
+    transport: Transport
+    new_order: Ny ordre
+    seller: Selger
+    product: Produkt
+    unit_price: Enhetspris
+    amount: Antall
+    discount: Rabatt
+    total_price: Sum
+    add_product: Legg til produkt
+    save: Lagre
+    back: Tilbake
+    show: Vis
+    edit: Rediger
+    editing_order: Redigerer ordre
+    destroy: Slett
+  bills:
+    listing_bills: Viser fakturaer
+    delivery_date: Leveringsdato
+    billing_date: Fakturadato
+    new_bill: Ny faktura
+    show: Vis
+    back: Tilbake
+    edit: Rediger
+    destroy: Slett
+    confirm_destroy: Bekreft sletting av faktura {{number}}
+    editing_bill: Redigerer faktura
+    order: Ordre
+    products: Produkter
+    product: Produkt
+    unit_price: Pr stk
+    remaining: Rest
+    amount: Antall
+    discount: Rabatt
+    total_price: Totalpris
+    add_order: Legg til ordre
+    create: Opprett
+    total_for_this_order: Total for denne ordren
+    total_for_all_orders: Total for alle ordre
+    total: Total
+
+
+

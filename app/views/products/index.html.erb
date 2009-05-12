@@ -1,22 +1,23 @@
-<h1>Listing products</h1>
+<h1><%= t(:listing_products, :scope => :products) -%></h1>
 
 <table>
   <tr>
-    <th>Price</th>
-    <th>Name</th>
+    <th><%= t(:price, :scope => :products) -%></th>
+    <th><%= t(:name, :scope => :products) -%></th>
     <th>Account</th>
     <th></th>
   </tr>
   
   <% for product in @products %>
   <tr>
-    <td><%=h product.price %></td>
+    <td><%=h product.price -%></td>
     <td><%=h product.name %></td>
     <td><%=h product.account.name %></td>
     <td>
-      <%= link_to 'Show', product %>
-      <%= link_to 'Edit', edit_product_path(product) %>
-      <%= link_to 'Destroy', product, :confirm => 'Are you sure?', :method => :delete %>
+
+      <%= link_to t(:show, :scope => :products), product %>
+      <%= link_to t(:edit, :scope => :products), edit_product_path(product) %>
+      <%= link_to t(:destroy, :scope => :products), product, :confirm => t(:destroy_confirmation, :scope => :products, :name => product.name), :method => :delete %>
     </td>
   </tr>
   <% end %>
@@ -24,4 +25,4 @@
 
 <br />
 
-<%= link_to 'New product', new_product_path %>
+<%= link_to t(:new_product, :scope => :products), new_product_path %>

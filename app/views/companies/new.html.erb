@@ -1,5 +1,5 @@
-<h1>New company</h1>
+<h1><%= t(:new_company, :scope => :companies) -%></h1>
 
 <%= render :partial => "form" %>
 
-<%= link_to 'Back', companies_path %>
+<%= link_to t(:back, :scope => :companies), companies_path %>

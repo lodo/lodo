@@ -3,21 +3,21 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :name %><br />
+    <%= f.label :name, t(:name, :scope => :companies) %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :organization_number %><br />
+    <%= f.label :organization_number, t(:organization_number, :scope => :companies) %><br />
     <%= f.text_field :organization_number %>
   </p>
   <p>
-    <%= f.label :user_ids %><br />
+    <%= f.label :user_ids, t(:users, :scope => :companies) %><br />
     <%= f.select :user_ids, User.find(:all).collect {|p| [ p.login, p.id ] }, {}, {:multiple => true, :size => 15} %>
   </p>
   <p>
     <%= render :partial => "addresses/form", :locals => { :address => @company.address } %>
   </p>
   <p>
-    <%= f.submit "Save" %>
+    <%= f.submit t(:save, :scope => :companies) %>
   </p>
 <% end %>

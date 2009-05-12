@@ -66,7 +66,7 @@ class AccountsController < ApplicationController
     @account.company = @me.current_company
     respond_to do |format|
       if @account.save
-        flash[:notice] = 'Account was successfully created.'
+        flash[:notice] = t(:account_created, :scope => :accounts)
         format.html { redirect_to(@account) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }
       else
@@ -81,7 +81,7 @@ class AccountsController < ApplicationController
   def update
     respond_to do |format|
       if @account.update_attributes(params[:account])
-        flash[:notice] = 'Account was successfully updated.'
+        flash[:notice] = t(:account_updated, :scope => :accounts)
         format.html { redirect_to(@account) }
         format.xml  { head :ok }
       else

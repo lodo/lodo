@@ -11,21 +11,21 @@
 <%= f.error_messages %>
 
 <p>
-  <%= f.label :journal_type %><br />
+  <%= f.label :journal_type, t(:type, :scope => :journals) %><br />
   <%= f.text_field :journal_type %>
 </p>
 <p>
-  <%= f.label :number %><br />
+  <%= f.label :number, t(:number, :scope => :journals) %><br />
   <%= f.text_field :number %>
 </p>
 <p>
-  <%= f.label :journal_date %><br />
+  <%= f.label :journal_date, t(:journal_date, :scope => :journals) %><br />
   <%= f.date_select :journal_date %>
 </p>
 <p>
-  <button onClick='journals.addAccountLine();' type='button'>Ny postering til bilag</button>
-  <input type='checkbox' id='vat' onchange='journals.toggleVisibility();'/><label for='vat'>VAT</label>
-  <input type='checkbox' id='details' onchange='journals.toggleVisibility();'/><label for='details'>Details</label>
+  <button onClick='journals.addAccountLine();' type='button'><%= t(:new_journal_operation, :scope => :journals) -%></button>
+  <input type='checkbox' id='vat' onchange='journals.toggleVisibility();'/><label for='vat'><%= t(:vat, :scope => :journals) -%></label>
+  <input type='checkbox' id='details' onchange='journals.toggleVisibility();'/><label for='details'><%= t(:details, :scope => :journals) -%></label>
   
 </p>
 <p>
@@ -33,46 +33,46 @@
     <thead>
       <tr>
 	<th class='details' style='display:none'>
-	  Details
+    <%= t(:details, :scope => :journals) %>
 	</th>
 	<th>
-	  Kontoplan
+	  <%= t(:account, :scope => :journals) %>
 	</th>
 	<th>
-	  Debet
+	  <%= t(:debit, :scope => :journals) %>
 	</th>
 	<th>
-	  Kredit
+	  <%= t(:credit, :scope => :journals) %>
 	</th>
 	<th>
-	  Saldo
+	  <%= t(:balance, :scope => :journals) %>
 	</th>
 	<th>
-	  Inn
+	  <%= t(:in, :scope => :journals) %>
 	</th>
 	<th>
-	  Ut
+	  <%= t(:out, :scope => :journals) %>
 	</th>
 	<th>
-	  MVA
+	  <%= t(:vat, :scope => :journals) %>
 	</th>
 	<th>
-	  Avd.
+	  <%= t(:unit, :scope => :journals) %>
 	</th>
 	<th>
-	  Prosjekt
+	  <%= t(:project, :scope => :journals) %>
 	</th>
 	<th>
-	  Forfallsdato
+	  <%= t(:due_date, :scope => :journals) %>
 	</th>
 	<th>
-	  KID.
+	  <%= t(:kid, :scope => :journals) %>
 	</th>
 	<th>
-	  Faktura
+	  <%= t(:invoice, :scope => :journals) %>
 	</th>
 	<th>
-	  Tekst
+	  <%= t(:text, :scope => :journals) %>
 	</th>
 	<th>
 
@@ -96,7 +96,7 @@
 
 </p>
 <p>
-  <%= f.submit "Save" %>
+  <%= f.submit t(:save, :scope => :journals) %>
 </p>
 <script>
 journals.addPredefined();

@@ -13,11 +13,11 @@
   <table class='striped'>
 	<thead>
 	  <tr>
-		<th>Product</th>
-		<th>Unit Price</th>
-		<th>Amount</th>
-		<th>Discount</th>
-		<th>Total Price</th>
+		<th><%= t(:product, :scope => :orders) -%></th>
+		<th><%= t(:unit_price, :scope => :orders) -%></th>
+		<th><%= t(:amount, :scope => :orders) -%></th>
+		<th><%= t(:discount, :scope => :orders) -%></th>
+		<th><%= t(:total_price, :scope => :orders) -%></th>
 		<th></th>
 	  </tr>
 	</thead>
@@ -37,38 +37,38 @@
     </tfoot>
   </table>
 
-  <button onClick='orders.addProduct();' type='button'>Add product</button>
+  <button onClick='orders.addProduct();' type='button'><%= t(:add_product, :scope => :orders) -%></button>
   
   <p>
-    <%= f.label :mva %><br />
+    <%= f.label :mva, t(:vat, :scope => :orders) %><br />
     <%= f.text_field :mva %>
   </p>
   <p>
-    <%= f.label :order_date %><br />
+    <%= f.label :order_date, t(:order_date, :scope => :orders) %><br />
     <%= f.date_select :order_date %>
   </p>
   <p>
-    <%= f.label :requested_delivery_date %><br />
+    <%= f.label :requested_delivery_date, t(:requested_delivery_date, :scope => :orders) -%><br />
     <%= f.date_select :requested_delivery_date %>
   </p>
   <p>
-    <%= f.label :seller_id %><br />
+    <%= f.label :seller_id, t(:seller, :scope => :orders) -%><br />
     <%= f.select :seller_id, Company.find(:all).collect {|p| [ p.name, p.id ] } %>
   </p>
   <p>
-    <%= f.label :customer_id %><br />
+    <%= f.label :customer_id, t(:customer, :scope => :orders) %><br />
     <%= f.select :customer_id, (Account.find(@me.current_company.accounts).collect { |a| a.ledgers }).flatten.collect {|p| [ p.name, p.id ] } %>
   </p>
   <p>
-    <b>Delivery address:</b>
+    <%= f.label :delivery_address_id, t(:delivery_address, :scope => :orders) -%><br />
     <%= render :partial => "addresses/form", :locals => { :address => @order.delivery_address } %>
   </p>
   <p>
-    <%= f.label :transport_id %><br />
+    <%= f.label :transport_id, t(:transport, :scope => :orders) -%><br />
     <%= f.select :transport_id, Company.find(:all).collect {|p| [ p.name, p.id ] } %>
   </p>
   <p>
-    <%= f.submit "Save" %>
+    <%= f.submit t(:save, :scope => :orders) %>
   </p>
 <% end %>
 

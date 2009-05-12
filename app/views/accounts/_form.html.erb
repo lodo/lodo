@@ -2,36 +2,36 @@
   <%= f.error_messages %>
 
 <p>
-  <%= f.label :number %><br />
+  <%= f.label :number, t(:number, :scope => :accounts) %><br />
   <%= f.text_field :number %>
 </p>
 <p>
-  <%= f.label :name %><br />
+  <%= f.label :name, t(:name, :scope => :accounts) %><br />
   <%= f.text_field :name %>
 </p>
 <p>
-  <%= f.label :lodo_name %><br />
+  <%= f.label :lodo_name, t(:lodo_name, :scope => :accounts) %><br />
   <%= f.text_field :lodo_name %>
 </p>
 <p>
-  <%= f.label :debit_text %><br />
+  <%= f.label :debit_text, t(:debit_text, :scope => :accounts) %><br />
   <%= f.text_field :debit_text %>
 </p>
 <p>
-  <%= f.label :credit_text %><br />
+  <%= f.label :credit_text, t(:credit_text, :scope => :accounts) %><br />
   <%= f.text_field :credit_text %>
 </p>
 <p>
-  <%= f.label :vat_account_id %><br />
+  <%= f.label :vat_account_id, t(:vat_account, :scope => :accounts) %><br />
   <%= f.select :vat_account_id, [['<No VAT account>', nil]] + @me.current_company.vat_accounts.collect {|p| [ p.target_account.name, p.id ] }.sort %>
 </p>
 <p>
-  <%= f.label :comments %><br />
+  <%= f.label :comments, t(:comments, :scope => :accounts) %><br />
   <%= f.text_field :comments %>
 </p>
 <p id="has_ledger_toggle">
   <%= f.check_box :has_ledger, :onchange => "accounts.toggleLedger( $('#account_has_ledger').attr('checked') );" %>
-  <%= f.label :has_ledger %>
+  <%= f.label :has_ledger, t(:ledger, :scope => :accounts) %><br />
 </p>
 <% if @account.ledgers.size > 0 %>
 <%= javascript_tag "$(document).ready( function () { $('#has_ledger_toggle').hide(); } );" %>
@@ -40,9 +40,8 @@
 <%= render :partial => "active_periods/form", :locals => { :active_periods => @account.activatable } %>
 
 <p>
-  <%= f.submit "Save" %>
+  <%= f.submit t(:save, :scope => :accounts) %>
 </p>
 <% end %>
-
 
 

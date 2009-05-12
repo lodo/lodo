@@ -18,43 +18,43 @@
   <div class='main_menu'>
     <ul>
       <li>
-	<%= link_to I18n.t(:user_administration, :scope => :layout), users_path %>
+	<%= link_to t(:user_administration, :scope => :layout), users_path %>
       </li>
 
       <li>
-	<%= link_to I18n.t(:chart_of_accounts, :scope => :layout), accounts_path %>
+	<%= link_to t(:chart_of_accounts, :scope => :layout), accounts_path %>
       </li>
       <li>
-	<%= link_to 'VAT plan', vat_accounts_path %>
-      </li>
-
-      <li>
-	<%= link_to I18n.t(:journals, :scope => :layout), journals_path %>
+      <%= link_to t(:vat_plan, :scope => :layout), vat_accounts_path %>
       </li>
 
       <li>
-	<%= link_to I18n.t(:companies, :scope => :layout), companies_path %>
+	<%= link_to t(:journals, :scope => :layout), journals_path %>
       </li>
 
       <li>
-	<%= link_to I18n.t(:products, :scope => :layout), products_path %>
+	<%= link_to t(:companies, :scope => :layout), companies_path %>
       </li>
 
       <li>
-	<%= link_to I18n.t(:orders, :scope => :layout), orders_path %>
+	<%= link_to t(:products, :scope => :layout), products_path %>
       </li>
 
       <li>
-	<%= link_to I18n.t(:bills, :scope => :layout), bills_path %>
+	<%= link_to t(:orders, :scope => :layout), orders_path %>
       </li>
 
       <li>
-	<%= I18n.t(:logged_in_as, :scope => :layout) -%> <em><%= link_to @me.login, :controller => 'users', :action => 'show', :id => @me.id %></em> (<%= link_to I18n.t(:log_out, :scope => :layout), :controller => 'users', :action => 'logout' %>)
+	<%= link_to t(:bills, :scope => :layout), bills_path %>
+      </li>
+
+      <li>
+	<%= t(:logged_in_as, :scope => :layout) -%> <em><%= link_to @me.login, :controller => 'users', :action => 'show', :id => @me.id %></em> (<%= link_to t(:log_out, :scope => :layout), :controller => 'users', :action => 'logout' %>)
       </li>
 
       <li class="change_company_form">
         <% form_tag :controller => "users", :action=> "change_current_company" do -%>
-         <label for="current_company"><%= I18n.t(:active_company, :scope => :layout) -%>:</label>
+         <label for="current_company"><%= t(:active_company, :scope => :layout) -%>:</label>
          <%= select_tag "current_company", options_for_select(@me.companies.collect {|p| [ p.name, p.id ] },
                                                               if @me.current_company.nil? then 0 else @me.current_company.id end ) %>
         <% end %>

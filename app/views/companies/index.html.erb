@@ -1,11 +1,11 @@
-<h1>Listing companies</h1>
+<h1><%= t(:listing_companies, :scope => :companies) -%></h1>
 
 <table class='striped'>
   <tr>
-    <th>Name</th>
-    <th>Users</th>
-    <th>Organization number</th>
-    <th>Address</th>
+    <th><%= t(:name, :scope => :companies) -%></th>
+    <th><%= t(:users, :scope => :companies) -%></th>
+    <th><%= t(:organization_number, :scope => :companies) -%></th>
+    <th><%= t(:address, :scope => :companies) -%></th>
     <th></th>
   </tr>
 
@@ -18,9 +18,9 @@
       <%= render :partial => "addresses/show", :locals => { :address => company.address } %>
     </td>
     <td>
-      <%= link_to 'Show', company %>
-      <%= link_to 'Edit', edit_company_path(company) %>
-      <%= link_to 'Destroy', company, :confirm => 'Are you sure?', :method => :delete %>
+      <%= link_to t(:show, :scope => :companies), company %>
+      <%= link_to t(:edit, :scope => :companies), edit_company_path(company) %>
+      <%= link_to t(:destroy, :scope => :companies), company, :confirm => t(:destroy_confirmation, :scope => :companies, :name => company.name), :method => :delete %>
     </td>
   </tr>
 <% end %>
@@ -28,4 +28,4 @@
 
 <br />
 
-<%= link_to 'New company', new_company_path %>
+<%= link_to t(:new_company, :scope => :companies), new_company_path %>

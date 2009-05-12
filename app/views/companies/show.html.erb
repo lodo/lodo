@@ -1,28 +1,28 @@
 <p>
-  <b>Name:</b>
+  <b><%= t(:name, :scope => :companies) -%>:</b>
   <%=h @company.name %>
 </p>
 
 <p>
-  <b>Users:</b>
+  <b><%= t(:users, :scope => :companies) -%>:</b>
   <%=h @company.users.collect {|u| u.login}.join ", " %>
 </p>
 
 <p>
-  <b>Accounts:</b>
-  <%=h @company.accounts %>
+  <b><%= t(:accounts, :scope => :companies) -%>:</b>
+  <%=h @company.accounts.map {|a| "#{a.number} - #{a.name}"}.join(", ") %>
 </p>
 
 <p>
-  <b>Organization number:</b>
+  <b><%= t(:organization_number, :scope => :companies) -%>:</b>
   <%=h @company.organization_number %>
 </p>
 
 <p>
-  <b>Address:</b>
-  <%= render :partial => "addresses/show", :locals => { :address => @company.address } %>
+  <b><%= t(:address, :scope => :companies) -%>:</b>
+  <%= render :partial => "/addresses/show", :locals => { :address => @company.address } %>
 </p>
 
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<%= link_to t(:edit, :scope => :companies), edit_company_path(@company) %> |
+<%= link_to t(:back, :scope => :companies), companies_path %>

@@ -9,101 +9,101 @@
 <% form_for([@account, @ledger], {:name => "new_ledger", :id => "ledger_form"} ) do |f| %>
 
 <div id="ledger_form_div" style="float: left;">
-  <h3>Ledger</h3>
+  <h3><%= t(:ledger, :scope => :accounts) -%></h3>
   
   <p>
-    <%= f.label :number, "Account number" %><br />
+    <%= f.label :number, t(:number, :scope => :accounts) -%><br />
     <%= f.text_field :number %>
   </p>
-    <p>
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
-    </p>
   <p>
-    <%= f.label :telephone_number, "Telephone" %><br />
+    <%= f.label :name, t(:name, :scope => :accounts) -%><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :telepone_number, t(:telephone_number, :scope => :accounts) -%><br />
     <%= f.text_field :telephone_number %>
   </p>
   <p>
-    <%= f.label :mobile_number, "Mobile" %><br />
+    <%= f.label :mobile_number, t(:mobile_number, :scope => :accounts) -%><br />
     <%= f.text_field :mobile_number %>
   </p>
   <p>
-    <%= f.label :email %><br />
+    <%= f.label :email, t(:email, :scope => :accounts) -%><br />
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.label :ledger_bank_number, "Bank account" %><br />
+    <%= f.label :ledger_bank_number, t(:ledger_bank_number, :scope => :accounts) -%><br />
     <%= f.text_field :ledger_bank_number %>
   </p>
   <p>
-    <%= f.label :foreign_bank_number %><br />
+    <%= f.label :foreign_bank_number, t(:foreign_bank_number, :scope => :accounts) -%><br />
     <%= f.text_field :foreign_bank_number %>
   </p>
   <p>
-    <%= f.label :credit_days %><br />
+    <%= f.label :credit_days, t(:credit_days, :scope => :accounts) -%><br />
     <%= f.text_field :credit_days %>
   </p>
   <p>
-    <%= f.label :auto_payment %><br />
+    <%= f.label :auto_payment, t(:auto_payment, :scope => :accounts) -%><br />
     <%= f.check_box :auto_payment %>
   </p>
   <p>
-    <%= f.label :placement_top %><br />
+    <%= f.label :placement_top, t(:placement_top, :scope => :accounts) -%><br />
     <%= f.check_box :placement_top %>
   </p>
   <p>
-    <%= f.label :net_bank %><br />
+    <%= f.label :net_bank, t(:net_bank, :scope => :accounts) -%><br />
     <%= f.check_box :net_bank %>
   </p>
   
   <p>
-    <%= f.label :unit_id, "Default unit" %><br />
+    <%= f.label :unit_id, t(:unit, :scope => :accounts) -%><br />
     <%= f.select :unit_id, Unit.find(:all).map {|u| [u.name, u.id]}, {:include_blank => true} %>
   </p>
   <p>
-    <%= f.label :project_id, "Default project" %><br />
+    <%= f.label :project_id, t(:project, :scope => :accounts) -%><br />
     <%= f.select :project_id, Project.find(:all).map {|p| [p.name, p.id]}, {:include_blank => true} %>
     </p>
   <p>
-    <%= f.label :debit_text %><br />
+    <%= f.label :debit_text, t(:debit_text, :scope => :accounts) -%><br />
     <%= f.text_field :debit_text %>
   </p>
   <p>
-    <%= f.label :credit_text %><br />
+    <%= f.label :credit_text, t(:credit_text, :scope => :accounts) -%><br />
     <%= f.text_field :credit_text %>
   </p>
   <p>
-    <%= f.label :comment, "Notes" %><br />
+    <%= f.label :comment, t(:comment, :scope => :accounts) -%><br />
     <%= f.text_area :comment %>
   </p>
 </div>
 
 <div id="addresses" style="float: left;">
   
-  <h4>Address</h4>
+  <h4><%= t(:address, :scope => :address) -%></h4>
   <% f.fields_for :address do |a| %>
   <p>
-    <%= a.label :name %><br />
+    <%= a.label :name, t(:name, :scope => :address)%><br />
     <%= a.text_field :name %>
   </p>
   <p>
-    <%= a.label :street1 %><br />
+    <%= a.label :street1, t(:street1, :scope => :address)%><br />
     <%= a.text_field :street1 %>
   </p>
   <p>
-    <%= a.label :street2 %><br />
+    <%= a.label :street2, t(:street2, :scope => :address)%><br />
     <%= a.text_field :street2 %>
   </p>
   <p>
-    <%= a.label :postal_code %><br />
+    <%= a.label :postal_code, t(:postal_code, :scope => :address)%><br />
     <%= a.text_field :postal_code %>
   </p>
   <p>
-    <%= a.label :town %><br />
+    <%= a.label :town, t(:town, :scope => :address)%><br />
       <%= a.text_field :town %>
   </p>
   <p>
-    <%= a.label :country %><br />
+    <%= a.label :country, t(:country, :scope => :address)%><br />
     <%= a.text_field :country %>
   </p>
   <% end %>
@@ -111,7 +111,7 @@
 
 <div style="clear: both;" />
 
-<%= submit_tag "Save" %>
+  <%= submit_tag t(:save, :scope => :accounts) %>
 <%= javascript_tag "$('#new_ledger').submit( function () { jQuery.ajax({
 		    type: 'POST',
 		    url: '/accounts/#{@account.id}/ledgers',

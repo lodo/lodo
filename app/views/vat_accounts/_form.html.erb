@@ -2,30 +2,30 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :code %><br />
+    <%= f.label :code, t(:code, :scope => :vat) %><br />
     <%= f.text_field :code %>
   </p>
   <p>
-    <%= f.label :target_account_id %><br />
+    <%= f.label :target_account_id, t(:account, :scope => :vat) %><br />
     <%= f.select :target_account_id, @me.current_company.accounts.collect {|p| [ p.name, p.id ] }.sort %>
   </p>
   <p>
-    <%= f.label :percentage %><br />
+    <%= f.label :percentage, t(:percentage, :scope => :vat) %><br />
     <%= f.text_field :percentage %>
   </p>
   <p>
-    <%= f.label :overridable %><br />
+    <%= f.label :overridable, t(:overridable, :scope => :vat) %><br />
     <%= f.check_box :overridable %>
   </p>
   <p>
-    <%= f.label :valid_from %><br />
+    <%= f.label :valid_from, t(:valid_from, :scope => :vat) %><br />
     <%= f.date_select :valid_from %>
   </p>
   <p>
-    <%= f.label :valid_to %><br />
+    <%= f.label :valid_to, t(:valid_to, :scope => :vat) %><br />
     <%= f.date_select :valid_to %>
   </p>
   <p>
-    <%= f.submit "Save" %>
+    <%= f.submit t(:save, :scope => :vat) %>
   </p>
 <% end %>
