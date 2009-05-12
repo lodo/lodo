@@ -26,7 +26,7 @@ class AccountsController < ApplicationController
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = Account.find(@me.current_company.accounts, :order => 'number')
+    @accounts = @me.current_company.accounts
     
     respond_to do |format|
       format.html # index.html.erb

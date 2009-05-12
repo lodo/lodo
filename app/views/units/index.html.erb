@@ -1,0 +1,24 @@
+<h1>Listing units</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Comments</th>
+  </tr>
+
+<% @units.each do |unit| %>
+  <tr>
+    <td><%=h unit.name %></td>
+    <td><%= render :partial => "/addresses/show", :locals => { :address => unit.address }  %></td>
+    <td><%=h unit.comments %></td>
+    <td><%= link_to 'Show', unit %></td>
+    <td><%= link_to 'Edit', edit_unit_path(unit) %></td>
+    <td><%= link_to 'Destroy', unit, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New unit', new_unit_path %>

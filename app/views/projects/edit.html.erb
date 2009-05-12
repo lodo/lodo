@@ -1,0 +1,21 @@
+<h1>Editing project</h1>
+
+<% form_for(@project) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <%= render :partial => "addresses/nested_form", :locals => {  :parent => f, :field_name => :address } %>
+  <p>
+    <%= f.label :comments %><br />
+    <%= f.text_area :comments %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @project %> |
+<%= link_to 'Back', projects_path %>

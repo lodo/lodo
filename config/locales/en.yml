@@ -30,6 +30,8 @@ en:
     chart_of_accounts: "Accounts"
     journals: "Journals"
     companies: "Companies"
+    projects: "Projects"
+    units: Units
     products: "Products"
     orders: "Orders"
     bills: "Bills"

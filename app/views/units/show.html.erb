@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%=h @unit.name %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= render :partial => "/addresses/show", :locals => { :address => @unit.address }  %>
+</p>
+
+<p>
+  <b>Comments:</b>
+  <%=h @unit.comments %>
+</p>
+
+
+<%= link_to 'Edit', edit_unit_path(@unit) %> |
+<%= link_to 'Back', units_path %>

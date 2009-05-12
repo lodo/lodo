@@ -97,6 +97,8 @@
     chart_of_accounts: "Kontoplan"
     journals: "Bilagsføring"
     companies: "Firmaer"
+    projects: Prosjekt
+    units: Avdeling
     products: "Produkter"
     orders: "Ordre"
     bills: "Faktura"
