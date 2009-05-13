@@ -5,6 +5,6 @@ class Journal < ActiveRecord::Base
   belongs_to :period
 
   def editable?
-    return (not self.closed and self.bill_id.nil?)
+    return (self.period.open? and not self.closed and self.bill_id.nil?)
   end
 end
