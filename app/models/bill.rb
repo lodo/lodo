@@ -3,11 +3,12 @@ class Bill < ActiveRecord::Base
   has_many :bill_orders, :autosave => true
   has_one :journal, :autosave => true
 
-  def before_save
+  def after_save
     if self.journal.nil?
       self.journal = Journal.new(:journal_date => self.updated_at, :company => self.company)
     else
       self.journal.journal_operations.clear
+      self.journal.journal_date = self.updated_at
     end
 
     self.bill_orders.each do |bill_order|
@@ -39,6 +40,7 @@ class Bill < ActiveRecord::Base
         ))
       end
     end
+    self.journal.save
   end
 
   def editable?
