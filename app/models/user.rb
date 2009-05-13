@@ -43,6 +43,10 @@ class User < ActiveRecord::Base
     Notifications.deliver_forgot_password(self.email, self.login, new_pass)
   end
   
+  def open_periods(company = self.current_company)
+    Period.find(:all, :conditions => {:company_id => company.id, :status => Period::STATUSE_NAMES['Open']})
+  end
+
   protected
 
   def self.encrypt(pass, salt)
@@ -61,5 +65,4 @@ class User < ActiveRecord::Base
     1.upto(len) { |i| newpass << chars[rand(chars.size-1)] }
     return newpass
   end
-  
 end

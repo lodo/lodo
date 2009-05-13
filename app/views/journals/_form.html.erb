@@ -21,6 +21,10 @@
   <%= f.text_field :number %>
 </p>
 <p>
+  <%= f.label :period_id, "Period" %><br />
+  <%= f.select :period_id, @me.open_periods.collect {|p| [ p.year.to_s + "-" + p.nr.to_s, p.id ] } %>
+</p>
+<p>
   <%= f.label :journal_date, t(:journal_date, :scope => :journals) %><br />
   <%= f.date_select :journal_date %>
 </p>

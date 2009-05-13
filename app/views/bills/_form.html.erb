@@ -90,6 +90,10 @@
     <%= f.date_select :billing_date %>
   </p>
   <p>
+    <%= f.label :period_id, "Period" %><br />
+    <%= f.select :period_id, @me.open_periods.collect {|p| [ p.year.to_s + "-" + p.nr.to_s, p.id ] } %>
+  </p>
+  <p>
     <%= f.label :due_date, "Due date" %><br />
     <%= f.date_select :due_date %>
   </p>

@@ -1,0 +1,19 @@
+<% form_for(@period) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :year %><br />
+    <%= f.text_field :year %>
+  </p>
+  <p>
+    <%= f.label :nr %><br />
+    <%= f.text_field :nr %>
+  </p>
+  <p>
+    <%= f.label :status, "Status" %><br />
+    <%= f.select :status, Period::STATUSES.collect { |key,value| [value, key]} %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>

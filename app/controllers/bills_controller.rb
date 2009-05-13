@@ -94,6 +94,7 @@ order by
      'billing_date(1i)',
      'billing_date(2i)',
      'billing_date(3i)',
+     'period_id',
      'due_date(1i)',
      'due_date(2i)',
      'due_date(3i)'].each do |name|
