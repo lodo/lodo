@@ -90,6 +90,10 @@
     <%= f.date_select :billing_date %>
   </p>
   <p>
+    <%= f.label :due_date, "Due date" %><br />
+    <%= f.date_select :due_date %>
+  </p>
+  <p>
     <%= f.submit t(:create, :scope => :bills) %>
   </p>
 <% end %>
