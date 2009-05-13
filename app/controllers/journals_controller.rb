@@ -63,15 +63,15 @@ class JournalsController < ApplicationController
         begin
           @journal = Journal.new(params[:journal])
           @journal.company = @me.current_company
-          @journal.save or raise ActiveRecord::Rollback
-          params[:journal_operations].each {
+          params[:journal_operations].each do
             |key, value|
-            value[:journal_id] = @journal.id
             op = JournalOperation.new(value)
             if op.amount != 0.0
-              op.save or raise ActiveRecord::Rollback
+              @journal.journal_operations.push op 
             end
-          }
+          end
+          @journal.save!
+
           flash[:notice] = 'Journal was successfully created.'
           format.html { redirect_to(@journal) }
           format.xml  { render :xml => @journal, :status => :created, :location => @journal }
@@ -86,32 +86,19 @@ class JournalsController < ApplicationController
   # PUT /journals/1
   # PUT /journals/1.xml
   def update
-
     respond_to do |format|
       Journal.transaction do
         begin
           @journal.update_attributes(params[:journal]) or raise ActiveRecord::Rollback
-
-          # FIXME: This is an ugly way to save things.  Lot's of work,
-          # and no transactional safety.  Can we move this to the save
-          # method of the model, or is that not railsy?
-          params[:journal_operations].each {
+          @journal.journal_operations.clear
+          params[:journal_operations].each do
             |key, value|
-            value[:journal_id] = @journal.id
-            if value[:id] != nil
-              op = JournalOperation.find(value[:id])
-              if op.amount > 0.0
-                op.update_attributes(value)  or raise ActiveRecord::Rollback
-              else
-                op.destroy
-              end
-            else
-              op = JournalOperation.new(value)
-              if op.amount > 0.0
-                op.save  or raise ActiveRecord::Rollback
-              end
+            op = JournalOperation.new(value)
+            if op.amount != 0.0
+              @journal.journal_operations.push op 
             end
-          }
+          end
+          @journal.save!
 
           flash[:notice] = 'Journal was successfully updated.'
           format.html { redirect_to(@journal) }
