@@ -45,6 +45,6 @@ class Bill < ActiveRecord::Base
   end
 
   def editable?
-    return (not self.journal.nil? or not self.journal.closed)
+    return (self.period.open? and (not self.journal.nil? or not self.journal.closed))
   end
 end

@@ -7,4 +7,8 @@ class Period < ActiveRecord::Base
   def status_name
     STATUSES[self.status]
   end
+
+  def open?
+     self.status == 1
+  end
 end
