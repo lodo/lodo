@@ -53,7 +53,7 @@
   </p>
   <p>
     <%= f.label :seller_id, t(:seller, :scope => :orders) -%><br />
-    <%= f.select :seller_id, Company.find(:all).collect {|p| [ p.name, p.id ] } %>
+    <%= f.select :seller_id, @me.current_company.users.collect {|u| [ "#{u.login}: #{u.email}", u.id ] } %>
   </p>
   <p>
     <%= f.label :customer_id, t(:customer, :scope => :orders) %><br />

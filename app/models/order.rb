@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  belongs_to :seller, :class_name => 'Company'
+  belongs_to :seller, :class_name => 'User'
   belongs_to :customer, :class_name => 'Ledger'
   belongs_to :delivery_address, :class_name => 'Address'
   belongs_to :transport, :class_name => 'Company'
