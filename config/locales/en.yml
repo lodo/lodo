@@ -213,6 +213,7 @@ en:
     destroy: Delete
   bills:
     listing_bills: Listing bills
+    invoice_number: "Invoice number: {{number}}"
     delivery_date: Delivery date
     billing_date: Billing date
     new_bill: New bill
@@ -220,6 +221,7 @@ en:
     back: Back
     edit: Edit
     destroy: Delete
+    save: Save
     confirm_destroy: Confirm deleting bill {{number}}
     editing_bill: Editing bill
     order: Order

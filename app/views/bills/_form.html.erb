@@ -93,8 +93,18 @@
     <%= f.label :due_date, "Due date" %><br />
     <%= f.date_select :due_date %>
   </p>
+
+<% if @bill.invoice_number %>
+  <b><%= t("bills.invoice_number", :number => @bill.invoice_number) %></b>
+<% else %>
   <p>
-    <%= f.submit t(:create, :scope => :bills) %>
+    <%= check_box_tag "close_invoice", "1", false %>
+    <%= label :close, :invoice, t("bills.close_invoice") %>
+  </p>
+<% end %>
+
+  <p>
+    <%= f.submit t(:save, :scope => :bills) %>
   </p>
 <% end %>
 

@@ -3,6 +3,15 @@ class Bill < ActiveRecord::Base
   has_many :bill_orders, :autosave => true
   has_one :journal, :autosave => true
 
+  # close bill and assign invoice number
+  def post_invoice!
+    raise "already posted?" if !self.invoice_number.nil?
+    company = Company.find(:first, :conditions => {:id => self.company.id}, :lock => true)
+    self.invoice_number = company.next_invoice_number
+    company.next_invoice_number += 1
+    company.save!
+  end
+
   def after_save
     if self.journal.nil?
       self.journal = Journal.new(:journal_date => self.updated_at, :company => self.company)

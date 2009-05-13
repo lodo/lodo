@@ -280,6 +280,7 @@
     destroy: Slett
   bills:
     listing_bills: Viser fakturaer
+    invoice_number: "Fakturanummer: {{number}}"
     delivery_date: Leveringsdato
     billing_date: Fakturadato
     new_bill: Ny faktura

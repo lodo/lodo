@@ -1,3 +1,9 @@
+<% if @bill.invoice_number %>
+<p>
+  <b><%= t(:invoice_number, :scope => :bills, :number => @bill.invoice_number) -%></b>
+</p>
+<% end %>
+
 <p>
   <b><%= t(:delivery_date, :scope => :bills) -%>:</b>
   <%=h l(@bill.delivery_date) %>
