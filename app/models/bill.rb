@@ -19,6 +19,8 @@ class Bill < ActiveRecord::Base
         self.journal.journal_operations.push(JournalOperation.new(
           :account => bill_item.order_item.product.account,
           :amount => -bill_item.price,
+          :unit => bill_order.order.unit,
+          :project => bill_order.order.project,
           :vat => -bill_item.price * @vat,
           :vat_account => bill_item.order_item.product.account.vat_account
         ))
@@ -28,6 +30,9 @@ class Bill < ActiveRecord::Base
         end
         self.journal.journal_operations.push(JournalOperation.new(
           :account => bill_order.order.customer.account,
+          :ledger => bill_order.order.customer,
+          :unit => bill_order.order.customer.unit,
+          :project => bill_order.order.customer.project,
 	  :amount => bill_item.price,
           :vat => bill_item.price * @vat,
           :vat_account => bill_order.order.customer.account.vat_account

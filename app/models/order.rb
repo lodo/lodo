@@ -4,6 +4,8 @@ class Order < ActiveRecord::Base
   belongs_to :delivery_address, :class_name => 'Address'
   belongs_to :transport, :class_name => 'Company'
   belongs_to :company, :class_name => 'Company'
+  belongs_to :unit
+  belongs_to :project
   has_many :order_items
 
   def discount

@@ -68,6 +68,14 @@
     <%= f.select :transport_id, Company.find(:all).collect {|p| [ p.name, p.id ] } %>
   </p>
   <p>
+    <%= f.label :unit_id, "Unit" -%><br />
+    <%= f.select :unit_id, Unit.find(:all).collect {|p| [ p.name, p.id ] } %>
+  </p>
+  <p>
+    <%= f.label :project_id, "Project" -%><br />
+    <%= f.select :project_id, Project.find(:all).collect {|p| [ p.name, p.id ] } %>
+  </p>
+  <p>
     <%= f.submit t(:save, :scope => :orders) %>
   </p>
 <% end %>
