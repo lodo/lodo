@@ -10,7 +10,7 @@
 
 <p>
   <b><%= t(:journal_date, :scope => :journals) -%>:</b>
-  <%=h l(@journal.journal_date) %>
+  <%=h @journal.journal_date ? l(@journal.journal_date) : "" %>
 </p>
 
 <p>
