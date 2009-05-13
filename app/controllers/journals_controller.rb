@@ -1,5 +1,7 @@
 class JournalsController < ApplicationController
   before_filter :company_required
+  before_filter :find_units_all, :only => [:new, :edit]
+  before_filter :find_projects_all, :only => [:new, :edit]
   before_filter :find_accounts_all, :only => [:new, :edit]
   before_filter :load_journal, :only => [:show, :edit, :update, :destroy]
   before_filter :right_company, :only => [:show, :edit, :update, :destroy]
@@ -129,6 +131,20 @@ class JournalsController < ApplicationController
       Account.find(:all, 
                    :conditions => {:company_id => @me.current_company.id}, 
                    :order => :number)
+  end
+
+  def find_units_all
+    @units_all =
+      Unit.find(:all, 
+                   :conditions => {:company_id => @me.current_company.id},
+                   :order => :name)
+  end
+
+  def find_projects_all
+    @projects_all =
+      Project.find(:all, 
+                   :conditions => {:company_id => @me.current_company.id},
+                   :order => :name)
   end
 
   def open_required

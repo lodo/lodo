@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  year: 1
+  nr: 1
+  status: 1
+  company_id: 1
+
+two:
+  year: 1
+  nr: 1
+  status: 1
+  company_id: 1

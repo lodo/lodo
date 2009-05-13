@@ -130,6 +130,36 @@ var journals = {
     },
 
     /**
+       Return a DOM select node, populated with a list of all units that can be used for a transaction
+     */
+    makeUnitSelect: function () {
+	var sel = document.createElement("select");
+	sel.name = "journal_operations[" + LODO.journalLines+"][unit_id]";
+	sel.id = "dynfield_3_"+ LODO.journalLines;
+	
+	for (var i=0; i<LODO.unitList.length; i++) {
+	    sel.add(new Option(LODO.unitList[i].unit.name,
+			       LODO.unitList[i].unit.id), null);
+	}
+	return sel;
+    },
+
+    /**
+       Return a DOM select node, populated with a list of all projects that can be used for a transaction
+     */
+    makeProjectSelect: function () {
+	var sel = document.createElement("select");
+	sel.name = "journal_operations[" + LODO.journalLines+"][project_id]";
+	sel.id = "dynfield_4_"+ LODO.journalLines;
+	
+	for (var i=0; i<LODO.projectList.length; i++) {
+	    sel.add(new Option(LODO.projectList[i].project.name,
+			       LODO.projectList[i].project.id), null);
+	}
+	return sel;
+    },
+
+    /**
        Updates the vat amount to the default for the selected account
      */
     setDefaultVat: function (line) 
@@ -249,7 +279,7 @@ var journals = {
        Add a new line to the journal_operation list. 
      */
     addAccountLine: function(line)
-    {
+    { 
 	if(!LODO.journalLines) {
 	    LODO.journalLines = 0;
 	}
@@ -290,15 +320,7 @@ var journals = {
 	row3.addCell(journals.makeText('vat2_debet'));
 	row3.addCell(journals.makeText('vat2_credit'));
 	
-	row.addCell(journals.makeAccountSelect());
-	row.addCell(journals.makeDebet());
-	row.addCell(journals.makeCredit());
-	row.addCell(journals.makeText('balance'));
-	row.addCell(journals.makeText('in'));
-	row.addCell(journals.makeText('out'));
-	row.addCell(journals.makeVat(line?line.vat:25));
-	var cell = journals.makeText('amount');
-	
+	var cell = journals.makeAccountSelect()
 	if (line) {
 	    var line_id = document.createElement("input");
 	    line_id.type = "hidden";
@@ -310,17 +332,25 @@ var journals = {
 	vat_account_id.type = "hidden";
 	vat_account_id.name = "journal_operations[" + LODO.journalLines+"][vat_account_id]";
 	vat_account_id.id = "vat_account_" + LODO.journalLines;
-	
 	cell.appendChild(vat_account_id);
-	
-	
+
 	row.addCell(cell);
-	
+	row.addCell(journals.makeDebet());
+	row.addCell(journals.makeCredit());
+	row.addCell(journals.makeText('balance'));
+	row.addCell(journals.makeText('in'));
+	row.addCell(journals.makeText('out'));
+	row.addCell(journals.makeVat(line?line.vat:25));
+	row.addCell(journals.makeUnitSelect());
+	row.addCell(journals.makeProjectSelect());
+
 	if (line) {
 	    amount = line.amount;
 	    $("#dynfield_0_"+ LODO.journalLines)[0].value = line.account_id;
 	    $("#dynfield_1_"+ LODO.journalLines)[0].value = amount<0?-amount:0;
 	    $("#dynfield_2_"+ LODO.journalLines)[0].value = amount>0?amount:0;
+	    $("#dynfield_3_"+ LODO.journalLines)[0].value = line.unit_id;
+	    $("#dynfield_4_"+ LODO.journalLines)[0].value = line.project_id;
 	    journals.doDisable(LODO.journalLines);
 	}
 	LODO.journalLines++;

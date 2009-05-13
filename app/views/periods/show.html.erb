@@ -1,0 +1,23 @@
+<p>
+  <b>Year:</b>
+  <%=h @period.year %>
+</p>
+
+<p>
+  <b>Nr:</b>
+  <%=h @period.nr %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h @period.status %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%=h @period.company_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_period_path(@period) %> |
+<%= link_to 'Back', periods_path %>

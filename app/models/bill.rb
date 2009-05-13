@@ -2,6 +2,7 @@ class Bill < ActiveRecord::Base
   belongs_to :company
   has_many :bill_orders, :autosave => true
   has_one :journal, :autosave => true
+  belongs_to :period
 
   # close bill and assign invoice number
   def post_invoice!
@@ -14,7 +15,7 @@ class Bill < ActiveRecord::Base
 
   def after_save
     if self.journal.nil?
-      self.journal = Journal.new(:journal_date => self.updated_at, :company => self.company)
+      self.journal = Journal.new(:period => self.period, :journal_date => self.updated_at, :company => self.company)
     else
       self.journal.journal_operations.clear
       self.journal.journal_date = self.updated_at

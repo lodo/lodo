@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :periods
+
   map.resources :units
 
   map.resources :projects
