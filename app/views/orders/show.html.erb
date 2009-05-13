@@ -76,6 +76,16 @@
   <%=h @order.transport.name %>
 </p>
 
+<p>
+  <b>Unit</b>
+  <%=h @order.unit.name %>
+</p>
+
+<p>
+  <b>Project</b>
+  <%=h @order.project.name %>
+</p>
+
 
 <%= link_to t(:edit, :scope => :orders), edit_order_path(@order) %> |
 <%= link_to t(:back, :scope => :orders), orders_path %>
