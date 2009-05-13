@@ -107,9 +107,12 @@
   </p>
 <% end %>
 
-  <p>
-    <%= f.submit t(:save, :scope => :bills) %>
-  </p>
+<p>
+<% if @bill.editable? %>
+  <%= f.submit t(:save, :scope => :bills) %>
+<% end %>
+</p>
+
 <% end %>
 
 <script>

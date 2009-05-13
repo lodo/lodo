@@ -137,13 +137,22 @@ order by
   def create
     @bill = post_to_model params[:bill]
     @bill.company_id = @me.current_company.id
-
     respond_to do |format|
-      if @bill.save
+      saved = true
+      begin
+        Bill.transaction do
+          @bill.post_invoice! if params[:close_invoice].to_i == 1
+          @bill.save!
+        end # commit
+      rescue Exception
+        saved = false
+      end
+      if saved
         flash[:notice] = 'Bill was successfully created.'
         format.html { redirect_to(@bill) }
         format.xml  { render :xml => @bill, :status => :created, :location => @bill }
       else
+        flash.now[:notice] = 'Error saving bill.'
         format.html { render :action => "new" }
         format.xml  { render :xml => @bill.errors, :status => :unprocessable_entity }
       end
@@ -153,11 +162,21 @@ order by
   # PUT /bills/1
   # PUT /bills/1.xml
   def update
+    raise "bill is closed" if !@bill.editable?
     params[:bill]['id'] = params[:id]
     @bill = post_to_model params[:bill]
 
     respond_to do |format|
-      if @bill.save
+      saved = true
+      begin
+        Bill.transaction do
+          @bill.post_invoice! if params[:close_invoice].to_i == 1
+          @bill.save!
+        end # commit
+      rescue Exception
+        saved = false
+      end
+      if saved
         flash[:notice] = 'Bill was successfully updated.'
         format.html { redirect_to(@bill) }
         format.xml  { head :ok }
@@ -171,6 +190,7 @@ order by
   # DELETE /bills/1
   # DELETE /bills/1.xml
   def destroy
+    raise "bill closed" if !@bill.editable?
     @bill.destroy
 
     respond_to do |format|

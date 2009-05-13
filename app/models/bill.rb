@@ -6,11 +6,13 @@ class Bill < ActiveRecord::Base
 
   # close bill and assign invoice number
   def post_invoice!
-    raise "already posted?" if !self.invoice_number.nil?
+    raise "already posted?" if !self.editable?
     company = Company.find(:first, :conditions => {:id => self.company.id}, :lock => true)
     self.invoice_number = company.next_invoice_number
     company.next_invoice_number += 1
     company.save!
+    self.journal.closed = true
+    self.journal.save!
   end
 
   def after_save
@@ -54,6 +56,6 @@ class Bill < ActiveRecord::Base
   end
 
   def editable?
-    return (not self.journal.nil? or not self.journal.closed)
+    return (self.journal.nil? || (not self.journal.closed))
   end
 end

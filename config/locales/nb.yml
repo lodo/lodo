@@ -98,6 +98,7 @@
     journals: "Bilagsføring"
     companies: "Firmaer"
     projects: Prosjekt
+    periods: Perioder
     units: Avdeling
     products: "Produkter"
     orders: "Ordre"
@@ -280,6 +281,8 @@
     destroy: Slett
   bills:
     listing_bills: Viser fakturaer
+    save: Lagre
+    close_invoice: Lukk faktura
     invoice_number: "Fakturanummer: {{number}}"
     delivery_date: Leveringsdato
     billing_date: Fakturadato

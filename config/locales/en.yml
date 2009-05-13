@@ -31,6 +31,7 @@ en:
     journals: "Journals"
     companies: "Companies"
     projects: "Projects"
+    periods: Periods
     units: Units
     products: "Products"
     orders: "Orders"
@@ -213,6 +214,8 @@ en:
     destroy: Delete
   bills:
     listing_bills: Listing bills
+    save: Save
+    close_invoice: Close invoice
     invoice_number: "Invoice number: {{number}}"
     delivery_date: Delivery date
     billing_date: Billing date
