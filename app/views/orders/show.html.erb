@@ -58,7 +58,7 @@
 
 <p>
   <b><%= t(:seller, :scope => :orders) -%>:</b>
-  <%=h @order.seller.name %>
+  <%=h @order.seller.login + ": " + @order.seller.email %>
 </p>
 
 <p>

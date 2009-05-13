@@ -19,7 +19,7 @@
     <td><%=h order.mva %></td>
     <td><%=h l(order.order_date) %></td>
     <td><%=h l(order.requested_delivery_date) %></td>
-    <td><%=h order.seller.name %></td>
+    <td><%=h order.seller.login + ": " + order.seller.email %></td>
     <td><%=h order.customer.name %></td>
     <td><%= render :partial => "addresses/show", :locals => { :address => order.delivery_address } %></td>
     <td><%=h order.transport.name %></td>

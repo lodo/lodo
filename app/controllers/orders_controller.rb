@@ -5,6 +5,7 @@ class OrdersController < ApplicationController
 
   def load_order
     @order = Order.find(params[:id])
+    @order.delivery_address ||= Address.new
   end
 
   def right_company
