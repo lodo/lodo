@@ -2,25 +2,19 @@
 
 <table class='striped'>
   <tr>
-    <th><%= t(:account, :scope => :vat) -%></th>
-    <th><%= t(:percentage, :scope => :vat) -%></th>
-    <th><%= t(:overridable, :scope => :vat) -%></th>
     <th><%= t(:code, :scope => :vat) -%></th>
-    <th><%= t(:valid_from, :scope => :vat) -%></th>
-    <th><%= t(:valid_to, :scope => :vat) -%></th>
+    <th><%= t(:account, :scope => :vat) -%></th>
+    <th><%= t(:overridable, :scope => :vat) -%></th>
   </tr>
 
 <% for vat_account in @vat_accounts %>
   <tr>
+    <td><%=h vat_account.id %></td>
     <td><%=h vat_account.target_account.number %> -  <%=h vat_account.target_account.name %></td>
-    <td><%=h vat_account.percentage %></td>
     <td><%=h vat_account.overridable %></td>
-    <td><%=h vat_account.code %></td>
-    <td><%= l(vat_account.valid_from) %></td>
-    <td><%= l(vat_account.valid_to) %></td>
     <td><%= link_to t(:show, :scope => :vat), vat_account %></td>
     <td><%= link_to t(:edit, :scope => :vat), edit_vat_account_path(vat_account) %></td>
-    <td><%= link_to t(:destroy, :scope => :vat), vat_account, :confirm => t(:confirm_destroy, :scope => :vat, :code => vat_account.code), :method => :delete %></td>
+    <td><%= link_to t(:destroy, :scope => :vat), vat_account, :confirm => t(:confirm_destroy, :scope => :vat, :code => vat_account.id), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

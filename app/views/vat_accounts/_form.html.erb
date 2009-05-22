@@ -1,30 +1,51 @@
 <% form_for(@vat_account) do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label :code, t(:code, :scope => :vat) %><br />
-    <%= f.text_field :code %>
-  </p>
   <p>
     <%= f.label :target_account_id, t(:account, :scope => :vat) %><br />
     <%= f.select :target_account_id, @me.current_company.accounts.collect {|p| [ p.name, p.id ] }.sort %>
   </p>
   <p>
-    <%= f.label :percentage, t(:percentage, :scope => :vat) %><br />
-    <%= f.text_field :percentage %>
-  </p>
-  <p>
     <%= f.label :overridable, t(:overridable, :scope => :vat) %><br />
     <%= f.check_box :overridable %>
   </p>
-  <p>
-    <%= f.label :valid_from, t(:valid_from, :scope => :vat) %><br />
-    <%= f.unobtrusive_date_text_picker :valid_from, :format=>'y-m-d', :divider=>'-' %>
-  </p>
-  <p>
-    <%= f.label :valid_to, t(:valid_to, :scope => :vat) %><br />
-    <%= f.unobtrusive_date_text_picker :valid_to, :format=>'y-m-d', :divider=>'-' %>
-  </p>
+
+  <div>
+    <table class='striped'>
+      <tr>
+	<th>Valid from</th>
+	<th>Percentage</th>
+      </tr>
+
+      <% for vat_account_period in @vat_account.vat_account_periods.sort { |a,b| b.valid_from <=> a.valid_from } %>
+	<tr>
+	  <td>
+           <%=h vat_account_period.valid_from %>
+          </td>
+	  <td>
+           <%=h vat_account_period.percentage %>
+           <%= hidden_field_tag "periods[][id]", vat_account_period.id %>
+           <%= hidden_field_tag "periods[][valid_from]", vat_account_period.valid_from %>
+           <%= hidden_field_tag "periods[][percentage]", vat_account_period.percentage %>
+          </td>
+	</tr>
+      <% end %>
+    </table>
+
+    <p>
+      <%= f.label "add_period[valid_from]", "Valid from" %><br />
+      <%= unobtrusive_date_text_picker_tag "add_period[valid_from]", DateTime::now() %>
+    </p>
+
+    <p>
+      <%= f.label "add_period[percentage]", "Percentage" %><br />
+      <%= text_field_tag "add_period[percentage]" %>
+    </p>
+
+    <p>
+      <%= f.submit "Add period" %>
+    </p>
+  </div>
+
   <p>
     <%= f.submit t(:save, :scope => :vat) %>
   </p>

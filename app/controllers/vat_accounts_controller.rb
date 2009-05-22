@@ -54,20 +54,33 @@ class VatAccountsController < ApplicationController
   def edit
   end
 
+  def add_period
+    @vat_account.vat_account_periods.push VatAccountPeriod.new(params[:add_period])
+  end
+
   # POST /vat_accounts
   # POST /vat_accounts.xml
   def create
     @vat_account = VatAccount.new(params[:vat_account])
     @vat_account.company_id = @me.current_company.id
 
+    params[:periods].each do |period|
+      @vat_account.vat_account_periods.push VatAccountPeriod.new(period)
+    end
+
     respond_to do |format|
-      if @vat_account.save
-        flash[:notice] = t(:create_success, :scope => :vat)
-        format.html { redirect_to(@vat_account) }
-        format.xml  { render :xml => @vat_account, :status => :created, :location => @vat_account }
+      if params[:commit] == 'Add period'
+	self.add_period
+	format.html { render :action => "new" }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @vat_account.errors, :status => :unprocessable_entity }
+	if @vat_account.save
+	  flash[:notice] = t(:create_success, :scope => :vat)
+	  format.html { redirect_to(@vat_account) }
+	  format.xml  { render :xml => @vat_account, :status => :created, :location => @vat_account }
+	else
+	  format.html { render :action => "new" }
+	  format.xml  { render :xml => @vat_account.errors, :status => :unprocessable_entity }
+	end
       end
     end
   end
@@ -75,14 +88,21 @@ class VatAccountsController < ApplicationController
   # PUT /vat_accounts/1
   # PUT /vat_accounts/1.xml
   def update
+    @vat_account.attributes = params[:vat_account]
+
     respond_to do |format|
-      if @vat_account.update_attributes(params[:vat_account])
-        flash[:notice] = t(:update_success, :scope => :vat)
-        format.html { redirect_to(@vat_account) }
-        format.xml  { head :ok }
+      if params[:commit] == 'Add period'
+	self.add_period
+	format.html { render :action => "edit" }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @vat_account.errors, :status => :unprocessable_entity }
+	if @vat_account.save!
+	  flash[:notice] = t(:update_success, :scope => :vat)
+	  format.html { redirect_to(@vat_account) }
+	  format.xml  { head :ok }
+	else
+	  format.html { render :action => "edit" }
+	  format.xml  { render :xml => @vat_account.errors, :status => :unprocessable_entity }
+	end
       end
     end
   end
