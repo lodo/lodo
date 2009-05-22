@@ -19,11 +19,11 @@
   </p>
   <p>
     <%= f.label :valid_from, t(:valid_from, :scope => :vat) %><br />
-    <%= f.date_select :valid_from %>
+    <%= f.unobtrusive_date_text_picker :valid_from, :format=>'y-m-d', :divider=>'-' %>
   </p>
   <p>
     <%= f.label :valid_to, t(:valid_to, :scope => :vat) %><br />
-    <%= f.date_select :valid_to %>
+    <%= f.unobtrusive_date_text_picker :valid_to, :format=>'y-m-d', :divider=>'-' %>
   </p>
   <p>
     <%= f.submit t(:save, :scope => :vat) %>

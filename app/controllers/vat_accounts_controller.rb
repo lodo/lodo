@@ -43,6 +43,8 @@ class VatAccountsController < ApplicationController
   # GET /vat_accounts/new.xml
   def new
     @vat_account = VatAccount.new
+    @vat_account.valid_from = DateTime::now()
+    @vat_account.valid_to = DateTime::now()
 
     respond_to do |format|
       format.html # new.html.erb
