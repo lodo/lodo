@@ -40,10 +40,6 @@
   <button onClick='orders.addProduct();' type='button'><%= t(:add_product, :scope => :orders) -%></button>
   
   <p>
-    <%= f.label :mva, t(:vat, :scope => :orders) %><br />
-    <%= f.text_field :mva %>
-  </p>
-  <p>
     <%= f.label :order_date, t(:order_date, :scope => :orders) %><br />
     <%= f.unobtrusive_date_text_picker :order_date, :format=>'y-m-d', :divider=>'-' %>
   </p>
