@@ -83,11 +83,11 @@
 
   <p>
     <%= f.label :delivery_date, t(:delivery_date, :scope => :bills) %><br />
-    <%= f.date_select :delivery_date %>
+    <%= f.unobtrusive_date_text_picker :delivery_date, :format=>'y-m-d', :divider=>'-' %>
   </p>
   <p>
     <%= f.label :billing_date, t(:billing_date, :scope => :bills) %><br />
-    <%= f.date_select :billing_date %>
+    <%= f.unobtrusive_date_text_picker :billing_date, :format=>'y-m-d', :divider=>'-' %>
   </p>
   <p>
     <%= f.label :period_id, "Period" %><br />
@@ -95,7 +95,7 @@
   </p>
   <p>
     <%= f.label :due_date, "Due date" %><br />
-    <%= f.date_select :due_date %>
+    <%= f.unobtrusive_date_text_picker :due_date, :format=>'y-m-d', :divider=>'-' %>
   </p>
 
 <% if @bill.invoice_number %>

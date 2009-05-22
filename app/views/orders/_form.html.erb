@@ -45,11 +45,11 @@
   </p>
   <p>
     <%= f.label :order_date, t(:order_date, :scope => :orders) %><br />
-    <%= f.date_select :order_date %>
+    <%= f.unobtrusive_date_text_picker :order_date, :format=>'y-m-d', :divider=>'-' %>
   </p>
   <p>
     <%= f.label :requested_delivery_date, t(:requested_delivery_date, :scope => :orders) -%><br />
-    <%= f.date_select :requested_delivery_date %>
+    <%= f.unobtrusive_date_text_picker :requested_delivery_date, :format=>'y-m-d', :divider=>'-' %>
   </p>
   <p>
     <%= f.label :seller_id, t(:seller, :scope => :orders) -%><br />
