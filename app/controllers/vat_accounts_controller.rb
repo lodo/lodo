@@ -64,8 +64,10 @@ class VatAccountsController < ApplicationController
     @vat_account = VatAccount.new(params[:vat_account])
     @vat_account.company_id = @me.current_company.id
 
-    params[:periods].each do |period|
-      @vat_account.vat_account_periods.push VatAccountPeriod.new(period)
+    if !params[:periods].nil?
+      params[:periods].each do |period|
+        @vat_account.vat_account_periods.push VatAccountPeriod.new(period)
+      end
     end
 
     respond_to do |format|

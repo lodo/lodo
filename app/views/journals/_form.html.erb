@@ -5,7 +5,7 @@
   var LODO = new Object();
   LODO.unitList = <%= @units_all.to_json %>;
   LODO.projectList = <%= @projects_all.to_json %>;
-  LODO.accountList = <%= @accounts_all.to_json :include => { :vat_account => {:include => {:target_account=>{}}} } %>;
+  LODO.accountList = <%= @accounts_all.to_json :include => { :vat_account => {:include => { :vat_account_periods =>{}, :target_account=>{}}} } %>;
   LODO.journalOperationList = <%= @journal.journal_operations.to_json %>;
 </script>
 

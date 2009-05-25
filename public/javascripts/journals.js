@@ -52,11 +52,18 @@ var journals = {
     },
     
 
+    updateVat: function (reset_all) {
+        for (var i=0; i < LODO.journalLines; i++)
+            if (reset_all || $('#vatFactor_'+i)[0].value == "-1")
+                journals.setDefaultVat(i);
+    },
+
     /**
        Update all automatic fields, such as the vat. This also calls the validate function.
      */
     update: function ()
     {
+        journals.updateVat(false);
 	journals.sumColumn(1);
 	journals.sumColumn(2);
 	for (var i=0; i < LODO.journalLines; i++) {
@@ -164,11 +171,31 @@ var journals = {
      */
     setDefaultVat: function (line) 
     {
+        var current_date = $('#journal_journal_date')[0].value;
 	var account = journals.getAccount($('#dynfield_0_'+line)[0].value);
         var percentage = 0;
 
-        if (account.vat_account != undefined)
-            percentage = account.vat_account.percentage;
+        if (current_date != '')
+            current_date = Date.fromString(current_date);
+
+        if (account.vat_account != undefined) {
+            var current_vat_account_period;
+            var current_vat_account_period_valid_from;
+            $.each(account.vat_account.vat_account_periods,
+               	function (i, vat_account_period) {
+                    var vat_account_period_valid_from = Date.fromString(vat_account_period.valid_from)
+
+                    if (   vat_account_period_valid_from < current_date
+                        && (   current_vat_account_period_valid_from === undefined
+                            || current_vat_account_period_valid_from < vat_account_period_valid_from)) {
+			current_vat_account_period = vat_account_period;
+			current_vat_account_period_valid_from = vat_account_period_valid_from;
+                    }
+                });
+            console.log("SET",line, current_vat_account_period);
+            if (current_vat_account_period !== undefined)
+                percentage = current_vat_account_period.percentage;
+        }
 
 	$('#vatFactor_'+line)[0].value = percentage;
 
@@ -340,7 +367,7 @@ var journals = {
 	row.addCell(journals.makeText('balance'));
 	row.addCell(journals.makeText('in'));
 	row.addCell(journals.makeText('out'));
-	row.addCell(journals.makeVat(line?line.vat:25));
+	row.addCell(journals.makeVat(line?line.vat:-1));
 	row.addCell(journals.makeUnitSelect());
 	row.addCell(journals.makeProjectSelect());
 
@@ -370,7 +397,12 @@ var journals = {
 	    line = lines[i]['journal_operation'];
 	    journals.addAccountLine(line);
 	}
+        journals.updateVat(false);
 	journals.update();
+        $('#journal_journal_date')[0].onchange = function (e) {
+            journals.updateVat(true);
+	    journals.update();
+        }
     },
     
     /**

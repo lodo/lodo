@@ -27,7 +27,7 @@ class Bill < ActiveRecord::Base
       bill_order.bill_items.each do |bill_item|
         @vat = 0
         if !bill_item.order_item.product.account.vat_account.nil?
-          @vat = bill_item.order_item.product.account.vat_account.percentage
+  	  @vat = bill_item.order_item.product.account.vat_account.vat_account_period_from_date(self.journal.journal_date).percentage
         end
         self.journal.journal_operations.push(JournalOperation.new(
           :account => bill_item.order_item.product.account,

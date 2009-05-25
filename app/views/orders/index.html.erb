@@ -3,7 +3,6 @@
 <table>
   <tr>
     <th><%= t(:price, :scope => :orders) -%></th>
-    <th><%= t(:vat, :scope => :orders) -%></th>
     <th><%= t(:order_date, :scope => :orders) -%></th>
     <th><%= t(:requested_delivery_date, :scope => :orders) -%></th>
     <th><%= t(:seller, :scope => :orders) -%></th>
@@ -16,7 +15,6 @@
 <% for order in @orders %>
   <tr>
     <td><%=h order.price %></td>
-    <td><%=h order.mva %></td>
     <td><%=h l(order.order_date) %></td>
     <td><%=h l(order.requested_delivery_date) %></td>
     <td><%=h order.seller.login + ": " + order.seller.email %></td>
