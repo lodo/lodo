@@ -1,4 +1,6 @@
 class PeriodsController < ApplicationController
+  before_filter :company_required
+
   # GET /periods
   # GET /periods.xml
   def index
