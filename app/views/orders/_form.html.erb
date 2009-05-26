@@ -7,6 +7,8 @@
   LODO.orderItemList = <%= @order.order_items.to_json %>;
 </script>
 
+<div>Note: All amounts are ex. VAT.</div>
+
 <% form_for(@order) do |f| %>
   <%= f.error_messages %>
 
