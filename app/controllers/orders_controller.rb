@@ -11,6 +11,7 @@ class OrdersController < ApplicationController
   def right_company
     if @me.companies.include? @order.company
       @me.current_company = @order.company
+      @me.save!
       return true
     end
 

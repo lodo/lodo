@@ -10,6 +10,7 @@ class BillsController < ApplicationController
   def right_company
     if @me.companies.include? @bill.company
       @me.current_company = @bill.company
+      @me.save!
       return true
     end
 

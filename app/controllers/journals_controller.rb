@@ -14,6 +14,7 @@ class JournalsController < ApplicationController
   def right_company
     if @me.companies.include? @journal.company
       @me.current_company = @journal.company
+      @me.save!
       return true
     end
 
@@ -25,7 +26,7 @@ class JournalsController < ApplicationController
   # GET /journals
   # GET /journals.xml
   def index
-    @journals = Journal.find(:all)
+    @journals = @me.current_company.journals
     
     respond_to do |format|
       format.html # index.html.erb
