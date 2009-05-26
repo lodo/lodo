@@ -10,6 +10,7 @@ class VatAccountsController < ApplicationController
   def right_company
     if @me.companies.include? @vat_account.company
       @me.current_company = @vat_account.company
+      @me.save!
       return true
     end
 
