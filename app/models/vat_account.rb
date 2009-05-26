@@ -6,7 +6,7 @@ class VatAccount < ActiveRecord::Base
 
   def vat_account_period_from_date(date)
     (self.vat_account_periods.find_all do |vat_account_period|
-      vat_account_period.valid_from <= self.journal.journal_date
+      vat_account_period.valid_from <= date.to_date
      end
     ).min do |a, b|
       a.valid_from <=> b.valid_from

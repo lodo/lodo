@@ -88,16 +88,10 @@ order by
     bill_model = Hash.new
     post = post.clone()
 
-    ['delivery_date(1i)', 
-     'delivery_date(2i)',
-     'delivery_date(3i)',
-     'billing_date(1i)',
-     'billing_date(2i)',
-     'billing_date(3i)',
+    ['delivery_date', 
+     'billing_date',
      'period_id',
-     'due_date(1i)',
-     'due_date(2i)',
-     'due_date(3i)'].each do |name|
+     'due_date'].each do |name|
       bill_model[name] = post.delete name
     end
 
@@ -144,8 +138,8 @@ order by
           @bill.post_invoice! if params[:close_invoice].to_i == 1
           @bill.save!
         end # commit
-      rescue Exception
-        saved = false
+#      rescue Exception
+#        saved = false
       end
       if saved
         flash[:notice] = 'Bill was successfully created.'
