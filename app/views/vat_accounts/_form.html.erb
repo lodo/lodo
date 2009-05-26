@@ -1,5 +1,11 @@
 <% form_for(@vat_account) do |f| %>
   <%= f.error_messages %>
+  <% if not @vat_account.id.nil? %>
+    <p>
+      <%= f.label :vat_id, "Kode" %><br />
+      <%= @vat_account.id.to_s %>
+    </p>
+  <% end %>
   <p>
     <%= f.label :target_account_id, t(:account, :scope => :vat) %><br />
     <%= f.select :target_account_id, @me.current_company.accounts.collect {|p| [ p.id.to_s + " - " + p.name, p.id ] }.sort %>
