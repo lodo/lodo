@@ -1,27 +1,35 @@
 <h1>Listing periods</h1>
 
+
+<%= link_to 'New period', new_period_path %>
+
+<br />
+
 <table>
   <tr>
     <th>Year</th>
     <th>Nr</th>
-    <th>Status</th>
-    <th>Company</th>
+    <th>New</th>
+    <th>Open</th>
+    <th>Done</th>
+    <th>Closed</th>
   </tr>
 
 <% @periods.each do |period| %>
   <tr>
     <td><%=h period.year %></td>
     <td><%=h period.nr %></td>
-    <td><%=h period.status_name %></td>
-    <td>
-      <%= link_to 'Show', period %>
-      <%= link_to 'Edit', edit_period_path(period) %>
-      <%= link_to 'Destroy', period, :confirm => 'Are you sure?', :method => :delete %>
-    </td>
+    <% for status in (0..period.status - 1) %>
+      <td></td>
+    <% end %>
+    <% if period.status < 3 then %>
+      <td><%= link_to '-&gt;', :id => period.id, :action => :elevate_status %></td>
+    <% else %>
+      <td>X</td>
+    <% end %>
+    <% for status in (period.status+1..3) %>
+      <td></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New period', new_period_path %>

@@ -11,4 +11,14 @@ class Period < ActiveRecord::Base
   def open?
      self.status == 1
   end
+
+  def create_next
+    year = self.year
+    nr = self.nr + 1
+    if nr > 13
+      nr = 1
+      year = year + 1
+    end
+    return Period.new :company => self.company, :year => year, :nr => nr, :status => Period::STATUSE_NAMES['New']
+  end
 end

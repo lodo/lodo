@@ -1,7 +1,7 @@
 class PeriodsController < ApplicationController
   before_filter :company_required
-  before_filter :load_period, :only => [:show, :edit, :update, :destroy]
-  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+  before_filter :load_period, :only => [:elevate_status, :show, :edit, :update, :destroy]
+  before_filter :right_company, :only => [:elevate_status, :show, :edit, :update, :destroy]
 
   def load_period
     @period = Period.find(params[:id])
@@ -30,22 +30,33 @@ class PeriodsController < ApplicationController
     end
   end
 
+  # GET /periods/new
+  # GET /periods/new.xml
+  def new
+    @me.current_company.last_period.create_next.save!
+
+    respond_to do |format|
+      format.html { redirect_to(periods_url) }
+      format.xml  { head :ok }
+    end
+  end
+
+  def elevate_status
+    @period.status += 1
+    @period.save!
+    respond_to do |format|
+      format.html { redirect_to(periods_url) }
+      format.xml  { head :ok }
+    end
+  end
+
+
+
   # GET /periods/1
   # GET /periods/1.xml
   def show
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @period }
-    end
-  end
-
-  # GET /periods/new
-  # GET /periods/new.xml
-  def new
-    @period = Period.new
-
-    respond_to do |format|
-      format.html # new.html.erb
       format.xml  { render :xml => @period }
     end
   end

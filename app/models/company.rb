@@ -9,4 +9,8 @@ class Company < ActiveRecord::Base
   has_many :units, :order => "lower(name)"
   has_many :periods
   has_many :journals
+
+  def last_period
+    return (self.periods.sort { |a,b| a.year != b.year ? a.year <=> b.year : a.nr <=> b.nr })[-1]
+  end
 end
