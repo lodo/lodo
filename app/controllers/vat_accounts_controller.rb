@@ -22,7 +22,7 @@ class VatAccountsController < ApplicationController
   # GET /vat_accounts
   # GET /vat_accounts.xml
   def index
-    @vat_accounts = VatAccount.find(:all)
+    @vat_accounts = @me.current_company.vat_accounts
 
     respond_to do |format|
       format.html # index.html.erb
