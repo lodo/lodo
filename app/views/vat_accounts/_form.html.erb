@@ -2,7 +2,7 @@
   <%= f.error_messages %>
   <p>
     <%= f.label :target_account_id, t(:account, :scope => :vat) %><br />
-    <%= f.select :target_account_id, @me.current_company.accounts.collect {|p| [ p.name, p.id ] }.sort %>
+    <%= f.select :target_account_id, @me.current_company.accounts.collect {|p| [ p.id.to_s + " - " + p.name, p.id ] }.sort %>
   </p>
   <p>
     <%= f.label :overridable, t(:overridable, :scope => :vat) %><br />
