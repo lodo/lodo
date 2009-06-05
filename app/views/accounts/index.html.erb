@@ -4,12 +4,14 @@
   <tr>
     <th><%= t(:number, :scope => :accounts) -%></th>
     <th><%= t(:name, :scope => :accounts) -%></th>
+    <th><%= t("accounts.vat_account") -%></th>
     <th></th>
   </tr>
 <% for account in @accounts %>
   <tr>
     <td><%=h account.number %></td>
     <td><%=h account.name %></td>
+    <td><%=h (account.vat_account ? account.vat_account.target_account.name : "") %></td>
     <td>
       <%= link_to t(:show, :scope => :accounts), account %>
       <%= link_to t(:edit, :scope => :accounts), edit_account_path(account) %>
