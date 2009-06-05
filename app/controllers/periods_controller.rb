@@ -1,7 +1,7 @@
 class PeriodsController < ApplicationController
   before_filter :company_required
-  before_filter :load_period, :only => [:elevate_status, :show, :edit, :update, :destroy]
-  before_filter :right_company, :only => [:elevate_status, :show, :edit, :update, :destroy]
+  before_filter :load_period, :only => [:elevate_status, :move_bills]
+  before_filter :right_company, :only => [:elevate_status, :move_bills]
 
   def load_period
     @period = Period.find(params[:id])
@@ -41,71 +41,32 @@ class PeriodsController < ApplicationController
     end
   end
 
+  # GET /periods/move_bills
+  def move_bills
+    respond_to do |format|
+      format.html
+      format.xml  { render :xml => @periods }
+    end
+  end
+
   def elevate_status
-    @period.status += 1
-    @period.save!
     respond_to do |format|
-      format.html { redirect_to(periods_url) }
-      format.xml  { head :ok }
-    end
-  end
-
-
-
-  # GET /periods/1
-  # GET /periods/1.xml
-  def show
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @period }
-    end
-  end
-
-  # GET /periods/1/edit
-  def edit
-  end
-
-  # POST /periods
-  # POST /periods.xml
-  def create
-    @period = Period.new(params[:period])
-    @period.company = @me.current_company
-
-    respond_to do |format|
-      if @period.save
-        flash[:notice] = 'Period was successfully created.'
-        format.html { redirect_to(@period) }
-        format.xml  { render :xml => @period, :status => :created, :location => @period }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @period.errors, :status => :unprocessable_entity }
+      if not params.nil? and not params[:new_period_id].nil?
+	new_period = Period.find(params[:new_period_id])
+	@period.move_open_bills new_period
+	@period.save!
+	new_period.save!
       end
-    end
-  end
 
-  # PUT /periods/1
-  # PUT /periods/1.xml
-  def update
-    respond_to do |format|
-      if @period.update_attributes(params[:period])
-        flash[:notice] = 'Period was successfully updated.'
-        format.html { redirect_to(@period) }
-        format.xml  { head :ok }
+      if @period.status_elevation_requires_closing_bills?
+	format.html { redirect_to :id => @period.id, :action => :move_bills }
+	format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @period.errors, :status => :unprocessable_entity }
+	@period.elevate_status
+	@period.save!
+	format.html { redirect_to(periods_url) }
+	format.xml  { head :ok }
       end
-    end
-  end
-
-  # DELETE /periods/1
-  # DELETE /periods/1.xml
-  def destroy
-    @period.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(periods_url) }
-      format.xml  { head :ok }
     end
   end
 end

@@ -1,0 +1,19 @@
+<h1>Move open bills</h1>
+
+There are <%= @period.open_bills.count %> open bills the period <%= @period.year.to_s + "-" + @period.nr.to_s %>.
+You need to move those bills to another period before proceeding.
+
+<% form_for(@period, :url => { :action => "elevate_status", :id => @period.id }) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <label for="new_period_id">Period to move bills to</label><br />
+    <%= select_tag "new_period_id", options_for_select(@me.open_periods.collect {|p| [ p.year.to_s + "-" + p.nr.to_s, p.id ] }) %>
+  </p>
+
+  <p>
+    <%= f.submit 'Move and proceed' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', periods_path %>

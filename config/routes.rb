@@ -1,6 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :periods
-
   map.resources :units
 
   map.resources :projects
@@ -22,6 +20,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :journal_operations
 
   map.resources :journals
+
+  map.resources :periods, :collection => { :elevate_status => :post }
 
   map.resources :accounts do |account|
     account.resources :ledgers

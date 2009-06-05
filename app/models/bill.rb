@@ -55,7 +55,11 @@ class Bill < ActiveRecord::Base
     self.journal.save
   end
 
+  def open?
+    return self.journal.nil? || self.journal.open?
+  end
+
   def editable?
-    return (self.period.nil? || self.period.open?) && (self.journal.nil? || (not self.journal.closed))
+    return (self.period.nil? || self.period.open?) && self.open?
   end
 end
