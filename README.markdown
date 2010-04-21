@@ -23,7 +23,7 @@ Preliminary feature list for the next milestone:
 
 ## Community
   * Redmine: <https://projects.freecode.no/projects/show/lodo-ng>
-  * Source: <https://projects.freecode.no/git/lodo.git>, <http://github.com/inymoen/lodo/tree/master>
+  * Source: <https://projects.freecode.no/git/lodo.git>, <http://github.com/ivarnymoen/lodo/tree/master>
 
 ## Contributors
   * Funding and requirements: [Arnt Telhaug](mailto:arnt@telhaug.no), <http://www.lodo.no/>
