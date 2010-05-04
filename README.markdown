@@ -29,5 +29,5 @@ Preliminary feature list for the next milestone:
   * Funding and requirements: [Arnt Telhaug](mailto:arnt@telhaug.no), <http://www.lodo.no/>
   * Development and project management by FreeCode, <http://freecode.no/>
   * Ivar Nymoen, employee at lodo.no.
-  * Paal de Vibe, consultant at Kanobo Web Consult, <http://www.kanobo.com>
+  * Paal de Vibe, consultant at Kanobo Web Consult, <http://www.kanobo.com/>
 
