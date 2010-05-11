@@ -8,3 +8,10 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
+Rake::Task["db:test:prepare"].enhance(['db:test:purge', 'db:schema:load']) do
+  Rake::Task["db:test:prepare"].reenable
+  Rake::Task["db:test:purge"].reenable
+  Rake::Task["db:schema:load"].reenable
+end
+
