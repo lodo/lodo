@@ -50,11 +50,6 @@ class User < ActiveRecord::Base
   protected
 
   def self.encrypt(pass, salt)
-    print "Pass: "
-    print pass 
-    print ". Salt:" 
-    print salt 
-    print ".\n"
     Digest::SHA1.hexdigest(pass+salt)
   end
 

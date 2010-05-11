@@ -1,9 +1,0 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  delivery_date: 2009-03-19
-  billing_date: 2009-03-19
-
-two:
-  delivery_date: 2009-03-19
-  billing_date: 2009-03-19
