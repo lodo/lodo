@@ -90,6 +90,7 @@
         less_than_or_equal_to: "må være mindre enn eller lik {{count}}"
         odd: "må være oddetall"
         even: "må være partall"
+        record_invalid: "Valideringsfeil: {{errors}}"
     models:
     attributes:
   layout:
