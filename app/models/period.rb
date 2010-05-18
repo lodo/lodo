@@ -3,6 +3,9 @@ class Period < ActiveRecord::Base
   has_many :bills, :autosave => true
   has_many :journals, :autosave => true
 
+  # only useful for random statistics
+  has_many :journal_operations, :through => :journals
+
   STATUSES = {0 => 'New', 1 => 'Open', 2 => 'Done', 3 => 'Closed'}
   STATUSE_NAMES = {'New' => 0, 'Open' => 1, 'Done' => 2, 'Closed' => 3}
 
