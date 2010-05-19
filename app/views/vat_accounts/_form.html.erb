@@ -8,7 +8,7 @@
   <% end %>
   <p>
     <%= f.label :target_account_id, t(:account, :scope => :vat) %><br />
-    <%= f.select :target_account_id, @me.current_company.accounts.collect {|p| [ p.id.to_s + " - " + p.name, p.id ] }.sort %>
+    <%= f.select :target_account_id, @me.current_company.accounts.sort_by {|a| a.number}.collect {|p| [ p.number.to_s + " - " + p.name, p.id ] } %>
   </p>
   <p>
     <%= f.label :overridable, t(:overridable, :scope => :vat) %><br />
