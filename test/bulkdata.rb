@@ -110,15 +110,71 @@ end
 
 # create some accounts
 Company.all.each do |c|
-  Account.make(:company => c, :name => "Sales", :number => 3000)
+  # Vat accounts from empatix @ lodo.no
+
+  # **** Outgoing vat; sales ***
+  a2700 = Account.make(:company => c, :name => "Utg mva kode 10", :number => 2700)
+  va2700 = VatAccount.create!(:company => c, :overridable => true, :target_account => a2700)
+  VatAccountPeriod.create!(:vat_account => va2700, :percentage => 0, :valid_from => "1990-01-01")
+
+
+  a2701 = Account.make(:company => c, :name => "Utg mva kode 11", :number => 2701)
+  va2701 = VatAccount.create!(:company => c, :overridable => false, :target_account => a2701)
+  VatAccountPeriod.create!(:vat_account => va2701, :percentage => 24, :valid_from => "1990-01-01")
+  VatAccountPeriod.create!(:vat_account => va2701, :percentage => 25, :valid_from => "2005-01-01")
+
+
+  a2702 = Account.make(:company => c, :name => "Utg mva kode 12", :number => 2702)
+  va2702 = VatAccount.create!(:company => c, :overridable => false, :target_account => a2702)
+  VatAccountPeriod.create!(:vat_account => va2702, :percentage => 12, :valid_from => "1990-01-01")
+  VatAccountPeriod.create!(:vat_account => va2702, :percentage => 11, :valid_from => "2005-01-01")
+  VatAccountPeriod.create!(:vat_account => va2702, :percentage => 13, :valid_from => "2006-01-01")
+  VatAccountPeriod.create!(:vat_account => va2702, :percentage => 14, :valid_from => "2007-01-01")
+
+
+  a2703 = Account.make(:company => c, :name => "Utg mva kode 13", :number => 2703)
+  va2703 = VatAccount.create!(:company => c, :overridable => false, :target_account => a2703)
+  VatAccountPeriod.create!(:vat_account => va2703, :percentage => 6, :valid_from => "1990-01-01")
+  VatAccountPeriod.create!(:vat_account => va2703, :percentage => 7, :valid_from => "2005-01-01")
+  VatAccountPeriod.create!(:vat_account => va2703, :percentage => 8, :valid_from => "2006-01-01")
+
+  # *** Incoming vat; expenses ***
+  a2710 = Account.make(:company => c, :name => "Ing mva kode 40", :number => 2710)
+  va2710 = VatAccount.create!(:company => c, :overridable => true, :target_account => a2710)
+  VatAccountPeriod.create!(:vat_account => va2710, :percentage => 0, :valid_from => "1990-01-01")
+
+
+  a2711 = Account.make(:company => c, :name => "Ing mva kode 41", :number => 2711)
+  va2711 = VatAccount.create!(:company => c, :overridable => false, :target_account => a2711)
+  VatAccountPeriod.create!(:vat_account => va2711, :percentage => 24, :valid_from => "1990-01-01")
+  VatAccountPeriod.create!(:vat_account => va2711, :percentage => 25, :valid_from => "2005-01-01")
+
+
+  a2712 = Account.make(:company => c, :name => "Ing mva kode 42", :number => 2712)
+  va2712 = VatAccount.create!(:company => c, :overridable => false, :target_account => a2712)
+  VatAccountPeriod.create!(:vat_account => va2712, :percentage => 12, :valid_from => "1990-01-01")
+  VatAccountPeriod.create!(:vat_account => va2712, :percentage => 11, :valid_from => "2005-01-01")
+  VatAccountPeriod.create!(:vat_account => va2712, :percentage => 13, :valid_from => "2006-01-01")
+  VatAccountPeriod.create!(:vat_account => va2712, :percentage => 14, :valid_from => "2007-01-01")
+
+
+  a2713 = Account.make(:company => c, :name => "Ing mva kode 43", :number => 2713)
+  va2713 = VatAccount.create!(:company => c, :overridable => false, :target_account => a2713)
+  VatAccountPeriod.create!(:vat_account => va2713, :percentage => 6, :valid_from => "1990-01-01")
+  VatAccountPeriod.create!(:vat_account => va2713, :percentage => 7, :valid_from => "2005-01-01")
+  VatAccountPeriod.create!(:vat_account => va2713, :percentage => 8, :valid_from => "2006-01-01")
+
+
+  # Other accounts
+  Account.make(:company => c, :name => "Sales", :number => 3000, :vat_account => va2701)
   Account.make(:company => c, :name => "Cash", :number => 1900)
   Account.make(:company => c, :name => "Bank", :number => 1920)
-  Account.make(:company => c, :name => "Materials", :number => 4000)
+  Account.make(:company => c, :name => "Materials", :number => 4000, :vat_account => va2711)
   Account.make(:company => c, :name => "Salaries", :number => 5000)
   Account.make(:company => c, :name => "Arbeidsgiveravgift", :number => 5400)
   Account.make(:company => c, :name => "NAV-refusjon, sykepenger", :number => 5800)
-  Account.make(:company => c, :name => "Office supplies", :number => 6800)
-  Account.make(:company => c, :name => "Phone expenses", :number => 6900)
+  Account.make(:company => c, :name => "Office supplies", :number => 6800, :vat_account => va2711)
+  Account.make(:company => c, :name => "Phone expenses", :number => 6900, :vat_account => va2711)
 
   Account.make(:company => c, :name => "Accounts receivable", :number => 1500)
   # TODO: create some customers
