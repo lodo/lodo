@@ -80,7 +80,7 @@ ActiveRecord::Base.transaction do
 
 20.times {|i| user = User.make }
 
-bob = User.make(:login => "bob_the_user")
+bob = User.make(:login => "bob_the_user", :email => "bob@bobsdomain.com")
 admin = User.make(:login => "admin_user")
 
 10.times {|i| Company.make}
