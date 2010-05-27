@@ -49,11 +49,10 @@ Project.blueprint do
   address
 end
 
-# using populator for this
-#Product.blueprint do
-#  price { BigDecimal.new( sprintf("%.2f", 10000 * rand) ) }
-#  name { Sham.product_name }
-#end
+Product.blueprint do
+  price { BigDecimal.new( sprintf("%.2f", 10000 * rand) ) }
+  name { Sham.product_name }
+end
 
 Account.blueprint do
   name { Sham.account_name }
@@ -195,34 +194,30 @@ ActiveRecord::Base.transaction do
   end
 
   # let's go with an avg of 15 products / company
-  Product.populate(Company.count * 15) do |product|
-    product.account_id = companies.rand.accounts.rand.id
-    product.price = BigDecimal.new( sprintf("%.2f", 10000 * rand) )
-    product.name = Sham.product_name
+  (Company.count * 15).times do |i|
+    Product.make(:account => companies.rand.accounts.rand)
   end
+
+  def sample_array_sql(a)
+    "(array[#{a.map {|e| e.id.to_s}.join(',')}])[1 + random() * #{a.size - 1}]"
+  end
+
 
   # create random journal entries for the given period
   def create_journal_entries(company, period)
-    date = Date.civil(period.year, period.nr, rand(28) + 1)
     puts "creating journal entries for #{company.name}, period: #{period.year}-#{period.nr}"
-    Journal.populate(0..200) do |je|
-      je.company_id = company.id
-      je.period_id = period.id
-      je.journal_date = date
-      total = 0
-      JournalOperation.populate(1..4) do |jo|
-        jo.journal_id = je.id
-        jo.account_id = company.accounts.rand.id
-        jo.amount = -100..100
-        total += jo.amount
-      end
-      # close transaction
-      JournalOperation.populate(1) do |jo|
-        jo.journal_id = je.id
-        jo.account_id = company.accounts.rand.id
-        jo.amount = -total
-      end
-    end
+    # create journal entries
+    date = Date.civil(period.year, period.nr, 1)
+    sql = "insert into journals (company_id, period_id, journal_date) select #{company.id}, #{period.id}, ('#{date}'::date + interval '28 days' * random())::date from generate_series (1, #{rand(200)})"
+    ActiveRecord::Base.connection.execute sql
+
+    # create 4 journal_operations for every empty journal entry
+    sql = "insert into journal_operations (journal_id, account_id, amount) select id as journal_id, #{sample_array_sql(company.accounts)}, (random() * 200 - 100)::numeric(16,2) as amount from (select j.id from journals j where j.company_id = #{company.id} and not exists (select 1 from journal_operations jo where jo.journal_id = j.id)) as aa, (select 1 from generate_series(1, (1 + random() * 5)::integer)) as bb"
+    ActiveRecord::Base.connection.execute sql
+    
+    # find and close open journal entries
+    sql = "insert into journal_operations (journal_id, account_id, amount) select journal_id, #{sample_array_sql(company.accounts)}, -amount from (select journal_id, sum(amount) as amount from journals j inner join journal_operations jo on (j.id = jo.journal_id) where company_id = #{company.id} group by journal_id having sum(amount) <> 0) as qq"
+    ActiveRecord::Base.connection.execute sql
   end
 
   def create_period(company, year, nr)
@@ -232,8 +227,11 @@ ActiveRecord::Base.transaction do
     #puts "p.journal count: #{p.journals.count} -- operations: #{p.journal_operations.count}"
   end
 
+  analyze = 0
   # create periods and fill these with tx data
   companies.each do |c|
+    analyze += 1
+    ActiveRecord::Base.connection.execute("analyze") if analyze % 10 == 0
     (2000..2010).each do |year|
       (1..12).each do |month|
         create_period(c, year, month)
