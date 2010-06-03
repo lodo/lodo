@@ -9,7 +9,7 @@
   <%= stylesheet_link_tag 'journals' %>
   <%= stylesheet_link_tag 'lodo' %>
   <%= javascript_include_tag 'jquery' %>
-  <% Dir.open("#{RAILS_ROOT}/public/javascripts/").reject {|f| f.to_s =~ /jquery/ }.reject{|f| f.to_s =~ /^\.+$/}.each do |js| -%>
+  <% Dir.open("#{RAILS_ROOT}/public/javascripts/").reject {|f| File.directory?("#{RAILS_ROOT}/public/javascripts/" + f)}.reject {|f| f.to_s =~ /jquery/ }.reject{|f| f.to_s =~ /^\.+$/}.each do |js| -%>
     <script src="/javascripts/<%= js.to_s -%><%= ActionController::Base.perform_caching ? "" : "?#{(rand() * 10000000000000000).to_i}" -%>" type="text/javascript"></script>
   <% end %>
 </head>
