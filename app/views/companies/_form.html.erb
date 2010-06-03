@@ -10,9 +10,23 @@
     <%= f.label :organization_number, t(:organization_number, :scope => :companies) %><br />
     <%= f.text_field :organization_number %>
   </p>
+
   <p>
-    <%= f.label :user_ids, t(:users, :scope => :companies) %><br />
-    <%= f.select :user_ids, User.find(:all).collect {|p| [ p.login, p.id ] }, {}, {:multiple => true, :size => 15} %>
+    <%= t(:users, :scope => :companies) %><br />
+
+    <% f.fields_for :assignments do |assignment| %>
+
+      <%= assignment.select :user_id, User.find(:all).collect {|p| [ p.email, p.id ] }, :include_blank => "Add user" %>
+      <%= assignment.select :role_id, Role.all.map {|r| [r.name, r.id]}, :include_blank => "Select role" %>
+
+      <% unless assignment.object.new_record? %>
+        <%= assignment.check_box '_delete' %>
+        <%= assignment.label '_delete', 'Remove' %>
+      <% end %>
+
+      <br />
+
+    <% end %>
   </p>
   <p>
     <%= render :partial => "addresses/form", :locals => { :address => @company.address } %>

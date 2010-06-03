@@ -5,7 +5,7 @@
 
 <p>
   <b><%= t(:users, :scope => :companies) -%>:</b>
-  <%=h @company.users.collect {|u| u.login}.join ", " %>
+  <%=h @company.users.collect {|u| u.email}.join ", " %>
 </p>
 
 <p>

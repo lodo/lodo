@@ -3,6 +3,10 @@ require 'machinist/active_record'
 require 'sham'
 require 'faker'
 
+require File.expand_path(File.dirname(__FILE__) + "/../db/seed") if Role.all.empty?
+raise "roles not seeded" if Role.all.empty?
+
+
 Sham.login { Faker::Internet.user_name }
 Sham.email { Faker::Internet.email }
 Sham.company_name { Faker::Company.name }
@@ -18,7 +22,6 @@ Sham.account_name(:unique => false) { Faker::Lorem.words(3).join(" ").capitalize
 
 
 User.blueprint do
-  login { Sham.login }
   email { Sham.email }
   password { "Secret123" }
   password_confirmation { password }
@@ -80,25 +83,29 @@ ActiveRecord::Base.transaction do
 
   20.times {|i| user = User.make }
 
-  bob = User.make(:login => "bob_the_user", :email => "bob@bobsdomain.com")
-  admin = User.make(:login => "admin_user")
+  bob = User.make(:email => "bob@bobsdomain.com")
+  bob.confirm!
+  admin = User.make(:email => "admin@admindomain.com")
+  admin.confirm!
+  Assignment.create!(:user => admin, :role => Role.find_by_name("admin"))
 
   10.times {|i| Company.make}
 
   users = User.all
   companies = Company.all
+  roles = Role.all.reject {|r| r.name == "admin"}
 
   # attach users to companies
-  companies.each {|c| c.users << users.rand }
   (Company.count * 2).times do
     c = companies.rand
     u = users.rand
-    c.users << u unless c.users.include?(u)
+    r = roles.rand
+    c.assignments.create(:user => u, :role => r)
   end
 
   # make sure bob is assigned to a few companies
   companies.shuffle[0..4].each do |c|
-    c.users << bob unless c.users.include?(bob)
+    c.assignments.create(:user => bob, :role => Role.find_by_name("accountant"))
   end
 
   # create a bunch of units/projects and attach them to companies

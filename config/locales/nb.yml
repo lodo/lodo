@@ -109,6 +109,8 @@
     active_company: "Valgt firma"
     vat_plan: "MVA-oppsett"
   users:
+    remember_me: "Husk meg"
+    reset_password: "Nullstill passord"
     listing_users: "Viser brukere"
     login: "Brukernavn"
     email: "Epost"

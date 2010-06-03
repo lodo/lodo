@@ -1,0 +1,17 @@
+<h2>Logg inn</h2>
+
+<% form_for resource_name, resource, :url => session_path(resource_name) do |f| -%>
+  <p><%= f.label :email, t("users.email") %></p>
+  <p><%= f.text_field :email %></p>
+
+  <p><%= f.label :password, t("users.password") %></p>
+  <p><%= f.password_field :password %></p>
+
+  <% if devise_mapping.rememberable? -%>
+    <p><%= f.check_box :remember_me %> <%= f.label :remember_me, t("users.remember_me") %></p>
+  <% end -%>
+
+  <p><%= f.submit t("users.log_in") %></p>
+<% end -%>
+
+<%= render :partial => "shared/devise_links" %>

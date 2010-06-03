@@ -12,7 +12,7 @@
 <% for company in @companies %>
   <tr>
     <td><%=h company.name %></td>
-    <td><%=h company.users.collect {|u| u.login}.join ", " %></td>
+    <td><%= list_users company %></td>
     <td><%=h company.organization_number %></td>
     <td>  
       <%= render :partial => "addresses/show", :locals => { :address => company.address } %>

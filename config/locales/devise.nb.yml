@@ -1,0 +1,35 @@
+nb:
+  devise:
+    sessions:
+      link: 'Logg inn'
+      signed_in: 'Du er nå logget inn.'
+      signed_out: 'Du er nå logget ut.'
+      unauthenticated: 'Du må logge inn eller opprette en bruker for å besøke siden.'
+      unconfirmed: 'Kontoen må valideres først.'
+      locked: 'Kontoen er låst.'
+      invalid: 'Ugyldig epost eller passord.'
+      invalid_token: 'Ugyldig påloggings-nøkkel.'
+      timeout: 'Tidsavbrudd. Vennligst logg inn på nytt.'
+      inactive: 'Kontoen må aktiveres først.'
+    passwords:
+      link: 'Glemt passord?'
+      send_instructions: 'Vi har sendt deg en mail med instruksjoner for nullstilling av passord.'
+      updated: 'Passord endret. Du er nå logget inn.'
+    confirmations:
+      link: "Ikke mottatt instruksjoner for validering av konto?"
+      send_instructions: 'Vi har sendt deg en mail med instruksjoner for validering av konto.'
+      confirmed: 'Konto validert. Du er nå logget inn.'
+    registrations:
+      link: 'Registrer ny konto'
+      signed_up: 'Registrering fullført. (oversetting: dersom validering er nødvendig) Vi har sendt deg en mail med instruksjoner for validering av kontoen.'
+      updated: 'Oppdatering vellykket.'
+      destroyed: 'Kontoen din er nå avsluttet (oversetting: slettet eller stengt??).'
+    unlocks:
+      link: "Trenger du nye instruksjoner for opplåsing av konto?"
+      send_instructions: 'Vi har nå sendt deg en mail med instruksjoner for opplåsing av sperret konto.'
+      unlocked: 'Konto låst opp igjen. Du er nå logget inn.'
+    mailer:
+      confirmation_instructions: 'Instruksjoner for validering av konto'
+      reset_password_instructions: 'Instruksjoner for nullstilling av passord'
+      unlock_instructions: 'Instruksjoner for opplåsing av konto'
+

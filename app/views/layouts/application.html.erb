@@ -14,11 +14,11 @@
   <% end %>
 </head>
 <body>
-  <% if @me %>
+  <% if user_signed_in? %>
   
   <div class='main_menu'>
     <ul>
-      <li><%= link_to t(:user_administration, :scope => :layout), users_path %></li>
+      <li><%= link_to t(:user_administration, :scope => :layout), companies_path %></li>
       <li><%= link_to t(:chart_of_accounts, :scope => :layout), accounts_path %></li>
       <li><%= link_to t(:vat_plan, :scope => :layout), vat_accounts_path %></li>
       <li><%= link_to t(:journals, :scope => :layout), journals_path %></li>
@@ -31,14 +31,14 @@
       <li><%= link_to t(:periods, :scope => :layout), periods_path %></li>
 
       <li>
-	<%= t(:logged_in_as, :scope => :layout) -%> <em><%= link_to @me.login, :controller => 'users', :action => 'show', :id => @me.id %></em> (<%= link_to t(:log_out, :scope => :layout), :controller => 'users', :action => 'logout' %>)
+	<%= t(:logged_in_as, :scope => :layout) -%> <%= current_user.email %> (<%= link_to t(:log_out, :scope => :layout), destroy_user_session_path %>)
       </li>
 
       <li class="change_company_form">
         <% form_tag :controller => "users", :action=> "change_current_company" do -%>
          <label for="current_company"><%= t(:active_company, :scope => :layout) -%>:</label>
-         <%= select_tag "current_company", options_for_select(@me.companies.collect {|p| [ p.name, p.id ] },
-                                                              if @me.current_company.nil? then 0 else @me.current_company.id end ) %>
+         <%= select_tag "current_company", options_for_select(current_user.companies.collect {|p| [ p.name, p.id ] },
+                                                              if current_user.current_company.nil? then 0 else current_user.current_company.id end ) %>
         <% end %>
         <script>submitAction.registerSubmitAction('#current_company', 'change', '.change_company_form form');</script>
       </li>
@@ -48,13 +48,18 @@
 
   <% end %>
 
-  <% if flash[:notice] %>
   <div class='messages'>
-    <div class='messages_inner'>
-      <%= flash[:notice] %>
-    </div>
+    <% if flash[:alert] %>
+      <div class='messages_inner alert'>
+        <%= flash[:alert] %>
+      </div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class='messages_inner notice'>
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
   </div>
-  <% end %>
 
   <div class='content'>
     <div class='content_inner'>

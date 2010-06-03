@@ -1,7 +1,7 @@
 class Notifications < ActionMailer::Base
-  def forgot_password(to, login, pass, sent_at = Time.now)
+  def forgot_password(to, pass, sent_at = Time.now)
     @subject    = "Your new password is ..."
-    @body['login'] = login
+    @body['login'] = to
     @body['pass'] = pass
     @recipients = to
     @from       = 'support@yourdomain.com'

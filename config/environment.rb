@@ -32,6 +32,11 @@ Rails::Initializer.run do |config|
   config.gem "machinist"
   config.gem "faker"
 
+  config.gem "devise", "1.0.7"
+  config.gem "warden"
+
+  config.gem "declarative_authorization"
+
   # Only load the plugins named here, in the order given. By default, all plugins 
   # in vendor/plugins are loaded in alphabetical order.
   # :all can be used as a placeholder for all plugins not explicitly named
@@ -80,17 +85,15 @@ Rails::Initializer.run do |config|
   # Please note that observers generated using script/generate observer need to have an _observer suffix
   # config.active_record.observers = :cacher, :garbage_collector, :forum_observer
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => "mail.freecodeint.com",
+    :port => 25,
+    #    :domain => "freecode.no",
+    #    :user_name => "axel.liljencrantz@freecode.no",
+    #    :password => "MyPassword",
+    :authentication => :plain
+  }
+
 end
-
-ActionMailer::Base.delivery_method = :smtp
-ActionMailer::Base.smtp_settings = {
-  :address => "mail.freecodeint.com",
-  :port => 25,
-  #    :domain => "freecode.no",
-  #    :user_name => "axel.liljencrantz@freecode.no",
-  #    :password => "MyPassword",
-  :authentication => :plain
-}
-
-
 

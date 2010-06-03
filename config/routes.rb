@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.devise_for :users
+
   map.resources :units
 
   map.resources :projects
@@ -27,7 +29,6 @@ ActionController::Routing::Routes.draw do |map|
     account.resources :ledgers
   end
 
-  map.resources :users, :collection => { :change_current_company => :post, :login => :get, :login2 => :get, :new => :get, :forgot_password => :get, :logout => :get}
   map.resources :companies
   
   # The priority is based upon order of creation: first created -> highest priority.
@@ -62,7 +63,7 @@ ActionController::Routing::Routes.draw do |map|
   #   end
 
   # You can have the root of your site routed with map.root -- just remember to delete public/index.html.
-  map.root :controller => "users"
+  map.root :controller => "accounts"
 
   # See how all your routes lay out with "rake routes"
 
