@@ -2,7 +2,7 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
-  before_filter :set_locale_now, :authenticate_user!, :set_company
+  before_filter :set_locale_now, :authenticate_user!, :init_auth
   
   helper :all # include all helpers, all the time
 
@@ -18,13 +18,15 @@ class ApplicationController < ActionController::Base
   # filter_parameter_logging :password
 
 
+  protected
+
   def set_locale_now
     I18n.locale = session[:locale] = params[:locale] || session[:locale]
   end
 
-  def set_company
+  def init_auth
     company = session[:company_id]
-    # workaround for the time being
+    Authorization.current_user = current_user
     @me = current_user
     current_user.current_company = company if company
   end
@@ -41,6 +43,11 @@ class ApplicationController < ActionController::Base
     flash[:notice]='You must have at least one company to work with'
     redirect_to :controller => "companies", :action => "index"
     return false
+  end
+
+  def permission_denied
+    flash[:error] = I18n.t("access_denied")
+    redirect_to root_url
   end
 
 end

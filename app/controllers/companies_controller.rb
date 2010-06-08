@@ -1,5 +1,6 @@
 class CompaniesController < ApplicationController
-  before_filter :find_company, :only => [:show, :edit, :update, :destroy]
+  filter_access_to :all
+  #before_filter :find_company, :only => [:show, :edit, :update, :destroy]
 
   def find_company
     @company = Company.find(params[:id])

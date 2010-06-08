@@ -282,6 +282,7 @@
     edit: Rediger
     editing_order: Redigerer ordre
     destroy: Slett
+  access_denied: Beklager, du mangler tilgang til å gå inn på den siden.
   bills:
     listing_bills: Viser fakturaer
     save: Lagre

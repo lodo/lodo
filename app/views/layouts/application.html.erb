@@ -49,6 +49,11 @@
   <% end %>
 
   <div class='messages'>
+    <% if flash[:error] %>
+      <div class='messages_inner error'>
+        <%= flash[:error] %>
+      </div>
+    <% end %>
     <% if flash[:alert] %>
       <div class='messages_inner alert'>
         <%= flash[:alert] %>

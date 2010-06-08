@@ -214,6 +214,7 @@ en:
     edit: Edit
     editing_order: Edit order
     destroy: Delete
+  access_denied: Sorry, you are not allowed to perform that action.
   bills:
     listing_bills: Listing bills
     save: Save
