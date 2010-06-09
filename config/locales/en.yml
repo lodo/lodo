@@ -28,6 +28,7 @@ en:
   layout:
     user_administration: "User administration"
     chart_of_accounts: "Accounts"
+    administrators: Administrators
     journals: "Journals"
     companies: "Companies"
     projects: "Projects"

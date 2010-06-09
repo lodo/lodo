@@ -95,6 +95,7 @@
     attributes:
   layout:
     user_administration: "Brukeradministrasjon"
+    administrators: Administratorer
     chart_of_accounts: "Kontoplan"
     journals: "Bilagsføring"
     companies: "Firmaer"
@@ -128,7 +129,7 @@
     log_in: "Logg inn"
     forgotten_password: "Glemt passord"
     email_password: "Send meg nytt passord"
-    back: "Gå til innlogging"
+    back: "Tilbake"
     register: "Registrer ny bruker"
     list: "Tilbake til listen"
     editing: "Redigerer brukeren {{name}}"
@@ -282,7 +283,7 @@
     edit: Rediger
     editing_order: Redigerer ordre
     destroy: Slett
-  access_denied: Beklager, du mangler tilgang til å gå inn på den siden.
+  access_denied: Beklager, du mangler tilgang til denne siden.
   bills:
     listing_bills: Viser fakturaer
     save: Lagre

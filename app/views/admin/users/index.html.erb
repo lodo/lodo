@@ -1,0 +1,28 @@
+<h1><%= t(:listing_users, :scope => :users) -%></h1>
+
+<table class='striped'>
+  <tr>
+    <th><%= t(:email, :scope => :users) -%></th>
+    <th><%= t(:companies, :scope => :users) -%></th>
+    <th></th>
+  </tr>
+
+  
+  <% for user in @users %>
+  <tr>
+    <td><%=h user.email %></td>
+    <td>
+      <%= user.companies.collect{|c| link_to c.name, [:admin, c]}.join(", ") %>
+    </td>
+    <td>
+      <%= link_to t(:show, :scope => :users), [:admin, user] %>
+      <%= link_to t(:edit, :scope => :users), edit_admin_user_path(user) %>
+      <%= link_to t(:destroy, :scope => :users), [:admin, user], :confirm => t(:delete_confirmation, :scope => :users, :name => user.email), :method => :delete %>
+    </td>
+  </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to t(:new_user, :scope => :users), new_admin_user_path %>

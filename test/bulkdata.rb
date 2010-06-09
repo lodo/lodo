@@ -27,6 +27,12 @@ User.blueprint do
   password_confirmation { password }
 end
 
+Admin.blueprint do
+  email { Sham.email }
+  password { "Secret123" }
+  password_confirmation { password }
+end
+
 Address.blueprint do
   street1
   street2 if rand(10) > 5
@@ -85,15 +91,14 @@ ActiveRecord::Base.transaction do
 
   bob = User.make(:email => "bob@bobsdomain.com")
   bob.confirm!
-  admin = User.make(:email => "admin@admindomain.com")
-  admin.confirm!
-  Assignment.create!(:user => admin, Role.find_by_name("admin"))
+
+  admin = Admin.make(:email => "admin@adminsdomain.com")
 
   100.times {|i| Company.make}
 
   users = User.all
   companies = Company.all
-  roles = Role.all.reject {|r| r.name == "admin"}
+  roles = Role.all
 
   # attach users to companies
   (Company.count * 2).times do

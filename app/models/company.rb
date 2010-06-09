@@ -5,7 +5,7 @@ class Company < ActiveRecord::Base
   has_many :vat_accounts
   belongs_to :address
 
-  has_many :assignments
+  has_many :assignments, :include => :user, :order => "users.email"
   accepts_nested_attributes_for :assignments, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs["user_id"].blank? || attrs["role_id"].blank?}
 

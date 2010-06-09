@@ -1,0 +1,13 @@
+
+<p>
+<b><%= t(:email, :scope => :users) -%>:</b>
+  <%=h @user.email %>
+</p>
+
+<p>
+<b><%= t(:companies, :scope => :users) -%>:</b>
+  <%= @user.companies.collect{|c| link_to c.name, admin_company_path(c)}.join(", ") %>
+</p>
+
+<%= link_to t(:edit, :scope => :users), edit_admin_user_path(@user) %> |
+<%= link_to t(:list, :scope => :users), admin_users_path %>

@@ -1,0 +1,43 @@
+<h1><%= t(:editing, :scope => :users, :name => @user.email) -%></h1>
+
+<% form_for([:admin, @user]) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+  <%= f.label :email, t(:email, :scope => :users) %><br />
+    <%= f.text_field :email %>
+  </p>
+
+  <p>
+  <%= f.label :password, t(:password, :scope => :users) %><br />
+    <%= f.text_field :password %>
+  </p>
+
+  <p>
+  <%= f.label :password_confirmation, t(:password_confirmation, :scope => :users) %><br />
+    <%= f.text_field :password_confirmation %>
+  </p>
+
+  <p>
+    <%= t(:companies, :scope => :users) %><br />
+    
+    <% f.fields_for :assignments do |assignment| %>
+      <%= assignment.select :company_id, Company.all.collect {|p| [ p.name, p.id ] }, :include_blank => "Select company" %>
+      <%= assignment.select :role_id, Role.all.map {|r| [r.name, r.id]}, :include_blank => "Select role" %>
+
+      <% unless assignment.object.new_record? %>
+        <%= assignment.check_box '_delete' %>
+        <%= assignment.label '_delete', 'Remove' %>
+      <% end %>
+      <br />
+    <% end %>
+  </p>
+
+  <p>
+    <%= f.submit t(:update, :scope => :users) %>
+  </p>
+<% end %>
+
+<%= link_to t(:show, :scope => :users), [:admin, @user] %> |
+<%= link_to t(:list, :scope => :users), admin_users_path %>
+

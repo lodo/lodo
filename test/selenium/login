@@ -17,6 +17,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Logg inn</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForLocation</td>
 	<td>http://localhost:3000/users/sign_in?unauthenticated=true</td>
 	<td></td>

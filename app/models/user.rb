@@ -1,9 +1,12 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_many :assignments
   has_many :companies, :through => :assignments
   belongs_to :current_company, :class_name => 'Company'
+
+  has_many :assignments, :include => :company, :order => "companies.name"
+  accepts_nested_attributes_for :assignments, :allow_destroy => true,
+    :reject_if => proc { |attrs| attrs["company_id"].blank? || attrs["role_id"].blank? }
   
   # Include default devise modules. Others available are:
   # :http_authenticatable, :token_authenticatable, :confirmable, :lockable, :timeoutable and :activatable
@@ -12,8 +15,7 @@ class User < ActiveRecord::Base
          :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation
-
+  attr_accessible :email, :password, :password_confirmation, :assignments_attributes
 
   # return array of roles for self.current_company
   def role_symbols

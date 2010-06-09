@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <title>LODO</title>
+    <%= stylesheet_link_tag 'datepicker' %>
+    <%= stylesheet_link_tag 'journals' %>
+    <%= stylesheet_link_tag 'lodo' %>
+    <%= javascript_include_tag 'jquery' %>
+    <% Dir.open("#{RAILS_ROOT}/public/javascripts/").reject {|f| File.directory?("#{RAILS_ROOT}/public/javascripts/" + f)}.reject {|f| f.to_s =~ /jquery/ }.reject{|f| f.to_s =~ /^\.+$/}.each do |js| -%>
+      <script src="/javascripts/<%= js.to_s -%><%= ActionController::Base.perform_caching ? "" : "?#{(rand() * 10000000000000000).to_i}" -%>" type="text/javascript"></script>
+    <% end %>
+  </head>
+  <body>
+    <div class='main_menu'>
+      <ul>
+        <li><%= link_to t(:user_administration, :scope => :layout), admin_users_path %></li>
+        <li><%= link_to t(:administrators, :scope => :layout), admin_admins_path %></li>
+        <li><%= link_to t(:companies, :scope => :layout), admin_companies_path %></li>
+
+        <li>
+        <%= t(:logged_in_as, :scope => :layout) -%> <%= current_admin.email %>
+        - <%= link_to t(:log_out, :scope => :layout), destroy_admin_session_path %>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class='messages'>
+      <% if flash[:error] %>
+        <div class='messages_inner error'>
+          <%= flash[:error] %>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class='messages_inner alert'>
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+      <% if flash[:notice] %>
+        <div class='messages_inner notice'>
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class='content'>
+      <div class='content_inner'>
+        <%= yield  %>
+        <div class='content_post'>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      stripe();
+    </script>
+  </body>
+</html>
+

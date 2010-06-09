@@ -3,57 +3,72 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="selenium.base" href="" />
-<title>Password recovery</title>
+<link rel="selenium.base" href="http://localhost:3000/" />
+<title>Admin login</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">Password recovery</td></tr>
+<tr><td rowspan="1" colspan="3">Admin login</td></tr>
 </thead><tbody>
 <tr>
 	<td>open</td>
-	<td>http://localhost:3000/</td>
+	<td>/</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Logg inn</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Logg inn</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Glemt passord?</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>Glemt passord</td>
+	<td>link=Vedlikehold</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>user_email</td>
-	<td>bob@bobsdomain.com</td>
+	<td>admin_email</td>
+	<td>admin@adminsdomain.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>admin_password</td>
+	<td>Secret123</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>commit</td>
-	<td></td>
-</tr>
-<tr>
-	<td>assertValue</td>
-	<td>user_email</td>
+	<td>admin_submit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Vi har sendt deg en mail med instruksjoner for nullstilling av passord.</td>
+	<td>Du er nå logget inn. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Brukeradministrasjon</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Administratorer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Firmaer</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Logget inn som admin@adminsdomain.com</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Logg ut</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Du er nå logget ut. </td>
 	<td></td>
 </tr>
 

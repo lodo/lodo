@@ -1,0 +1,23 @@
+<p>
+  <b>Email:</b>
+  <%=h @admin.email %>
+</p>
+
+<p>
+  <b>Last sign in at:</b>
+  <%=h @admin.last_sign_in_at %>
+</p>
+
+<p>
+  <b>Last sign in ip:</b>
+  <%=h @admin.last_sign_in_ip %>
+</p>
+
+<p>
+  <b>Locked at:</b>
+  <%=h @admin.locked_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_admin_path(@admin) %> |
+<%= link_to 'Back', admin_admins_path %>

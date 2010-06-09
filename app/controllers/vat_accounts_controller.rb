@@ -1,29 +1,11 @@
 class VatAccountsController < ApplicationController
   before_filter :company_required
-  before_filter :load_vat_account, :only => [:show, :edit, :update, :destroy]
-  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
-
-  def load_vat_account
-    @vat_account = VatAccount.find(params[:id])
-  end
-
-  def right_company
-    if @me.companies.include? @vat_account.company
-      @me.current_company = @vat_account.company
-      @me.save!
-      return true
-    end
-
-    flash[:notice]='You can only manage your own vat accounts. Go away.'
-    redirect_to :action => "index"
-    return false 
-  end
-
+  filter_resource_access
 
   # GET /vat_accounts
   # GET /vat_accounts.xml
   def index
-    @vat_accounts = @me.current_company.vat_accounts
+    @vat_accounts = VatAccount.with_permissions_to(:index).all(:order => "accounts.number", :include => :target_account)
 
     respond_to do |format|
       format.html # index.html.erb

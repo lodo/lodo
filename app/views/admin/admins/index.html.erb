@@ -1,0 +1,24 @@
+<h1>Listing admins</h1>
+
+<table>
+  <tr>
+    <th>Email</th>
+    <th>Last sign in</th>
+    <th>Locked</th>
+  </tr>
+
+<% @admins.each do |admin| %>
+  <tr>
+    <td><%=h admin.email %></td>
+    <td><%= admin.last_sign_in_at ? l(admin.last_sign_in_at) : "" %></td>
+    <td><%= admin.locked_at ? l(admin.locked_at) : "" %></td>
+    <td><%= link_to 'Show', [:admin, admin] %></td>
+    <td><%= link_to 'Edit', edit_admin_admin_path(admin) %></td>
+    <td><%= link_to 'Destroy', [:admin, admin], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New admin', new_admin_admin_path %>

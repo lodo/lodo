@@ -1,0 +1,6 @@
+<h1><%= t(:editing_company, :scope => :companies) -%></h1>
+
+<%= render :partial => "form" %>
+
+<%= link_to t(:show, :scope => :companies), admin_company_path(@company) %> |
+<%= link_to t(:back, :scope => :companies), admin_companies_path %>

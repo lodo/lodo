@@ -10,6 +10,7 @@
 <tr><td><b>Test Suite</b></td></tr>
 <tr><td><a href="login">Login</a></td></tr>
 <tr><td><a href="password_recovery">Password recovery</a></td></tr>
+<tr><td><a href="admin_login">Admin login</a></td></tr>
 </tbody></table>
 </body>
 </html>

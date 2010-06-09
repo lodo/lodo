@@ -1,32 +1,12 @@
-=begin
-
-=end
-
+# chart of accounts
 class AccountsController < ApplicationController
   before_filter :company_required
-  before_filter :load_account, :only => [:show, :edit, :update, :destroy]
-  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
-
-  def load_account
-    @account = Account.find(params[:id], :include => :ledgers)
-  end
-
-  def right_company
-    if @me.companies.include? @account.company
-      @me.current_company = @account.company
-      return true
-    end
-
-    flash[:notice]='You can only manage your own accounts. Go away.'
-    redirect_to :action => "index"
-    return false 
-  end
-
+  filter_resource_access
 
   # GET /accounts
   # GET /accounts.xml
   def index
-    @accounts = current_user.current_company.accounts
+    @accounts = Account.with_permissions_to(:index).all(:order => "number")
     
     respond_to do |format|
       format.html # index.html.erb
@@ -61,7 +41,6 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.xml
   def create
-    @account = Account.new(params[:account])
     # Set the company manually
     @account.company = @me.current_company
     respond_to do |format|
