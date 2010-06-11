@@ -13,3 +13,5 @@
 /tmp/**/*
 /*.patch
 !.gitignore
+/doc/plugins
+
