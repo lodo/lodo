@@ -13,6 +13,7 @@
   <%=h @product.account.name %>
 </p>
 
-
-<%= link_to t(:edit, :scope => :products), edit_product_path(@product) %> |
+<% if permitted_to? :edit, @product %>
+  <%= link_to t(:edit, :scope => :products), edit_product_path(@product) %> |
+<% end %>
 <%= link_to t(:back, :scope => :products), products_path %>

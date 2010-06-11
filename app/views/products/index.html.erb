@@ -16,8 +16,12 @@
     <td>
 
       <%= link_to t(:show, :scope => :products), product %>
-      <%= link_to t(:edit, :scope => :products), edit_product_path(product) %>
-      <%= link_to t(:destroy, :scope => :products), product, :confirm => t(:destroy_confirmation, :scope => :products, :name => product.name), :method => :delete %>
+      <% if permitted_to? :edit, product %>
+        <%= link_to t(:edit, :scope => :products), edit_product_path(product) %>
+      <% end %>
+      <% if permitted_to? :delete, product %>
+        <%= link_to t(:destroy, :scope => :products), product, :confirm => t(:destroy_confirmation, :scope => :products, :name => product.name), :method => :delete %>
+      <% end %>
     </td>
   </tr>
   <% end %>
@@ -25,4 +29,6 @@
 
 <br />
 
-<%= link_to t(:new_product, :scope => :products), new_product_path %>
+<% if permitted_to? :create, :products %>
+  <%= link_to t(:new_product, :scope => :products), new_product_path %>
+<% end %>

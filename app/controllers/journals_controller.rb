@@ -4,30 +4,12 @@ class JournalsController < ApplicationController
   before_filter :find_units_all, :only => [:new, :edit]
   before_filter :find_projects_all, :only => [:new, :edit]
   before_filter :find_accounts_all, :only => [:new, :edit]
-  before_filter :load_journal, :only => [:show, :edit, :update, :destroy]
-  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
-  before_filter :open_required, :only => [:update, :destroy, :edit]  
-
-  def load_journal
-    @journal = Journal.find(params[:id])
-  end
-
-  def right_company
-    if @me.companies.include? @journal.company
-      @me.current_company = @journal.company
-      @me.save!
-      return true
-    end
-
-    flash[:notice]='You can only manage your own journals. Go away.'
-    redirect_to :action => "index"
-    return false 
-  end
+  filter_resource_access
 
   # GET /journals
   # GET /journals.xml
   def index
-    @journals = @me.current_company.journals
+    @journals = Journal.with_permissions_to(:index).all(:order => "number, journal_date desc, journal_type")
     
     respond_to do |format|
       format.html # index.html.erb
@@ -75,6 +57,7 @@ class JournalsController < ApplicationController
             end
           end
           @journal.save!
+          raise Authorization::NotAuthorized unless permitted_to? :create, @journal
 
           flash[:notice] = 'Journal was successfully created.'
           format.html { redirect_to(@journal) }
@@ -149,13 +132,4 @@ class JournalsController < ApplicationController
                    :order => :name)
   end
 
-  def open_required
-    if Journal.find(params[:id]).editable?
-      return true
-    end
-    flash[:notice] = 'Journal is closed'
-    redirect_to :action => "show"
-    return false
-  end
-  
 end

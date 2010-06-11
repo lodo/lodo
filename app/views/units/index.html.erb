@@ -13,12 +13,18 @@
     <td><%= render :partial => "/addresses/show", :locals => { :address => unit.address }  %></td>
     <td><%=h unit.comments %></td>
     <td><%= link_to 'Show', unit %></td>
-    <td><%= link_to 'Edit', edit_unit_path(unit) %></td>
-    <td><%= link_to 'Destroy', unit, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if permitted_to? :edit, unit %>
+      <td><%= link_to 'Edit', edit_unit_path(unit) %></td>
+    <% end %>
+    <% if permitted_to? :delete, unit %>
+      <td><%= link_to 'Destroy', unit, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New unit', new_unit_path %>
+<% if permitted_to? :create, :units %>
+  <%= link_to 'New unit', new_unit_path %>
+<% end %>

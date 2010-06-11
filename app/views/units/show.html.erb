@@ -13,6 +13,7 @@
   <%=h @unit.comments %>
 </p>
 
-
-<%= link_to 'Edit', edit_unit_path(@unit) %> |
+<% if permitted_to? :edit, @unit %>
+  <%= link_to 'Edit', edit_unit_path(@unit) %> |
+<% end %>
 <%= link_to 'Back', units_path %>

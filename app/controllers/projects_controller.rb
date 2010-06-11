@@ -1,26 +1,12 @@
 class ProjectsController < ApplicationController
   before_filter :company_required
-  before_filter :load_project, :only => [:show, :edit, :update, :destroy]
-  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
+  filter_resource_access
 
-  def load_project
-    @project = Project.find(params[:id])
-  end
-
-  def right_company
-    if @me.companies.include? @project.company
-      @me.current_company = @project.company
-      return true
-    end
-    flash[:notice] = "You can only manage your own data, Go away."
-    reditect_to :action => "index"
-    return false
-  end
 
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = @me.current_company.projects
+    @projects = Project.with_permissions_to(:index).all(:order => "lower(name)")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -59,6 +45,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     @project.company = @me.current_company
+    raise Authorization::NotAuthorized unless permitted_to? :create, @project
 
     respond_to do |format|
       if @project.save

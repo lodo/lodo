@@ -1,29 +1,12 @@
 class ProductsController < ApplicationController
   before_filter :company_required
-  before_filter :load_product, :only => [:show, :edit, :update, :destroy]
-  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
-
-  def load_product
-    @product = Product.find(params[:id])
-  end
-
-  def right_company
-    if @me.companies.include? @product.account.company
-      @me.current_company = @product.account.company
-      return true
-    end
-
-    flash[:notice]='You can only manage your own products. Go away.'
-    redirect_to :action => "index"
-    return false 
-  end
+  filter_resource_access
 
 
   # GET /products
   # GET /products.xml
   def index
-    @products = (Account.find(@me.current_company.accounts, :include => [ :products ]
-                             ).collect { |account| account.products}).flatten
+    @products = Product.with_permissions_to(:index).all(:order => "lower(products.name)")
 
     respond_to do |format|
       format.html # index.html.erb

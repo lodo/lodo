@@ -47,12 +47,15 @@
   </table>
 </p>
 
-<% if @journal.editable? %>
+<% if permitted_to? :edit, @journal %>
   <%= link_to t(:edit, :scope => :journals), edit_journal_path(@journal) %> |
 <% elsif not @journal.bill.nil? %>
-  <%= link_to 'Show bill', :controller => "bills", :action => "show", :id => @journal.bill.id %>
-  <% if @journal.bill.editable? %>
+  <% if permitted_to? :show, @journal.bill %>
+    <%= link_to 'Show bill', :controller => "bills", :action => "show", :id => @journal.bill.id %>
+  <% end %>
+  <% if permitted_to? :edit, @journal.bill %>
     <%= link_to 'Edit bill', :controller => "bills", :action => "edit", :id => @journal.bill.id %>
   <% end %>
 <% end %>
+
 <%= link_to t(:back, :scope => :journals), journals_path %>

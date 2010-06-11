@@ -1,27 +1,12 @@
 class UnitsController < ApplicationController
   before_filter :company_required
-  before_filter :load_unit, :only => [:show, :edit, :update, :destroy]
-  before_filter :right_company, :only => [:show, :edit, :update, :destroy]
-
-  def load_unit
-    @unit = Unit.find(params[:id])
-  end
-
-  def right_company
-    if @me.companies.include? @unit.company
-      @me.current_company = @unit.company
-      return true
-    end
-    flash[:notice] = "You can only manage your own data, Go away."
-    reditect_to :action => "index"
-    return false
-  end
+  filter_resource_access
 
 
   # GET /units
   # GET /units.xml
   def index
-    @units = @me.current_company.units
+    @units = Unit.with_permissions_to(:index).all(:order => "lower(name)")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -60,6 +45,7 @@ class UnitsController < ApplicationController
   def create
     @unit = Unit.new(params[:unit])
     @unit.company = @me.current_company
+    raise Authorization::NotAuthorized unless permitted_to? :create, @unit
 
     respond_to do |format|
       if @unit.save

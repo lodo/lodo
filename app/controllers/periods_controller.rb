@@ -1,29 +1,11 @@
 class PeriodsController < ApplicationController
   before_filter :company_required
-  before_filter :load_period, :only => [:elevate_status, :move_bills]
-  before_filter :right_company, :only => [:elevate_status, :move_bills]
-
-  def load_period
-    @period = Period.find(params[:id])
-  end
-
-  def right_company
-    if @me.companies.include? @period.company
-      @me.current_company = @period.company
-      @me.save!
-      return true
-    end
-
-    flash[:notice]='You can only manage your own periods. Go away.'
-    redirect_to :action => "index"
-    return false 
-  end
+  filter_resource_access
 
   # GET /periods
   # GET /periods.xml
   def index
-    @periods = @me.current_company.periods.sort { |a,b| a.year != b.year ? b.year <=> a.year : b.nr <=> a.nr }
-
+    @periods = Period.with_permissions_to(:index).all(:order => "year desc, nr desc")
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @periods }

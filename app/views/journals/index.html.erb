@@ -15,13 +15,17 @@
     <td><%=h l(journal.journal_date) %></td>
     <td>
       <%= link_to t(:show, :scope => :journals), journal %>
-      <% if journal.editable? %>
+      <% if permitted_to? :edit, journal %>
         <%= link_to t(:edit, :scope => :journals), edit_journal_path(journal) %>
+      <% end %>
+      <% if permitted_to? :delete, journal %>
         <%= link_to t(:destroy, :scope => :journals), journal, :confirm => 'Are you sure?', :method => :delete %>
       <% elsif not journal.bill.nil? %>
         <%= link_to 'Show bill', :controller => "bills", :action => "show", :id => journal.bill.id %>
-        <% if journal.bill.editable? %>
+        <% if permitted_to? :edit, journal.bill %>
           <%= link_to 'Edit bill', :controller => "bills", :action => "edit", :id => journal.bill.id %>
+        <% end %>
+        <% if permitted_to? :delete, journal.bill %>
           <%= link_to 'Destroy bill', journal.bill, :confirm => 'Are you sure?', :method => :delete %>
         <% end %>
       <% end %>
@@ -32,4 +36,6 @@
 
 <br />
 
-<%= link_to t(:new_journal, :scope => :journals), new_journal_path %>
+<% if permitted_to? :create, :journals %>
+  <%= link_to t(:new_journal, :scope => :journals), new_journal_path %>
+<% end %>
