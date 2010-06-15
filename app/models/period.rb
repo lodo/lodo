@@ -14,7 +14,7 @@ class Period < ActiveRecord::Base
   end
 
   def open?
-     self.status == 1
+    permitted_to? :update, self
   end
 
   def create_next
