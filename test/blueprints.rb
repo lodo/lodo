@@ -1,3 +1,7 @@
+# Ensure we're in test mode to avoid mail timeout errors
+# when creating users.
+raise "Set RAILS_ENV=test before loading blueprint" unless RAILS_ENV=='test'
+
 # Smallish data set for unit and selenium test purposes
 require 'machinist/active_record'
 require 'sham'

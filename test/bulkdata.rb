@@ -1,4 +1,8 @@
-# Smallish data set for unit and selenium test purposes
+# Ensure we're in test mode to avoid mail timeout errors
+# when creating users.
+raise "Set RAILS_ENV=test before loading blueprint" unless RAILS_ENV=='test'
+
+# largish data set to test scaling or whatever
 require 'machinist/active_record'
 require 'sham'
 require 'faker'
@@ -87,21 +91,21 @@ end
 # **********  Now create some data ***************
 ActiveRecord::Base.transaction do
 
-  200.times {|i| user = User.make }
+  15000.times {|i| user = User.make }
 
   bob = User.make(:email => "bob@bobsdomain.com")
   bob.confirm!
 
   admin = Admin.make(:email => "admin@adminsdomain.com")
 
-  100.times {|i| Company.make}
+  10000.times {|i| Company.make}
 
   users = User.all
   companies = Company.all
   roles = Role.all
 
   # attach users to companies
-  (Company.count * 2).times do
+  (Company.count * 5).times do
     c = companies.rand
     u = users.rand
     r = roles.rand
@@ -114,7 +118,7 @@ ActiveRecord::Base.transaction do
   end
 
   # create a bunch of units/projects and attach them to companies
-  (Company.count * 3).times do
+  (Company.count * 7).times do
     Unit.make(:company => companies.rand)
     Project.make(:company => companies.rand)
   end
@@ -197,7 +201,7 @@ ActiveRecord::Base.transaction do
     # TODO: create some employees
 
     # create some random filler accounts
-    (rand(120) + 40).times do
+    (rand(200) + 40).times do
       begin
         Account.make(:company => c)
       rescue
@@ -205,8 +209,8 @@ ActiveRecord::Base.transaction do
     end
   end
 
-  # let's go with an avg of 15 products / company
-  (Company.count * 15).times do |i|
+  # let's go with an avg of 50 products / company
+  (Company.count * 50).times do |i|
     Product.make(:account => companies.rand.accounts.rand)
   end
 
@@ -220,7 +224,7 @@ ActiveRecord::Base.transaction do
     puts "creating journal entries for #{company.name}, period: #{period.year}-#{period.nr}"
     # create journal entries
     date = Date.civil(period.year, period.nr, 1)
-    sql = "insert into journals (company_id, period_id, journal_date) select #{company.id}, #{period.id}, ('#{date}'::date + interval '28 days' * random())::date from generate_series (1, #{rand(200)})"
+    sql = "insert into journals (company_id, period_id, journal_date) select #{company.id}, #{period.id}, ('#{date}'::date + interval '28 days' * random())::date from generate_series (1, #{rand(500)})"
     ActiveRecord::Base.connection.execute sql
 
     # create 4 journal_operations for every empty journal entry
@@ -239,11 +243,8 @@ ActiveRecord::Base.transaction do
     #puts "p.journal count: #{p.journals.count} -- operations: #{p.journal_operations.count}"
   end
 
-  analyze = 0
   # create periods and fill these with tx data
   companies.each do |c|
-    analyze += 1
-    ActiveRecord::Base.connection.execute("analyze") if analyze % 10 == 0
     (2000..2010).each do |year|
       (1..12).each do |month|
         create_period(c, year, month)
