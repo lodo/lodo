@@ -40,7 +40,14 @@ class ActiveSupport::TestCase
 
   # Add more helper methods to be used by all tests here...
   setup do
-    Sham.reset
+    # might run out of unique values like this,
+    # but at least there won't be dupes..
+    # Sham.reset
   end
 
 end
+
+class ActionController::TestCase
+  include Devise::TestHelpers
+end
+

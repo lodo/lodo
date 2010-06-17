@@ -1,4 +1,4 @@
-puts "Seeding db!"
+puts "Seeding db.."
 ActiveRecord::Base.transaction do
 
 Role.create!(:name => "user") if Role.find_by_name("user").nil?
@@ -27,7 +27,7 @@ EOS
 end
 
 
-puts "done loading seed data"
+puts "..done loading seed data."
 
 end # commit
 

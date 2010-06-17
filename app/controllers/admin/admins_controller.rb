@@ -45,8 +45,8 @@ class Admin::AdminsController < Admin::BaseController
 
     respond_to do |format|
       if @admin.save
-        flash[:notice] = 'Admin::Admin was successfully created.'
-        format.html { redirect_to(@admin) }
+        flash[:notice] = 'Admin was successfully created.'
+        format.html { redirect_to([:admin, @admin]) }
         format.xml  { render :xml => @admin, :status => :created, :location => @admin }
       else
         format.html { render :action => "new" }
@@ -60,7 +60,6 @@ class Admin::AdminsController < Admin::BaseController
   def update
     @admin = ::Admin.find(params[:id])
     # don't update password if blank
-    puts params[:admin].inspect.to_s
     if params[:admin][:password].blank?
       params[:admin].delete :password
       params[:admin].delete :password_confirmation

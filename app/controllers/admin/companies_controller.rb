@@ -64,7 +64,7 @@ class Admin::CompaniesController < Admin::BaseController
         @company.user_ids = users
         if @company.save
           flash[:notice] = 'Company was successfully created.'
-          format.html { redirect_to(@company) }
+          format.html { redirect_to([:admin, @company]) }
           format.xml  { render :xml => @company, :status => :created, :location => @company }
         else
           format.html { render :action => "new" }
@@ -84,7 +84,7 @@ class Admin::CompaniesController < Admin::BaseController
     respond_to do |format|
       if @company.update_attributes(params[:company]) && @company.address.update_attributes(params[:address])
         flash[:notice] = 'Company was successfully updated.'
-        format.html { redirect_to(@company) }
+        format.html { redirect_to([:admin, @company]) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -99,7 +99,7 @@ class Admin::CompaniesController < Admin::BaseController
     @company.destroy
 
     respond_to do |format|
-      format.html { redirect_to(companies_url) }
+      format.html { redirect_to(admin_companies_url) }
       format.xml  { head :ok }
     end
   end

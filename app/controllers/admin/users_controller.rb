@@ -15,8 +15,6 @@ class Admin::UsersController < Admin::BaseController
 
     respond_to do |format|
       if @user.save
-        session[:user_id] = @user.id
-        session[:user_hashed_password] = @user.hashed_password
         flash[:notice] = :successful_signup
         format.html { redirect_to([:admin, @user]) }
         format.xml  { render :xml => @account, :status => :created, :location => @account }

@@ -23,6 +23,7 @@ Sham.bs(:unique => false) { Faker::Company.bs.capitalize }
 Sham.catch_phrase(:unique => false) { Faker::Company.catch_phrase.capitalize }
 Sham.product_name(:unique => false) { Faker::Lorem.words(3).join(" ").capitalize }
 Sham.account_name(:unique => false) { Faker::Lorem.words(3).join(" ").capitalize }
+Sham.role_name(:unique => true) { Faker::Lorem.words(3).join("_").downcase }
 
 
 User.blueprint do
@@ -85,6 +86,10 @@ Journal.blueprint do
 end
 
 JournalOperation.blueprint do
+end
+
+Role.blueprint do
+  name { Sham.role_name }
 end
 
 
