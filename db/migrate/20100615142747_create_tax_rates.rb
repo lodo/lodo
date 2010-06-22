@@ -10,7 +10,7 @@ class CreateTaxRates < ActiveRecord::Migration
 
       t.timestamps
     end
-    add_index :tax_rates, [:table_name, :gross_amount, :year, :period_length, :tax_type], :unique => true
+    add_index :tax_rates, [:table_name, :gross_amount, :year, :period_length, :tax_type], :unique => true, :name => :tax_rate_index
   end
 
   def self.down

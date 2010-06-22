@@ -8,14 +8,10 @@
   <%= stylesheet_link_tag 'datepicker' %>
   <%= stylesheet_link_tag 'journals' %>
   <%= stylesheet_link_tag 'lodo' %>
-  <%= javascript_include_tag 'jquery' %>
-  <% Dir.open("#{RAILS_ROOT}/public/javascripts/").reject {|f| File.directory?("#{RAILS_ROOT}/public/javascripts/" + f)}.reject {|f| f.to_s =~ /jquery/ }.reject{|f| f.to_s =~ /^\.+$/}.each do |js| -%>
-    <script src="/javascripts/<%= js.to_s -%><%= ActionController::Base.perform_caching ? "" : "?#{(rand() * 10000000000000000).to_i}" -%>" type="text/javascript"></script>
-  <% end %>
+  <%= javascript_include_tag :all %>
 </head>
 <body>
   <% if user_signed_in? %>
-  
   <div class='main_menu'>
     <ul>
       <li><%= link_to t(:chart_of_accounts, :scope => :layout), accounts_path %></li>

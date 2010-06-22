@@ -8,7 +8,7 @@ Role.create!(:name => "employee") if Role.find_by_name("employee").nil?
 # load tax rate data for 2010
 if TaxRate.find(:first, :conditions => {:year => 2010}).nil?
   puts "importing 2010 tax rates"
-  `cp "#{RAILS_ROOT}/db/skattetrekk2010.txt" "/tmp/trekk2010.txt"`
+  `cp "#{Rails.root}/db/skattetrekk2010.txt" "/tmp/trekk2010.txt"`
   TaxRate.connection.execute "create temporary table trekk2010 (val char(16)) on commit drop;"
   TaxRate.connection.execute "copy trekk2010 from '/tmp/trekk2010.txt';"
   TaxRate.connection.execute <<EOS
