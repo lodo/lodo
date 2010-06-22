@@ -1,6 +1,5 @@
 require 'test_helper'
 
-# TODO: test error conditions/handling
 class Admin::CompaniesControllerTest < ActionController::TestCase
   test "should get index" do
     admin = Admin.make
@@ -47,8 +46,10 @@ class Admin::CompaniesControllerTest < ActionController::TestCase
     admin = Admin.make
     sign_in :admin, admin
     company = Company.make
-    put :update, :id => company.id, :company => { }
+    new_name = "New company name"
+    put :update, :id => company.id, :company => { :name => new_name }
     assert_redirected_to [:admin, assigns(:company)]
+    assert_equal new_name, company.reload.name
   end
 
   test "should destroy company" do
@@ -61,4 +62,11 @@ class Admin::CompaniesControllerTest < ActionController::TestCase
   
     assert_redirected_to admin_companies_path
   end
+
+  test "show company w/o logging in should redirect to login page" do
+    company = Company.make
+    get :show, :id => company.id
+    assert_redirected_to new_admin_session_path(:unauthenticated => "true")
+  end
+
 end
