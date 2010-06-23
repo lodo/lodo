@@ -1,6 +1,6 @@
 # Ensure we're in test mode to avoid mail timeout errors
 # when creating users.
-raise "Set RAILS_ENV=test before loading blueprint" unless RAILS_ENV=='test'
+raise "Set RAILS_ENV=test before loading blueprint" unless Rails.env == 'test'
 
 # largish data set to test scaling or whatever
 require 'machinist/active_record'

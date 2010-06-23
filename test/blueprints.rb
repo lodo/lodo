@@ -1,6 +1,6 @@
 # Ensure we're in test mode to avoid mail timeout errors
 # when creating users.
-raise "Set RAILS_ENV=test before loading blueprint" unless RAILS_ENV=='test'
+raise "Set RAILS_ENV=test before loading blueprint" unless Rails.env == 'test'
 
 # Smallish data set for unit and selenium test purposes
 require 'machinist/active_record'
@@ -94,7 +94,9 @@ end
 
 
 # **********  Now create some data ***************
-ActiveRecord::Base.transaction do
+
+unless User.find_by_email("bob@bobsdomain.com")
+
 
   20.times {|i| user = User.make }
 
@@ -250,9 +252,4 @@ ActiveRecord::Base.transaction do
     end
   end
 
-
-
-
-
-
-end # ActiveRecord::Base.transaction do
+end # unless User.find(bob)
