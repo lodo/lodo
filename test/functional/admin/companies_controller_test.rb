@@ -66,7 +66,7 @@ class Admin::CompaniesControllerTest < ActionController::TestCase
   test "show company w/o logging in should redirect to login page" do
     company = Company.make
     get :show, :id => company.id
-    assert_redirected_to new_admin_session_path(:unauthenticated => "true")
+    assert_redirected_to new_admin_session_path
   end
 
 end

@@ -1,9 +1,12 @@
 nb:
+  errors:
+    messages:
+      not_found: "ikke funnet"
+      already_confirmed: "var allerede bekreftet"
+      not_locked: "var ikke låst"
+
   devise:
-    sessions:
-      link: 'Logg inn'
-      signed_in: 'Du er nå logget inn.'
-      signed_out: 'Du er nå logget ut.'
+    failure:
       unauthenticated: 'Du må logge inn eller opprette en bruker for å besøke siden.'
       unconfirmed: 'Kontoen må valideres først.'
       locked: 'Kontoen er låst.'
@@ -11,6 +14,10 @@ nb:
       invalid_token: 'Ugyldig påloggings-nøkkel.'
       timeout: 'Tidsavbrudd. Vennligst logg inn på nytt.'
       inactive: 'Kontoen må aktiveres først.'
+    sessions:
+      link: 'Logg inn'
+      signed_in: 'Du er nå logget inn.'
+      signed_out: 'Du er nå logget ut.'
     passwords:
       link: 'Glemt passord?'
       send_instructions: 'Vi har sendt deg en mail med instruksjoner for nullstilling av passord.'

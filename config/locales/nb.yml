@@ -93,6 +93,11 @@
         record_invalid: "Valideringsfeil: {{errors}}"
     models:
     attributes:
+      user:
+        email: Epost
+        password: Passord
+        password_confirmation: Gjenta passord
+        remember_me: Husk meg
   layout:
     user_administration: "Brukeradministrasjon"
     administrators: Administratorer
