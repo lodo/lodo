@@ -3,6 +3,7 @@ class Bill < ActiveRecord::Base
   has_many :bill_orders, :autosave => true
   has_one :journal, :autosave => true
   belongs_to :period
+  after_save :create_or_update_journal
 
   # close bill and assign invoice number
   def post_invoice!
@@ -15,7 +16,10 @@ class Bill < ActiveRecord::Base
     self.journal.save!
   end
 
-  def after_save
+
+  # name might be a bit off, just getting rid of deprecated approach
+  # for callbacks
+  def create_or_update_journal
     if self.journal.nil?
       self.journal = Journal.new(:period => self.period, :journal_date => self.updated_at, :company => self.company)
     else
