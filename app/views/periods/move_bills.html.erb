@@ -3,7 +3,7 @@
 There are <%= @period.open_bills.count %> open bills the period <%= @period.year.to_s + "-" + @period.nr.to_s %>.
 You need to move those bills to another period before proceeding.
 
-<% form_for(@period, :url => { :action => "elevate_status", :id => @period.id }) do |f| %>
+<%= form_for(@period, :url => { :action => "elevate_status", :id => @period.id }) do |f| %>
   <%= f.error_messages %>
 
   <p>

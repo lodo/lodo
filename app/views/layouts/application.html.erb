@@ -29,7 +29,7 @@
       </li>
 
       <li class="change_company_form">
-        <% form_tag :controller => "welcome", :action=> "change_current_company" do -%>
+        <%= form_tag :controller => "welcome", :action=> "change_current_company" do -%>
          <label for="current_company"><%= t(:active_company, :scope => :layout) -%>:</label>
          <%= select_tag "current_company", options_for_select(current_user.companies.collect {|p| [ p.name, p.id ] },
                                                               if current_user.current_company.nil? then 0 else current_user.current_company.id end ) %>

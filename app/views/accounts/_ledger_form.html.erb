@@ -6,7 +6,7 @@
    @ledger.address ||= Address.new
 %>
 
-<% form_for([@account, @ledger], {:name => "new_ledger", :id => "ledger_form"} ) do |f| %>
+<%= form_for([@account, @ledger], {:name => "new_ledger", :id => "ledger_form"} ) do |f| %>
 
 <div id="ledger_form_div" style="float: left;">
   <h3><%= t(:ledger, :scope => :accounts) -%></h3>

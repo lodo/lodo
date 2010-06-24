@@ -9,7 +9,7 @@
   LODO.journalOperationList = <%= @journal.journal_operations.to_json %>;
 </script>
 
-<% form_for(@journal) do |f| %>
+<%= form_for(@journal) do |f| %>
 <%= f.error_messages %>
 
 <p>

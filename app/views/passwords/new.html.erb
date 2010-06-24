@@ -1,6 +1,6 @@
 <h2><%= t("devise.passwords.link") %></h2>
 
-<% form_for resource_name, resource, :url => password_path(resource_name) do |f| %>
+<%= form_for resource_name, resource, :url => password_path(resource_name) do |f| %>
   <%= f.error_messages %>
 
   <p><%= f.label :email, t("users.email") %></p>

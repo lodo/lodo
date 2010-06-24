@@ -1,5 +1,5 @@
 
-<% form_for([:admin, @company]) do |f| %>
+<%= form_for([:admin, @company]) do |f| %>
   <%= f.error_messages %>
 
   <p>
@@ -14,7 +14,7 @@
   <p>
     <%= t(:users, :scope => :companies) %><br />
 
-    <% f.fields_for :assignments do |assignment| %>
+    <%= f.fields_for :assignments do |assignment| %>
 
       <%= assignment.select :user_id, User.find(:all).collect {|p| [ p.email, p.id ] }, :include_blank => "Add user" %>
       <%= assignment.select :role_id, Role.all.map {|r| [r.name, r.id]}, :include_blank => "Select role" %>
