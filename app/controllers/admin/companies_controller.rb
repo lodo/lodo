@@ -40,6 +40,7 @@ class Admin::CompaniesController < Admin::BaseController
   # GET /companies/new.xml
   def new
     @company = Company.new
+    @company.address = Address.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -58,6 +59,7 @@ class Admin::CompaniesController < Admin::BaseController
     users = params[:company][:user_ids]
     params[:company][:user_ids] = nil
     @company = Company.new(params[:company])
+    @company.address ||= Address.new
     
     respond_to do |format|
       if @company.save
