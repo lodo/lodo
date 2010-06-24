@@ -1,3 +1,3 @@
 #! /bin/sh
-echo HELLO
-#rake test
+cp config/database.yml.example config/database.yml
+rake test
