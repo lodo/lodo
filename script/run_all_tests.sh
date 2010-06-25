@@ -13,4 +13,6 @@ cp config/database.yml.example config/database.yml
 bundle install
 rake db:create
 rake db:migrate
-rake test
+rake test:units
+rake test:functionals
+
