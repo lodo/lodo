@@ -16,7 +16,7 @@
 
     <%= f.fields_for :assignments do |assignment| %>
 
-      <%= assignment.select :user_id, User.find(:all).collect {|p| [ p.email, p.id ] }, :include_blank => "Add user" %>
+      <%= assignment.select :user_id, User.all.map {|p| [p.email, p.id]}, :include_blank => "Add user" %>
       <%= assignment.select :role_id, Role.all.map {|r| [r.name, r.id]}, :include_blank => "Select role" %>
 
       <% unless assignment.object.new_record? %>

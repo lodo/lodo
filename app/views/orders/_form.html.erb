@@ -51,27 +51,27 @@
   </p>
   <p>
     <%= f.label :seller_id, t(:seller, :scope => :orders) -%><br />
-    <%= f.select :seller_id, @me.current_company.users.collect {|u| [ "#{u.email}", u.id ] } %>
+    <%= f.select :seller_id, @me.current_company.users.map {|u| [ "#{u.email}", u.id ]} %>
   </p>
   <p>
     <%= f.label :customer_id, t(:customer, :scope => :orders) %><br />
-    <%= f.select :customer_id, (Account.find(@me.current_company.accounts).collect { |a| a.ledgers }).flatten.collect {|p| [ p.name, p.id ] } %>
+    <%= f.select :customer_id, (Account.find(@me.current_company.accounts).collect {|a| a.ledgers }).flatten.collect {|p| [ p.name, p.id ]} %>
   </p>
   <p>
     <%= f.label :delivery_address_id, t(:delivery_address, :scope => :orders) -%><br />
-    <%= render :partial => "addresses/form", :locals => { :address => @order.delivery_address } %>
+    <%= render :partial => "addresses/form", :locals => {:address => @order.delivery_address} %>
   </p>
   <p>
     <%= f.label :transport_id, t(:transport, :scope => :orders) -%><br />
-    <%= f.select :transport_id, Company.find(:all).collect {|p| [ p.name, p.id ] } %>
+    <%= f.select :transport_id, Company.all.map {|p| [ p.name, p.id ]} %>
   </p>
   <p>
     <%= f.label :unit_id, "Unit" -%><br />
-    <%= f.select :unit_id, Unit.find(:all).collect {|p| [ p.name, p.id ] } %>
+    <%= f.select :unit_id, Unit.where(:company_id => current_user.current_company.id).map {|p| [ p.name, p.id ]} %>
   </p>
   <p>
     <%= f.label :project_id, "Project" -%><br />
-    <%= f.select :project_id, Project.find(:all).collect {|p| [ p.name, p.id ] } %>
+    <%= f.select :project_id, Project.where(:company_id => current_user.current_company.id).map {|p| [ p.name, p.id ]} %>
   </p>
   <p>
     <%= f.submit t(:save, :scope => :orders) %>

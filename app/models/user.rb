@@ -20,14 +20,14 @@ class User < ActiveRecord::Base
   # return array of roles for self.current_company
   def role_symbols
     if self.current_company
-      self.assignments.all(:conditions => ["company_id is null or company_id = ?", self.current_company.id]).map {|a| a.role.name.to_sym}
+      self.assignments.where("company_id is null or company_id = ?", self.current_company.id).map {|a| a.role.name.to_sym}
     else
-      self.assignments.all(:conditions => "company_id is null").map {|a| a.role.name.to_sym}
+      self.assignments.where("company_id is null").map {|a| a.role.name.to_sym}
     end
   end
   
   def open_periods(company = self.current_company)
-    Period.find(:all, :conditions => {:company_id => company.id, :status => Period::STATUSE_NAMES['Open']})
+    Period.where(:company_id => company.id, :status => Period::STATUSE_NAMES['Open'])
   end
 
 end

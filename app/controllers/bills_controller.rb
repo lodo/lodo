@@ -23,7 +23,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.xml
   def index
-    @bills = Bill.find(@me.current_company.bills, :order => 'updated_at')
+    @bills = Bill.order(:updated_at).find(@me.current_company.bills)
     
     respond_to do |format|
       format.html # index.html.erb
@@ -41,32 +41,7 @@ class BillsController < ApplicationController
   end
 
   def get_all_orders
-    @orders_all = Order.find(
-      :all,
-      :joins => :company,
-      :conditions => ["orders.company_id = ?", @me.current_company.id ],
-      :include => {
-	:seller => {},
-	:customer => {},
-	:transport => {},
-	:company => {},
-        :order_items => :product
-      })
-
-=begin
-    @orders_all = Order.find_by_sql([
-"
-select
-  orders.*
-from
- orders, companies
-where
-     orders.company_id = ?
- and orders.customer_id = companies.id
-order by
- companies.name, orders.created_at
-", @me.current_company.id])
-=end
+    @orders_all = Order.where(:company_id => current_user.current_company.id).joins(:company).order("companies.name, orders.created_at")
   end
 
   # GET /bills/new

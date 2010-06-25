@@ -58,11 +58,11 @@
   
   <p>
     <%= f.label :unit_id, t(:unit, :scope => :accounts) -%><br />
-    <%= f.select :unit_id, Unit.find(:all).map {|u| [u.name, u.id]}, {:include_blank => true} %>
+    <%= f.select :unit_id, Unit.where(:company_id => current_user.current_company.id).map {|u| [u.name, u.id]}, {:include_blank => true} %>
   </p>
   <p>
     <%= f.label :project_id, t(:project, :scope => :accounts) -%><br />
-    <%= f.select :project_id, Project.find(:all).map {|p| [p.name, p.id]}, {:include_blank => true} %>
+    <%= f.select :project_id, Project.where(:company_id => current_user.current_company.id).map {|p| [p.name, p.id]}, {:include_blank => true} %>
     </p>
   <p>
     <%= f.label :debit_text, t(:debit_text, :scope => :accounts) -%><br />

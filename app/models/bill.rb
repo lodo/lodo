@@ -8,14 +8,13 @@ class Bill < ActiveRecord::Base
   # close bill and assign invoice number
   def post_invoice!
     raise "already posted?" if !self.editable?
-    company = Company.find(:first, :conditions => {:id => self.company.id}, :lock => true)
+    company = Company.where(:id => self.company.id).lock.first
     self.invoice_number = company.next_invoice_number
     company.next_invoice_number += 1
     company.save!
     self.journal.closed = true
     self.journal.save!
   end
-
 
   # name might be a bit off, just getting rid of deprecated approach
   # for callbacks

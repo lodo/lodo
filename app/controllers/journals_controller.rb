@@ -9,7 +9,7 @@ class JournalsController < ApplicationController
   # GET /journals
   # GET /journals.xml
   def index
-    @journals = Journal.with_permissions_to(:index).all(:order => "number, journal_date desc, journal_type")
+    @journals = Journal.with_permissions_to(:index).order("number, journal_date desc, journal_type")
     
     respond_to do |format|
       format.html # index.html.erb
@@ -113,23 +113,17 @@ class JournalsController < ApplicationController
   
   def find_accounts_all
     @accounts_all =
-      Account.find(:all, 
-                   :conditions => {:company_id => @me.current_company.id}, 
-                   :order => :number)
+      Account.where(:company_id => @me.current_company.id).order(:number)
   end
 
   def find_units_all
     @units_all =
-      Unit.find(:all, 
-                   :conditions => {:company_id => @me.current_company.id},
-                   :order => :name)
+      Unit.where(:company_id => @me.current_company.id).order(:name)
   end
 
   def find_projects_all
     @projects_all =
-      Project.find(:all, 
-                   :conditions => {:company_id => @me.current_company.id},
-                   :order => :name)
+      Project.where(:company_id => @me.current_company.id).order(:name)
   end
 
 end
