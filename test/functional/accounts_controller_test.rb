@@ -16,7 +16,7 @@ class AccountsControllerTest < ActionController::TestCase
 
   test "should display account listing" do
     user = User.find_by_email("bob@bobsdomain.com")
-    user.current_company = user.companies.first
+    user.current_company = user.assignments.joins(:role).where("roles.name = 'accountant'").first.company
     user.save!
     sign_in :user, user
 
