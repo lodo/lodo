@@ -5,11 +5,10 @@ gem 'rails', '3.0.0.beta3'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
+# postgresql
 gem 'pg'
+
 gem 'bundler'
-
-gem 'json'
-
 gem "machinist"
 gem "faker"
 gem "devise", "1.1.rc1"
