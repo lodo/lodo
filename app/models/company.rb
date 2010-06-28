@@ -15,6 +15,9 @@ class Company < ActiveRecord::Base
   has_many :periods
   has_many :journals
 
+  # hmm.. no idea what validations make sense atm
+  #validates :organization_number, :format => {:with => /^(NO|no)?[\d]{9,}(MVA|mva)?$/}
+
   def last_period
     return (self.periods.sort { |a,b| a.year != b.year ? a.year <=> b.year : a.nr <=> b.nr })[-1]
   end
