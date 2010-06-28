@@ -4,17 +4,17 @@
   <%= f.error_messages %>
 
   <p>
-  <%= f.label :email, t(:email, :scope => :users) %><br />
+  <%= f.label :email %><br />
     <%= f.text_field :email %>
   </p>
 
   <p>
-  <%= f.label :password, t(:password, :scope => :users) %><br />
+  <%= f.label :password %><br />
     <%= f.text_field :password %>
   </p>
 
   <p>
-  <%= f.label :password_confirmation, t(:password_confirmation, :scope => :users) %><br />
+  <%= f.label :password_confirmation %><br />
     <%= f.text_field :password_confirmation %>
   </p>
 
@@ -26,8 +26,8 @@
       <%= assignment.select :role_id, Role.all.map {|r| [r.name, r.id]}, :include_blank => "Select role" %>
 
       <% unless assignment.object.new_record? %>
-        <%= assignment.check_box '_delete' %>
-        <%= assignment.label '_delete', 'Remove' %>
+        <%= assignment.check_box '_destroy' %>
+        <%= assignment.label '_destroy' %>
       <% end %>
       <br />
     <% end %>
@@ -40,4 +40,3 @@
 
 <%= link_to t(:show, :scope => :users), [:admin, @user] %> |
 <%= link_to t(:list, :scope => :users), admin_users_path %>
-

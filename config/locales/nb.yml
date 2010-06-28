@@ -98,6 +98,13 @@
         password: Passord
         password_confirmation: Gjenta passord
         remember_me: Husk meg
+      admin:
+        email: Epost
+        password: Passord
+        password_confirmation: Gjenta passord
+        remember_me: Husk meg
+      assignment:
+        _destroy: Slett
   layout:
     user_administration: "Brukeradministrasjon"
     administrators: Administratorer

@@ -20,8 +20,8 @@
       <%= assignment.select :role_id, Role.all.map {|r| [r.name, r.id]}, :include_blank => "Select role" %>
 
       <% unless assignment.object.new_record? %>
-        <%= assignment.check_box '_delete' %>
-        <%= assignment.label '_delete', 'Remove' %>
+        <%= assignment.check_box '_destroy' %>
+        <%= assignment.label '_destroy' %>
       <% end %>
 
       <br />

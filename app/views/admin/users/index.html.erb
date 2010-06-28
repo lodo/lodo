@@ -12,7 +12,7 @@
   <tr>
     <td><%=h user.email %></td>
     <td>
-      <%= user.companies.collect{|c| link_to c.name, [:admin, c]}.join(", ") %>
+      <%= user.companies.collect{|c| link_to h(c.name), [:admin, c]}.join(", ").html_safe %>
     </td>
     <td>
       <%= link_to t(:show, :scope => :users), [:admin, user] %>

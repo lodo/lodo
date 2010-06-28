@@ -41,6 +41,7 @@ class Admin::CompaniesController < Admin::BaseController
   def new
     @company = Company.new
     @company.address = Address.new
+    3.times { @company.assignments.build }
 
     respond_to do |format|
       format.html # new.html.erb
@@ -69,6 +70,7 @@ class Admin::CompaniesController < Admin::BaseController
           format.html { redirect_to([:admin, @company]) }
           format.xml  { render :xml => @company, :status => :created, :location => @company }
         else
+          3.times { @company.assignments.build }
           format.html { render :action => "new" }
           format.xml  { render :xml => @company.errors, :status => :unprocessable_entity }
         end

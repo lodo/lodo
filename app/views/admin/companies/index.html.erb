@@ -11,9 +11,9 @@
 
 <% for company in @companies %>
   <tr>
-    <td><%=h company.name %></td>
+    <td><%= company.name %></td>
     <td><%= list_users company %></td>
-    <td><%=h company.organization_number %></td>
+    <td><%= company.organization_number %></td>
     <td>  
       <%= render :partial => "addresses/show", :locals => { :address => company.address } %>
     </td>
