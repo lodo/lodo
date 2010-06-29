@@ -1,7 +1,7 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_many :companies, :through => :assignments, :order => "companies.name"
+  has_many :companies, :through => :assignments, :uniq => true, :order => "companies.name"
   belongs_to :current_company, :class_name => 'Company'
 
   has_many :assignments, :include => [:company, :role], :order => "companies.name"

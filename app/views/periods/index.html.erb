@@ -26,7 +26,7 @@
       <td></td>
     <% end %>
     <% if period.status < 3 then %>
-      <td><%= link_to '-&gt;', :id => period.id, :action => :elevate_status %></td>
+      <td><%= link_to '-&gt;'.html_safe, elevate_status_period_path(period), :method => :post %></td>
     <% else %>
       <td>X</td>
     <% end %>
