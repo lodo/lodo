@@ -1,10 +1,10 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_many :companies, :through => :assignments
+  has_many :companies, :through => :assignments, :order => "companies.name"
   belongs_to :current_company, :class_name => 'Company'
 
-  has_many :assignments, :include => :company, :order => "companies.name"
+  has_many :assignments, :include => [:company, :role], :order => "companies.name"
   accepts_nested_attributes_for :assignments, :allow_destroy => true,
     :reject_if => proc { |attrs| attrs["company_id"].blank? || attrs["role_id"].blank? }
   

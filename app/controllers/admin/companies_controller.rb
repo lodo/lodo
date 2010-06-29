@@ -13,7 +13,7 @@ class Admin::CompaniesController < Admin::BaseController
   # GET /companies
   # GET /companies.xml
   def index
-    @companies = Company.order("name").includes(:users)
+    @companies = Company.order("name").includes(:assignments).includes(:address)
     @companies.each do
       |c| 
       if !c.address 

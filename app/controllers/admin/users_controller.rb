@@ -35,7 +35,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def index
-    @users = User.order(:email)
+    @users = User.order(:email).includes(:companies)
 
     respond_to do |format|
       format.html # index.html.erb
