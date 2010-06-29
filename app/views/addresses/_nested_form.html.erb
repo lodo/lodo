@@ -1,4 +1,4 @@
-<% parent.fields_for field_name do |f| %>
+<%= parent.fields_for field_name do |f| %>
 <p>
   <%= f.label :name, t(:name, :scope => :address) %><br />
   <%= f.text_field :name %>
