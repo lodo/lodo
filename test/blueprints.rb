@@ -101,11 +101,10 @@ unless User.find_by_email("bob@bobsdomain.com")
   20.times {|i| user = User.make }
 
   bob = User.make(:email => "bob@bobsdomain.com")
-  bob.confirm!
 
   admin = Admin.make(:email => "admin@adminsdomain.com")
 
-  10.times {|i| Company.make}
+  3.times {|i| Company.make}
 
   users = User.all
   companies = Company.all
@@ -120,7 +119,7 @@ unless User.find_by_email("bob@bobsdomain.com")
   end
 
   # make sure bob is assigned to a few companies
-  companies.shuffle[0..4].each do |c|
+  companies.each do |c|
     c.assignments.create(:user => bob, :role => Role.find_by_name("accountant"))
   end
 
@@ -237,7 +236,7 @@ unless User.find_by_email("bob@bobsdomain.com")
 
   def create_period(company, year, nr)
     p = Period.make(:company => company, :year => year, :nr => nr)
-    rand(20).times do
+    rand(10).times do
       create_journal_entry(company, p)
     end
     # TODO: close period as appropriate
@@ -245,7 +244,7 @@ unless User.find_by_email("bob@bobsdomain.com")
 
   # create periods and fill these with tx data
   companies.each do |c|
-    (2009..2010).each do |year|
+    (2010..2010).each do |year|
       (1..12).each do |month|
         create_period(c, year, month)
       end
