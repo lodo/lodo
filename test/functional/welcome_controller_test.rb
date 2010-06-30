@@ -20,7 +20,7 @@ class WelcomeControllerTest < ActionController::TestCase
     company2 = Company.make
     Assignment.create(:company => company2, :role => role, :user => user)
     @request.env["HTTP_REFERER"] = root_path
-    put :change_current_company, :current_company => company2.id
+    put :current_company, :current_company => company2.id
 
     assert_redirected_to root_path
     assert_equal company2, user.reload.current_company

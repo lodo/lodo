@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
   def index
   end
 
-  def change_current_company
+  def current_company
     @me.current_company = Company.find(params[:current_company])
     
     if not @me.save

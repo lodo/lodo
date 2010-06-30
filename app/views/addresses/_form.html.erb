@@ -1,5 +1,5 @@
 
-<% fields_for address do |f| %>
+<%= fields_for address do |f| %>
 <p>
   <%= f.label :name, t(:name, :scope => :address) %><br />
   <%= f.text_field :name %>

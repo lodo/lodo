@@ -81,7 +81,7 @@
 <div id="addresses" style="float: left;">
   
   <h4><%= t(:address, :scope => :address) -%></h4>
-  <% f.fields_for :address do |a| %>
+  <%= f.fields_for :address do |a| %>
   <p>
     <%= a.label :name, t(:name, :scope => :address)%><br />
     <%= a.text_field :name %>
