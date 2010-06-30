@@ -19,10 +19,11 @@ class User < ActiveRecord::Base
 
   # return array of roles for self.current_company
   def role_symbols
+    return @symbols if defined? @symbols
     if self.current_company
-      self.assignments.where("company_id is null or company_id = ?", self.current_company.id).map {|a| a.role.name.to_sym}
+      @symbols = self.assignments.where("company_id is null or company_id = ?", self.current_company.id).map {|a| a.role.name.to_sym}
     else
-      self.assignments.where("company_id is null").map {|a| a.role.name.to_sym}
+      @symbols = self.assignments.where("company_id is null").map {|a| a.role.name.to_sym}
     end
   end
   
