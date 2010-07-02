@@ -14,13 +14,13 @@
 
 <% for order in @orders %>
   <tr>
-    <td><%=h order.price %></td>
-    <td><%=h l(order.order_date) %></td>
-    <td><%=h l(order.requested_delivery_date) %></td>
-    <td><%=h order.seller.email %></td>
-    <td><%=h order.customer.name %></td>
+    <td><%= order.price %></td>
+    <td><%= l(order.order_date) %></td>
+    <td><%= l(order.requested_delivery_date) %></td>
+    <td><%= order.seller.email %></td>
+    <td><%= order.customer.name %></td>
     <td><%= render :partial => "addresses/show", :locals => { :address => order.delivery_address } %></td>
-    <td><%=h order.transport.name %></td>
+    <td><%= order.transport.name %></td>
     <td>
       <%= link_to t(:show, :scope => :orders), order %>
       <%= link_to t(:edit, :scope => :orders), edit_order_path(order) %>

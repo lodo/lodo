@@ -10,9 +10,9 @@
   
   <% for product in @products %>
   <tr>
-    <td><%=h product.price -%></td>
-    <td><%=h product.name %></td>
-    <td><%=h product.account.name %></td>
+    <td><%= product.price -%></td>
+    <td><%= product.name %></td>
+    <td><%= product.account.name %></td>
     <td>
 
       <%= link_to t(:show, :scope => :products), product %>

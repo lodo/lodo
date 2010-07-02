@@ -25,10 +25,10 @@
       <% for vat_account_period in @vat_account.vat_account_periods.sort { |a,b| b.valid_from <=> a.valid_from } %>
 	<tr>
 	  <td>
-           <%=h vat_account_period.valid_from %>
+           <%= vat_account_period.valid_from %>
           </td>
 	  <td>
-           <%=h vat_account_period.percentage %>
+           <%= vat_account_period.percentage %>
            <%= hidden_field_tag "periods[][id]", vat_account_period.id %>
            <%= hidden_field_tag "periods[][valid_from]", vat_account_period.valid_from %>
            <%= hidden_field_tag "periods[][percentage]", vat_account_period.percentage %>

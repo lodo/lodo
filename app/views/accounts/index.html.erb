@@ -9,9 +9,9 @@
   </tr>
 <% for account in @accounts %>
   <tr>
-    <td><%=h account.number %></td>
-    <td><%=h account.name %></td>
-    <td><%=h (account.vat_account ? account.vat_account.target_account.name : "") %></td>
+    <td><%= account.number %></td>
+    <td><%= account.name %></td>
+    <td><%= (account.vat_account ? account.vat_account.target_account.name : "") %></td>
     <td>
       <%= link_to t(:show, :scope => :accounts), account %>
       <%= link_to t(:edit, :scope => :accounts), edit_account_path(account) %>
