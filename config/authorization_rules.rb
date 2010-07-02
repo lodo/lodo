@@ -121,6 +121,6 @@ privileges do
   end
 
   privilege :manage do
-    includes :read, :create, :update, :delete, :new, :edit
+    includes :create, :update, :delete, :new, :edit, :index, :show
   end
 end
