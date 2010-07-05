@@ -105,6 +105,11 @@
         remember_me: Husk meg
       assignment:
         _destroy: Slett
+      company:
+        template_company_id: Firma
+  admin:
+    companies:
+      select_template_company: Bruk som mal
   layout:
     user_administration: "Brukeradministrasjon"
     administrators: Administratorer

@@ -25,6 +25,9 @@ en:
           default: "%Y-%m-%dT%H:%M:%S%Z"
       am: 'am'
       pm: 'pm'
+  admin:
+    companies:
+      select_template_company: Select company as template
   layout:
     user_administration: "User administration"
     chart_of_accounts: "Accounts"
