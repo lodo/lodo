@@ -22,10 +22,10 @@ class ApplicationController < ActionController::Base
   end
 
   def init_auth
-    company = session[:company_id]
+    company_id = session[:company_id]
     Authorization.current_user = current_user
     @me = current_user
-    current_user.current_company = company if company
+    current_user.current_company_id = company_id if company_id
   end
 
   def company_required

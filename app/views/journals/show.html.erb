@@ -1,16 +1,16 @@
 <p>
   <b><%= t(:type, :scope => :journals) -%>:</b>
-  <%=h @journal.journal_type %>
+  <%= @journal.journal_type %>
 </p>
 
 <p>
   <b><%= t(:number, :scope => :journals) -%>:</b>
-  <%=h @journal.number %>
+  <%= @journal.number %>
 </p>
 
 <p>
   <b><%= t(:journal_date, :scope => :journals) -%>:</b>
-  <%=h @journal.journal_date ? l(@journal.journal_date) : "" %>
+  <%= @journal.journal_date ? l(@journal.journal_date) : "" %>
 </p>
 
 <p>

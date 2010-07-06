@@ -9,9 +9,9 @@
 
 <% @projects.each do |project| %>
   <tr>
-    <td><%=h project.name %></td>
+    <td><%= project.name %></td>
     <td><%= render :partial => "/addresses/show", :locals => { :address => project.address }  %></td>
-    <td><%=h project.comments %></td>
+    <td><%= project.comments %></td>
     <td><%= link_to 'Show', project %></td>
     <% if permitted_to? :edit, project %>
       <td><%= link_to 'Edit', edit_project_path(project) %></td>

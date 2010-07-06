@@ -8,8 +8,8 @@
 
 <% for bill_item in @bill_items %>
   <tr>
-    <td><%=h bill_item.order_item %></td>
-    <td><%=h bill_item.count %></td>
+    <td><%= bill_item.order_item %></td>
+    <td><%= bill_item.count %></td>
     <td><%= link_to 'Show', bill_item %></td>
     <td><%= link_to 'Edit', edit_bill_item_path(bill_item) %></td>
     <td><%= link_to 'Destroy', bill_item, :confirm => 'Are you sure?', :method => :delete %></td>

@@ -1,16 +1,16 @@
 <p>
   <b><%= t(:code, :scope => :vat) -%>:</b>
-  <%=h @vat_account.id %>
+  <%= @vat_account.id %>
 </p>
 
 <p>
   <b><%= t(:account, :scope => :vat) -%>:</b>
-  <%=h @vat_account.target_account.number %> -  <%=h @vat_account.target_account.name %>
+  <%= @vat_account.target_account.number %> -  <%= @vat_account.target_account.name %>
 </p>
 
 <p>
   <b><%= t(:overridable, :scope => :vat) -%>:</b>
-  <%=h @vat_account.overridable %>
+  <%= @vat_account.overridable %>
 </p>
 
 <%= link_to t(:edit, :scope => :vat), edit_vat_account_path(@vat_account) %> |

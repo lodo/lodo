@@ -9,9 +9,9 @@
 
 <% for order_item in @order_items %>
   <tr>
-    <td><%=h order_item.product %></td>
-    <td><%=h order_item.price %></td>
-    <td><%=h order_item.amount %></td>
+    <td><%= order_item.product %></td>
+    <td><%= order_item.price %></td>
+    <td><%= order_item.amount %></td>
     <td><%= link_to 'Show', order_item %></td>
     <td><%= link_to 'Edit', edit_order_item_path(order_item) %></td>
     <td><%= link_to 'Destroy', order_item, :confirm => 'Are you sure?', :method => :delete %></td>

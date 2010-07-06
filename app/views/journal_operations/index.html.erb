@@ -9,9 +9,9 @@
 
 <% for journal_operation in @journal_operations %>
   <tr>
-    <td><%=h journal_operation.journal %></td>
-    <td><%=h journal_operation.account %></td>
-    <td><%=h journal_operation.amount %></td>
+    <td><%= journal_operation.journal %></td>
+    <td><%= journal_operation.account %></td>
+    <td><%= journal_operation.amount %></td>
     <td><%= link_to 'Show', journal_operation %></td>
     <td><%= link_to 'Edit', edit_journal_operation_path(journal_operation) %></td>
     <td><%= link_to 'Destroy', journal_operation, :confirm => 'Are you sure?', :method => :delete %></td>

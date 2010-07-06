@@ -1,16 +1,16 @@
 <p>
   <b><%= t(:price, :scope => :products) -%>:</b>
-  <%=h @product.price %>
+  <%= @product.price %>
 </p>
 
 <p>
   <b><%= t(:name, :scope => :products) -%>:</b>
-  <%=h @product.name %>
+  <%= @product.name %>
 </p>
 
 <p>
   <b>Account:</b>
-  <%=h @product.account.name %>
+  <%= @product.account.name %>
 </p>
 
 <% if permitted_to? :edit, @product %>

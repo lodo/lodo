@@ -1,14 +1,14 @@
 <div class='address'>
   <% if address.name && address.name != "" %>
-  <%=h address.name %><br/>
+  <%= address.name %><br/>
   <% end %>
-  <%=h address.street1 %><br/>
+  <%= address.street1 %><br/>
   <% if address.street2 && address.street2 != "" %>
-  <%=h address.street2 %><br/>
+  <%= address.street2 %><br/>
   <% end %>
-  <%=h address.postal_code %>   <%=h address.town %><br/>
+  <%= address.postal_code %>   <%= address.town %><br/>
   <% if address.country && address.country != "" %>
-  <%=h address.country %><br/>
+  <%= address.country %><br/>
   <% end %>
 </div>
 

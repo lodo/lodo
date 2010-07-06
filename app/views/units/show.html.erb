@@ -1,6 +1,6 @@
 <p>
   <b>Name:</b>
-  <%=h @unit.name %>
+  <%= @unit.name %>
 </p>
 
 <p>
@@ -10,7 +10,7 @@
 
 <p>
   <b>Comments:</b>
-  <%=h @unit.comments %>
+  <%= @unit.comments %>
 </p>
 
 <% if permitted_to? :edit, @unit %>

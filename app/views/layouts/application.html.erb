@@ -11,9 +11,19 @@
   <%= javascript_include_tag :all %>
 </head>
 <body>
-  <% if user_signed_in? %>
   <div class='main_menu'>
     <ul>
+      <% if admin_signed_in? %>
+
+      <li><%= link_to t(:user_administration, :scope => :layout), admin_users_path %></li>
+      <li><%= link_to t(:administrators, :scope => :layout), admin_admins_path %></li>
+      <li><%= link_to t(:companies, :scope => :layout), admin_companies_path %></li>
+      <li>
+	<%= t(:logged_in_as, :scope => :layout) -%> <%= current_admin.email %> (<%= link_to t(:log_out, :scope => :layout), destroy_admin_session_path %>)
+      </li>
+
+      <% elsif user_signed_in? %>
+
       <li><%= link_to t(:chart_of_accounts, :scope => :layout), accounts_path %></li>
       <li><%= link_to t(:vat_plan, :scope => :layout), vat_accounts_path %></li>
       <li><%= link_to t(:journals, :scope => :layout), journals_path %></li>
@@ -23,7 +33,6 @@
       <li><%= link_to t(:orders, :scope => :layout), orders_path %></li>
       <li><%= link_to t(:bills, :scope => :layout), bills_path %></li>
       <li><%= link_to t(:periods, :scope => :layout), periods_path %></li>
-
       <li>
 	<%= t(:logged_in_as, :scope => :layout) -%> <%= current_user.email %> (<%= link_to t(:log_out, :scope => :layout), destroy_user_session_path %>)
       </li>
@@ -37,10 +46,12 @@
         <script>submitAction.registerSubmitAction('#current_company', 'change', '.change_company_form form');</script>
       </li>
 
+      <% else %>
+      <li><%= link_to "Til forsiden", root_path  %></li>
+      <% end %>
+
     </ul>
   </div>
-
-  <% end %>
 
   <div class='messages'>
     <% if flash[:error] %>

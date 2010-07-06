@@ -38,27 +38,27 @@
 
 <p>
   <b><%= t(:price, :scope => :orders) -%>:</b>
-  <%=h @order.price %>
+  <%= @order.price %>
 </p>
 
 <p>
   <b><%= t(:order_date, :scope => :orders) -%>:</b>
-  <%=h l(@order.order_date) %>
+  <%= l(@order.order_date) %>
 </p>
 
 <p>
   <b><%= t(:requested_delivery_date, :scope => :orders) -%>:</b>
-  <%=h l(@order.requested_delivery_date) %>
+  <%= l(@order.requested_delivery_date) %>
 </p>
 
 <p>
   <b><%= t(:seller, :scope => :orders) -%>:</b>
-  <%=h @order.seller.email %>
+  <%= @order.seller.email %>
 </p>
 
 <p>
   <b><%= t(:customer, :scope => :orders) -%>:</b>
-  <%=h @order.customer.name %>
+  <%= @order.customer.name %>
 </p>
 
 <p>
@@ -68,17 +68,17 @@
 
 <p>
   <b><%= t(:transport, :scope => :orders) -%>:</b>
-  <%=h @order.transport.name %>
+  <%= @order.transport.name %>
 </p>
 
 <p>
   <b>Unit</b>
-  <%=h @order.unit.name %>
+  <%= @order.unit.name %>
 </p>
 
 <p>
   <b>Project</b>
-  <%=h @order.project.name %>
+  <%= @order.project.name %>
 </p>
 
 

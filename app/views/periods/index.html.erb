@@ -20,8 +20,8 @@
 
 <% @periods.each do |period| %>
   <tr>
-    <td><%=h period.year %></td>
-    <td><%=h period.nr %></td>
+    <td><%= period.year %></td>
+    <td><%= period.nr %></td>
     <% for status in (0..period.status - 1) %>
       <td></td>
     <% end %>

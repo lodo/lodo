@@ -8,8 +8,8 @@
 
 <% for bill in @bills %>
   <tr>
-    <td><%=h l(bill.delivery_date) %></td>
-    <td><%=h l(bill.billing_date) %></td>
+    <td><%= l(bill.delivery_date) %></td>
+    <td><%= l(bill.billing_date) %></td>
     <td><%= link_to t(:show, :scope => :bills), bill %></td>
     <td><%= link_to t(:edit, :scope => :bills), edit_bill_path(bill) %></td>
     <td><%= link_to t(:destroy, :scope => :bills), bill, :confirm => t(:confirm_destroy, :scope => :bills, :number => bill.id), :method => :delete %></td>

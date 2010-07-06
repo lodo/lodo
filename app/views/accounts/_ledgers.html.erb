@@ -22,19 +22,19 @@
     
     <% @account.ledgers.each do |ledger| %>
     <tr class="ledger_item" id="ledger_id_<%= ledger.id %>">
-      <td><%=h ledger.number -%></td>
+      <td><%= ledger.number -%></td>
 <!--
       <td><%= link_to ledger.name, edit_account_ledger_path(ledger.account, ledger) -%></td>
 -->
-      <td><%=h ledger.name -%></td>
-      <td><%=h ledger.telephone_number -%></td>
-      <td><%=h ledger.mobile_number -%></td>
-      <td><%=h ledger.email -%></td>
-      <td><%=h ledger.credit_days -%></td>
-      <td><%=h ledger.auto_payment -%></td>
-      <td><%=h ledger.placement_top -%></td>
-      <td><%=h ledger.unit ? ledger.unit.name : "" -%></td>
-      <td><%=h ledger.project ? ledger.project.name : "" -%></td>
+      <td><%= ledger.name -%></td>
+      <td><%= ledger.telephone_number -%></td>
+      <td><%= ledger.mobile_number -%></td>
+      <td><%= ledger.email -%></td>
+      <td><%= ledger.credit_days -%></td>
+      <td><%= ledger.auto_payment -%></td>
+      <td><%= ledger.placement_top -%></td>
+      <td><%= ledger.unit ? ledger.unit.name : "" -%></td>
+      <td><%= ledger.project ? ledger.project.name : "" -%></td>
     </tr>
     <% end %>
 

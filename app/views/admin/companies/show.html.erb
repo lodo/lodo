@@ -1,21 +1,21 @@
 <p>
   <b><%= t(:name, :scope => :companies) -%>:</b>
-  <%=h @company.name %>
+  <%= @company.name %>
 </p>
 
 <p>
   <b><%= t(:users, :scope => :companies) -%>:</b>
-  <%=h @company.users.collect {|u| u.email}.join ", " %>
+  <%= @company.users.collect {|u| u.email}.join ", " %>
 </p>
 
 <p>
   <b><%= t(:accounts, :scope => :companies) -%>:</b>
-  <%=h @company.accounts.map {|a| "#{a.number} - #{a.name}"}.join(", ") %>
+  <%= @company.accounts.map {|a| "#{a.number} - #{a.name}"}.join(", ") %>
 </p>
 
 <p>
   <b><%= t(:organization_number, :scope => :companies) -%>:</b>
-  <%=h @company.organization_number %>
+  <%= @company.organization_number %>
 </p>
 
 <p>
