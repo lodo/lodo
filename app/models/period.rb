@@ -48,4 +48,8 @@ class Period < ActiveRecord::Base
     end
     self.status += 1
   end
+
+  def to_s
+    sprintf("%d %.2d", self.year, self.nr)
+  end
 end

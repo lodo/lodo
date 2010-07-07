@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <b>Period:</b>
@@ -9,6 +8,60 @@
   <b>Employee:</b>
   <%= @paycheck.employee %>
 </p>
+
+
+<table>
+  <tr>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.description') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.count') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.rate') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.amount') %>
+    </th>
+    <th>
+      <%= t('paychecks.cum_sum') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.account') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.unit') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.project') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.payroll_tax') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.vacation_basis') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.salary_code') %>
+    </th>
+  </tr>
+<% @paycheck.paycheck_lines.each do |line| %>
+  <tr>
+    <td><%= line.description %></td>
+    <td><%= line.count %></td>
+    <td><%= line.rate %></td>
+    <td><%= line.amount %></td>
+    <td>???</td>
+    <td><%= line.account %></td>
+    <td><%= line.unit %></td>
+    <td><%= line.project %></td>
+    <td><%= line.payroll_tax? %></td>
+    <td><%= line.vacation_basis? %></td>
+    <td><%= line.salary_code %></td>
+  </tr>
+<% end %>
+
 
 
 <%= link_to 'Edit', edit_paycheck_path(@paycheck) %> |

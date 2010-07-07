@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = session[:locale] = params[:locale] || session[:locale]
   end
 
-  def init_auth
+  def init_auth   
     company_id = session[:company_id]
     Authorization.current_user = current_user
     @me = current_user

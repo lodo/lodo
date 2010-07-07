@@ -1,42 +1,67 @@
 <%= form_for(@paycheck) do |f| %>
-  <% if @paycheck.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@paycheck.errors.count, "error") %> prohibited this paycheck from being saved:</h2>
+<% if @paycheck.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@paycheck.errors.count, "error") %> prohibited this paycheck from being saved:</h2>
+  
+  <ul>
+    <% @paycheck.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-      <ul>
-      <% @paycheck.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :period %><br />
-    <%= f.text_field :period %>
-  </div>
-  <%= f.hidden_field :employee_id %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="field">
+  <%= f.label :period_id %><br />
+  <%= f.select :period_id, current_user.open_periods.map {|p| [ p, p.id ] } %>
+</div>
+<%= f.hidden_field :employee_id %>
 
 <table>
   <tr>
-    <th><%= t('tralala') %></th>
-    <th></th>
-    <th></th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.description') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.count') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.rate') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.amount') %>
+    </th>
+    <th>
+      <%= t('tjoho') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.account') %>
+    </th>
   </tr>
-<% @employee.paycheck_line_templates.each do |line| %>
+  <% f.fields_for :paycheck_lines do |f_line| %>
   <tr>
-    <td><%= line.description %></td>
-    <td><%= line.description %></td>
-    <td><%= line.description %></td>
-
+    <td>
+      <%= f_line.hidden_field :line_type %>
+      <%= f_line.hidden_field :description %>
+      <%= f_line.hidden_field :account_id %>
+      <%= f_line.hidden_field :payroll_tax %>
+      <%= f_line.hidden_field :vacation_basis %>
+      <%= f_line.hidden_field :salary_code %>
+      <%= f_line.object.description %>
+    </td>
+    <td><%= f_line.text_field :count %></td>
+    <td><%= f_line.text_field :rate %></td>
+    <td><%= f_line.text_field :amount %></td>
+    <td>Hej vad det går!</td>
+    <td><%= f_line.object.account %></td>
+    <td><%= f_line.select :unit_id, @units.map {|u| [u.name, u.id]} %></td>
+    <td><%= f_line.select :project_id, @projects.map {|u| [u.name, u.id]} %></td>
   </tr>
-<% end %>
+  <% end %>
 </table>
 
-
-
+<div class="actions">
+  <%= f.submit %>
+</div>
 
 <% end %>

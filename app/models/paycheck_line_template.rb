@@ -22,7 +22,7 @@ class PaycheckLineTemplate < ActiveRecord::Base
   validates :account, :presence => true, :unless => proc {line_type == TYPE_INFO}
 #  validates :payroll_tax, :presence => true
 #  validates :vacation_basis, :presence => true
-#  validates :employee, :presence => true
+  validates :employee, :presence => true
   
   
   

@@ -95,7 +95,7 @@ class Company < ActiveRecord::Base
   end
 
   def paychecks
-    Paycheck.where(:employee_id => employees)    
+    Paycheck.where(:employee_id => employees)
   end
 
 end

@@ -118,7 +118,9 @@
         unit: Avdelning
         project: Prosjekt
         payroll_tax: Arb. giv. avg.
-        
+        vacation_basis: Ferie.Gr
+        salary_code: Lønnskode
+        employee: Ansatt
   global:
     none: Ikke kjempvalp
   admin:
@@ -349,6 +351,7 @@
     income: Kjemeinkomst
     expense: Kjemeutgift
     info: Kjemeinformativt
-
-
+  paychecks:
+    new_header: Skaper ny lønnsslipp for {{name}}
+    cum_sum: Beløp denne periode
 

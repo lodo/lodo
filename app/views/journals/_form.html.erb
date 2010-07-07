@@ -3,10 +3,10 @@
   Use an object as a fake namespace. Spiffy.
   */
   var LODO = new Object();
-  LODO.unitList = <%= @units_all.to_json %>;
-  LODO.projectList = <%= @projects_all.to_json %>;
-  LODO.accountList = <%= @accounts_all.to_json :include => { :vat_account => {:include => { :vat_account_periods =>{}, :target_account=>{}}} } %>;
-  LODO.journalOperationList = <%= @journal.journal_operations.to_json %>;
+  LODO.unitList = <%= @units_all.all.to_json %>;
+  LODO.projectList = <%= @projects_all.all.to_json %>;
+  LODO.accountList = <%= @accounts_all.all.to_json :include => { :vat_account => {:include => { :vat_account_periods =>{}, :target_account=>{}}} } %>;
+  LODO.journalOperationList = <%= @journal.journal_operations.all.to_json %>;
 </script>
 
 <%= form_for(@journal) do |f| %>
@@ -22,7 +22,7 @@
 </p>
 <p>
   <%= f.label :period_id, "Period" %><br />
-  <%= f.select :period_id, @me.open_periods.collect {|p| [ p.year.to_s + "-" + p.nr.to_s, p.id ] } %>
+  <%= f.select :period_id, @me.open_periods.collect {|p| [ p, p.id ] } %>
 </p>
 <p>
   <%= f.label :journal_date, t(:journal_date, :scope => :journals) %><br />

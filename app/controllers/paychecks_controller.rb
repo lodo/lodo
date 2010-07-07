@@ -5,7 +5,7 @@ class PaychecksController < ApplicationController
   before_filter :employee_required, :except => [:index]
   
   def employee_required
-    @employee = current_user.current_company.employees.find(params[:employee_id])
+    @employee = current_user.current_company.employees.select {|e| e.id == params[:employee_id].to_i}.first
     @paychecksemployees = current_user.current_company.employees
   end
   
@@ -14,6 +14,9 @@ class PaychecksController < ApplicationController
     @projects = current_user.current_company.projects
     @employees = current_user.current_company.employees
     @paychecks = current_user.current_company.paychecks
+    @units = current_user.current_company.units
+    @projects = current_user.current_company.projects
+#    @periods = current_user.current_company.periods.select {|p| p.open?}
   end
 
   # GET /paychecks
@@ -30,8 +33,7 @@ class PaychecksController < ApplicationController
   # GET /paychecks/1
   # GET /paychecks/1.xml
   def show
-    
-    
+        
     @paycheck = Paycheck.find(params[:id])
 
     respond_to do |format|
@@ -45,13 +47,20 @@ class PaychecksController < ApplicationController
   def new
     @paycheck = Paycheck.new
     @paycheck.employee_id = @employee.id
+    @employee.paycheck_line_templates.each do |line| 
+      l = {}
+      ["count", "rate", "amount", "unit_id", "project_id","line_type","description","account_id","payroll_tax","vacation_basis","salary_code"].each do |key|
+        l[key] = line.attributes[key]
+      end
+      @paycheck.paycheck_lines.build l
+    end
     
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @paycheck }
     end
   end
-
+  
   # GET /paychecks/1/edit
   def edit
     @paycheck = Paycheck.find(params[:id])
