@@ -15,7 +15,7 @@
     </td>
     <td>
     </td>
-    <td><%= link_to 'Edit', paycheck_line_templates %></td>
+    <td><%= link_to 'Show', edit_paycheck_template_path(:global) %></td>
     <td>
     </td>
 
@@ -26,7 +26,7 @@
     <td><%= emp.name %></td>
     <td>
     </td>
-    <td><%= link_to 'Edit', new_paycheck_line_template_path(:employee_id => emp.id) %></td>
+    <td><%= link_to 'Show', edit_paycheck_template_path(emp.id) %></td>
     <td>      
     </td>
   </tr>
@@ -35,4 +35,3 @@
 
 <br />
 
-<%= link_to 'New Paycheck line template', new_paycheck_line_template_path %>
