@@ -1,0 +1,45 @@
+<h1>Listing paycheck_line_templates</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Count</th>
+    <th>Rate</th>
+    <th>Amount</th>
+    <th>Account</th>
+    <th>Unit</th>
+    <th>Project</th>
+    <th>Payroll tax</th>
+    <th>Vacation basis</th>
+    <th>Salary code</th>
+    <th>Employee</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @paycheck_line_templates.each do |paycheck_line_template| %>
+  <tr>
+    <td><%= paycheck_line_template.line_type %></td>
+    <td><%= paycheck_line_template.description %></td>
+    <td><%= paycheck_line_template.count %></td>
+    <td><%= paycheck_line_template.rate %></td>
+    <td><%= paycheck_line_template.amount %></td>
+    <td><%= paycheck_line_template.account %></td>
+    <td><%= paycheck_line_template.unit %></td>
+    <td><%= paycheck_line_template.project %></td>
+    <td><%= paycheck_line_template.payroll_tax %></td>
+    <td><%= paycheck_line_template.vacation_basis %></td>
+    <td><%= paycheck_line_template.salary_code %></td>
+    <td><%= paycheck_line_template.employee %></td>
+    <td><%= link_to 'Show', paycheck_line_template %></td>
+    <td><%= link_to 'Edit', edit_paycheck_line_template_path(paycheck_line_template) %></td>
+    <td><%= link_to 'Destroy', paycheck_line_template, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Paycheck line template', new_paycheck_line_template_path %>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Period:</b>
+  <%= @paycheck.period %>
+</p>
+
+<p>
+  <b>Employee:</b>
+  <%= @paycheck.employee %>
+</p>
+
+
+<%= link_to 'Edit', edit_paycheck_path(@paycheck) %> |
+<%= link_to 'Back', paychecks_path %>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  paycheck_line_template: 
+  paycheck: 
+  count: 9.99
+  rate: 9.99
+  amount: 9.99
+  unit: 
+  project: 
+
+two:
+  paycheck_line_template: 
+  paycheck: 
+  count: 9.99
+  rate: 9.99
+  amount: 9.99
+  unit: 
+  project: 

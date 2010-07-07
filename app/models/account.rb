@@ -14,4 +14,14 @@ class Account < ActiveRecord::Base
     end
     return "none"
   end
+
+  def description
+    sprintf('%.4d', self.number) + " " + self.name
+  end
+
+  def to_s
+    return description
+  end
+
+  
 end

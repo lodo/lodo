@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  type: 1
+  description: MyText
+  count: 9.99
+  rate: 9.99
+  amount: 9.99
+  account: 
+  unit: 
+  project: 
+  payroll_tax: false
+  vacation_basis: false
+  salary_code: MyText
+  employee: 
+
+two:
+  type: 1
+  description: MyText
+  count: 9.99
+  rate: 9.99
+  amount: 9.99
+  account: 
+  unit: 
+  project: 
+  payroll_tax: false
+  vacation_basis: false
+  salary_code: MyText
+  employee: 

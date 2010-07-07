@@ -33,6 +33,8 @@
       <li><%= link_to t(:orders, :scope => :layout), orders_path %></li>
       <li><%= link_to t(:bills, :scope => :layout), bills_path %></li>
       <li><%= link_to t(:periods, :scope => :layout), periods_path %></li>
+      <li><%= link_to t(:paycheck_line_templates, :scope => :layout), paycheck_line_templates_path %></li>
+      <li><%= link_to t(:paychecks, :scope => :layout), paychecks_path %></li>
       <li>
 	<%= t(:logged_in_as, :scope => :layout) -%> <%= current_user.email %> (<%= link_to t(:log_out, :scope => :layout), destroy_user_session_path %>)
       </li>

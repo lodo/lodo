@@ -1,0 +1,42 @@
+<%= form_for(@paycheck) do |f| %>
+  <% if @paycheck.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@paycheck.errors.count, "error") %> prohibited this paycheck from being saved:</h2>
+
+      <ul>
+      <% @paycheck.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :period %><br />
+    <%= f.text_field :period %>
+  </div>
+  <%= f.hidden_field :employee_id %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+
+<table>
+  <tr>
+    <th><%= t('tralala') %></th>
+    <th></th>
+    <th></th>
+  </tr>
+<% @employee.paycheck_line_templates.each do |line| %>
+  <tr>
+    <td><%= line.description %></td>
+    <td><%= line.description %></td>
+    <td><%= line.description %></td>
+
+  </tr>
+<% end %>
+</table>
+
+
+
+
+<% end %>

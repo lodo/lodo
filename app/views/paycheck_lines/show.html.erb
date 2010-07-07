@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Paycheck line template:</b>
+  <%= @paycheck_line.paycheck_line_template %>
+</p>
+
+<p>
+  <b>Paycheck:</b>
+  <%= @paycheck_line.paycheck %>
+</p>
+
+<p>
+  <b>Count:</b>
+  <%= @paycheck_line.count %>
+</p>
+
+<p>
+  <b>Rate:</b>
+  <%= @paycheck_line.rate %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @paycheck_line.amount %>
+</p>
+
+<p>
+  <b>Unit:</b>
+  <%= @paycheck_line.unit %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= @paycheck_line.project %>
+</p>
+
+
+<%= link_to 'Edit', edit_paycheck_line_path(@paycheck_line) %> |
+<%= link_to 'Back', paycheck_lines_path %>

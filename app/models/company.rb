@@ -87,4 +87,15 @@ class Company < ActiveRecord::Base
 
   end
 
+  def employees
+    # FIXME: Don't hardcode this here. Make intelligent configuration
+    # possible. Talk to Arnt about how he wants the UI to actually
+    # look, first.
+    self.accounts.where(:number => "2930").first.ledgers
+  end
+
+  def paychecks
+    Paycheck.where(:employee_id => employees)    
+  end
+
 end

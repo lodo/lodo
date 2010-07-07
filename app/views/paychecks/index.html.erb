@@ -1,0 +1,34 @@
+<h1>Listing paychecks</h1>
+
+<table>
+  <tr>
+    <th>Employee</th>
+    <th># of paychecks</th>
+    <th></th>
+  </tr>
+<% @employees.each do |emp| %>
+  <tr>
+    <td><%= emp %></td>
+    <td> <%= Paycheck.where(:employee_id => emp).count %></td>
+    <td><%= link_to 'New paycheck', new_paycheck_path(:employee_id => emp.id) %></td>
+  </tr>
+<% end %>
+
+
+<!--
+<% @paychecks.each do |paycheck| %>
+  <tr>
+    <td><%= paycheck.period %></td>
+    <td><%= paycheck.employee %></td>
+    <td><%= link_to 'Show', paycheck %></td>
+    <td><%= link_to 'Edit', edit_paycheck_path(paycheck) %></td>
+    <td><%= link_to 'Destroy', paycheck, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+
+-->
+</table>
+
+<br />
+
+<%= link_to 'New Paycheck', new_paycheck_path %>

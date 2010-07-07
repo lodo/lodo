@@ -4,5 +4,9 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :address
   attr_protected :company_id, :company
 
+  def to_s
+    return name
+  end
+
 end
 

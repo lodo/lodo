@@ -92,6 +92,7 @@
         even: "må være partall"
         record_invalid: "Valideringsfeil: {{errors}}"
     models:
+      paycheck_line_template: "Diddelipoo"
     attributes:
       user:
         email: Epost
@@ -107,6 +108,19 @@
         _destroy: Slett
       company:
         template_company_id: Firma
+      paycheck_line_template:
+        type: Type
+        description: Text
+        count: "Antall"
+        rate: Sats
+        amount: "Beløp"
+        account: Konto
+        unit: Avdelning
+        project: Prosjekt
+        payroll_tax: Arb. giv. avg.
+        
+  global:
+    none: Ikke kjempvalp
   admin:
     companies:
       select_template_company: Bruk som mal
@@ -126,6 +140,8 @@
     log_out: "Logg ut"
     active_company: "Valgt firma"
     vat_plan: "MVA-oppsett"
+    paycheck_line_templates: "Maler for lønnsslipper"
+    paychecks: "Lønnsslipper"
   users:
     remember_me: "Husk meg"
     reset_password: "Nullstill passord"
@@ -328,6 +344,11 @@
     total_for_this_order: Total for denne ordren
     total_for_all_orders: Total for alle ordre
     total: Total
+
+  paycheck_line_templates:
+    income: Kjemeinkomst
+    expense: Kjemeutgift
+    info: Kjemeinformativt
 
 
 

@@ -1,4 +1,7 @@
 Lodo::Application.routes.draw do |map|
+  resources :paycheck_lines
+  resources :paychecks
+  resources :paycheck_line_templates
 
   devise_for :admins
   devise_for :users

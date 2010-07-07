@@ -1,0 +1,35 @@
+<h1>Listing paycheck_lines</h1>
+
+<table>
+  <tr>
+    <th>Paycheck line template</th>
+    <th>Paycheck</th>
+    <th>Count</th>
+    <th>Rate</th>
+    <th>Amount</th>
+    <th>Unit</th>
+    <th>Project</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @paycheck_lines.each do |paycheck_line| %>
+  <tr>
+    <td><%= paycheck_line.paycheck_line_template %></td>
+    <td><%= paycheck_line.paycheck %></td>
+    <td><%= paycheck_line.count %></td>
+    <td><%= paycheck_line.rate %></td>
+    <td><%= paycheck_line.amount %></td>
+    <td><%= paycheck_line.unit %></td>
+    <td><%= paycheck_line.project %></td>
+    <td><%= link_to 'Show', paycheck_line %></td>
+    <td><%= link_to 'Edit', edit_paycheck_line_path(paycheck_line) %></td>
+    <td><%= link_to 'Destroy', paycheck_line, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Paycheck line', new_paycheck_line_path %>

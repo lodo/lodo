@@ -1,0 +1,73 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type:</b>
+  <%= PaycheckLineTemplate::TYPES[@paycheck_line_template.line_type] %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @paycheck_line_template.description %>
+</p>
+
+<p>
+  <b>Count:</b>
+  <%= @paycheck_line_template.count %>
+</p>
+
+<p>
+  <b>Rate:</b>
+  <%= @paycheck_line_template.rate %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @paycheck_line_template.amount %>
+</p>
+
+<p>
+  <b>Account:</b>
+  <%= 
+     @paycheck_line_template.account || t('global.none')
+     %>
+</p>
+
+<p>
+  <b>Unit:</b>
+  <%= 
+     @paycheck_line_template.unit || t('global.none')
+     %>
+</p>
+
+<p>
+  <b>Project:</b>
+  <%= 
+     @paycheck_line_template.project || t('global.none')
+     %>
+</p>
+
+<p>
+  <b>Payroll tax:</b>
+  <%= @paycheck_line_template.payroll_tax %>
+</p>
+
+<p>
+  <b>Vacation basis:</b>
+  <%= @paycheck_line_template.vacation_basis %>
+</p>
+
+<p>
+  <b>Salary code:</b>
+  <%= @paycheck_line_template.salary_code %>
+</p>
+
+<p>
+  <b>Employee:</b>
+  <%= 
+     @paycheck_line_template.employee || t('global.none')
+     %>
+</p>
+
+
+<%= link_to 'Edit', edit_paycheck_line_template_path(@paycheck_line_template) %> |
+<%= link_to 'Back', paycheck_line_templates_path %>

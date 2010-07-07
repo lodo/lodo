@@ -1,0 +1,66 @@
+<%= form_for(@paycheck_line_template) do |f| %>
+  <% if @paycheck_line_template.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@paycheck_line_template.errors.count, "error") %> prohibited this paycheck_line_template from being saved:</h2>
+
+      <ul>
+      <% @paycheck_line_template.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :line_type %><br />
+    <%= f.select :line_type, PaycheckLineTemplate::TYPES.map {|k,v| [v,k]}%>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :count %><br />
+    <%= f.text_field :count %>
+  </div>
+  <div class="field">
+    <%= f.label :rate %><br />
+    <%= f.text_field :rate %>
+  </div>
+  <div class="field">
+    <%= f.label :amount %><br />
+    <%= f.text_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :account %><br />
+    <%= f.select :account_id, @accounts.map {|c| [c.description, c.id]}, :include_blank => t("global.none")%>
+
+  </div>
+  <div class="field">
+    <%= f.label :unit_id %><br />
+    <%= f.select :unit_id, @units.map {|c| [c.name, c.id]}, :include_blank => t("global.none") %>
+  </div>
+  <div class="field">
+    <%= f.label :project_id %><br />
+    <%= f.select :project_id, @projects.map {|c| [c.name, c.id]}, :include_blank => t("global.none") %>
+  </div>
+  <div class="field">
+    <%= f.check_box :payroll_tax %>
+    <%= f.label :payroll_tax %>
+  </div>
+  <div class="field">
+    <%= f.check_box :vacation_basis %>
+    <%= f.label :vacation_basis %>
+  </div>
+  <div class="field">
+    <%= f.label :salary_code %><br />
+    <%= f.text_field :salary_code %>
+  </div>
+  <div class="field">
+    <%= f.label :employee_id %><br />
+    <%= f.select :employee_id, @employees.map {|c| [c.name, c.id]}, :include_blank => t("global.none") %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
