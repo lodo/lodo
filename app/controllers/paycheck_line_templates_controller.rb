@@ -6,8 +6,7 @@ class PaycheckLineTemplatesController < ApplicationController
     @accounts = current_user.current_company.accounts
     @units = current_user.current_company.units
     @projects = current_user.current_company.projects
-    empolyee_account_id = 20
-    @employees = Account.find(empolyee_account_id).ledgers
+    @employees = current_user.current_company.employees
   end
 
   # GET /paycheck_line_templates
