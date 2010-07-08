@@ -54,7 +54,7 @@ en:
     show: "Show"
     edit: "Edit"
     destroy: "Destroy"
-    delete_confirmation: "Delete the user {{name}}?"
+    delete_confirmation: "Delete the user %{name}?"
     new_user: "New user"
     password: "Password"
     signup: "Sign up"
@@ -67,7 +67,7 @@ en:
     back: "Back"
     register: "Register"
     list: "Back"
-    editing: "Editing the user {{name}}"
+    editing: "Editing the user %{name}"
     update: "Update"
     signup_successful: You have been registered
     login_success: You are now logged in
@@ -84,7 +84,7 @@ en:
     show: "Show"
     edit: "Edit"
     destroy: "Destroy"
-    confirm_delete: "Confirm you want to delete the account {{name}}"
+    confirm_delete: "Confirm you want to delete the account %{name}"
     new_account: "New account"
     lodo_name: "Lodo name"
     debit_text: "Debit text"
@@ -112,7 +112,7 @@ en:
     account_created: Account created
     account_updated: Account updated
   ledgers:
-    ledger_saved: Ledger {{name}} saved
+    ledger_saved: Ledger %{name} saved
   vat:
     listing_vat_accounts: "Listing vat accounts"
     account: "Account"
@@ -124,7 +124,7 @@ en:
     show: "Show"
     edit: "Edit"
     destroy: "Delete"
-    confirm_destroy: "Confirm deletion of vat-account {{code}}"
+    confirm_destroy: "Confirm deletion of vat-account %{code}"
     new_vat_account: "Create new"
     editing_vat_account: "Editing vat account"
     back: "Back"
@@ -136,7 +136,7 @@ en:
     type: "Type"
     number: "Number"
     journal_date: "Journal date"
-    confirm_destroy: "Sure you want to destroy journal entry {{number}}?"
+    confirm_destroy: "Sure you want to destroy journal entry %{number}?"
     show: "Show"
     edit: "Edit"
     destroy: "Destroy"
@@ -169,7 +169,7 @@ en:
     edit: "Edit"
     destroy: "Destroy"
     new_company: "New company"
-    destroy_confirmation: "Confirm deleting the company {{name}}"
+    destroy_confirmation: "Confirm deleting the company %{name}"
     back: "Back"
     editing_company: "Editing company"
     save: "Save"
@@ -189,7 +189,7 @@ en:
     show: Show
     edit: Edit
     destroy: Destroy
-    destroy_confirmation: Confirm deleting {{name}}
+    destroy_confirmation: Confirm deleting %{name}
     new_product: New product
     create: Opprett
     back: Back
@@ -223,7 +223,7 @@ en:
     listing_bills: Listing bills
     save: Save
     close_invoice: Close invoice
-    invoice_number: "Invoice number: {{number}}"
+    invoice_number: "Invoice number: %{number}"
     delivery_date: Delivery date
     billing_date: Billing date
     new_bill: New bill
@@ -232,7 +232,7 @@ en:
     edit: Edit
     destroy: Delete
     save: Save
-    confirm_destroy: Confirm deleting bill {{number}}
+    confirm_destroy: Confirm deleting bill %{number}
     editing_bill: Editing bill
     order: Order
     products: Products

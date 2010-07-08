@@ -24,34 +24,34 @@
       half_a_minute: "et halvt minutt"
       less_than_x_seconds:
         one: "mindre enn 1 sekund"
-        other: "mindre enn {{count}} sekunder"
+        other: "mindre enn %{count} sekunder"
       x_seconds:
         one: "1 sekund"
-        other: "{{count}} sekunder"
+        other: "%{count} sekunder"
       less_than_x_minutes:
         one: "mindre enn 1 minutt"
-        other: "mindre enn {{count}} minutter"
+        other: "mindre enn %{count} minutter"
       x_minutes:
         one: "1 minutt"
-        other: "{{count}} minutter"
+        other: "%{count} minutter"
       about_x_hours:
         one: "rundt 1 time"
-        other: "rundt {{count}} timer"
+        other: "rundt %{count} timer"
       x_days:
         one: "1 dag"
-        other: "{{count}} dager"
+        other: "%{count} dager"
       about_x_months:
         one: "rundt 1 måned"
-        other: "rundt {{count}} måneder"
+        other: "rundt %{count} måneder"
       x_months:
         one: "1 måned"
-        other: "{{count}} måneder"
+        other: "%{count} måneder"
       about_x_years:
         one: "rundt 1 år"
-        other: "rundt {{count}} år"
+        other: "rundt %{count} år"
       over_x_years:
         one: "over 1 år"
-        other: "over {{count}} år"
+        other: "over %{count} år"
   number:
     format:
       precision: 2
@@ -68,7 +68,7 @@
   activerecord:
     errors:
       template:
-        header: "Kunne ikke lagre {{model}} på grunn av {{count}} feil."
+        header: "Kunne ikke lagre %{model} på grunn av %{count} feil."
         body: "Det oppstod problemer i følgende felt:"
       messages:
         inclusion: "er ikke inkludert i listen"
@@ -78,19 +78,19 @@
         accepted: "må være akseptert"
         empty: "kan ikke være tom"
         blank: "kan ikke være blank"
-        too_long: "er for lang (maksimum {{count}} tegn)"
-        too_short: "er for kort (minimum {{count}} tegn)"
-        wrong_length: "er av feil lengde (maksimum {{count}} tegn)"
+        too_long: "er for lang (maksimum %{count} tegn)"
+        too_short: "er for kort (minimum %{count} tegn)"
+        wrong_length: "er av feil lengde (maksimum %{count} tegn)"
         taken: "er allerede i bruk"
         not_a_number: "er ikke et tall"
-        greater_than: "må være større enn {{count}}"
-        greater_than_or_equal_to: "må være større enn eller lik {{count}}"
-        equal_to: "må være lik {{count}}"
-        less_than: "må være mindre enn {{count}}"
-        less_than_or_equal_to: "må være mindre enn eller lik {{count}}"
+        greater_than: "må være større enn %{count}"
+        greater_than_or_equal_to: "må være større enn eller lik %{count}"
+        equal_to: "må være lik %{count}"
+        less_than: "må være mindre enn %{count}"
+        less_than_or_equal_to: "må være mindre enn eller lik %{count}"
         odd: "må være oddetall"
         even: "må være partall"
-        record_invalid: "Valideringsfeil: {{errors}}"
+        record_invalid: "Valideringsfeil: %{errors}"
     models:
       paycheck_line_template: "Diddelipoo"
     attributes:
@@ -142,7 +142,7 @@
     log_out: "Logg ut"
     active_company: "Valgt firma"
     vat_plan: "MVA-oppsett"
-    paycheck_line_templates: "Maler for lønnsslipper"
+    paycheck_templates: "Maler for lønnsslipper"
     paychecks: "Lønnsslipper"
   users:
     remember_me: "Husk meg"
@@ -154,7 +154,7 @@
     show: "Vis"
     edit: "Rediger"
     destroy: "Slett"
-    delete_confirmation: "Sikker på at du vil slette brukeren {{name}}?"
+    delete_confirmation: "Sikker på at du vil slette brukeren %{name}?"
     new_user: "Ny bruker"
     password: "Passord"
     signup: "Registrer bruker"
@@ -167,7 +167,7 @@
     back: "Tilbake"
     register: "Registrer ny bruker"
     list: "Tilbake til listen"
-    editing: "Redigerer brukeren {{name}}"
+    editing: "Redigerer brukeren %{name}"
     update: "Lagre"
     signup_successful: Bruker opprettet
     login_success: Du er nå logget inn
@@ -184,7 +184,7 @@
     show: "Vis"
     edit: "Rediger"
     destroy: "Slett"
-    confirm_delete: "Bekreft sletting av konto {{name}}"
+    confirm_delete: "Bekreft sletting av konto %{name}"
     new_account: "Ny konto"
     lodo_name: "Lodo navn"
     debit_text: "Debit tekst"
@@ -212,7 +212,7 @@
     account_created: Konto opprettet
     account_updated: Konto oppdatert
   ledgers:
-    ledger_saved: Reskontro {{name}} lagret
+    ledger_saved: Reskontro %{name} lagret
   vat:
     listing_vat_accounts: "Viser mva-kontoer"
     account: "Konto"
@@ -224,7 +224,7 @@
     show: "Vis"
     edit: "Rediger"
     destroy: "Slett"
-    confirm_destroy: "Bekreft sletting av mva-sats {{code}}"
+    confirm_destroy: "Bekreft sletting av mva-sats %{code}"
     new_vat_account: "Ny oppføring"
     editing_vat_account: "Redigerer mva-konto"
     back: "Tilbake til listen"
@@ -236,7 +236,7 @@
     type: "Type"
     number: "Nummer"
     journal_date: "Bilagsdato"
-    confirm_destroy: "Bekreft sletting av bilag {{number}}"
+    confirm_destroy: "Bekreft sletting av bilag %{number}"
     show: "Vis"
     edit: "Rediger"
     destroy: "Slett"
@@ -269,7 +269,7 @@
     edit: "Rediger"
     destroy: "Slett"
     new_company: "Nytt firma"
-    destroy_confirmation: "Bekreft sletting av firmaet {{name}}"
+    destroy_confirmation: "Bekreft sletting av firmaet %{name}"
     back: "Tilbake"
     editing_company: "Rediger firma"
     save: "Lagre"
@@ -289,7 +289,7 @@
     show: Vis
     edit: Rediger
     destroy: Slett
-    destroy_confirmation: Bekreft sletting av {{name}}
+    destroy_confirmation: Bekreft sletting av %{name}
     new_product: Nytt produkt
     create: Opprett
     back: Tilbake
@@ -323,7 +323,7 @@
     listing_bills: Viser fakturaer
     save: Lagre
     close_invoice: Lukk faktura
-    invoice_number: "Fakturanummer: {{number}}"
+    invoice_number: "Fakturanummer: %{number}"
     delivery_date: Leveringsdato
     billing_date: Fakturadato
     new_bill: Ny faktura
@@ -331,7 +331,7 @@
     back: Tilbake
     edit: Rediger
     destroy: Slett
-    confirm_destroy: Bekreft sletting av faktura {{number}}
+    confirm_destroy: Bekreft sletting av faktura %{number}
     editing_bill: Redigerer faktura
     order: Ordre
     products: Produkter
@@ -352,6 +352,6 @@
     expense: Kjemeutgift
     info: Kjemeinformativt
   paychecks:
-    new_header: Skaper ny lønnsslipp for {{name}}
+    new_header: Skaper ny lønnsslipp for %{name}
     cum_sum: Beløp denne periode
 
