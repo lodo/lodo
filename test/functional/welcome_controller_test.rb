@@ -10,7 +10,6 @@ class WelcomeControllerTest < ActionController::TestCase
   test "changing the current user" do
     company1 = Company.make
     user = User.make
-    user.confirm!
     role = Role.find_by_name("accountant")
     Assignment.create(:company => company1, :role => role, :user => user)
     user.current_company = company1
