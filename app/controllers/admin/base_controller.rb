@@ -1,6 +1,6 @@
 # Checks if user has permission to access administration
 class Admin::BaseController < ApplicationController
-  skip_before_filter :authenticate_user!, :init_auth
+  skip_before_filter :authenticate_user!, :init_auth, :company_required
   before_filter :authenticate_admin!, :init_admin_auth
 
 

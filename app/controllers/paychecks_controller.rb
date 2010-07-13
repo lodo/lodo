@@ -1,6 +1,4 @@
 class PaychecksController < ApplicationController
-
-  before_filter :company_required
   before_filter :setup_form
   before_filter :employee_required, :except => [:index]
   

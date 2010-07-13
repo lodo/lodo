@@ -1,5 +1,4 @@
 class VatAccountsController < ApplicationController
-  before_filter :company_required
   filter_resource_access
 
   # GET /vat_accounts

@@ -1,6 +1,5 @@
 # chart of accounts
 class AccountsController < ApplicationController
-  before_filter :company_required
   filter_resource_access
 
   # GET /accounts

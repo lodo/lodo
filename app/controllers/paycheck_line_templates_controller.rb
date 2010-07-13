@@ -1,5 +1,4 @@
 class PaycheckLineTemplatesController < ApplicationController
-  before_filter :company_required
   before_filter :setup_form
 
 

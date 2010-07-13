@@ -1,5 +1,4 @@
 class BillsController < ApplicationController
-  before_filter :company_required
   before_filter :load_bill, :only => [:show, :edit, :update, :destroy]
   before_filter :right_company, :only => [:show, :edit, :update, :destroy]
   filter_access_to :all

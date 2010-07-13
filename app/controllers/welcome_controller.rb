@@ -1,5 +1,6 @@
 class WelcomeController < ApplicationController
   skip_before_filter :authenticate_user!, :init_auth, :only => :index
+  skip_before_filter :company_required
 
   def index
   end

@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-  before_filter :company_required
   filter_resource_access
 
 

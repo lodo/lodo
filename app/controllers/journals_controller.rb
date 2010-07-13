@@ -1,6 +1,4 @@
 class JournalsController < ApplicationController
-  before_filter :company_required
-
   before_filter :find_units_all, :only => [:new, :edit]
   before_filter :find_projects_all, :only => [:new, :edit]
   before_filter :find_accounts_all, :only => [:new, :edit]

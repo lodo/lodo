@@ -3,6 +3,7 @@
 
 class ApplicationController < ActionController::Base
   before_filter :set_locale_now, :authenticate_user!, :init_auth
+  before_filter :company_required, :if => proc { current_user }
   
   helper :all # include all helpers, all the time
 
