@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def set_locale_now
-    I18n.locale = session[:locale] = params[:locale] || session[:locale]
+    I18n.locale = session[:locale] = params[:locale] || session[:locale] || I18n.default_locale
   end
 
   def init_auth   
