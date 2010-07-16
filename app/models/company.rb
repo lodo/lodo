@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Company < ActiveRecord::Base
   has_many :accounts, :order => :number
   has_many :orders
@@ -68,7 +69,7 @@ class Company < ActiveRecord::Base
     template.accounts.where("vat_account_id is not null").each do |acc|
       accounts[acc.id].update_attributes!(:vat_account_id => vat_accounts[acc.vat_account_id].id)
     end
-
+    
     # copy units. shallow, copying addresses doesn't make sense..
     template.units.each do |unit|
       u = Unit.new(unit.attributes)
@@ -76,7 +77,7 @@ class Company < ActiveRecord::Base
       u.address = Address.create!
       u.save!
     end
-
+    
     # copy projects. not copying addresses.
     template.projects.each do |project|
       p = Project.new(project.attributes)
@@ -95,7 +96,10 @@ class Company < ActiveRecord::Base
   end
 
   def paychecks
-    Paycheck.where(:employee_id => employees)
+    r = Paycheck.where(:employee_id => employees).joins([:employee, :period]).order("periods.year desc, periods.nr desc, lower(ledgers.name)")
+    print r.to_sql
+    print "..."
+    r
   end
 
 end

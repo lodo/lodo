@@ -1,73 +1,85 @@
-<p id="notice"><%= notice %></p>
+<h2><%= t('paycheck_templates.show_header', {:name => @employee.name}) %></h2>
 
-<p>
-  <b>Type:</b>
-  <%= PaycheckLineTemplate::TYPES[@paycheck_line_template.line_type] %>
-</p>
+<table>
+  <tr>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.type') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.description') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.count') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.rate') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.amount') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.account') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.unit') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.project') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.payroll_tax') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.vacation_basis') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.salary_code') %>
+    </th>
+    <th>
+    </th>
+  </tr>
+  <% @paycheck_line_templates.each do |line| %>
+  <tr>
+    <td>
+      <%= PaycheckLineTemplate::TYPES[line.line_type] %>
+    </td>
+    <td>
+      <%= line.description %>
+    </td>
+    <td>
+      <%= line.count %>
+    </td>
+    <td>
+      <%= line.rate %>
+    </td>
+    <td>
+      <%= line.amount %>
+    </td>
+    <td>
+      <%= line.account.name %>
+    </td>
+    <td>
+      <%= line.unit %>
+    </td>
+    <td>
+      <%= line.project %>
+    </td>
+    <td>
+      <%= line.payroll_tax? ? t('global.yes_val') : t('global.no_val') %>
+    </td>
+    <td>
+      <%= line.vacation_basis? ? t('global.yes_val') : t('global.no_val') %>
+    </td>
+    <td>
+      <%= line.salary_code %>
+    </td>
+    <td>
+      <%= link_to t('global.edit'), edit_paycheck_line_template_path(line) %>
+      <%= link_to t('global.destroy'), line, :confirm => t(:confirm_delete, :scope => :paycheck_templates, :name => line.description), :method => :delete %>
+    </td>
+  </tr>
+  <% end %>
+</table>
 
-<p>
-  <b>Description:</b>
-  <%= @paycheck_line_template.description %>
-</p>
-
-<p>
-  <b>Count:</b>
-  <%= @paycheck_line_template.count %>
-</p>
-
-<p>
-  <b>Rate:</b>
-  <%= @paycheck_line_template.rate %>
-</p>
-
-<p>
-  <b>Amount:</b>
-  <%= @paycheck_line_template.amount %>
-</p>
-
-<p>
-  <b>Account:</b>
-  <%= 
-     @paycheck_line_template.account || t('global.none')
-     %>
-</p>
-
-<p>
-  <b>Unit:</b>
-  <%= 
-     @paycheck_line_template.unit || t('global.none')
-     %>
-</p>
-
-<p>
-  <b>Project:</b>
-  <%= 
-     @paycheck_line_template.project || t('global.none')
-     %>
-</p>
-
-<p>
-  <b>Payroll tax:</b>
-  <%= @paycheck_line_template.payroll_tax %>
-</p>
-
-<p>
-  <b>Vacation basis:</b>
-  <%= @paycheck_line_template.vacation_basis %>
-</p>
-
-<p>
-  <b>Salary code:</b>
-  <%= @paycheck_line_template.salary_code %>
-</p>
-
-<p>
-  <b>Employee:</b>
-  <%= 
-     @paycheck_line_template.employee || t('global.none')
-     %>
-</p>
-
-
-<%= link_to 'Edit', edit_paycheck_line_template_path(@paycheck_line_template) %> |
-<%= link_to 'Back', paycheck_line_templates_path %>
+<%= link_to t(:new_line, :scope => :paycheck_templates), new_paycheck_line_template_path(:employee_id => @employee.id) %>
+<%= link_to t('global.back'), paycheck_templates_path %>

@@ -56,10 +56,7 @@
     <%= f.label :salary_code %><br />
     <%= f.text_field :salary_code %>
   </div>
-  <div class="field">
-    <%= f.label :employee_id %><br />
-    <%= f.select :employee_id, @employees.map {|c| [c.name, c.id]}, :include_blank => t("global.none") %>
-  </div>
+  <%= f.hidden_field :employee_id%>
   <div class="actions">
     <%= f.submit %>
   </div>

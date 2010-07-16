@@ -22,8 +22,14 @@ class PaycheckTemplatesController < ApplicationController
   # GET /paycheck_line_templates/1
   # GET /paycheck_line_templates/1.xml
   def show
-    raise "NOT IMPLEMENTED"
-    @paycheck_line_template = PaycheckLineTemplate.find(params[:id])
+    if params[:id] == "global" 
+      @employee = Ledger.new
+      @employee.name = t('paycheck_templates.global_template')
+      @paycheck_line_templates = PaycheckLineTemplate.where(:employee_id => nil, :company_id => current_user.current_company.id )
+    else
+      @employee = Ledger.find(params[:id])
+      @paycheck_line_templates = @employee.paycheck_line_templates
+    end
     
     respond_to do |format|
       format.html # show.html.erb
@@ -31,8 +37,26 @@ class PaycheckTemplatesController < ApplicationController
     end
   end
   
+    # Create a template for the relevant employee based on the
+    # company-global template lines
+  def create
+    emp = Ledger.find(params[:employee_id])
+    templates = PaycheckLineTemplate.where(:employee_id => nil, :company_id => current_user.current_company.id )
+    PaycheckLineTemplate.transaction do
+      templates.each do |line|
+        l = PaycheckLineTemplate.create!(line.attributes.merge( {:employee_id => emp}))
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to(paycheck_template_url(emp.id)) }
+    end
+  end
+
   # GET /paycheck_line_templates/1/edit
   def edit
+    raise "NOT IMPLEMENTED"
+    
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @paycheck_line_template }

@@ -1,9 +1,9 @@
-<h1>Paycheck templates</h1>
+<h1><%= t('paycheck_templates.index_header') %> </h1>
 
 <table>
   <tr>
-    <th>Template</th>
-    <th># lines</th>
+    <th><%= t('paycheck_templates.template') %></th>
+    <th><%= t('paycheck_templates.line_count') %></th>
     <th></th>
     <th></th>
 
@@ -11,11 +11,11 @@
 
   <tr>
     <td>
-      Global template
+      <%= t('paycheck_templates.global_template') %>
     </td>
     <td>
-    </td>
-    <td><%= link_to 'Show', edit_paycheck_template_path(:global) %></td>
+    </td> 
+    <td><%= link_to t('global.show'), paycheck_template_path(:global) %></td>
     <td>
     </td>
 
@@ -25,13 +25,20 @@
   <tr>
     <td><%= emp.name %></td>
     <td>
+      <%= emp.paycheck_line_templates.count %>
     </td>
-    <td><%= link_to 'Show', edit_paycheck_template_path(emp.id) %></td>
+    <td>
+      <%= 
+	 if emp.paycheck_line_templates.count == 0
+	   link_to t('global.create'), paycheck_templates_path(:employee_id => emp.id), :method => 'post' 
+	 else
+	   link_to t('global.show'), paycheck_template_path(emp.id) 
+	 end
+	 %>
+    </td>
     <td>      
     </td>
   </tr>
 <% end %>
 </table>
-
-<br />
 

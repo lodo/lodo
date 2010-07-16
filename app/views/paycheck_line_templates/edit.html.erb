@@ -1,6 +1,5 @@
-<h1>Editing <%= t("activerecord.models.paycheck_line_template") %></h1>
+<h1><%= t("paycheck_line_templates.edit_header") %></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @paycheck_line_template %> |
-<%= link_to 'Back', paycheck_line_templates_path %>
+<%= link_to t('global.back'), paycheck_template_path(@paycheck_line_template.maybe_employee_id) %>

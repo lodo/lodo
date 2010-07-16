@@ -2,6 +2,8 @@ class PaycheckLineTemplatesController < ApplicationController
   before_filter :company_required
   before_filter :setup_form
 
+
+
   def setup_form
     @accounts = current_user.current_company.accounts
     @units = current_user.current_company.units
@@ -34,7 +36,14 @@ class PaycheckLineTemplatesController < ApplicationController
   # GET /paycheck_line_templates/new
   # GET /paycheck_line_templates/new.xml
   def new
+    
     @paycheck_line_template = PaycheckLineTemplate.new
+    if params[:employee_id]
+      @employee = Ledger.find(params[:employee_id])
+      @paycheck_line_template.employee = @employee
+    else
+      
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,14 +60,28 @@ class PaycheckLineTemplatesController < ApplicationController
   # POST /paycheck_line_templates.xml
   def create
     @paycheck_line_template = PaycheckLineTemplate.new(params[:paycheck_line_template])
-
+    @paycheck_line_template.company = current_user.current_company
+    
     respond_to do |format|
       if @paycheck_line_template.save
-        format.html { redirect_to(@paycheck_line_template, :notice => 'Paycheck line template was successfully created.') }
-        format.xml  { render :xml => @paycheck_line_template, :status => :created, :location => @paycheck_line_template }
+        id = @paycheck_line_template.maybe_employee_id
+        format.html do
+          redirect_to(paycheck_template_url(id), 
+                      :notice => t('paycheck_line_templates.created')) 
+          end
+        
+        format.xml do 
+          render :xml => @paycheck_line_template, 
+          :status => :created, :location => @paycheck_line_template 
+        end
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @paycheck_line_template.errors, :status => :unprocessable_entity }
+        format.html do
+          render :action => "new" 
+        end
+        format.xml do
+          render :xml => @paycheck_line_template.errors, 
+          :status => :unprocessable_entity 
+        end
       end
     end
   end
@@ -70,12 +93,14 @@ class PaycheckLineTemplatesController < ApplicationController
 
     respond_to do |format|
       if @paycheck_line_template.update_attributes(params[:paycheck_line_template])
-        format.html { redirect_to(@paycheck_line_template, :notice => 'Paycheck line template was successfully updated.') }
+        id = @paycheck_line_template.maybe_employee_id
+        format.html { redirect_to(paycheck_template_url(id), 
+                                  :notice => t('paycheck_line_templates.saved')) }
+
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @paycheck_line_template.errors, :status => :unprocessable_entity }
-      end
+        format.xml  { render :xml => @paycheck_line_template.errors, :status => :unprocessable_entity }      end
     end
   end
 
@@ -83,10 +108,12 @@ class PaycheckLineTemplatesController < ApplicationController
   # DELETE /paycheck_line_templates/1.xml
   def destroy
     @paycheck_line_template = PaycheckLineTemplate.find(params[:id])
+    id = @paycheck_line_template.maybe_employee_id
     @paycheck_line_template.destroy
 
     respond_to do |format|
-      format.html { redirect_to(paycheck_line_templates_url) }
+      format.html { redirect_to(paycheck_template_url(id), 
+                                  :notice => t('paycheck_line_templates.destroyed')) }
       format.xml  { head :ok }
     end
   end

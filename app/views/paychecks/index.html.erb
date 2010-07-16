@@ -1,34 +1,39 @@
-<h1>Listing paychecks</h1>
+<h1><%= t('paychecks.index_header') %></h1>
 
 <table>
   <tr>
-    <th>Employee</th>
-    <th># of paychecks</th>
+    <th><%= t('activerecord.attributes.paycheck_line_template.employee') %></th>
+    <th><%= t('paychecks.paycheck_count') %></th>
     <th></th>
   </tr>
 <% @employees.each do |emp| %>
   <tr>
     <td><%= emp %></td>
     <td> <%= Paycheck.where(:employee_id => emp).count %></td>
-    <td><%= link_to 'New paycheck', new_paycheck_path(:employee_id => emp.id) %></td>
+    <td><%= link_to t('paychecks.new'), new_paycheck_path(:employee_id => emp.id) %></td>
   </tr>
 <% end %>
+</table>
 
 
-<!--
+<table>
+  <tr>
+    <th><%= t('global.period', :count => 1) %></th>
+    <th><%= t('activerecord.attributes.paycheck_line_template.employee') %></th>
+    <th></th>
+  </tr>
 <% @paychecks.each do |paycheck| %>
   <tr>
     <td><%= paycheck.period %></td>
     <td><%= paycheck.employee %></td>
-    <td><%= link_to 'Show', paycheck %></td>
-    <td><%= link_to 'Edit', edit_paycheck_path(paycheck) %></td>
-    <td><%= link_to 'Destroy', paycheck, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td>
+      <%= link_to t('global.show'), paycheck %>
+      <%= link_to t('global.edit'), edit_paycheck_path(paycheck) %>
+      <%= link_to t('global.destroy'), paycheck, :confirm => t('global.confirm'), :method => :delete %>    </td>
   </tr>
 <% end %>
 
--->
 </table>
 
 <br />
 
-<%= link_to 'New Paycheck', new_paycheck_path %>

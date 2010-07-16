@@ -1,8 +1,7 @@
 <%= form_for(@paycheck) do |f| %>
 <% if @paycheck.errors.any? %>
 <div id="error_explanation">
-  <h2><%= pluralize(@paycheck.errors.count, "error") %> prohibited this paycheck from being saved:</h2>
-  
+  <h2> <%= t('paychecks.error_header', :count => @paycheck.errors.count) %></h2>  
   <ul>
     <% @paycheck.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>
@@ -20,6 +19,9 @@
 <table>
   <tr>
     <th>
+      <%= t('activerecord.attributes.paycheck_line_template.type') %>
+    </th>
+    <th>
       <%= t('activerecord.attributes.paycheck_line_template.description') %>
     </th>
     <th>
@@ -32,30 +34,57 @@
       <%= t('activerecord.attributes.paycheck_line_template.amount') %>
     </th>
     <th>
-      <%= t('tjoho') %>
-    </th>
-    <th>
       <%= t('activerecord.attributes.paycheck_line_template.account') %>
     </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.unit') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.project') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.payroll_tax') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.vacation_basis') %>
+    </th>
+    <th>
+      <%= t('activerecord.attributes.paycheck_line_template.salary_code') %>
+    </th>
   </tr>
-  <% f.fields_for :paycheck_lines do |f_line| %>
+  <%= f.fields_for :paycheck_lines do |f_line| %>
+  <% obj = f_line.object %>
   <tr>
     <td>
       <%= f_line.hidden_field :line_type %>
-      <%= f_line.hidden_field :description %>
-      <%= f_line.hidden_field :account_id %>
-      <%= f_line.hidden_field :payroll_tax %>
-      <%= f_line.hidden_field :vacation_basis %>
-      <%= f_line.hidden_field :salary_code %>
-      <%= f_line.object.description %>
+      <%=  PaycheckLineTemplate::TYPES[obj.line_type] %>
     </td>
-    <td><%= f_line.text_field :count %></td>
-    <td><%= f_line.text_field :rate %></td>
-    <td><%= f_line.text_field :amount %></td>
-    <td>Hej vad det går!</td>
-    <td><%= f_line.object.account %></td>
+    <td>
+      <%= f_line.hidden_field :description %>
+      <%= obj.description %>
+    </td>
+    <td><%= f_line.text_field :count, :class => 'numeric' %></td>
+    <td><%= f_line.text_field :rate, :class => 'numeric' %></td>
+    <td><%= f_line.text_field :amount, :class => 'numeric' %></td>
+    <td>
+      <%= f_line.hidden_field :account_id %>
+      <%= f_line.object.account %>
+    </td>
     <td><%= f_line.select :unit_id, @units.map {|u| [u.name, u.id]} %></td>
     <td><%= f_line.select :project_id, @projects.map {|u| [u.name, u.id]} %></td>
+    <td>
+      <%= f_line.hidden_field :payroll_tax %>
+      <%= obj.payroll_tax? ? t('global.yes_val') : t('global.no_val') %>
+    </td>
+    <td>
+      <%= f_line.hidden_field :vacation_basis %>
+      <%= obj.vacation_basis? ? t('global.yes_val') : t('global.no_val') %>
+    </td>
+    <td>
+      <%= f_line.hidden_field :salary_code %>
+      <%= obj.salary_code %>
+    </td>
+
   </tr>
   <% end %>
 </table>

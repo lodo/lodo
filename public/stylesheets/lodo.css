@@ -54,7 +54,18 @@ input
 {
     background-color: white;
     border: 1px solid #888;
-	color: black;
+    color: black;
+}
+
+select
+{
+    max-width: 15em;
+
+}
+
+input.numeric
+{
+    width: 5em;
 }
 
 td input

@@ -22,8 +22,7 @@ class PaychecksController < ApplicationController
   # GET /paychecks
   # GET /paychecks.xml
   def index
-    @paychecks = Paycheck.all
-
+#    @paychecks = Paycheck.all
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @paychecks }

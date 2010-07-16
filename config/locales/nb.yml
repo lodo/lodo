@@ -1,5 +1,9 @@
 # Norwegian, norsk bokmål, by irb.no
 "nb":
+  helpers:
+    submit:
+      create: "Kjempeskap %{model}"
+      update: "Kjempeupdater %{model}"
   support:
     array:
       sentence_connector: "og"
@@ -122,7 +126,18 @@
         salary_code: Lønnskode
         employee: Ansatt
   global:
+    confirm: Er du kjempesikker?
     none: Ikke kjempvalp
+    back: Kjempetilbake
+    edit: Rediger
+    create: Opprett
+    show: Vis
+    destroy: Slett
+    yes_val: Ja
+    no_val: Nei
+    period: 
+      one: Periode
+      other: Perioder
   admin:
     companies:
       select_template_company: Bruk som mal
@@ -133,7 +148,6 @@
     journals: "Bilagsføring"
     companies: "Firmaer"
     projects: Prosjekt
-    periods: Perioder
     units: Avdeling
     products: "Produkter"
     orders: "Ordre"
@@ -153,7 +167,6 @@
     companies: "Firmaer"
     show: "Vis"
     edit: "Rediger"
-    destroy: "Slett"
     delete_confirmation: "Sikker på at du vil slette brukeren %{name}?"
     new_user: "Ny bruker"
     password: "Passord"
@@ -183,7 +196,7 @@
     name: "Navn"
     show: "Vis"
     edit: "Rediger"
-    destroy: "Slett"
+    
     confirm_delete: "Bekreft sletting av konto %{name}"
     new_account: "Ny konto"
     lodo_name: "Lodo navn"
@@ -223,7 +236,6 @@
     valid_to: "Gyldig til"
     show: "Vis"
     edit: "Rediger"
-    destroy: "Slett"
     confirm_destroy: "Bekreft sletting av mva-sats %{code}"
     new_vat_account: "Ny oppføring"
     editing_vat_account: "Redigerer mva-konto"
@@ -239,7 +251,6 @@
     confirm_destroy: "Bekreft sletting av bilag %{number}"
     show: "Vis"
     edit: "Rediger"
-    destroy: "Slett"
     new_journal: "Nytt bilag"
     back: "Tilbake"
     new_journal_operation: "Ny postering"
@@ -267,7 +278,6 @@
     address: "Adresse"
     show: "Vis"
     edit: "Rediger"
-    destroy: "Slett"
     new_company: "Nytt firma"
     destroy_confirmation: "Bekreft sletting av firmaet %{name}"
     back: "Tilbake"
@@ -288,7 +298,6 @@
     name: Navn
     show: Vis
     edit: Rediger
-    destroy: Slett
     destroy_confirmation: Bekreft sletting av %{name}
     new_product: Nytt produkt
     create: Opprett
@@ -317,7 +326,6 @@
     show: Vis
     edit: Rediger
     editing_order: Redigerer ordre
-    destroy: Slett
   access_denied: Beklager, du mangler tilgang til denne siden.
   bills:
     listing_bills: Viser fakturaer
@@ -330,7 +338,6 @@
     show: Vis
     back: Tilbake
     edit: Rediger
-    destroy: Slett
     confirm_destroy: Bekreft sletting av faktura %{number}
     editing_bill: Redigerer faktura
     order: Ordre
@@ -351,7 +358,24 @@
     income: Kjemeinkomst
     expense: Kjemeutgift
     info: Kjemeinformativt
+    saved: Din kjempeendring er kjempelagret
+    destroyed: Din kjempelinje er kjempeslettet
+    created: Din kjempelinje er blitt kjempeskapet
+    edit_header: Kjemperedigerer linje
   paychecks:
     new_header: Skaper ny lønnsslipp for %{name}
     cum_sum: Beløp denne periode
-
+    new: Kjempeny lønnslipp
+    index_header: Kjempelønnslipper før ansatte
+    paycheck_count: "# kjempelønnslipper"
+    error_header:
+      one: "Kunne ikke lagre lønnslippen på grunn av følgende problem:"
+      other: "Kunne ikke lagre lønnslippen på grunn av følgende %{count} problemer:"
+  paycheck_templates:
+    show_header: Lønnsslippmal for %{name}
+    confirm_delete: "Bekreft sletting av linje %{name}"
+    new_line: "Ny linje"
+    line_count: "Antal kjempelinjer i mal"
+    template: Ansatt
+    index_header: Kjempemaler for ansatte
+    global_template: Hovedmal
