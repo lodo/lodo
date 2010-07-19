@@ -62,53 +62,18 @@ authorization do
   end
 
   role :accountant do
-    has_permission_on :accounts, :to => :manage do
-      if_attribute :company_id => is {user.current_company.id}
-    end
 
-    has_permission_on :vat_accounts, :to => :manage do
-      if_attribute :company_id => is {user.current_company.id}
-    end
-
-    has_permission_on :projects, :to => :manage do
-      if_attribute :company_id => is {user.current_company.id}
-    end
-
-    has_permission_on :units, :to => :manage do
-      if_attribute :company_id => is {user.current_company.id}
-    end
-
-    has_permission_on :products, :to => :manage do
-      if_attribute :account => { :company_id => is {user.current_company.id} }
-    end
+    includes :user
 
     has_permission_on :journals, :to => :manage, :join_by => :and do
       if_attribute :company_id => is {user.current_company.id}
       if_attribute :period => { :status => [ Period::STATUSE_NAMES['Open'], Period::STATUSE_NAMES['Done'] ] }
     end
-    has_permission_on :journals, :to => :read do
-      if_attribute :company_id => is {user.current_company.id}
-    end
-    has_permission_on :journals, :to => :new
 
     has_permission_on :bills, :to => :manage, :join_by => :and do
       if_attribute :company_id => is {user.current_company.id}
       if_attribute :period => { :status => [ Period::STATUSE_NAMES['Open'], Period::STATUSE_NAMES['Done'] ] }
     end
-    has_permission_on :bills, :to => :read do
-      if_attribute :company_id => is {user.current_company.id}
-    end
-    has_permission_on :bills, :to => :new
-
-    has_permission_on :orders, :to => :manage do
-      if_attribute :company_id => is {user.current_company.id}
-    end
-
-    has_permission_on :periods, :to => [:index, :new, :elevate_status, :move_bills] do
-      if_attribute :company_id => is {user.current_company.id}
-      if_attribute :company_id => nil
-    end
-
   end
 
   role :employee do
