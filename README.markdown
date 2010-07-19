@@ -11,23 +11,21 @@ The initial release aims to deliver these features:
   * Chart of accounts, with abstract ledger support which should cover AR, AP and salary ledgers
   * General ledger
   * Orders and billing
-  * Support for multiple users and tenants. Seems like proper access control didn't make it into this version
+  * Support for multiple users and tenants
 
 ### Upcoming features
 Preliminary feature list for the next milestone:
 
   * Reporting
-  * Finish up user administration and access control
   * Salaries
   * A test suite
 
 ## Community
   * Redmine: <https://projects.freecode.no/projects/show/lodo-ng>
-  * Source: <https://projects.freecode.no/git/lodo.git>, <http://github.com/ivarnymoen/lodo/tree/master>
+  * Source: <http://github.com/lodo/lodo.git>, <https://projects.freecode.no/git/lodo.git>
 
 ## Contributors
-  * Funding and requirements: [Arnt Telhaug](mailto:arnt@telhaug.no), <http://www.lodo.no/>
+  * Funding, requirements and some development resources: [Arnt Telhaug](mailto:arnt@telhaug.no), <http://www.lodo.no/>
   * Development and project management by FreeCode, <http://freecode.no/>
-  * Ivar Nymoen, employee at lodo.no.
   * Paal de Vibe, consultant at Kanobo Web Consult, <http://www.kanobo.com/>
 
