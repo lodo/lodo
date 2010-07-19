@@ -29,5 +29,10 @@ class User < ActiveRecord::Base
   def open_periods(company = self.current_company)
     Period.where(:company_id => company.id, :status => Period::STATUSE_NAMES['Open'])
   end
+  
+  # declarative_auth wants a login attribute for the introspection ui
+  def login
+    self.email
+  end
 
 end

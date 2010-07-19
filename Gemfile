@@ -8,6 +8,7 @@ gem 'rails', '3.0.0.beta4'
 # postgresql
 gem 'pg'
 
+gem "ruby_parser"
 gem 'bundler'
 gem "machinist"
 gem "faker"

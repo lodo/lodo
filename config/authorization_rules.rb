@@ -1,14 +1,17 @@
 
 authorization do
 
-  # no need for privs. admin authentication will do
-  #role :admin do
-  #  has_permission_on :admin_users, :to => :manage
-  #  has_permission_on :admin_companies, :to => :manage
-  #  has_permission_on :admin_admins, :to => :manage
-  #end
+  role :admin do
+    has_permission_on :authorization_rules, :to => :manage
+    has_permission_on :authorization_usages, :to => :manage
+    # just being authenticated as an admin covers
+    # authorization for the admin ui
+  end
 
   role :user do
+    has_permission_on :authorization_rules, :to => :read
+    has_permission_on :authorization_usages, :to => :read
+
     has_permission_on :accounts, :to => :manage do
       if_attribute :company_id => is {user.current_company.id}
     end
@@ -116,11 +119,7 @@ authorization do
 end
 
 privileges do
-  privilege :read do
-    includes :index, :show
-  end
-
   privilege :manage do
-    includes :create, :update, :delete, :new, :edit, :index, :show
+    includes :create, :update, :delete, :new, :edit, :index, :show, :read
   end
 end
