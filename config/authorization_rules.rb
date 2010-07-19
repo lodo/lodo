@@ -15,22 +15,27 @@ authorization do
     has_permission_on :accounts, :to => :manage do
       if_attribute :company_id => is {user.current_company.id}
     end
+    has_permission_on :accounts, :to => :create
 
     has_permission_on :vat_accounts, :to => :manage do
       if_attribute :company_id => is {user.current_company.id}
     end
+    has_permission_on :vat_accounts, :to => :create
 
     has_permission_on :projects, :to => :manage do
       if_attribute :company_id => is {user.current_company.id}
     end
+    has_permission_on :projects, :to => :create
 
     has_permission_on :units, :to => :manage do
       if_attribute :company_id => is {user.current_company.id}
     end
+    has_permission_on :units, :to => :create
 
     has_permission_on :products, :to => :manage do
       if_attribute :account => { :company_id => is {user.current_company.id} }
     end
+    has_permission_on :products, :to => :create
 
     has_permission_on :journals, :to => :manage, :join_by => :and do
       if_attribute :company_id => is {user.current_company.id}
@@ -39,7 +44,7 @@ authorization do
     has_permission_on :journals, :to => :read do
       if_attribute :company_id => is {user.current_company.id}
     end
-    has_permission_on :journals, :to => :new
+    has_permission_on :journals, :to => :create
 
     has_permission_on :bills, :to => :manage, :join_by => :and do
       if_attribute :company_id => is {user.current_company.id}
@@ -48,11 +53,12 @@ authorization do
     has_permission_on :bills, :to => :read do
       if_attribute :company_id => is {user.current_company.id}
     end
-    has_permission_on :bills, :to => :new
+    has_permission_on :bills, :to => :create
 
     has_permission_on :orders, :to => :manage do
       if_attribute :company_id => is {user.current_company.id}
     end
+    has_permission_on :orders, :to => :create
 
     has_permission_on :periods, :to => [:index, :new, :elevate_status, :move_bills] do
       if_attribute :company_id => is {user.current_company.id}
@@ -84,7 +90,11 @@ authorization do
 end
 
 privileges do
-  privilege :manage do
-    includes :create, :update, :delete, :new, :edit, :index, :show, :read
-  end
+  # default privs
+  privilege :manage, :includes => [:create, :read, :update, :delete]
+  privilege :read, :includes => [:index, :show]
+  privilege :create, :includes => :new
+  privilege :update, :includes => :edit
+  privilege :delete, :includes => :destroy
+
 end
