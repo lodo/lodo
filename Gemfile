@@ -8,7 +8,6 @@ gem 'rails', '3.0.0.beta4'
 # postgresql
 gem 'pg'
 
-gem "ruby_parser"
 gem 'bundler'
 gem "machinist"
 gem "faker"
@@ -33,3 +32,8 @@ gem "declarative_authorization", :git => "http://github.com/stffn/declarative_au
 # group :test do
 #   gem 'webrat'
 # end
+
+group :development do
+  gem "ruby_parser"
+end
+
