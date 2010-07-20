@@ -7,7 +7,7 @@ nb:
 
   devise:
     failure:
-      unauthenticated: 'Du må logge inn eller opprette en bruker for å besøke siden.'
+      unauthenticated: 'Du må logge inn for å besøke siden.'
       unconfirmed: 'Kontoen må valideres først.'
       locked: 'Kontoen er låst.'
       invalid: 'Ugyldig epost eller passord.'
@@ -32,7 +32,7 @@ nb:
       updated: 'Oppdatering vellykket.'
       destroyed: 'Kontoen din er nå avsluttet (oversetting: slettet eller stengt??).'
     unlocks:
-      link: "Trenger du nye instruksjoner for opplåsing av konto?"
+      link: "Trenger du instruksjoner for opplåsing av konto?"
       send_instructions: 'Vi har nå sendt deg en mail med instruksjoner for opplåsing av sperret konto.'
       unlocked: 'Konto låst opp igjen. Du er nå logget inn.'
     mailer:
