@@ -12,12 +12,12 @@
     <td><%= unit.name %></td>
     <td><%= render :partial => "/addresses/show", :locals => { :address => unit.address }  %></td>
     <td><%= unit.comments %></td>
-    <td><%= link_to 'Show', unit %></td>
+    <td><%= link_to t("global.show"), unit %></td>
     <% if permitted_to? :edit, unit %>
-      <td><%= link_to 'Edit', edit_unit_path(unit) %></td>
+      <td><%= link_to t("global.edit"), edit_unit_path(unit) %></td>
     <% end %>
     <% if permitted_to? :delete, unit %>
-      <td><%= link_to 'Destroy', unit, :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to t("global.destroy"), unit, :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
 <% end %>

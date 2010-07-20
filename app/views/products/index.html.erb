@@ -15,12 +15,12 @@
     <td><%= product.account.name %></td>
     <td>
 
-      <%= link_to t(:show, :scope => :products), product %>
+      <%= link_to t("global.show"), product %>
       <% if permitted_to? :edit, product %>
-        <%= link_to t(:edit, :scope => :products), edit_product_path(product) %>
+        <%= link_to t("global.edit"), edit_product_path(product) %>
       <% end %>
       <% if permitted_to? :delete, product %>
-        <%= link_to t(:destroy, :scope => :products), product, :confirm => t(:destroy_confirmation, :scope => :products, :name => product.name), :method => :delete %>
+        <%= link_to t("global.destroy"), product, :confirm => t(:destroy_confirmation, :scope => :products, :name => product.name), :method => :delete %>
       <% end %>
     </td>
   </tr>

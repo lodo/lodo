@@ -12,9 +12,9 @@
     <td><%= vat_account.id %></td>
     <td><%= vat_account.target_account.number %> -  <%= vat_account.target_account.name %></td>
     <td><%= vat_account.overridable %></td>
-    <td><%= link_to t(:show, :scope => :vat), vat_account %></td>
-    <td><%= link_to t(:edit, :scope => :vat), edit_vat_account_path(vat_account) %></td>
-    <td><%= link_to t(:destroy, :scope => :vat), vat_account, :confirm => t(:confirm_destroy, :scope => :vat, :code => vat_account.id), :method => :delete %></td>
+    <td><%= link_to t("global.show"), vat_account %></td>
+    <td><%= link_to t("global.edit"), edit_vat_account_path(vat_account) %></td>
+    <td><%= link_to t("global.destroy"), vat_account, :confirm => t(:confirm_destroy, :scope => :vat, :code => vat_account.id), :method => :delete %></td>
   </tr>
 <% end %>
 </table>

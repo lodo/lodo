@@ -156,7 +156,7 @@
     log_out: "Logg ut"
     active_company: "Valgt firma"
     vat_plan: "MVA-oppsett"
-    paycheck_templates: "Maler for lønnsslipper"
+    paycheck_templates: "Lønnsslipp-maler"
     paychecks: "Lønnsslipper"
   users:
     remember_me: "Husk meg"
@@ -194,8 +194,6 @@
     listing_accounts: "Viser kontoplan"
     number: "Nummer"
     name: "Navn"
-    show: "Vis"
-    edit: "Rediger"
     
     confirm_delete: "Bekreft sletting av konto %{name}"
     new_account: "Ny konto"
@@ -234,8 +232,6 @@
     code: "Kode"
     valid_from: "Gyldig fra"
     valid_to: "Gyldig til"
-    show: "Vis"
-    edit: "Rediger"
     confirm_destroy: "Bekreft sletting av mva-sats %{code}"
     new_vat_account: "Ny oppføring"
     editing_vat_account: "Redigerer mva-konto"
@@ -249,8 +245,6 @@
     number: "Nummer"
     journal_date: "Bilagsdato"
     confirm_destroy: "Bekreft sletting av bilag %{number}"
-    show: "Vis"
-    edit: "Rediger"
     new_journal: "Nytt bilag"
     back: "Tilbake"
     new_journal_operation: "Ny postering"
@@ -276,8 +270,6 @@
     users: "Brukere"
     organization_number: "Org. nummer"
     address: "Adresse"
-    show: "Vis"
-    edit: "Rediger"
     new_company: "Nytt firma"
     destroy_confirmation: "Bekreft sletting av firmaet %{name}"
     back: "Tilbake"
@@ -296,8 +288,6 @@
     listing_products: Viser produkter
     price: Pris
     name: Navn
-    show: Vis
-    edit: Rediger
     destroy_confirmation: Bekreft sletting av %{name}
     new_product: Nytt produkt
     create: Opprett
@@ -323,8 +313,6 @@
     add_product: Legg til produkt
     save: Lagre
     back: Tilbake
-    show: Vis
-    edit: Rediger
     editing_order: Redigerer ordre
   access_denied: Beklager, du mangler tilgang til denne siden.
   bills:
@@ -335,9 +323,7 @@
     delivery_date: Leveringsdato
     billing_date: Fakturadato
     new_bill: Ny faktura
-    show: Vis
     back: Tilbake
-    edit: Rediger
     confirm_destroy: Bekreft sletting av faktura %{number}
     editing_bill: Redigerer faktura
     order: Ordre
@@ -365,7 +351,7 @@
   paychecks:
     new_header: Skaper ny lønnsslipp for %{name}
     cum_sum: Beløp denne periode
-    new: Kjempeny lønnslipp
+    new: Ny lønnsslipp
     index_header: Kjempelønnslipper før ansatte
     paycheck_count: "# kjempelønnslipper"
     error_header:
