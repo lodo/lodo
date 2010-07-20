@@ -33,7 +33,8 @@ gem "declarative_authorization", :git => "http://github.com/stffn/declarative_au
 #   gem 'webrat'
 # end
 
-group :development do
-  gem "ruby_parser"
-end
+# didn't work. was still being required in prod..
+#group :development do
+#  gem "ruby_parser"
+#end
 
