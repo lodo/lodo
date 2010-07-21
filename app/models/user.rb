@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
     :reject_if => proc { |attrs| attrs["company_id"].blank? || attrs["role_id"].blank? }
   
   # Include default devise modules. Others available are:
-  # :http_authenticatable, :token_authenticatable, :confirmable, :lockable, :timeoutable and :activatable, :registerable
-  devise :database_authenticatable, :recoverable, :http_authenticatable,
-    :rememberable, :trackable, :validatable, :lockable
+  # :token_authenticatable, :confirmable, :lockable, :timeoutable and :activatable, :registerable
+  devise :database_authenticatable, :recoverable, :rememberable,
+	:trackable, :validatable, :lockable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :assignments_attributes
