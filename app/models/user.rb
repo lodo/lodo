@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
     Period.where(:company_id => company.id, :status => Period::STATUSE_NAMES['Open'])
   end
 
+  def to_s
+    return email
+  end
+
 end

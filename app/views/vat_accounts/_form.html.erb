@@ -2,8 +2,7 @@
   <%= f.error_messages %>
   <% if not @vat_account.id.nil? %>
     <p>
-      <%= f.label :vat_id, "Kode" %><br />
-      <%= @vat_account.id.to_s %>
+      <%= f.label :vat_id, t('vat.code') %>: <%= @vat_account.id.to_s %>
     </p>
   <% end %>
   <p>
@@ -11,15 +10,14 @@
     <%= f.select :target_account_id, @me.current_company.accounts.sort_by {|a| a.number}.collect {|p| [ p.number.to_s + " - " + p.name, p.id ] } %>
   </p>
   <p>
-    <%= f.label :overridable, t(:overridable, :scope => :vat) %><br />
-    <%= f.check_box :overridable %>
+    <%= f.check_box :overridable %>     <%= f.label :overridable, t(:overridable, :scope => :vat) %>
   </p>
 
   <div>
     <table class='striped'>
       <tr>
-	<th>Valid from</th>
-	<th>Percentage</th>
+	<th><%= t('vat.valid_from') %></th>
+	<th><%= t('vat.percentage') %></th>
       </tr>
 
       <% for vat_account_period in @vat_account.vat_account_periods.sort { |a,b| b.valid_from <=> a.valid_from } %>
@@ -38,21 +36,21 @@
     </table>
 
     <p>
-      <%= f.label "add_period[valid_from]", "Valid from" %><br />
+      <%= f.label "add_period[valid_from]", t('vat.valid_from') %><br />
       <%= unobtrusive_date_text_picker_tag "add_period[valid_from]", DateTime::now() %>
     </p>
 
     <p>
-      <%= f.label "add_period[percentage]", "Percentage" %><br />
+      <%= f.label "add_period[percentage]", t('vat.percentage') %><br />
       <%= text_field_tag "add_period[percentage]" %>
     </p>
 
     <p>
-      <%= f.submit "Add period" %>
+      <%= f.submit t('vat.add_period') %>
     </p>
   </div>
 
   <p>
-    <%= f.submit t(:save, :scope => :vat) %>
+    <%= f.submit t(:save, :scope => :global) %>
   </p>
 <% end %>

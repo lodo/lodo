@@ -2,9 +2,10 @@
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Address</th>
-    <th>Comments</th>
+    <th><%= t('activerecord.attributes.unit.name') %></th>
+    <th><%= t('activerecord.attributes.unit.address') %></th>
+    <th><%= t('activerecord.attributes.unit.comments') %></th>
+    <th></th>
   </tr>
 
 <% @units.each do |unit| %>
@@ -12,13 +13,18 @@
     <td><%= unit.name %></td>
     <td><%= render :partial => "/addresses/show", :locals => { :address => unit.address }  %></td>
     <td><%= unit.comments %></td>
-    <td><%= link_to 'Show', unit %></td>
-    <% if permitted_to? :edit, unit %>
-      <td><%= link_to 'Edit', edit_unit_path(unit) %></td>
-    <% end %>
-    <% if permitted_to? :delete, unit %>
-      <td><%= link_to 'Destroy', unit, :confirm => 'Are you sure?', :method => :delete %></td>
-    <% end %>
+    <td>
+      <%= link_to 'Show', unit %>
+
+      <% if permitted_to? :edit, unit %>
+      <%= link_to 'Edit', edit_unit_path(unit) %>
+      <% end %>
+
+      <% if permitted_to? :delete, unit %>
+      <%= link_to 'Destroy', unit, :confirm => 'Are you sure?', :method => :delete %>
+      <% end %>
+
+    </td>
   </tr>
 <% end %>
 </table>

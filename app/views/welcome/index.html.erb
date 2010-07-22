@@ -1,7 +1,5 @@
-<h1>Velkommen til lodo regnskap</h1>
-
-<p><%= link_to "Logg inn", accounts_url %></p>
-
+<h1><%= t('login.welcome') %></h1>
+<p><%= link_to t('login.login'), accounts_url %></p>
 <hr />
+<p><%= link_to t('login.maintainance'), admin_companies_url %></p>
 
-<p><%= link_to "Vedlikehold", admin_companies_url %></p>

@@ -44,10 +44,9 @@ class PaycheckTemplatesController < ApplicationController
     templates = PaycheckLineTemplate.where(:employee_id => nil, :company_id => current_user.current_company.id )
     PaycheckLineTemplate.transaction do
       templates.each do |line|
-        l = PaycheckLineTemplate.create!(line.attributes.merge( {:employee_id => emp}))
+        l = PaycheckLineTemplate.create!(line.attributes.merge( {:employee_id => emp.id}))
       end
     end
-
     respond_to do |format|
       format.html { redirect_to(paycheck_template_url(emp.id)) }
     end

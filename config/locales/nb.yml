@@ -125,10 +125,14 @@
         vacation_basis: Ferie.Gr
         salary_code: Lønnskode
         employee: Ansatt
+      unit:
+        name: Kjempenavn
+        address: Kjempeaddress
+        comments: Kjempekommentar
   global:
     confirm: Er du kjempesikker?
     none: Ikke kjempvalp
-    back: Kjempetilbake
+    back: Tilbake
     edit: Rediger
     create: Opprett
     show: Vis
@@ -138,6 +142,7 @@
     period: 
       one: Periode
       other: Perioder
+    save: Lagre
   admin:
     companies:
       select_template_company: Bruk som mal
@@ -165,7 +170,6 @@
     login: "Brukernavn"
     email: "Epost"
     companies: "Firmaer"
-    show: "Vis"
     edit: "Rediger"
     delete_confirmation: "Sikker på at du vil slette brukeren %{name}?"
     new_user: "Ny bruker"
@@ -177,7 +181,6 @@
     log_in: "Logg inn"
     forgotten_password: "Glemt passord"
     email_password: "Send meg nytt passord"
-    back: "Tilbake"
     register: "Registrer ny bruker"
     list: "Tilbake til listen"
     editing: "Redigerer brukeren %{name}"
@@ -194,9 +197,7 @@
     listing_accounts: "Viser kontoplan"
     number: "Nummer"
     name: "Navn"
-    show: "Vis"
     edit: "Rediger"
-    
     confirm_delete: "Bekreft sletting av konto %{name}"
     new_account: "Ny konto"
     lodo_name: "Lodo navn"
@@ -205,9 +206,7 @@
     vat_account: "MVA-konto"
     comments: "Beskrivelse"
     ledger: "Reskontro"
-    back: "Tilbake til listen"
     editing_account: "Redigerer konto"
-    save: "Lagre"
     ledger_accounts: "Reskontroer"
     telephone_number: "Telefon"
     mobile_number: "Mobil"
@@ -234,25 +233,21 @@
     code: "Kode"
     valid_from: "Gyldig fra"
     valid_to: "Gyldig til"
-    show: "Vis"
     edit: "Rediger"
     confirm_destroy: "Bekreft sletting av mva-sats %{code}"
     new_vat_account: "Ny oppføring"
     editing_vat_account: "Redigerer mva-konto"
-    back: "Tilbake til listen"
-    save: "Lagre"
     create_success: Mva-sats opprettet
     update_success: Mva-sats oppdatert
+    add_period: Opprett kjempeperiode
   journals:
     listing_journals: "Viser bilag"
     type: "Type"
     number: "Nummer"
     journal_date: "Bilagsdato"
     confirm_destroy: "Bekreft sletting av bilag %{number}"
-    show: "Vis"
     edit: "Rediger"
     new_journal: "Nytt bilag"
-    back: "Tilbake"
     new_journal_operation: "Ny postering"
     vat: "Mva"
     details: "Detaljer"
@@ -268,7 +263,6 @@
     kid: "KID"
     invoice: "Faktura?"
     text: "Tekst"
-    save: "Lagre"
     editing_journal: "Rediger bilag"
   companies:
     listing_companies: "Viser firmaer"
@@ -276,13 +270,10 @@
     users: "Brukere"
     organization_number: "Org. nummer"
     address: "Adresse"
-    show: "Vis"
     edit: "Rediger"
     new_company: "Nytt firma"
     destroy_confirmation: "Bekreft sletting av firmaet %{name}"
-    back: "Tilbake"
     editing_company: "Rediger firma"
-    save: "Lagre"
     accounts: "Kontoplan"
   address:
     address: "Adresse"
@@ -296,12 +287,10 @@
     listing_products: Viser produkter
     price: Pris
     name: Navn
-    show: Vis
     edit: Rediger
     destroy_confirmation: Bekreft sletting av %{name}
     new_product: Nytt produkt
     create: Opprett
-    back: Tilbake
     editing_product: Rediger produkt
     update: Lagre endringer
   orders:
@@ -321,22 +310,16 @@
     discount: Rabatt
     total_price: Sum
     add_product: Legg til produkt
-    save: Lagre
-    back: Tilbake
-    show: Vis
     edit: Rediger
     editing_order: Redigerer ordre
   access_denied: Beklager, du mangler tilgang til denne siden.
   bills:
     listing_bills: Viser fakturaer
-    save: Lagre
     close_invoice: Lukk faktura
     invoice_number: "Fakturanummer: %{number}"
     delivery_date: Leveringsdato
     billing_date: Fakturadato
     new_bill: Ny faktura
-    show: Vis
-    back: Tilbake
     edit: Rediger
     confirm_destroy: Bekreft sletting av faktura %{number}
     editing_bill: Redigerer faktura
@@ -379,3 +362,7 @@
     template: Ansatt
     index_header: Kjempemaler for ansatte
     global_template: Hovedmal
+  login:
+    login: Logg inn
+    maintainance: Vedlikehold
+    welcome: Velkommen til lodo regnskap

@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
     if current_user.current_company.nil?
       current_user.current_company = current_user.companies.first
     end    
-
+    
     if not current_user.current_company.nil?
       return true
     end
@@ -44,7 +44,11 @@ class ApplicationController < ActionController::Base
   end
 
   def permission_denied
-    flash[:error] = I18n.t("access_denied")
+#    raise 'snopp'
+    print "LAAAAAAAAAAAAAAAAAAAA: " + current_user.role_symbols.inspect
+    msg = I18n.t("access_denied")
+    flash[:error] = msg
+    logger.info "Error: #{msg}, user: #{current_user}, url: #{request.request_uri}, pid: #{Process.pid}, Time: #{Time.now}"
     redirect_to root_url
   end
 
