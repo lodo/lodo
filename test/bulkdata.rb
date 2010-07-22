@@ -2,6 +2,18 @@
 # when creating users.
 raise "Set RAILS_ENV=test before loading blueprint" unless Rails.env == 'test'
 
+# Number of users
+USER_COUNT = 2
+#15000
+# Number of companies
+COMPANY_COUNT = 10
+#10000
+# Average number of products for a company
+PRODUCT_COUNT = 5
+# 50 
+YEARS=(2000..2001)
+MAX_JOURNAL_COUNT=100
+
 # largish data set to test scaling or whatever
 require 'machinist/active_record'
 require 'sham'
@@ -96,21 +108,23 @@ end
 # **********  Now create some data ***************
 ActiveRecord::Base.transaction do
 
-  15000.times {|i| user = User.make }
+  print "Creating users..\n"
+  USER_COUNT.times {|i| user = User.make }
 
   bob = User.make(:email => "bob@bobsdomain.com")
-  bob.confirm!
 
   admin = Admin.make(:email => "admin@adminsdomain.com")
 
-  10000.times {|i| Company.make}
+  print "Creating companies...\n"
+  COMPANY_COUNT.times {|i| Company.make}
 
   users = User.all
   companies = Company.all
   roles = Role.all
 
+  print "Attaching users to companies...\n"
   # attach users to companies
-  (Company.count * 5).times do
+  (COMPANY_COUNT * 5).times do
     c = companies.rand
     u = users.rand
     r = roles.rand
@@ -118,16 +132,18 @@ ActiveRecord::Base.transaction do
   end
 
   # make sure bob is assigned to a few companies
-  companies.shuffle[0..4].each do |c|
+  companies.shuffle[0..[COMPANY_COUNT, 5].min].each do |c|
     c.assignments.create(:user => bob, :role => Role.find_by_name("accountant"))
   end
 
+  print "Creating units and projects...\n"
   # create a bunch of units/projects and attach them to companies
   (Company.count * 7).times do
     Unit.make(:company => companies.rand)
     Project.make(:company => companies.rand)
   end
 
+  print "Creating company accounts...\n"
   # create some accounts
   Company.all.each do |c|
     # Vat accounts from empatix @ lodo.no
@@ -214,8 +230,8 @@ ActiveRecord::Base.transaction do
     end
   end
 
-  # let's go with an avg of 50 products / company
-  (Company.count * 50).times do |i|
+  print "Creating products...\n"
+  (Company.count * PRODUCT_COUNT).times do |i|
     Product.make(:account => companies.rand.accounts.rand)
   end
 
@@ -224,20 +240,36 @@ ActiveRecord::Base.transaction do
   end
 
 
+  print "Creating journal entries...\n"
   # create random journal entries for the given period
   def create_journal_entries(company, period)
     puts "creating journal entries for #{company.name}, period: #{period.year}-#{period.nr}"
     # create journal entries
     date = Date.civil(period.year, period.nr, 1)
-    sql = "insert into journals (company_id, period_id, journal_date) select #{company.id}, #{period.id}, ('#{date}'::date + interval '28 days' * random())::date from generate_series (1, #{rand(500)})"
+    sql = "insert into journals (company_id, period_id, journal_date) select #{company.id}, #{period.id}, ('#{date}'::date + interval '28 days' * random())::date from generate_series (1, #{rand(MAX_JOURNAL_COUNT)})"
     ActiveRecord::Base.connection.execute sql
 
     # create 4 journal_operations for every empty journal entry
-    sql = "insert into journal_operations (journal_id, account_id, amount) select id as journal_id, #{sample_array_sql(company.accounts)}, (random() * 200 - 100)::numeric(16,2) as amount from (select j.id from journals j where j.company_id = #{company.id} and not exists (select 1 from journal_operations jo where jo.journal_id = j.id)) as aa, (select 1 from generate_series(1, (1 + random() * 5)::integer)) as bb"
+#    sql = "insert into journal_operations (journal_id, account_id, amount) select id as journal_id, #{sample_array_sql(company.accounts)}, (random() * 200 - 100)::numeric(16,2) as amount from (select j.id from journals j where j.company_id = #{company.id} and not exists (select 1 from journal_operations jo where jo.journal_id = j.id)) as aa, (select 1 from generate_series(1, (1 + random() * 5)::integer)) as bb"
+    sql = "
+insert into journal_operations 
+(journal_id, account_id, amount) 
+select 
+    id as journal_id, 
+    (select id from accounts where company_id=#{company.id} order by random() limit 1) as account_id,
+    (random() * 200 - 100)::numeric(16,2) as amount 
+from (select j.id from journals j where j.company_id = #{company.id} and not exists (select 1 from journal_operations jo where jo.journal_id = j.id)) as aa, (select 1 from generate_series(1, (1 + random() * 5)::integer)) as bb"
     ActiveRecord::Base.connection.execute sql
     
     # find and close open journal entries
-    sql = "insert into journal_operations (journal_id, account_id, amount) select journal_id, #{sample_array_sql(company.accounts)}, -amount from (select journal_id, sum(amount) as amount from journals j inner join journal_operations jo on (j.id = jo.journal_id) where company_id = #{company.id} group by journal_id having sum(amount) <> 0) as qq"
+    sql = "
+insert into journal_operations 
+(journal_id, account_id, amount) 
+select 
+    journal_id, 
+    (select id from accounts where company_id=#{company.id} order by random() limit 1) as account_id,
+    -amount from (select journal_id, sum(amount) as amount 
+from journals j inner join journal_operations jo on (j.id = jo.journal_id) where company_id = #{company.id} group by journal_id having sum(amount) <> 0) as qq"
     ActiveRecord::Base.connection.execute sql
   end
 
@@ -250,7 +282,7 @@ ActiveRecord::Base.transaction do
 
   # create periods and fill these with tx data
   companies.each do |c|
-    (2000..2010).each do |year|
+    YEARS.each do |year|
       (1..12).each do |month|
         create_period(c, year, month)
       end
