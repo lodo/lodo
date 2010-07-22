@@ -18,9 +18,9 @@
       <%= render :partial => "addresses/show", :locals => { :address => company.address } %>
     </td>
     <td>
-      <%= link_to t(:show, :scope => :companies), admin_company_path(company) %>
-      <%= link_to t(:edit, :scope => :companies), edit_admin_company_path(company) %>
-      <%= link_to t(:destroy, :scope => :companies), admin_company_path(company), :confirm => t(:destroy_confirmation, :scope => :companies, :name => company.name), :method => :delete %>
+      <%= link_to t("global.show"), admin_company_path(company) %>
+      <%= link_to t("global.edit"), edit_admin_company_path(company) %>
+      <%= link_to t("global.destroy"), admin_company_path(company), :confirm => t(:destroy_confirmation, :scope => :companies, :name => company.name), :method => :delete %>
     </td>
   </tr>
 <% end %>

@@ -161,7 +161,7 @@
     log_out: "Logg ut"
     active_company: "Valgt firma"
     vat_plan: "MVA-oppsett"
-    paycheck_templates: "Maler for lønnsslipper"
+    paycheck_templates: "Lønnsslipp-maler"
     paychecks: "Lønnsslipper"
   users:
     remember_me: "Husk meg"
@@ -197,7 +197,11 @@
     listing_accounts: "Viser kontoplan"
     number: "Nummer"
     name: "Navn"
+<<<<<<< HEAD:config/locales/nb.yml
     edit: "Rediger"
+=======
+    
+>>>>>>> 4a0fa2e208fa04d4eaa53ce81fd286b55df212d6:config/locales/nb.yml
     confirm_delete: "Bekreft sletting av konto %{name}"
     new_account: "Ny konto"
     lodo_name: "Lodo navn"
@@ -233,7 +237,10 @@
     code: "Kode"
     valid_from: "Gyldig fra"
     valid_to: "Gyldig til"
+<<<<<<< HEAD:config/locales/nb.yml
     edit: "Rediger"
+=======
+>>>>>>> 4a0fa2e208fa04d4eaa53ce81fd286b55df212d6:config/locales/nb.yml
     confirm_destroy: "Bekreft sletting av mva-sats %{code}"
     new_vat_account: "Ny oppføring"
     editing_vat_account: "Redigerer mva-konto"
@@ -246,7 +253,10 @@
     number: "Nummer"
     journal_date: "Bilagsdato"
     confirm_destroy: "Bekreft sletting av bilag %{number}"
+<<<<<<< HEAD:config/locales/nb.yml
     edit: "Rediger"
+=======
+>>>>>>> 4a0fa2e208fa04d4eaa53ce81fd286b55df212d6:config/locales/nb.yml
     new_journal: "Nytt bilag"
     new_journal_operation: "Ny postering"
     vat: "Mva"
@@ -270,7 +280,10 @@
     users: "Brukere"
     organization_number: "Org. nummer"
     address: "Adresse"
+<<<<<<< HEAD:config/locales/nb.yml
     edit: "Rediger"
+=======
+>>>>>>> 4a0fa2e208fa04d4eaa53ce81fd286b55df212d6:config/locales/nb.yml
     new_company: "Nytt firma"
     destroy_confirmation: "Bekreft sletting av firmaet %{name}"
     editing_company: "Rediger firma"
@@ -287,7 +300,10 @@
     listing_products: Viser produkter
     price: Pris
     name: Navn
+<<<<<<< HEAD:config/locales/nb.yml
     edit: Rediger
+=======
+>>>>>>> 4a0fa2e208fa04d4eaa53ce81fd286b55df212d6:config/locales/nb.yml
     destroy_confirmation: Bekreft sletting av %{name}
     new_product: Nytt produkt
     create: Opprett
@@ -310,7 +326,12 @@
     discount: Rabatt
     total_price: Sum
     add_product: Legg til produkt
+<<<<<<< HEAD:config/locales/nb.yml
     edit: Rediger
+=======
+    save: Lagre
+    back: Tilbake
+>>>>>>> 4a0fa2e208fa04d4eaa53ce81fd286b55df212d6:config/locales/nb.yml
     editing_order: Redigerer ordre
   access_denied: Beklager, du mangler tilgang til denne siden.
   bills:
@@ -320,7 +341,11 @@
     delivery_date: Leveringsdato
     billing_date: Fakturadato
     new_bill: Ny faktura
+<<<<<<< HEAD:config/locales/nb.yml
     edit: Rediger
+=======
+    back: Tilbake
+>>>>>>> 4a0fa2e208fa04d4eaa53ce81fd286b55df212d6:config/locales/nb.yml
     confirm_destroy: Bekreft sletting av faktura %{number}
     editing_bill: Redigerer faktura
     order: Ordre
@@ -348,7 +373,7 @@
   paychecks:
     new_header: Skaper ny lønnsslipp for %{name}
     cum_sum: Beløp denne periode
-    new: Kjempeny lønnslipp
+    new: Ny lønnsslipp
     index_header: Kjempelønnslipper før ansatte
     paycheck_count: "# kjempelønnslipper"
     error_header:
@@ -362,7 +387,10 @@
     template: Ansatt
     index_header: Kjempemaler for ansatte
     global_template: Hovedmal
+<<<<<<< HEAD:config/locales/nb.yml
   login:
     login: Logg inn
     maintainance: Vedlikehold
     welcome: Velkommen til lodo regnskap
+=======
+>>>>>>> 4a0fa2e208fa04d4eaa53ce81fd286b55df212d6:config/locales/nb.yml

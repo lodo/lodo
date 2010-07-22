@@ -14,12 +14,12 @@
     <td><%= journal.number %></td>
     <td><%= journal.journal_date ? l(journal.journal_date) : "" %></td>
     <td>
-      <%= link_to t(:show, :scope => :journals), journal %>
+      <%= link_to t("global.show"), journal %>
       <% if permitted_to? :edit, journal %>
-        <%= link_to t(:edit, :scope => :journals), edit_journal_path(journal) %>
+        <%= link_to t("global.edit"), edit_journal_path(journal) %>
       <% end %>
       <% if permitted_to? :delete, journal %>
-        <%= link_to t(:destroy, :scope => :journals), journal, :confirm => 'Are you sure?', :method => :delete %>
+        <%= link_to t("global.destroy"), journal, :confirm => 'Are you sure?', :method => :delete %>
       <% elsif not journal.bill.nil? %>
         <%= link_to 'Show bill', :controller => "bills", :action => "show", :id => journal.bill.id %>
         <% if permitted_to? :edit, journal.bill %>

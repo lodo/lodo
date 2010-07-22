@@ -13,9 +13,9 @@
     <td><%= account.name %></td>
     <td><%= (account.vat_account ? account.vat_account.target_account.name : "") %></td>
     <td>
-      <%= link_to t(:show, :scope => :accounts), account %>
-      <%= link_to t(:edit, :scope => :accounts), edit_account_path(account) %>
-      <%= link_to t(:destroy, :scope => :accounts), account, :confirm => t(:confirm_delete, :scope => :accounts, :name => account.name), :method => :delete %>
+      <%= link_to t("global.show"), account %>
+      <%= link_to t("global.edit"), edit_account_path(account) %>
+      <%= link_to t("global.destroy"), account, :confirm => t(:confirm_delete, :scope => :accounts, :name => account.name), :method => :delete %>
     </td>
   </tr>
 <% end %>

@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
     :reject_if => proc { |attrs| attrs["company_id"].blank? || attrs["role_id"].blank? }
   
   # Include default devise modules. Others available are:
-  # :http_authenticatable, :token_authenticatable, :confirmable, :lockable, :timeoutable and :activatable
-  devise :registerable, :database_authenticatable, :recoverable,
-         :rememberable, :trackable, :validatable, :lockable
+  # :token_authenticatable, :confirmable, :lockable, :timeoutable and :activatable, :registerable
+  devise :database_authenticatable, :recoverable, :rememberable,
+	:trackable, :validatable, :lockable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :assignments_attributes
@@ -28,6 +28,11 @@ class User < ActiveRecord::Base
   
   def open_periods(company = self.current_company)
     Period.where(:company_id => company.id, :status => Period::STATUSE_NAMES['Open'])
+  end
+  
+  # declarative_auth wants a login attribute for the introspection ui
+  def login
+    self.email
   end
 
   def to_s

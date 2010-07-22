@@ -15,9 +15,9 @@
       <%= user.companies.collect{|c| link_to h(c.name), [:admin, c]}.join(", ").html_safe %>
     </td>
     <td>
-      <%= link_to t(:show, :scope => :users), [:admin, user] %>
-      <%= link_to t(:edit, :scope => :users), edit_admin_user_path(user) %>
-      <%= link_to t(:destroy, :scope => :users), [:admin, user], :confirm => t(:delete_confirmation, :scope => :users, :name => user.email), :method => :delete %>
+      <%= link_to t("global.show"), [:admin, user] %>
+      <%= link_to t("global.edit"), edit_admin_user_path(user) %>
+      <%= link_to t("global.destroy"), [:admin, user], :confirm => t(:delete_confirmation, :scope => :users, :name => user.email), :method => :delete %>
     </td>
   </tr>
   <% end %>
