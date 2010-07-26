@@ -2,6 +2,7 @@ class PaycheckLinesController < ApplicationController
   # GET /paycheck_lines
   # GET /paycheck_lines.xml
   def index
+    raise "aksljdfklasdf"
     @paycheck_lines = PaycheckLine.all
 
     respond_to do |format|
@@ -13,6 +14,7 @@ class PaycheckLinesController < ApplicationController
   # GET /paycheck_lines/1
   # GET /paycheck_lines/1.xml
   def show
+    raise "lsadkfjljwefl"
     @paycheck_line = PaycheckLine.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +26,7 @@ class PaycheckLinesController < ApplicationController
   # GET /paycheck_lines/new
   # GET /paycheck_lines/new.xml
   def new
+    raise "sdfjdlaskjflkwjdsf"
     @paycheck_line = PaycheckLine.new
 
     respond_to do |format|
@@ -34,12 +37,14 @@ class PaycheckLinesController < ApplicationController
 
   # GET /paycheck_lines/1/edit
   def edit
+    raise "asdljfjadsf"
     @paycheck_line = PaycheckLine.find(params[:id])
   end
 
   # POST /paycheck_lines
   # POST /paycheck_lines.xml
   def create
+    raise "aklsdfjlaksdjf"
     @paycheck_line = PaycheckLine.new(params[:paycheck_line])
 
     respond_to do |format|
@@ -56,6 +61,7 @@ class PaycheckLinesController < ApplicationController
   # PUT /paycheck_lines/1
   # PUT /paycheck_lines/1.xml
   def update
+    raise "aklsdfjslkdf"
     @paycheck_line = PaycheckLine.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +78,7 @@ class PaycheckLinesController < ApplicationController
   # DELETE /paycheck_lines/1
   # DELETE /paycheck_lines/1.xml
   def destroy
+    raise "asdklfjsahdf"
     @paycheck_line = PaycheckLine.find(params[:id])
     @paycheck_line.destroy
 

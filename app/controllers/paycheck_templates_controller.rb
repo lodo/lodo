@@ -52,26 +52,4 @@ class PaycheckTemplatesController < ApplicationController
     end
   end
 
-  # GET /paycheck_line_templates/1/edit
-  def edit
-    raise "NOT IMPLEMENTED"
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @paycheck_line_template }
-    end
-  end
-
-  # DELETE /paycheck_line_templates/1
-  # DELETE /paycheck_line_templates/1.xml
-  def destroy
-    raise "NOT IMPLEMENTED"
-    @paycheck_line_template = PaycheckLineTemplate.find(params[:id])
-    @paycheck_line_template.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(paycheck_line_templates_url) }
-      format.xml  { head :ok }
-    end
-  end
 end

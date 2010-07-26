@@ -97,8 +97,6 @@ class Company < ActiveRecord::Base
 
   def paychecks
     r = Paycheck.where(:employee_id => employees).joins([:employee, :period]).order("periods.year desc, periods.nr desc, lower(ledgers.name)")
-    print r.to_sql
-    print "..."
     r
   end
 
