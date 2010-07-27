@@ -60,6 +60,8 @@ module Lodo
       :secret      => '29e52c8e64c464b41e52b98c9cceb4e43d1d8870df42124cd96be3c4004179720c0326431b0126f1f27d9c65bd834d1028c8f745ddcc8484e32ff0ac3e7d75fa'
     }
     
+    # define js asset loading order (:all adds :defaults in front)
+    config.action_view.javascript_expansions = { :defaults => ['jquery', 'rails'] }
   end
 end
 

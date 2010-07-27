@@ -1,6 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.0.beta4'
+gem 'bundler', '>=1.0.0.rc.1'
+
+gem 'rails', '3.0.0.rc'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -9,7 +11,6 @@ gem 'rails', '3.0.0.beta4'
 gem 'pg'
 
 gem 'ruby_parser'
-gem 'bundler'
 gem "machinist"
 gem "faker"
 gem "devise", "1.1.rc2"
