@@ -16,6 +16,8 @@ class Company < ActiveRecord::Base
   has_many :periods
   has_many :journals
 
+  has_many :paycheck_line_templates
+
   # company acting as a template on create
   attr_accessor :template_company_id
   after_create :init_from_template, :if => proc { !self.template_company_id.blank? }
@@ -70,20 +72,34 @@ class Company < ActiveRecord::Base
       accounts[acc.id].update_attributes!(:vat_account_id => vat_accounts[acc.vat_account_id].id)
     end
     
+    units = {}
     # copy units. shallow, copying addresses doesn't make sense..
     template.units.each do |unit|
       u = Unit.new(unit.attributes)
       u.company = self
       u.address = Address.create!
       u.save!
+      units[unit.id] = u
     end
     
+    projects = {}
     # copy projects. not copying addresses.
     template.projects.each do |project|
       p = Project.new(project.attributes)
       p.company = self
       p.address = Address.create!
       p.save!
+      projects[project.id] = p
+    end
+
+    # copy salary templates
+    template.paycheck_line_templates.where(:employee_id => nil).each do |line|
+      l = PaycheckLineTemplate.new(line.attributes)
+      l.company = self
+      l.account = accounts[line.account_id]
+      l.unit = units[line.unit_id]
+      l.project = projects[line.project_id]
+      l.save!
     end
 
   end

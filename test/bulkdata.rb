@@ -122,6 +122,17 @@ Role.blueprint do
   name { Sham.role_name }
 end
 
+PaycheckLineTemplate.blueprint do
+  line_type { PaycheckLineTemplate::TYPES.keys.rand }
+  description { Sham.product_name }
+  salary_code { "#{rand(1000)}-#{'abc'.chars.to_a.rand}" }
+  count { rand(200) }
+  rate { rand(1200) }
+  amount { count * rate }
+  payroll_tax { rand(10) > 3 }
+  vacation_basis { rand(10) > 3 }
+end
+
 bob = nil
 admin = nil
 companies = []
