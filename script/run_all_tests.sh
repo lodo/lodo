@@ -9,6 +9,8 @@ set -x
 set -e
 
 export HOME=$BD
+export BUNDLE_PATH=$HOME/bundle
+mkdir -p $HOME
 cp config/database.yml.example config/database.yml
 bundle install
 rake db:create
