@@ -1,4 +1,4 @@
-<h1>Listing units</h1>
+<h1><%= t('untis.header_index')%></h1>
 
 <table>
   <tr>
@@ -29,5 +29,5 @@
 <br />
 
 <% if permitted_to? :create, :units %>
-  <%= link_to 'New unit', new_unit_path %>
+  <%= link_to t('New unit'), new_unit_path %>
 <% end %>

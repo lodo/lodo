@@ -359,3 +359,9 @@
     login: Logg inn
     maintainance: Vedlikehold
     welcome: Velkommen til lodo regnskap
+  units:
+    header_edit: Kjemperedigerer avdelning
+    header_index: Kjempelister avdelninger
+
+
+

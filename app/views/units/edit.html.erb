@@ -1,4 +1,4 @@
-<h1>Editing unit</h1>
+<h1><%= t('untis.header_edit')%></h1>
 
 <%= form_for(@unit) do |f| %>
   <%= f.error_messages %>
@@ -13,9 +13,9 @@
     <%= f.text_area :comments %>
   </p>
   <p>
-    <%= f.submit 'Update' %>
+    <%= f.submit t('global.update') %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @unit %> |
-<%= link_to 'Back', units_path %>
+<%= link_to t('global.show'), @unit %> |
+<%= link_to t('global.back'), units_path %>
