@@ -40,4 +40,8 @@ Lodo::Application.configure do
   # Enable threaded mode
   # config.threadsafe!
   config.action_mailer.default_url_options = { :host => "localhost" }
+
+  # log deprecation warnings
+  config.active_support.deprecation = :stderr
 end
+

@@ -4,7 +4,7 @@ class VatAccountsController < ApplicationController
   # GET /vat_accounts
   # GET /vat_accounts.xml
   def index
-    @vat_accounts = VatAccount.with_permissions_to(:index).all(:order => "accounts.number", :include => :target_account)
+    @vat_accounts = VatAccount.with_permissions_to(:index).where(:company_id => current_user.current_company.id).order("accounts.number").includes("target_account")
 
     respond_to do |format|
       format.html # index.html.erb

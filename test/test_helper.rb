@@ -17,5 +17,14 @@ end
 
 class ActionController::TestCase
   include Devise::TestHelpers
+
+
+  def log_in_as_bob
+    @user = User.find_by_email("bob@bobsdomain.com")
+    @company = @user.assignments.select {|a| a.role.name == "accountant"}.map {|a| a.company}.first
+    @user.current_company = @company
+    @user.save!
+    sign_in :user, @user
+  end
 end
 

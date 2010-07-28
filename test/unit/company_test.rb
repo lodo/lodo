@@ -8,6 +8,16 @@ class CompanyTest < ActiveSupport::TestCase
     # this probably is -- it certainly should be! -- non-ideomatic use of AR
     template = Company.select("companies.id").joins(:accounts).group("companies.id").having("count (*) > 10").first.reload
 
+    100.times do |i|
+      u = nil
+      u = template.units.rand if rand(10) > 7
+      p = nil
+      p = template.projects.rand if rand(10) > 6
+      e = nil
+      e = template.employees.rand if rand(10) > 7
+      PaycheckLineTemplate.make(:company => template, :unit => u, :project => p, :employee => e, :account => template.accounts.rand)
+    end
+
     company = Company.new(:name => "Jalla Inc", :template_company_id => template.id)
     assert company.save
 
@@ -28,8 +38,13 @@ class CompanyTest < ActiveSupport::TestCase
     assert_not_nil copy.vat_account_id
     assert_equal a1.vat_account.target_account.name, copy.vat_account.target_account.name
 
-    # ensure the tax rates for this vat account were copied as well
-    assert_equal Set.new(a1.vat_account.vat_account_periods.map {|p| [p.vat_account.target_account.name, p.valid_from, p.percentage]}), Set.new(copy.vat_account.vat_account_periods.map {|p| [p.vat_account.target_account.name, p.valid_from, p.percentage]})
+    # ensure the tax rates for this vat account were copied
+    f = proc {|p| [p.vat_account.target_account.name, p.valid_from, p.percentage]}
+    assert_equal Set.new(a1.vat_account.vat_account_periods.map(&f)), Set.new(copy.vat_account.vat_account_periods.map(&f))
+
+    # compare paycheck templates
+    f = proc {|line| [line.line_type, line.description, line.count, line.amount, line.unit ? line.unit.name : "", line.project ? line.project.name : "", line.account ? line.account.name : ""]}
+    assert_equal Set.new(company.paycheck_line_templates.map(&f)), Set.new(template.paycheck_line_templates.map(&f))
   end
 
 end

@@ -18,7 +18,7 @@ authorization do
     has_permission_on :accounts, :to => :create
 
     has_permission_on :vat_accounts, :to => :manage do
-#      if_attribute :company_id => is {user.current_company.id}
+      if_attribute :company_id => is {user.current_company.id}
     end
     has_permission_on :vat_accounts, :to => :create
 

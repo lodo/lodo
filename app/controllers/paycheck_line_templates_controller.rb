@@ -1,8 +1,6 @@
 class PaycheckLineTemplatesController < ApplicationController
   before_filter :setup_form
 
-
-
   def setup_form
     @accounts = current_user.current_company.accounts
     @units = current_user.current_company.units
@@ -13,6 +11,7 @@ class PaycheckLineTemplatesController < ApplicationController
   # GET /paycheck_line_templates
   # GET /paycheck_line_templates.xml
   def index
+    raise "asdlfkjsldjkfee"
     @paycheck_line_templates = PaycheckLineTemplate.all
     
     respond_to do |format|
@@ -24,6 +23,7 @@ class PaycheckLineTemplatesController < ApplicationController
   # GET /paycheck_line_templates/1
   # GET /paycheck_line_templates/1.xml
   def show
+    raise "dslkfjasldfjas"
     @paycheck_line_template = PaycheckLineTemplate.find(params[:id])
     
     respond_to do |format|
