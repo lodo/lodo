@@ -31,5 +31,7 @@ Lodo::Application.configure do
   # config.active_record.schema_format = :sql
 
   config.action_mailer.default_url_options = { :host => "localhost" }
+
+  config.active_support.deprecation = :stderr
 end
 
