@@ -35,7 +35,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def index
-    @users = User.order(:email).includes(:companies)
+    @users = User.order(:email).includes(:companies).paginate({:page => params[:page]})
 
     respond_to do |format|
       format.html # index.html.erb

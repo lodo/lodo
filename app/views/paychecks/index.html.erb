@@ -15,6 +15,8 @@
 <% end %>
 </table>
 
+<%= render :partial => "shared/period_picker" %>
+
 
 <table>
   <tr>
@@ -29,7 +31,8 @@
     <td>
       <%= link_to t('global.show'), paycheck %>
       <%= link_to t('global.edit'), edit_paycheck_path(paycheck) %>
-      <%= link_to t('global.destroy'), paycheck, :confirm => t('global.confirm'), :method => :delete %>    </td>
+      <%= link_to t('global.destroy'), paycheck, :confirm => t('global.confirm'), :method => :delete %>
+    </td>
   </tr>
 <% end %>
 

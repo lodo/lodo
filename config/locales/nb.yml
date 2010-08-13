@@ -143,6 +143,7 @@
       one: Periode
       other: Perioder
     save: Lagre
+    filter: Kjempefiltrer
   admin:
     companies:
       select_template_company: Bruk som mal
@@ -362,6 +363,8 @@
   units:
     header_edit: Kjemperedigerer avdelning
     header_index: Kjempelister avdelninger
-
+  period_picker:
+    first_period: Fra
+    last_period: Til
 
 

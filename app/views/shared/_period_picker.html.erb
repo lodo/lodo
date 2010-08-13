@@ -1,0 +1,16 @@
+<div class='period_picker'>
+<%= form_tag "", :method => :get do %>
+<div class='first'>
+<%= label :first_period, t('period_picker.first_period') %>
+<%= select_tag 'first_period', options_for_select(current_user.current_company.periods.map {|e| e.to_s}, first_period) %>
+</div>
+<div class='last'>
+
+<%= label :first_period, t('period_picker.last_period') %>
+<%= select_tag 'last_period', options_for_select(current_user.current_company.periods.map {|e| e.to_s}, last_period) %>
+</div>
+<%= submit_tag t('global.filter') %>
+<% end %>
+</div>
+
+

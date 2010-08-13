@@ -1,6 +1,5 @@
 class Admin::CompaniesController < Admin::BaseController
 
-
   before_filter :find_company, :only => [:show, :edit, :update, :destroy]
 
   def find_company
@@ -13,7 +12,7 @@ class Admin::CompaniesController < Admin::BaseController
   # GET /companies
   # GET /companies.xml
   def index
-    @companies = Company.order("name").includes(:assignments).includes(:address)
+    @companies = Company.order("name").includes(:assignments).includes(:address).paginate({:page => params[:page]})
     @companies.each do
       |c| 
       if !c.address 

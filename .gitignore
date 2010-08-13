@@ -14,4 +14,5 @@
 /*.patch
 !.gitignore
 /doc/plugins
+Gemfile.lock
 

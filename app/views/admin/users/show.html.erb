@@ -6,7 +6,11 @@
 
 <p>
 <b><%= t(:companies, :scope => :users) -%>:</b>
-  <%= @user.companies.collect{|c| link_to c.name, admin_company_path(c)}.join(", ") %>
+<ul>
+  <% @user.companies.each do |c| %>
+<li><%= link_to c.name, admin_company_path(c)%> </li>
+  <% end %>
+</ul>
 </p>
 
 <%= link_to t(:edit, :scope => :users), edit_admin_user_path(@user) %> |

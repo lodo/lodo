@@ -10,10 +10,12 @@ gem 'rails', '3.0.0.rc'
 # postgresql
 gem 'pg'
 
+gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branch => 'rails3'
+
 gem 'ruby_parser'
 gem "machinist"
 gem "faker"
-gem "devise", "1.1.rc2"
+gem "devise", "~>1.1"
 gem "warden"
 gem "declarative_authorization", :git => "http://github.com/stffn/declarative_authorization.git" 
 

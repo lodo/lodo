@@ -1,6 +1,9 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+
+  include ::PropertyModel
+
   has_many :companies, :through => :assignments, :uniq => true, :order => "companies.name"
   belongs_to :current_company, :class_name => 'Company'
 
@@ -15,6 +18,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :assignments_attributes
+
+  self.per_page = 20
 
   # return array of roles for self.current_company
   def role_symbols

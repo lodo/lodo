@@ -1,5 +1,7 @@
 <h1><%= t(:listing_companies, :scope => :companies) -%></h1>
 
+<%= will_paginate @companies %>
+
 <table class='striped'>
   <tr>
     <th><%= t(:name, :scope => :companies) -%></th>

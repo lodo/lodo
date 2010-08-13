@@ -1,0 +1,19 @@
+
+
+Statistik:
+
+Før alla stængda perioder:
+  * # open bills
+  * # bills
+  * # journal entries
+  * Før alla konto/unit/project kombos med transaktioner:
+    * debet
+    * kredit
+  
+Bættra på bulkinsættning:
+
+* Ordrer
+* Fakturor
+
+
+

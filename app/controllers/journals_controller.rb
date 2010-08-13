@@ -1,4 +1,7 @@
 class JournalsController < ApplicationController
+
+  include PeriodController
+
   before_filter :find_units_all, :only => [:new, :edit]
   before_filter :find_projects_all, :only => [:new, :edit]
   before_filter :find_accounts_all, :only => [:new, :edit]
@@ -7,13 +10,14 @@ class JournalsController < ApplicationController
   # GET /journals
   # GET /journals.xml
   def index
-    @journals = Journal.with_permissions_to(:index).order("number, journal_date desc, journal_type")
-    
+    @journals = period_filter(Journal.with_permissions_to(:index).order("number, journal_date desc, journal_type")).paginate({:page => params[:page]})
+
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @journals }
     end
   end
+
   
   # GET /journals/1
   # GET /journals/1.xml

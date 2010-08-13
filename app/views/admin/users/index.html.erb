@@ -1,5 +1,7 @@
 <h1><%= t(:listing_users, :scope => :users) -%></h1>
 
+<%= will_paginate @users %>
+
 <table class='striped'>
   <tr>
     <th><%= t(:email, :scope => :users) -%></th>

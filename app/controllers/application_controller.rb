@@ -50,4 +50,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
+  def user_property name, default
+    fn = controller_name + "." + action_name + "." + name.to_s
+    foo = params[name] || current_user.get_property( fn ) || default
+    current_user.set_property( fn, foo)
+  end
+
+
 end

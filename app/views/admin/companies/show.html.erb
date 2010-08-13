@@ -5,12 +5,12 @@
 
 <p>
   <b><%= t(:users, :scope => :companies) -%>:</b>
-  <%= @company.users.collect {|u| u.email}.join ", " %>
-</p>
+  <ul>
+    <% @company.users.each do |c| %>
+    <li><%= link_to c.email, admin_user_path(c)%> </li>
+    <% end %>
+  </ul>
 
-<p>
-  <b><%= t(:accounts, :scope => :companies) -%>:</b>
-  <%= @company.accounts.map {|a| "#{a.number} - #{a.name}"}.join(", ") %>
 </p>
 
 <p>

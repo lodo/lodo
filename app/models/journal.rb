@@ -4,6 +4,8 @@ class Journal < ActiveRecord::Base
   belongs_to :bill
   belongs_to :period
 
+  self.per_page = 200
+
   def open?
    return (not self.closed)
   end

@@ -22,6 +22,8 @@ class Company < ActiveRecord::Base
   attr_accessor :template_company_id
   after_create :init_from_template, :if => proc { !self.template_company_id.blank? }
 
+  self.per_page = 50
+
   # hmm.. no idea what validations make sense atm
   #validates :organization_number, :format => {:with => /^(NO|no)?[\d]{9,}(MVA|mva)?$/}
 
@@ -114,6 +116,10 @@ class Company < ActiveRecord::Base
   def paychecks
     r = Paycheck.where(:employee_id => employees).joins([:employee, :period]).order("periods.year desc, periods.nr desc, lower(ledgers.name)")
     r
+  end
+
+  def to_s
+    name
   end
 
 end

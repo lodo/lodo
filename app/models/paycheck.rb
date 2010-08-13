@@ -4,4 +4,6 @@ class Paycheck < ActiveRecord::Base
   has_many :paycheck_lines
   accepts_nested_attributes_for :paycheck_lines
 
+
+
 end

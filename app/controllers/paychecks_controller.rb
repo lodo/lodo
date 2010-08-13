@@ -1,4 +1,7 @@
 class PaychecksController < ApplicationController
+
+  include PeriodController
+
   before_filter :setup_form
   before_filter :employee_required, :except => [:index]
   
@@ -11,9 +14,10 @@ class PaychecksController < ApplicationController
     @units = current_user.current_company.units
     @projects = current_user.current_company.projects
     @employees = current_user.current_company.employees
-    @paychecks = current_user.current_company.paychecks
+    @paychecks = period_filter(current_user.current_company.paychecks.includes(:period).includes(:employee))
     @units = current_user.current_company.units
     @projects = current_user.current_company.projects
+
 #    @periods = current_user.current_company.periods.select {|p| p.open?}
   end
 

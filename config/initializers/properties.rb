@@ -1,0 +1,3 @@
+
+
+require 'property_model'
