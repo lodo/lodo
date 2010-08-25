@@ -33,6 +33,9 @@
       <tr>
 	<td>
 	  <%= op.account.name %>
+	  <% if op.ledger %>
+	  : <%= op.ledger %>
+	  <% end %>
 	</td>
 	<td>
 	  <%= op.debet %>

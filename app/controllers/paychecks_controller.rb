@@ -36,6 +36,7 @@ class PaychecksController < ApplicationController
   def show
         
     @paycheck = Paycheck.find(params[:id])
+    make_journal @paycheck
 
     respond_to do |format|
       format.html # show.html.erb
@@ -67,6 +68,73 @@ class PaychecksController < ApplicationController
     @paycheck = Paycheck.find(params[:id])
   end
 
+  def make_journal paycheck
+
+    if paycheck.journal != nil
+      paycheck.journal.journal_operations.each do
+        |op|
+        op.destroy
+      end
+    else
+      j = Journal.new
+    end
+
+    j.journal_type = 1
+    j.journal_date = paycheck.updated_at
+    j.company = @me.current_company
+    j.period_id = paycheck.period_id
+    j.closed = true
+    j.save
+    ops = {}
+    
+    paycheck.paycheck_lines.each do
+      |line|
+      if line.line_type != PaycheckLineTemplate::TYPE_INFO
+
+        base_amount = line.amount
+        if line.line_type == PaycheckLineTemplate::TYPE_EXPENSE
+          base_amount = -base_amount
+        end
+        
+        if ops[line.account.id] is nil
+          ops[line.account.id] = 0.0
+        end
+
+        ops[line.account.id] += base_amount 
+        
+      end
+
+      
+        op = JournalOperation.new
+        op.amount = base_amount
+        op.journal = j
+        op.account = paycheck.employee.account
+        op.vat = 0
+        op.vat_account_id = nil
+        op.unit = line.unit
+        op.project = line.project
+        op.ledger = paycheck.employee
+        op.save
+        
+        op2 = JournalOperation.new
+        op2.amount = -base_amount
+        op2.journal = j
+        op2.account = line.account
+        op2.vat = 0
+        op2.vat_account_id = nil
+        op2.unit = line.unit
+        op2.project = line.project
+        op2.ledger = nil
+        op2.save
+
+      end
+      
+    end
+
+    paycheck.journal = j
+    paycheck.save
+  end
+
   # POST /paychecks
   # POST /paychecks.xml
   def create
@@ -74,6 +142,7 @@ class PaychecksController < ApplicationController
 
     respond_to do |format|
       if @paycheck.save
+        make_journal @paycheck
         format.html { redirect_to(@paycheck, :notice => 'Paycheck was successfully created.') }
         format.xml  { render :xml => @paycheck, :status => :created, :location => @paycheck }
       else
@@ -90,6 +159,7 @@ class PaychecksController < ApplicationController
 
     respond_to do |format|
       if @paycheck.update_attributes(params[:paycheck])
+        make_journal @paycheck
         format.html { redirect_to(@paycheck, :notice => 'Paycheck was successfully updated.') }
         format.xml  { head :ok }
       else

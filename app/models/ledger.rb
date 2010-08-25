@@ -13,5 +13,12 @@ class Ledger < ActiveRecord::Base
     return name
   end
 
+  def tax_rate period
+    0.30
+  end
+
+  def tax_account period
+    Account.where(:number => 5400, :company_id => self.account.company_id).first
+  end
 
 end

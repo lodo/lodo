@@ -13,6 +13,9 @@
 <table>
   <tr>
     <th>
+      <%= t('activerecord.attributes.paycheck_line_template.type') %>
+    </th>
+    <th>
       <%= t('activerecord.attributes.paycheck_line_template.description') %>
     </th>
     <th>
@@ -48,6 +51,7 @@
   </tr>
 <% @paycheck.paycheck_lines.each do |line| %>
   <tr>
+    <td><%= PaycheckLineTemplate::TYPES[line.line_type] %></td>
     <td><%= line.description %></td>
     <td><%= line.count %></td>
     <td><%= line.rate %></td>
@@ -62,7 +66,7 @@
   </tr>
 <% end %>
 
-
+<%= link_to t('paychecks.show_journal'), @paycheck.journal %>
 
 <%= link_to 'Edit', edit_paycheck_path(@paycheck) %> |
 <%= link_to 'Back', paychecks_path %>
