@@ -3,15 +3,15 @@
   Use an object as a fake namespace. Spiffy.
   */
   var LODO = new Object();
-  LODO.orderList = <%= @orders_all.all.to_json(
+  LODO.orderList = <%= raw(@orders_all.all.to_json(
     :include => {:company => {},
                  :customer => {},
                  :seller => {},
                  :transport => {},
-                 :order_items => {:include => :product}})
+                 :order_items => {:include => :product}}))
   %>;
-  LODO.billItemList = <%= @bill.bill_orders.to_json(
-    :include => :bill_items) %>;
+  LODO.billItemList = <%= raw(@bill.bill_orders.to_json(
+    :include => :bill_items)) %>;
 </script>
 
 

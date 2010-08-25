@@ -3,10 +3,10 @@
   Use an object as a fake namespace. Spiffy.
   */
   var LODO = new Object();
-  LODO.unitList = <%= @units_all.all.to_json %>;
-  LODO.projectList = <%= @projects_all.all.to_json %>;
-  LODO.accountList = <%= @accounts_all.all.to_json :include => { :vat_account => {:include => { :vat_account_periods =>{}, :target_account=>{}}} } %>;
-  LODO.journalOperationList = <%= @journal.journal_operations.all.to_json %>;
+  LODO.unitList = <%= raw(@units_all.all.to_json) %>;
+  LODO.projectList = <%= raw(@projects_all.all.to_json) %>;
+  LODO.accountList = <%= raw(@accounts_all.all.to_json :include => { :vat_account => {:include => { :vat_account_periods =>{}, :target_account=>{}}} }) %>;
+  LODO.journalOperationList = <%= raw(@journal.journal_operations.all.to_json) %>;
 </script>
 
 <%= form_for(@journal) do |f| %>
@@ -29,7 +29,7 @@
   <%= f.unobtrusive_date_text_picker :journal_date, :format=>'y-m-d', :divider=>'-' %>
 </p>
 <p>
-  <button onClick='journals.addAccountLine();' type='button'><%= t(:new_journal_operations, :scope => :journals) -%></button>
+  <button onClick='journals.addAccountLine();' type='button'><%= t(:new_journal_operation, :scope => :journals) -%></button>
   <input type='checkbox' id='vat' onchange='journals.toggleVisibility();'/><label for='vat'><%= t(:vat, :scope => :journals) -%></label>
   <input type='checkbox' id='details' onchange='journals.toggleVisibility();'/><label for='details'><%= t(:details, :scope => :journals) -%></label>
   
@@ -101,7 +101,7 @@
 
 </p>
 <p>
-  <%= f.submit t(:save, :scope => :journals) %>
+  <%= f.submit t(:save, :scope => :global) %>
 </p>
 <script>
 journals.addPredefined();
