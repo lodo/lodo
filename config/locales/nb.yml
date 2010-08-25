@@ -340,6 +340,7 @@
     created: Din kjempelinje er blitt kjempeskapet
     edit_header: Kjemperedigerer linje
   paychecks:
+    show_journal: "Kjempevis journal"
     new_header: Skaper ny lønnsslipp for %{name}
     cum_sum: Beløp denne periode
     new: Ny lønnsslipp
