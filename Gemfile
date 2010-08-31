@@ -1,8 +1,7 @@
 source 'http://rubygems.org'
 
-gem 'bundler', '>=1.0.0.rc.1'
-
-gem 'rails', '3.0.0.rc'
+#gem 'bundler', '>=1.0.0'
+gem 'rails', '>=3.0.0'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -15,7 +14,7 @@ gem 'will_paginate', :git => 'git://github.com/mislav/will_paginate.git', :branc
 gem 'ruby_parser'
 gem "machinist"
 gem "faker"
-gem "devise", "~>1.1"
+gem "devise", ">=1.1.2"
 gem "warden"
 gem "declarative_authorization", :git => "http://github.com/stffn/declarative_authorization.git" 
 
