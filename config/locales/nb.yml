@@ -144,6 +144,7 @@
       other: Perioder
     save: Lagre
     filter: Kjempefiltrer
+    company: Kjempeforettning
   admin:
     companies:
       select_template_company: Bruk som mal
@@ -342,7 +343,7 @@
   paychecks:
     show_journal: "Kjempevis journal"
     new_header: Skaper ny lønnsslipp for %{name}
-    cum_sum: Beløp denne periode
+    cum_sum: Beløp hittil i år
     new: Ny lønnsslipp
     index_header: Kjempelønnslipper før ansatte
     paycheck_count: "# kjempelønnslipper"

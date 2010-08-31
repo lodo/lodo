@@ -75,6 +75,7 @@ class PaychecksController < ApplicationController
         |op|
         op.destroy
       end
+      j = paycheck.journal
     else
       j = Journal.new
     end
@@ -91,45 +92,54 @@ class PaychecksController < ApplicationController
       |line|
       if line.line_type != PaycheckLineTemplate::TYPE_INFO
 
-        base_amount = line.amount
+        base_amount = -line.amount
         if line.line_type == PaycheckLineTemplate::TYPE_EXPENSE
           base_amount = -base_amount
         end
         
-        if ops[line.account.id] is nil
-          ops[line.account.id] = 0.0
+        if ops[line.account.id] == nil
+          ops[line.account.id] = {:amount => 0.0, :account => line.account }
         end
 
-        ops[line.account.id] += base_amount 
+        ops[line.account.id] = {:amount => ops[line.account.id][:amount] + base_amount, :account => line.account }
         
       end
+    end
+    
+    print "COUNT: #{ops.count}\n"
 
+    tot = 0
+    ops.each do
+      |key, value|
       
-        op = JournalOperation.new
-        op.amount = base_amount
-        op.journal = j
-        op.account = paycheck.employee.account
-        op.vat = 0
-        op.vat_account_id = nil
-        op.unit = line.unit
-        op.project = line.project
-        op.ledger = paycheck.employee
-        op.save
-        
-        op2 = JournalOperation.new
-        op2.amount = -base_amount
-        op2.journal = j
-        op2.account = line.account
-        op2.vat = 0
-        op2.vat_account_id = nil
-        op2.unit = line.unit
-        op2.project = line.project
-        op2.ledger = nil
-        op2.save
+      op = JournalOperation.new
+      op.amount = value[:amount]
+      op.journal = j
+      op.account = value[:account]
 
-      end
+      tot += value[:amount]
+      op.vat = 0
+      op.vat_account_id = nil
+      #        op.unit = line.unit
+      #        op.project = line.project
+      # op.ledger = paycheck.employee
+      op.save
       
     end
+      
+    op = JournalOperation.new
+    op.amount = -tot
+    op.journal = j
+    op.account = paycheck.employee.account
+    op.vat = 0
+    op.vat_account_id = nil
+    #        op.unit = line.unit
+    #        op.project = line.project
+    op.ledger = paycheck.employee
+    op.save
+      
+
+
 
     paycheck.journal = j
     paycheck.save

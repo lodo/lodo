@@ -1,13 +1,173 @@
 
-<p>
-  <b>Period:</b>
-  <%= @paycheck.period %>
-</p>
+<table>
+  <tr>
+    <th>
+      <%= t('global.recipient') %>
+    </th>
+    <td>
+    </td>
+    <th>
+    </th>
+    <td>
+    </td>
+  </tr>
 
-<p>
-  <b>Employee:</b>
-  <%= @paycheck.employee %>
-</p>
+  <tr>
+    <th>
+      <%= t('paychecks.employee_number') %>
+    </th>
+    <td>
+      <%= @paycheck.employee.number %>
+    </td>
+    <th>
+      <%= t('paychecks.company') %>
+    </th>
+    <td>
+      <%= @me.current_company %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>
+      <%= t('global.name') %>
+    </th>
+    <td>
+      <%= @paycheck.employee %>
+    </td>
+    <th>
+      <%= t('address.address') %>
+    </th>
+    <td>
+      <%= @me.current_company.address.street1 %><br>
+      <%= @me.current_company.address.street2 %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>
+      <%= t('address.address') %>
+    </th>
+    <td>
+      <%= @paycheck.employee.address.street1%><br/>
+      <%= @paycheck.employee.address.street2%>
+    </td>
+    <th>
+      <%= t('address.postal_code') %>
+    </th>
+    <td>
+      <%= @me.current_company.address.postal_code %>
+      <%= @me.current_company.address.town %>
+    </td>
+    </td>
+  </tr>
+
+  <tr>
+    <th>
+      <%= t('address.postalcode') %>
+    </th>
+    <td>
+      <%= @paycheck.employee.address.postal_code%> 
+      <%= @paycheck.employee.address.town%>
+    </td>
+    <th>
+      <%= t('global.email') %>
+    </th>
+    <td>
+      <%=  %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>
+      <%= t('global.email') %>
+    </th>
+    <td>
+      <%= @paycheck.employee.email  %>
+    </td>
+    <th>
+      <%= t('global.orgnr') %>
+    </th>
+    <td>
+      <%= @paycheck.employee.id_number  %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>
+      <%= t('global.ss_number') %>
+    </th>
+    <td>
+      <%= @paycheck.employee.id_number  %>
+    </td>
+    <th>
+      <%= t('global.from_date') %>
+    </th>
+    <td>
+      ???
+    </td>
+  </tr>
+
+  <tr>
+    <th>
+      <%= t('global.tax_table') %>
+    </th>
+    <td>
+      <%= %>
+    </td>
+    <th>
+      <%= t('global.to_date') %>
+    </th>
+    <td>
+      ???
+    </td>
+  </tr>
+
+  <tr>
+    <th>
+      <%= t('global.tax_percentage') %>
+    </th>
+    <td>
+      <%= %>
+    </td>
+    <th>
+      <%= t('global.journal_number') %>
+    </th>
+    <td>
+      <%= @paycheck.journal.number %>
+    </td>
+  </tr>
+
+  <tr>
+    <th>
+      <%= t('global.account') %>
+    </th>
+    <td>
+      <%= @paycheck.employee.ledger_bank_number %>
+    </td>
+    <th>
+      <%= t('global.journal_date') %>
+    </th>
+    <td>
+      <%= @paycheck.journal.created_at  %> (???)
+    </td>
+  </tr>
+
+  <tr>
+    <th>
+      <%= t('global.pay_date') %>
+    </th>
+    <td>
+      ???
+    </td>
+    <th>
+      <%= t('global.period')[:one] %>
+    </th>
+    <td>
+      <%= @paycheck.period %>
+    </td>
+  </tr>
+
+</table>  
 
 
 <table>
@@ -49,13 +209,35 @@
       <%= t('activerecord.attributes.paycheck_line_template.salary_code') %>
     </th>
   </tr>
-<% @paycheck.paycheck_lines.each do |line| %>
+<% 
+total=0.0
+vacation=0.0
+@paycheck.paycheck_lines.each do |line| %>
+<%
+      if line.line_type != PaycheckLineTemplate::TYPE_INFO
+   
+        base_amount = line.amount
+        if line.line_type == PaycheckLineTemplate::TYPE_EXPENSE
+          base_amount = -base_amount
+        end
+        total += base_amount
+        base_amount_formated=base_amount
+      else
+        base_amount = line.amount
+        base_amount_formated = "(#{line.amount})"
+      end
+
+      if line.vacation_basis
+        vacation += base_amount
+      end
+
+%>
   <tr>
     <td><%= PaycheckLineTemplate::TYPES[line.line_type] %></td>
     <td><%= line.description %></td>
     <td><%= line.count %></td>
     <td><%= line.rate %></td>
-    <td><%= line.amount %></td>
+    <td><%= base_amount_formated %></td>
     <td>???</td>
     <td><%= line.account %></td>
     <td><%= line.unit %></td>
@@ -65,6 +247,24 @@
     <td><%= line.salary_code %></td>
   </tr>
 <% end %>
+<table>
+<tr>
+<th>
+SUM Utbetalt:
+</th>
+<td>
+<%= total %>
+</td>
+</tr>
+<tr>
+<th>
+Feriepengegrunnlag:
+</th>
+<td>
+ <%= vacation %>
+</td>
+</tr>
+</table>
 
 <%= link_to t('paychecks.show_journal'), @paycheck.journal %>
 
