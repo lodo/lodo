@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Tax zone:</b>
+  <%= @tax_zone_taxis.tax_zone_id %>
+</p>
+
+<p>
+  <b>Tax rate:</b>
+  <%= @tax_zone_taxis.tax_rate %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%= @tax_zone_taxis.from %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_tax_zone_taxis_path(@tax_zone_taxis) %> |
+<%= link_to 'Back', admin_tax_zone_taxes_path %>

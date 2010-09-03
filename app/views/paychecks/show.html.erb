@@ -238,7 +238,7 @@ vacation=0.0
     <td><%= line.count %></td>
     <td><%= line.rate %></td>
     <td><%= base_amount_formated %></td>
-    <td>???</td>
+    <td> <%= line.period_total(@paycheck.period) %></td>
     <td><%= line.account %></td>
     <td><%= line.unit %></td>
     <td><%= line.project %></td>

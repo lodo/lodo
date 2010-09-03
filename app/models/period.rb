@@ -6,6 +6,9 @@ class Period < ActiveRecord::Base
   # only useful for random statistics
   has_many :journal_operations, :through => :journals
 
+  cattr_reader :per_page
+  @@per_page = 200
+
   STATUSES = {0 => 'New', 1 => 'Open', 2 => 'Done', 3 => 'Closed'}
   STATUSE_NAMES = {'New' => 0, 'Open' => 1, 'Done' => 2, 'Closed' => 3}
 

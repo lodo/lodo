@@ -1,0 +1,30 @@
+<%= form_for(@paycheck_period) do |f| %>
+  <% if @paycheck_period.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@paycheck_period.errors.count, "error") %> prohibited this paycheck_period from being saved:</h2>
+
+      <ul>
+      <% @paycheck_period.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <b><%= t('paycheck_periods.period_start') %>:</b>
+    <%= f.text_field :start_day %>/<%= f.text_field :start_month %>
+  </div>
+
+  <div class="field">
+    <b><%= t('paycheck_periods.period_stop') %>:</b>
+    <%= f.text_field :stop_day %>/<%= f.text_field :stop_month %>
+  </div>
+  <div class="field">
+    <b><%= t('paycheck_periods.paycheck_due') %>:</b>
+    <%= f.text_field :pay_day %>/<%= f.text_field :pay_month %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<h1>Listing counties</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @counties.each do |county| %>
+  <tr>
+    <td><%= county.name %></td>
+    <td><%= link_to 'Show', [:admin, county] %></td>
+    <td><%= link_to 'Edit', edit_admin_county_path(county) %></td>
+    <td><%= link_to 'Destroy', [:admin, county], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New County', new_admin_county_path %>

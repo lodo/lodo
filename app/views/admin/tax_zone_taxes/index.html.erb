@@ -1,0 +1,27 @@
+<h1>Listing tax_zone_taxes</h1>
+
+<table>
+  <tr>
+    <th>Tax zone</th>
+    <th>Tax rate</th>
+    <th>From</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tax_zone_taxes.each do |tax_zone_taxis| %>
+  <tr>
+    <td><%= tax_zone_taxis.tax_zone_id %></td>
+    <td><%= tax_zone_taxis.tax_rate %></td>
+    <td><%= tax_zone_taxis.from %></td>
+    <td><%= link_to 'Show', [:admin, tax_zone_taxis] %></td>
+    <td><%= link_to 'Edit', edit_admin_tax_zone_taxis_path(tax_zone_taxis) %></td>
+    <td><%= link_to 'Destroy', [:admin, tax_zone_taxis], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tax zone tax', new_admin_tax_zone_taxis_path %>

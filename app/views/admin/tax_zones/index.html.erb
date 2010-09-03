@@ -1,0 +1,23 @@
+<h1>Listing tax_zones</h1>
+
+<table>
+  <tr>
+    <th>Number</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tax_zones.each do |tax_zone| %>
+  <tr>
+    <td><%= tax_zone.number %></td>
+    <td><%= link_to 'Show', [:admin, tax_zone] %></td>
+    <td><%= link_to 'Edit', edit_admin_tax_zone_path(tax_zone) %></td>
+    <td><%= link_to 'Destroy', [:admin, tax_zone], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tax zone', new_admin_tax_zone_path %>

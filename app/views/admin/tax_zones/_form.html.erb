@@ -1,0 +1,21 @@
+<%= form_for([:admin, @tax_zone]) do |f| %>
+  <% if @tax_zone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tax_zone.errors.count, "error") %> prohibited this tax_zone from being saved:</h2>
+
+      <ul>
+      <% @tax_zone.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.text_field :number %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

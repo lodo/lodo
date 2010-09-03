@@ -5,6 +5,7 @@
     <th><%= t(:number, :scope => :accounts) -%></th>
     <th><%= t(:name, :scope => :accounts) -%></th>
     <th><%= t("accounts.vat_account") -%></th>
+    <th><%= t('accounts.ledger') -%></th>
     <th></th>
   </tr>
 <% for account in @accounts %>
@@ -12,6 +13,16 @@
     <td><%= account.number %></td>
     <td><%= account.name %></td>
     <td><%= (account.vat_account ? account.vat_account.target_account.name : "") %></td>
+    <td>
+      <%
+	 first=true
+	 if account.ledgers.count>0
+%>
+      <%= account.ledgers.collect{ |l| l.to_s }.join ", " %>
+      
+<%
+         end %>
+    </td>
     <td>
       <%= link_to t("global.show"), account %>
       <%= link_to t("global.edit"), edit_account_path(account) %>

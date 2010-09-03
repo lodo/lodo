@@ -1,0 +1,9 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  county_id: 1
+  from: 
+
+two:
+  county_id: 1
+  from: 

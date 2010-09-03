@@ -4,6 +4,8 @@ Lodo::Application.routes.draw do |map|
   
   resources :paycheck_templates 
   
+  resources :paycheck_periods
+  
   resources :paycheck_line_templates
 
   devise_for :admins
@@ -15,6 +17,10 @@ Lodo::Application.routes.draw do |map|
     resources :companies
     resources :users
     resources :admins
+    resources :tax_zone_taxes
+    resources :county_tax_zones
+    resources :counties
+    resources :tax_zones
   end
 
   resources :units

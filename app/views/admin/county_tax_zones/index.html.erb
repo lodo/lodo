@@ -1,0 +1,27 @@
+<h1>Listing county_tax_zones</h1>
+
+<table>
+  <tr>
+    <th>County</th>
+    <th>Tax Zone</th>
+    <th>From</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @county_tax_zones.each do |county_tax_zone| %>
+  <tr>
+    <td><%= county_tax_zone.county_id %></td>
+    <td><%= county_tax_zone.tax_zone_id %></td>
+    <td><%= county_tax_zone.from %></td>
+    <td><%= link_to 'Show', [:admin, county_tax_zone] %></td>
+    <td><%= link_to 'Edit', edit_admin_county_tax_zone_path(county_tax_zone) %></td>
+    <td><%= link_to 'Destroy', [:admin, county_tax_zone], :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New County tax zone', new_admin_county_tax_zone_path %>

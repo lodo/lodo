@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  company: 
+  start_month: 1
+  start_day: 1
+  stop_month: 1
+  stop_day: 1
+  pay_month: 1
+  pay_day: 1
+
+two:
+  company: 
+  start_month: 1
+  start_day: 1
+  stop_month: 1
+  stop_day: 1
+  pay_month: 1
+  pay_day: 1

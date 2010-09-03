@@ -21,6 +21,10 @@ class PaychecksController < ApplicationController
 #    @periods = current_user.current_company.periods.select {|p| p.open?}
   end
 
+  def period_total_type line
+    return 0.0
+  end
+
   # GET /paychecks
   # GET /paychecks.xml
   def index
@@ -43,17 +47,21 @@ class PaychecksController < ApplicationController
       format.xml  { render :xml => @paycheck }
     end
   end
-
+  
   # GET /paychecks/new
   # GET /paychecks/new.xml
   def new
     @paycheck = Paycheck.new
     @paycheck.employee_id = @employee.id
+    @paycheck.paycheck_period_id = user_company_property("paycheck.paycheck_period_id", nil)
+    @paycheck.period_id = user_company_property("paycheck.period_id", nil)
+    
     @employee.paycheck_line_templates.each do |line| 
       l = {}
       ["count", "rate", "amount", "unit_id", "project_id","line_type","description","account_id","payroll_tax","vacation_basis","salary_code"].each do |key|
         l[key] = line.attributes[key]
       end
+      l['paycheck_line_template_id'] = line.id
       @paycheck.paycheck_lines.build l
     end
     
@@ -149,19 +157,23 @@ class PaychecksController < ApplicationController
   # POST /paychecks.xml
   def create
     @paycheck = Paycheck.new(params[:paycheck])
-
+    user_company_property("paycheck.paycheck_period_id", nil)
+    user_company_property("paycheck.period_id", nil)
+    
     respond_to do |format|
-      if @paycheck.save
-        make_journal @paycheck
-        format.html { redirect_to(@paycheck, :notice => 'Paycheck was successfully created.') }
-        format.xml  { render :xml => @paycheck, :status => :created, :location => @paycheck }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @paycheck.errors, :status => :unprocessable_entity }
+      Paycheck.transaction do
+        if @paycheck.save
+          make_journal @paycheck
+          format.html { redirect_to(@paycheck, :notice => 'Paycheck was successfully created.') }
+          format.xml  { render :xml => @paycheck, :status => :created, :location => @paycheck }
+        else
+          format.html { render :action => "new" }
+          format.xml  { render :xml => @paycheck.errors, :status => :unprocessable_entity }
+        end
       end
     end
   end
-
+  
   # PUT /paychecks/1
   # PUT /paychecks/1.xml
   def update

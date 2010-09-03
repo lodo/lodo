@@ -51,10 +51,29 @@ class ApplicationController < ActionController::Base
   end
 
   def user_property name, default
-    fn = controller_name + "." + action_name + "." + name.to_s
-    foo = params[name] || current_user.get_property( fn ) || default
+    fn = controller_name + "." + name.to_s
+    foo = search_param(String(name).split('.'), params) || current_user.get_property( fn ) || default
     current_user.set_property( fn, foo)
   end
 
+  def search_param name_arr, dict
+    if name_arr == nil
+      return nil
+    end
+    if dict == nil
+      return nil
+    end
+    if name_arr.count == 1
+      return dict[name_arr[0]]
+    end
+    return search_param(name_arr[1..name_arr.count], dict[name_arr[0]])
+  end
+  
+  def user_company_property name, default
 
+    fn = "company_#{current_user.current_company.id.to_s}.#{controller_name}.#{name.to_s}"
+    foo = search_param(String(name).split('.'), params) || current_user.get_property( fn ) || default
+    current_user.set_property( fn, foo)
+  end
+  
 end

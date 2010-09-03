@@ -1,0 +1,29 @@
+<%= form_for([:admin, @county_tax_zone]) do |f| %>
+  <% if @county_tax_zone.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@county_tax_zone.errors.count, "error") %> prohibited this county_tax_zone from being saved:</h2>
+
+      <ul>
+      <% @county_tax_zone.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :county_id %><br />
+    <%= f.text_field :county_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tax_zone_id %><br />
+    <%= f.text_field :tax_zone_id %>
+  </div>
+  <div class="field">
+    <%= f.label :from %><br />
+    <%= f.text_field :from %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

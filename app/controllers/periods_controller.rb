@@ -4,7 +4,7 @@ class PeriodsController < ApplicationController
   # GET /periods
   # GET /periods.xml
   def index
-    @periods = Period.with_permissions_to(:index).all(:order => "year desc, nr desc")
+    @periods = Period.with_permissions_to(:index).all(:order => "year desc, nr desc").paginate({:page => params[:page]})
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @periods }

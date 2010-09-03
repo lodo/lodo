@@ -1,0 +1,27 @@
+<h1><%= t('paycheck_periods.index_header') %></h1>
+
+<table>
+  <tr>
+    <th><%= t('paycheck_periods.period_start') %></th>
+    <th><%= t('paycheck_periods.period_stop') %></th>
+    <th><%= t('paycheck_periods.period_paycheck_due') %></th>
+    <th></th>
+  </tr>
+
+<% @paycheck_periods.each do |paycheck_period| %>
+  <tr>
+    <td><%= paycheck_period.start_day %>/<%= paycheck_period.start_month %></td>
+    <td><%= paycheck_period.stop_day %>/<%= paycheck_period.stop_month %></td>
+    <td><%= paycheck_period.pay_day %>/<%= paycheck_period.pay_month %></td>
+    <td>
+      <%= link_to t('global.show'), paycheck_period %>
+      <%= link_to t('global.edit'), edit_paycheck_period_path(paycheck_period) %>
+      <%= link_to t('global.destroy'), paycheck_period, :confirm => t('global.confirm'), :method => :delete %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to t('paycheck_periods.new'), new_paycheck_period_path %>

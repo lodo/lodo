@@ -18,6 +18,12 @@
       <li><%= link_to t(:user_administration, :scope => :layout), admin_users_path %></li>
       <li><%= link_to t(:administrators, :scope => :layout), admin_admins_path %></li>
       <li><%= link_to t(:companies, :scope => :layout), admin_companies_path %></li>
+
+      <li><%= link_to t(:tax_zones, :scope => :layout), admin_tax_zones_path %></li>
+      <li><%= link_to t(:tax_zone_taxes, :scope => :layout), admin_tax_zone_taxes_path %></li>
+      <li><%= link_to t(:counties, :scope => :layout), admin_counties_path %></li>
+      <li><%= link_to t(:county_tax_zones, :scope => :layout), admin_county_tax_zones_path %></li>
+
       <li>
 	<%= t(:logged_in_as, :scope => :layout) -%> <%= current_admin.email %> (<%= link_to t(:log_out, :scope => :layout), destroy_admin_session_path %>)
       </li>
@@ -35,6 +41,9 @@
       <li><%= link_to t("global.period", :count => 20), periods_path %></li>
       <li><%= link_to t(:paycheck_templates, :scope => :layout), paycheck_templates_path %></li>
       <li><%= link_to t(:paychecks, :scope => :layout), paychecks_path %></li>
+      
+      <li><%= link_to t(:paycheck_periods, :scope => :layout), paycheck_periods_path %></li>
+
       <li>
 	<%= t(:logged_in_as, :scope => :layout) -%> <%= current_user.email %> (<%= link_to t(:log_out, :scope => :layout), destroy_user_session_path %>)
       </li>
@@ -47,7 +56,7 @@
         <% end %>
         <script>submitAction.registerSubmitAction('#current_company', 'change', '.change_company_form form');</script>
       </li>
-
+      
       <% else %>
       <li><%= link_to "Til forsiden", root_path  %></li>
       <% end %>

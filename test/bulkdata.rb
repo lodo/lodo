@@ -382,6 +382,7 @@ select
     end # ActiveRecord::Base.transaction do
   end
 else
+  ActiveRecord::Base.connection.execute "truncate paycheck_periods"
   ActiveRecord::Base.connection.execute "truncate paycheck_lines"
   ActiveRecord::Base.connection.execute "truncate paychecks"
   ActiveRecord::Base.connection.execute "truncate paycheck_line_templates"
@@ -390,6 +391,15 @@ else
   companies = Company.all
   print_time "Creating employees and salary information" do
     companies.each do |c|
+      (1..13).each do |m|
+        PaycheckPeriod.new( { :company_id => c.id,
+          :start_month => m,
+          :start_day => 1,
+          :stop_month => m,
+          :stop_day => 25,
+          :pay_month => m,
+          :pay_day => 28 })
+      end
       print '.'
       emp_account = Account.where(:company_id => c.id, :number => 2930).first
 
@@ -418,15 +428,15 @@ else
         end
         sql = "
 insert into paychecks
-(period_id, employee_id, created_at, updated_at)
-select id, #{emp.id}, now(), now() from periods where company_id = #{c.id};
+(period_id, employee_id, created_at, updated_at, paycheck_period_id)
+select p.id, #{emp.id}, now(), now(), (select id from paycheck_periods where company_id = #{c.id} order by random() limit 1) from periods p where company_id = #{c.id};
 "
         ActiveRecord::Base.connection.execute sql
         
         sql = "
 insert into paycheck_lines
-(line_type, description, paycheck_id, account_id, count, rate, amount, payroll_tax, vacation_basis, salary_code, created_at, updated_at)
-select plt.line_type, plt.description, p.id, plt.account_id, plt.count, plt.rate, plt.amount, plt.payroll_tax, plt.vacation_basis, plt.salary_code, now(), now()
+(line_type, description, paycheck_id, account_id, count, rate, amount, payroll_tax, vacation_basis, salary_code, created_at, updated_at, paycheck_line_template_id)
+select plt.line_type, plt.description, p.id, plt.account_id, plt.count, plt.rate, plt.amount, plt.payroll_tax, plt.vacation_basis, plt.salary_code, now(), now(), plt.id
 from paychecks p, paycheck_line_templates plt
 where p.employee_id = #{emp.id}
     and plt.employee_id = #{emp.id}

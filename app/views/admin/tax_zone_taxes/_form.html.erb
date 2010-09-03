@@ -1,0 +1,29 @@
+<%= form_for([:admin, @tax_zone_taxis]) do |f| %>
+  <% if @tax_zone_taxis.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tax_zone_taxis.errors.count, "error") %> prohibited this tax_zone_taxis from being saved:</h2>
+
+      <ul>
+      <% @tax_zone_taxis.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tax_zone_id %><br />
+    <%= f.text_field :tax_zone_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tax_rate %><br />
+    <%= f.text_field :tax_rate %>
+  </div>
+  <div class="field">
+    <%= f.label :from %><br />
+    <%= f.text_field :from %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

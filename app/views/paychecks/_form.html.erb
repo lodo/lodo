@@ -11,7 +11,11 @@
 <% end %>
 
 <div class="field">
-  <%= f.label :period_id %><br />
+  <%= f.label :paycheck_period_id %>:<br />
+  <%= f.select :paycheck_period_id, current_user.current_company.paycheck_periods.map {|p| [ p, p.id ] } %>
+</div>
+<div class="field">
+  <%= f.label :period_id %>:<br />
   <%= f.select :period_id, current_user.open_periods.map {|p| [ p, p.id ] } %>
 </div>
 <%= f.hidden_field :employee_id %>

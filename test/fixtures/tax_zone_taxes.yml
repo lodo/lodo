@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  tax_zone_id: 1
+  tax_rate: 9.99
+  from: 
+
+two:
+  tax_zone_id: 1
+  tax_rate: 9.99
+  from: 

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b><%= t('paycheck_periods.period_start') %>:</b>
+  <%= @paycheck_period.start_day %>/<%= @paycheck_period.start_month %>
+</p>
+
+<p>
+  <b><%= t('paycheck_periods.period_stop') %>:</b>
+  <%= @paycheck_period.stop_day %>/<%= @paycheck_period.stop_month %>
+</p>
+
+<p>
+  <b><%= t('paycheck_period.paycheck_due') %>:</b>
+  <%= @paycheck_period.pay_day %>/<%= @paycheck_period.pay_month %>
+</p>
+
+<%= link_to t('global.edit'), edit_paycheck_period_path(@paycheck_period) %> |
+<%= link_to t('global.back'), paycheck_periods_path %>

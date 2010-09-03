@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  number: 1
+  tax_rate: 9.99
+  from: 2010-09-03
+  to: 2010-09-03
+
+two:
+  number: 1
+  tax_rate: 9.99
+  from: 2010-09-03
+  to: 2010-09-03
