@@ -1,6 +1,6 @@
 # Lodo
 Lodo is a web based double entry accounting application, built on the [Ruby on Rails](http://rubyonrails.org/) framework.
-It is open source, released under AGPLv3.
+It is open source, released under the MIT license.
 
 ## Project status
 We're currently finishing up the first milestone/deliverable. A second development cycle is required to add some essential features before we consider it ready for experimental use, a schedule for this phase is still TBD.
